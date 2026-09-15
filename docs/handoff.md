@@ -1,5 +1,19 @@
 # 개발 인수인계
 
+## 개발/운영 분리·구매 도메인 연결 준비 — 2026-09-15
+
+**이 절이 배포 대상과 도메인에 대한 최신 상태다.** 개발 전용 사이트를 새로 배포했다. 운영은 기존 **v18/env revision3**을 그대로 유지한다. GitHub master의 환경 대응 변경은 개발에만 반영되었으므로 현재 master:web과 운영 v18이 동일하다고 기록하면 안 된다.
+
+- 개발 URL **https://gunbeon-development.ybuser.chatgpt.site**, 소유자 전용. Project `appgprj_6aa8c98dd2a08191a61d18c5e318a57f`, source `7a26875ba8af48454e39f03ce79c933c359e82d5`, saved version `appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_9c5329f1b8f8819198b0f9c0b3204e01` **v1**, deployment `appgdep_6aa8cc19acf8819196395be690693a38` **succeeded 9/15 04:40:15 UTC**, env2.
+- 개발 D1은 별도17테이블·accounts0건 확인. 운영 DB/계정 복제 없음. 개발 TEST_SESSION_SECRET은 새 값, TourAPI/Kakao 키는 기존 승인 값. 개발 소셜 키는 미설정이며 Kakao 개발 도메인 추가는 남아 있다. 운영 네이버 앱을 개발용 새 앱으로 교체하지 않는다.
+- 코드 `e58c993`, [PR28](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/28) **병합 `4d1fa32e4518e6623997617c596e5e2eada43718`, 9/15 04:45:10 UTC**. TypeScript·102단위·개발 빌드·품질2개·전체 키 없는 브라우저 CI 통과. 최종 문서 커밋/원격은 git log와 status에서 확인한다.
+- 실제 개발 HTML/API: [개발] 제목, noindex/nofollow, 개발 OG 이미지 URL, providers false, account null. Sites 소유자용 QA 인증으로 읽기만 했다. IAB는 OpenAI 로그인 화면까지 확인했으며 브라우저 앱 로그인·지도 성공을 주장하지 않는다. [실행 보고](../reports/custom_domain_rollout_2026-09-15.md).
+- `config/sites-environments.json`과 `scripts/check-site-target.mjs` 사용. web/.openai/hosting.json은 운영 ID를 유지하고 개발 소스 checkout은 개발 ID를 유지한다. 배포마다 명시적 환경 검사 후 Sites 공식 skill을 수행한다. 개발/운영 원격 인증은 해당 프로젝트에서 새로 받는다.
+
+**필수 대기:** 사용자 메시지에 구매 주소 `gunbeon.gangwon.kr`와 실사용 주소 `gunbeon.ganwon.kr`가 함께 있어 정확한 철자를 질문했다. Hosting.kr 브라우저가 로그아웃이어서 로그인도 요청했다. 답변/로그인 전 커스텀 도메인 등록, DNS, 운영 AUTH_BASE_URL은 변경하지 않았다. Sites custom domains는 현재 빈 목록이다.
+
+다음 첫 행동: 사용자 확인 → 기존 운영 Site에 custom domain 추가(한 번) → 반환된 A/검증 레코드를 Hosting.kr에 설정 → DNS/SSL active 확인 → 기존 Naver 앱에 새 callback·Kakao SDK 도메인·Google TXT 확인 → 운영 AUTH_BASE_URL/PUBLIC_SITE_URL과 검증된 코드를 함께 배포 → 새 주소 로그인·기존 기록·지도·공유·네이버 캡처 재검증. [상세 연결 구조](custom-domain-setup.md). 기존 주소·DB·PWA 기록을 삭제하거나 운영 데이터를 개발로 복사하지 않는다.
+
 ## 네이버 운영 로그인·검수 자료 — 2026-09-15
 
 **소셜 로그인과 배포 환경은 이 절이 아래 기록보다 우선한다.** 네이버 로컬 발급값을 운영 Secret에 반영하고 **env revision3**으로 기존 **Sites v18**을 재배포했다. Google 키는 미설정이며 코드와 연결 준비 상태를 유지한다.

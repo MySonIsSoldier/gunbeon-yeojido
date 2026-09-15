@@ -12,6 +12,8 @@
 
 소스 저장소: [MySonIsSoldier/gunbeon-yeojido](https://github.com/MySonIsSoldier/gunbeon-yeojido) · [기존 clone 연결 변경 안내](docs/local-setup.md#기존-clone의-조직-저장소-연결)
 
+[개발 전용 사이트](https://gunbeon-development.ybuser.chatgpt.site) · 소유자 전용, 운영과 별도 DB · [구매 도메인 연결과 배포 구조](docs/custom-domain-setup.md). 새 운영 도메인은 철자 확인·Hosting.kr DNS 설정 대기이며, 위 기존 공개 주소는 계속 이용할 수 있습니다.
+
 ## 일정 보기와 편집
 
 홈·내 여행·그룹의 **일정 보기**에서 날짜, 장소 순서, 도착·체류 시간과 개인 복귀 여유를 확인합니다. **일정 편집**으로 들어가 수정하고 저장하면 갱신된 일정으로 돌아옵니다. 그룹 일정에는 개인 복귀 기준이 표시되지 않습니다.

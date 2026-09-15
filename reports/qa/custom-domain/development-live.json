@@ -1,0 +1,14 @@
+{
+  "environment": "development",
+  "base": "https://gunbeon-development.ybuser.chatgpt.site",
+  "public_page_200": true,
+  "title": "[개발] 군번여지도 강원 · 휴전선 밖 첫 하루",
+  "og_image": "https://gunbeon-development.ybuser.chatgpt.site/og.png",
+  "robots": "noindex, nofollow",
+  "providers": {
+    "google": false,
+    "naver": false
+  },
+  "account_is_null": true,
+  "auth_method": "Sites owner-scoped API QA header; app session absent. No browser login claimed."
+}

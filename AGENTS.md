@@ -52,6 +52,7 @@ npm run build
 
 ## 저장·배포·비밀값
 
+- 9/15부터 개발/운영 Site가 분리됐다. `docs/custom-domain-setup.md`와 `config/sites-environments.json`을 먼저 확인하고 `scripts/check-site-target.mjs`를 통과한다. 개발은 별도 DB와 소유자 전용 chatgpt.site다. web/의 운영 project_id를 개발 ID로 덮어쓰거나 개발 검사를 운영 DB에 실행하지 않는다. 도메인 DNS/콜백 준비 전 운영 AUTH_BASE_URL은 유지한다.
 - `web/.openai/hosting.json`은 기존 Sites 연결이다. 실제 앱/배포 작업은 해당 환경의 Sites building·hosting 지침을 읽고 기존 프로젝트에서 진행한다.
 - GitHub 전체 저장소와 Sites 앱 소스 Git은 별개다. 새 PC에서는 기존 프로젝트의 현행 연결 정보를 조회하여 앱 소스를 새로 clone한다. 과거 임시 clone 경로에 의존하지 않는다.
 - `web/wrangler.local.jsonc`의 DB ID는 **로컬 placeholder**다. `--local`로만 사용한다. 운영 D1은 Sites의 서버 DB이며 배포 환경에서 migration 상태를 따로 확인한다.

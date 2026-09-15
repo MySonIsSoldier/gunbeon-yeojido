@@ -1,5 +1,7 @@
 # 다른 PC에서 로컬 개발 시작
 
+운영/개발 Sites는 이제 별도 프로젝트·DB다. [도메인·배포 환경 안내](custom-domain-setup.md)와 config/sites-environments.json을 읽고 `check-site-target.mjs`로 대상을 확인한다. web/.openai/hosting.json은 기존 운영 프로젝트이며 개발 배포 checkout에는 개발 프로젝트 ID를 유지한다. 로컬 D1 절차는 아래와 동일하다.
+
 Git, **Node 22(최소 22.13.0, 기존 CI 22.18)**, npm이 필요하다. 아래는 macOS/Linux/Windows WSL의 POSIX 셸 기준이다. PowerShell은 환경변수 문법을 해당 셸에 맞춘다. 사용자 홈·임시 브라우저·이전 배포 checkout 경로는 필요 없다.
 
 ## 1. 새 clone과 작업 브랜치
