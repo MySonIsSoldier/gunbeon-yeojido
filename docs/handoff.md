@@ -1,8 +1,14 @@
 # 개발 인수인계
 
-## 로고 후보 선택 — 2026-09-15
+## 공개 이용약관·B 로고 확정 — 2026-09-15
 
-새 로고 3안과 생성 프롬프트는 [후보 기록](../reports/brand-concepts/2026-09-15/README.md)에 있다. **사용자가 A/B/C 중 선택한 뒤** 140×140을 포함한 등록·홍보 키트를 제작한다. 현재는 선택용 PNG 원본만 추가했으며 앱 로고·Sites v17은 그대로다. 다음 PC에서도 생성 도구의 임시 경로 대신 저장소의 세 PNG와 prompts.json을 사용한다. master의 후보 문서/에셋 커밋은 `git log -1 -- reports/brand-concepts`로 확인한다. 기능 코드 변경이 없어 앱 검사는 재실행하지 않았다.
+사용자가 **B ‘다시 만나는 길’**을 선택했다. [이미지 키트](../assets/brand-kit/README.md)의 source/symbol.svg가 마스터이며 140×140 포함 16개 PNG, 단색 SVG, 폰트/OFL, 재현 스크립트가 있다. image_gen의 후속 투명 출력은 실패해 사용하지 않았고 최종 파일은 선택안 기반 SVG를 정리하여 렌더링했다. 키트 ZIP과 140 PNG는 운영 /brand/의 공개 다운로드다. 다음 PC는 저장소 파일로 작업한다.
+
+- **/terms** 공개 페이지, /login·/account·/about·/privacy·앱 하단 연결. [OAuth 입력 주소](social-login-setup.md) 갱신. 약관 동의 기록·자동 탈퇴·제공자 검수를 새로 구현/완료한 것은 아니다. 전용 비공개 문의 창구는 운영 후속 과제다.
+- 기능 `aacbe9b`, 문서 `fa1773f`, [PR27](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/27) 병합 `ca55db0d344501df65cbd48cf9c6312a93fccfe8` (03:56:50UTC). 품질 검사·전체 브라우저 CI5분46초 통과. [전달 보고](../reports/terms_brand_delivery_2026-09-15.md). 최종 기록 SHA는 git log -1로 확인한다.
+- 공개 **Sites v18**: source `b82711477d649f41896a7a32fbc07aca15f4aed1`, version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_a8708f3a7c008191a67c40c21f15cba8`, deployment `appgdep_6aa8c0e2a47081918d52644711074df3` succeeded **9/15 03:52:29 UTC**, env revision2. 기존 공개 URL 유지. GitHub web/source tree `ef8915adae5f18a45139e90363184efbbaf4c6bd` 일치. D1·API 키 변경 없음.
+- TypeScript·99 단위·빌드 통과. Chromium151 320/430/1440px에서 비로그인 약관 본문10절, 링크·공개 자산, 개인 API401·가로 넘침 없음 확인. 실제 16 PNG 크기와 투명 파일의 알파 확인. 로그인 캡처는 계정 상태 조회 완료 후 촬영했다.
+- 기존 후보 A/C는 기록용이다. 다시 선택 요청하지 않는다. 최종 대표 이미지는 기능설명서와 실제 상세 화면3~5장을 대체하지 않으며 제출 후속 과제는 아래 계획을 이어간다.
 
 
 ## 최신 일정 보기 개선 — 2026-09-15

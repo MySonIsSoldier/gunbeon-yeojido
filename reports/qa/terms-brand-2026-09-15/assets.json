@@ -1,0 +1,114 @@
+[
+  {
+    "file": "logo-140.png",
+    "width": 140,
+    "height": 140,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "symbol-transparent-140.png",
+    "width": 140,
+    "height": 140,
+    "hasAlpha": true,
+    "cornerAlpha": 0
+  },
+  {
+    "file": "logo-180.png",
+    "width": 180,
+    "height": 180,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "logo-192.png",
+    "width": 192,
+    "height": 192,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "logo-512.png",
+    "width": 512,
+    "height": 512,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "symbol-transparent-512.png",
+    "width": 512,
+    "height": 512,
+    "hasAlpha": true,
+    "cornerAlpha": 0
+  },
+  {
+    "file": "logo-1024.png",
+    "width": 1024,
+    "height": 1024,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "symbol-transparent-1024.png",
+    "width": 1024,
+    "height": 1024,
+    "hasAlpha": true,
+    "cornerAlpha": 0
+  },
+  {
+    "file": "icon-maskable-512.png",
+    "width": 512,
+    "height": 512,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "symbol-white-512.png",
+    "width": 512,
+    "height": 512,
+    "hasAlpha": true,
+    "cornerAlpha": 0
+  },
+  {
+    "file": "symbol-teal-512.png",
+    "width": 512,
+    "height": 512,
+    "hasAlpha": true,
+    "cornerAlpha": 0
+  },
+  {
+    "file": "wordmark-horizontal.png",
+    "width": 1200,
+    "height": 320,
+    "hasAlpha": true,
+    "cornerAlpha": 0
+  },
+  {
+    "file": "wordmark-dark.png",
+    "width": 1200,
+    "height": 320,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "representative-1200x630.png",
+    "width": 1200,
+    "height": 630,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "social-square-1080.png",
+    "width": 1080,
+    "height": 1080,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  },
+  {
+    "file": "story-1080x1920.png",
+    "width": 1080,
+    "height": 1920,
+    "hasAlpha": false,
+    "cornerAlpha": 255
+  }
+]

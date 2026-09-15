@@ -8,6 +8,8 @@
 
 [화면으로 보는 사용 가이드](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/guide) · [사진 원문·이용조건 검토 목록](reports/photo_sources.md)
 
+[서비스 이용약관](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/terms) · [개인정보 안내](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/privacy) · [확정 B 로고·이미지 키트](assets/brand-kit/README.md) · [키트 ZIP 다운로드](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/brand/gunbeon-brand-kit-v1.zip)
+
 소스 저장소: [MySonIsSoldier/gunbeon-yeojido](https://github.com/MySonIsSoldier/gunbeon-yeojido) · [기존 clone 연결 변경 안내](docs/local-setup.md#기존-clone의-조직-저장소-연결)
 
 ## 일정 보기와 편집
