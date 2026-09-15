@@ -1,5 +1,13 @@
 # 개발 인수인계
 
+## 사용자용 도메인 가이드·Sites 한도 — 2026-09-15 16:47 KST
+
+- [사용자용 가이드](domain-owner-guide.md)에 기존 Google/Naver/Kakao 앱에 새 주소를 추가하는 절차와 별도 Google 도메인 소유/브랜드 검수를 정리했다. 실제 콘솔 값은 변경하지 않았다.
+- 동일 도메인 ID 새로고침: pending / provider active / SSL pending_validation, 오류 없음. 운영은 active/public·disabled_by 없음. 운영 v19/env4와 기존 origin 유지. 새 배포 없음.
+- 공식 Sites DB 한도는 사이트당 10GB. 동시 접속자·방문자/요청 수·전송량·고정 공개 기간은 공개 숫자를 확인하지 못했다. 도구는 계정별 quota를 제공하지 않고, Sites 관리 페이지의 브라우저 로딩 실패로 개인 계정 표시값도 미확인이다. Cloudflare Free 숫자로 대체하지 않는다.
+- 계정의 모든 Sites 합산·요금제별 beta 한도와 초과 시 공개 제한 가능성을 안내했다. Analytics는 실적이며 허용 최대값이 아니다. 문의 초안만 준비했으며 발송/모니터링 등록은 하지 않았다.
+- 문서 링크/공백 검사 후 commit/push. 코드·Secret·DB 변경이 없어 앱 검사는 반복하지 않는다. 다음은 사용자의 제공자 주소 등록 완료 확인과 SSL 활성화 이후 전환이다.
+
 ## Google 운영 활성화·DNS 반영·심사 호스팅 — 2026-09-15 최신
 
 **배포·소셜 로그인·도메인은 이 절이 아래 과거 기록보다 우선한다.** 상세 원인·증빙·공식 근거는 [운영 점검 보고](../reports/google_login_hosting_2026-09-15.md)에 있다.
