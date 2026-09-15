@@ -1,0 +1,53 @@
+{
+  "startedAt": "2026-09-15T01:42:29.554Z",
+  "base": "http://localhost:3000",
+  "liveApis": true,
+  "deviceMode": "Desktop browsers with viewport/touch emulation; not physical phones or mobile OS browsers",
+  "cases": [
+    {
+      "browser": "chromium",
+      "version": "151.0.7922.34",
+      "viewport": {
+        "width": 360,
+        "height": 740
+      },
+      "touchEmulated": true,
+      "name": "small",
+      "checks": [
+        "Live TourAPI response received",
+        "Home has no horizontal page overflow",
+        "Browser Back returns to the previous app screen",
+        "Mission has no horizontal page overflow",
+        "Kakao tiles/pins loaded; pin opens detail and closes",
+        "Date-free course choice, explicit schedule editing, save/reload and exact place order restore",
+        "Family briefing has no horizontal page overflow",
+        "Independent parent briefing; server group invitation is covered in groups QA",
+        "Explicit preparation target; preparation/visit split; SVG share download",
+        "API failure preserves saved refs and shows explicit unavailable state"
+      ],
+      "screenshots": [
+        "chromium-small-home.png",
+        "chromium-small-course.png",
+        "chromium-small-editor.png",
+        "chromium-small-mission.png",
+        "chromium-small-family.png"
+      ],
+      "apiRequests": {
+        "/api/account": 5,
+        "/api/test-access": 1,
+        "/api/groups": 4,
+        "/api/catalog": 4,
+        "/api/status": 4,
+        "/api/places": 5,
+        "/api/weather": 1,
+        "/api/accessibility": 1,
+        "/api/places/resolve": 1
+      },
+      "pageErrors": [],
+      "status": "passed"
+    }
+  ],
+  "completedAt": "2026-09-15T01:42:45.409Z",
+  "passed": 1,
+  "failed": 0
+}

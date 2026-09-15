@@ -20,6 +20,7 @@ import { recommendationEntry } from '@/lib/discovery';
 import { pageFetch, clearPageCache } from '@/lib/page-cache';
 import Brand from './brand';
 import { Input } from './ui/input';
+import TripOverview from './trip-overview';
 import TravelGroups, { TravelHome, useTravelGroups } from './travel-groups';
 import GroupShare from './group-share';
 import { groupEntry } from '@/lib/group-model';
@@ -374,6 +375,11 @@ export default function PassportApp() {
   const [refresh, setRefresh] = useState(0);
   const [mapKey, setMapKey] = useState('');
   const [selectedId, setSelectedId] = useState('');
+  const [overview, setOverview] = useState<{
+    entry: Entry;
+    group?: GroupDetail;
+    groupPlan?: GroupPlan;
+  } | null>(null);
   const [reviewEntry, setReviewEntry] = useState<Entry | null>(null);
   const [savedReferencesLoading, setSavedReferencesLoading] = useState(false);
   const [radarRecordId, setRadarRecordId] = useState('');
@@ -650,6 +656,7 @@ export default function PassportApp() {
         shared,
         recordEditing,
         composer?.entry,
+        overview?.entry,
         adviceManaging,
       ].filter((entry): entry is Entry => !!entry),
       ...(view === 'outing' && (startCandidate || activeOuting)
@@ -703,6 +710,7 @@ export default function PassportApp() {
     };
   }, [
     reviewEntry,
+    overview,
     completion,
     recordEditing,
     composer,
@@ -947,38 +955,9 @@ export default function PassportApp() {
     setNotice('장소·순서·계획 시간을 내 여행에 담았습니다.');
   }
   function openEntry(entry: Entry) {
-    if (
-      entry.plan?.kind === 'custom' &&
-      (!entry.plan.stops.length || !entry.plan.originId)
-    ) {
-      openBuilder(entry, 'edit');
-      return;
-    }
-    if (!entry.plan?.timeBudgetMinutes) {
-      openBuilder(entry, 'edit');
-      setNotice('이 여행의 출발·복귀 기준을 먼저 정해 주세요.');
-      return;
-    }
-    setReviewEntry(entry);
-    setSettings((s) => ({
-      ...s,
-      ...(entry.plan?.conditions || {}),
-      transport: entry.plan?.transport || s.transport,
-      region: entry.region,
-      originId: entry.plan?.originId || '',
-      startedAt: entry.plan?.departureAt || s.startedAt,
-      duration: entry.plan?.timeBudgetMinutes || 240,
-      returnAt: new Date(
-        Date.parse(entry.plan?.departureAt || s.startedAt) +
-          (entry.plan?.timeBudgetMinutes || 240) * 60000,
-      ).toISOString(),
-      ...(s.region !== entry.region
-        ? { weather: 'unknown', weatherForecast: undefined }
-        : {}),
-    }));
-    setSelectedId(entry.missionId);
-    go('planner');
+    setOverview({ entry });
   }
+
   function addStamp(id: string, stamp: string) {
     if (stamp !== '휴가 씨앗') return;
     setEntries((v) =>
@@ -1221,7 +1200,11 @@ export default function PassportApp() {
           <TravelHome
             entries={entries}
             places={places}
-            onContinue={(entry) => openBuilder(entry, 'edit')}
+            onContinue={(entry) =>
+              activeOuting && entryKey(activeOuting.entry) === entryKey(entry)
+                ? go('outing')
+                : openEntry(entry)
+            }
             outing={activeOuting}
             store={groupStore}
             onOpen={openEntry}
@@ -1235,6 +1218,7 @@ export default function PassportApp() {
         </TabsContent>
         <TabsContent value="groups">
           <TravelGroups
+            places={places}
             key={groupReload}
             store={groupStore}
             selectedId={selectedGroupId}
@@ -1245,6 +1229,13 @@ export default function PassportApp() {
                 entry: null,
                 mode: 'new',
                 group,
+              })
+            }
+            onView={(group, record) =>
+              setOverview({
+                entry: groupEntry(record),
+                group,
+                groupPlan: record,
               })
             }
             onEdit={(group, record) =>
@@ -2185,7 +2176,15 @@ export default function PassportApp() {
                           </DropdownMenuContent>
                         </DropdownMenu>
                         <span>{e.region}</span>
-                        <h2>{e.title}</h2>
+                        <h2>
+                          <button
+                            className="saved-title-link"
+                            onClick={() => openEntry(e)}
+                          >
+                            {e.title}
+                            <ChevronRight size={18} />
+                          </button>
+                        </h2>
                         {e.plan?.departureAt && (
                           <p className="saved-departure">
                             출발 계획{' '}
@@ -2220,6 +2219,10 @@ export default function PassportApp() {
                         </div>
                       ) : (
                         <div className="trip-record-actions">
+                          <Button onClick={() => openEntry(e)}>
+                            일정 보기
+                            <ChevronRight size={16} />
+                          </Button>
                           <Button
                             variant="outline"
                             disabled={!e.plan?.stops.length}
@@ -2759,13 +2762,21 @@ export default function PassportApp() {
             setGroupSharing(null);
           }}
           onSave={async (groupId, plan, record) => {
-            await groupStore.action({
+            const saved = await groupStore.action({
               action: 'savePlan',
               groupId,
               plan,
               planId: record?.id,
               version: record?.version,
             });
+            const updated = saved.group?.plans.find((p) => p.id === record?.id);
+            if (overview?.group && saved.group && updated)
+              setOverview({
+                entry: groupEntry(updated),
+                group: saved.group,
+                groupPlan: updated,
+              });
+            else setOverview(null);
             setGroupSharing(null);
             setSelectedGroupId(groupId);
             setGroupReload((v) => v + 1);
@@ -2783,6 +2794,67 @@ export default function PassportApp() {
           <PhotoCredits />
         </SheetContent>
       </Sheet>
+      {overview && !composer && !groupSharing && !placeOpen && (
+        <TripOverview
+          entry={
+            overview.group
+              ? overview.entry
+              : entries.find((e) => entryKey(e) === entryKey(overview.entry)) ||
+                overview.entry
+          }
+          places={places}
+          loading={catalogLoading || savedReferencesLoading}
+          groupName={overview.group?.name}
+          active={
+            !!activeOuting &&
+            !overview.group &&
+            entryKey(activeOuting.entry) === entryKey(overview.entry)
+          }
+          mapKey={mapKey}
+          onClose={() => setOverview(null)}
+          onEdit={() => {
+            if (overview.group && overview.groupPlan)
+              setComposer({
+                key: crypto.randomUUID(),
+                entry: overview.entry,
+                mode: 'edit',
+                group: overview.group,
+                groupPlan: overview.groupPlan,
+              });
+            else
+              openBuilder(
+                entries.find((e) => entryKey(e) === entryKey(overview.entry)) ||
+                  overview.entry,
+                hasVisitRecord(overview.entry) ? 'copy' : 'edit',
+              );
+          }}
+          onStart={() => {
+            const entry =
+              entries.find((e) => entryKey(e) === entryKey(overview.entry)) ||
+              overview.entry;
+            setOverview(null);
+            if (
+              activeOuting &&
+              entryKey(activeOuting.entry) === entryKey(entry)
+            )
+              go('outing');
+            else startTrip(entry);
+          }}
+          onImport={
+            overview.group
+              ? () => {
+                  const entry = overview.entry;
+                  setOverview(null);
+                  openBuilder(entry, 'copy');
+                  setNotice(
+                    '개인 사본의 복귀 기준을 설정해 주세요. 그룹 원본은 그대로 유지됩니다.',
+                  );
+                }
+              : undefined
+          }
+          onPlace={setPlaceOpen}
+        />
+      )}
       {composer && (
         <TripBuilder
           key={composer.key}
@@ -2855,6 +2927,7 @@ export default function PassportApp() {
                 [...v, ...memoryPlaces].map((p) => [p.id, p]),
               ).values(),
             ]);
+            if (overview) setOverview({ entry });
             setReviewEntry(entry);
             setSelectedId(entry.missionId);
             setSettings((v) => ({
@@ -3424,6 +3497,7 @@ export default function PassportApp() {
         </SheetContent>
       </Sheet>
       {notice &&
+        !overview &&
         !shared &&
         !composer &&
         !completion &&

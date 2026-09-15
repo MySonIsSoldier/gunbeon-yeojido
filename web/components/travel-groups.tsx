@@ -3,6 +3,7 @@ import { accountContextHeaders } from '@/lib/account-client';
 
 import { useCallback, useEffect, useState, useRef } from 'react';
 import {
+  EllipsisVertical,
   Users,
   Plus,
   ArrowLeft,
@@ -14,6 +15,14 @@ import {
   UserPlus,
 } from 'lucide-react';
 import { Button } from './ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from './ui/dropdown-menu';
+import { groupEntry } from '@/lib/group-model';
+import { itineraryView } from '@/lib/itinerary-view';
 import { Input } from './ui/input';
 import {
   AlertDialog,
@@ -234,7 +243,7 @@ export function TravelHome({
                 <Button onClick={() => onContinue(planned[0])}>
                   {outing && entryKey(outing.entry) === entryKey(planned[0])
                     ? '현재 출타 이어보기'
-                    : '계속 계획하기'}
+                    : '일정 보기'}
                   <ArrowRight size={17} />
                 </Button>
               </article>
@@ -332,9 +341,11 @@ export function TravelHome({
   );
 }
 export default function TravelGroups({
+  places,
   store,
   selectedId,
   onSelect,
+  onView,
   onEdit,
   onImport,
   onNew,
@@ -344,6 +355,8 @@ export default function TravelGroups({
   store: TravelGroupStore;
   selectedId: string;
   onSelect: (id: string) => void;
+  places: Place[];
+  onView: (g: GroupDetail, p: GroupPlan) => void;
   onEdit: (g: GroupDetail, p: GroupPlan) => void;
   onImport: (g: GroupDetail, p: GroupPlan) => void;
   onNew: (g: GroupDetail) => void;
@@ -706,6 +719,22 @@ export default function TravelGroups({
                 <div className="group-plan-grid">
                   {group.plans.map((p) => (
                     <article className="group-plan-card" key={p.id}>
+                      <div className="group-plan-cover">
+                        <CourseCover
+                          places={itineraryView(
+                            groupEntry(p),
+                            places,
+                            true,
+                          ).stops.map(
+                            (s) =>
+                              s.place || {
+                                id: s.placeId,
+                                title: '장소 정보 확인 필요',
+                                image_url: '',
+                              },
+                          )}
+                        />
+                      </div>
                       <span className="tag">
                         {p.plan.region} · {p.plan.stops.length}곳
                       </span>
@@ -716,38 +745,46 @@ export default function TravelGroups({
                       </p>
                       <small>공유한 여행 계획 · 복귀시각은 각자 설정</small>
                       <div className="group-card-buttons">
-                        <Button onClick={() => onEdit(group, p)}>
-                          일정 보기·수정
+                        <Button onClick={() => onView(group, p)}>
+                          일정 보기
                         </Button>
-                        <Button
-                          variant="outline"
-                          onClick={() => onImport(group, p)}
-                        >
-                          내 여행에 담기
-                        </Button>
-                        <button
-                          className="text-link"
-                          onClick={() => onBrief(group, p)}
-                        >
-                          이 여행 동행 브리핑
-                        </button>
-                        {(manager || p.authorId === store.profile?.id) && (
-                          <button
-                            className="text-link"
-                            onClick={() =>
-                              setConfirm({
-                                message: `‘${p.plan.title}’을 그룹에서 삭제할까요? 각자의 내 여행에 담은 사본은 유지됩니다.`,
-                                body: {
-                                  action: 'deletePlan',
-                                  groupId: group.id,
-                                  planId: p.id,
-                                },
-                              })
-                            }
+                        <DropdownMenu>
+                          <DropdownMenuTrigger
+                            className="group-plan-more"
+                            aria-label={`${p.plan.title} 더보기`}
                           >
-                            삭제
-                          </button>
-                        )}
+                            <EllipsisVertical size={20} />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => onEdit(group, p)}>
+                              일정 편집
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => onImport(group, p)}
+                            >
+                              내 여행에 담기
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => onBrief(group, p)}>
+                              이 여행 동행 브리핑
+                            </DropdownMenuItem>
+                            {(manager || p.authorId === store.profile?.id) && (
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  setConfirm({
+                                    message: `‘${p.plan.title}’을 그룹에서 삭제할까요? 각자의 내 여행에 담은 사본은 유지됩니다.`,
+                                    body: {
+                                      action: 'deletePlan',
+                                      groupId: group.id,
+                                      planId: p.id,
+                                    },
+                                  })
+                                }
+                              >
+                                삭제
+                              </DropdownMenuItem>
+                            )}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </div>
                     </article>
                   ))}

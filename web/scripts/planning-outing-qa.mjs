@@ -323,10 +323,16 @@ for (const channel of (
         saved.plan.departureAt,
       );
       await tab(p, '내 여행').click();
-      await (await recordMenu(p, '저장한 장소 다시 보기'))
+      await (await recordMenu(p, '저장한 장소 다시 보기')).click();
+      await p.locator('.trip-overview').waitFor();
+      assert(
+        await p
+          .getByRole('button', { name: '일정 편집', exact: true })
+          .isDisabled(),
+      );
+      await p
+        .getByRole('button', { name: '현재 출타 이어보기', exact: true })
         .click();
-      await p.locator('.place-row').first().waitFor();
-      await p.locator('.edit-summary').click();
       await p.locator('.outing-clock').waitFor();
       assert.equal(await p.locator('.course-builder').count(), 0);
       await p

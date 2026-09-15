@@ -1,5 +1,7 @@
 # 9월 21일 제출까지 남은 목표
 
+9/15 추가 완료: 일정 보기/편집 분리, 여행 색감 보완, 그룹 카드 더보기, 지도 번호 터치 겹침 보완. Google/Naver는 발급값·운영 설정 및 실제 동의 검증이 남음. [전달 기록](../reports/itinerary_view_2026-09-15.md).
+
 목표는 **2026-09-21 16:00 KST 전** 접근 가능한 웹/PWA, 지정 기능설명서·이미지·실제 활용 API 근거를 준비하고 참가 계정에서 제출을 완료하는 것이다. 공식 조건은 `reports/submission_assets.md`, `reports/notion_requirements.md`의 원문을 제출 직전 다시 확인한다.
 
 **2026-09-09 기록 더보기·개인 계정·서버 저장까지 구현·검증·공개배포 완료.** PR22가 master에 병합되고 Sitesv14가 배포되었다. 최종 근거는 handoff.md와 reports/advice_implementation.md에 있다. 계정 증설 신청/승인과 최종 접수는 남아 있다.

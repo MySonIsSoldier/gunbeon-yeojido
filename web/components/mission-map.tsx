@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Mission, Place } from '@/lib/domain';
 import { validCoord } from '@/lib/domain';
+import { mapLabelLayout } from '@/lib/map-label-layout';
 import { loadKakaoMaps, type KMap, type KakaoAPI } from '@/lib/kakao-maps';
 export default function MissionMap({
   mission,
@@ -67,22 +68,17 @@ export default function MissionMap({
     const { map, api } = instance.current;
     const { places: nodes, mission: trip, origin: hub } = latest.current;
     const bounds = new api.LatLngBounds();
+    const labels: HTMLButtonElement[] = [];
     const overlays = nodes.map((place) => {
       const point = new api.LatLng(place.lat!, place.lon!);
       bounds.extend(point);
       const number = trip.stops.findIndex((s) => s.place.id === place.id) + 1;
       const label = document.createElement('button');
+      labels.push(label);
       label.type = 'button';
       label.className =
         'map-place-pin' + (place.id === hub.id ? ' hub-pin' : '');
       label.textContent = number ? String(number) : '만남';
-      const samePoint = nodes.filter(
-        (n) =>
-          Math.abs(n.lat! - place.lat!) < 0.00001 &&
-          Math.abs(n.lon! - place.lon!) < 0.00001,
-      );
-      if (samePoint.length > 1)
-        label.style.transform = `translateX(${(samePoint.findIndex((n) => n.id === place.id) - (samePoint.length - 1) / 2) * 50}px)`;
       label.setAttribute(
         'aria-label',
         (number ? number + '번 ' : '') + place.title + ' 방문 정보',
@@ -103,7 +99,36 @@ export default function MissionMap({
       return overlay;
     });
     if (nodes.length) map.setBounds(bounds);
-    return () => overlays.forEach((overlay) => overlay.setMap(null));
+    let frame = 0;
+    const arrange = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (!ref.current) return;
+        labels.forEach((label) => {
+          label.style.transform = '';
+        });
+        const offsets = mapLabelLayout(
+          labels.map((label) => label.getBoundingClientRect()),
+          ref.current.getBoundingClientRect(),
+        );
+        labels.forEach((label, i) => {
+          label.style.transform = `translate(${offsets[i].x}px, ${offsets[i].y}px)`;
+          label.style.pointerEvents = 'auto';
+          if (label.parentElement)
+            label.parentElement.style.pointerEvents = 'none';
+        });
+      });
+    };
+    api.event.addListener(map, 'idle', arrange);
+    const layoutObserver = new ResizeObserver(arrange);
+    if (ref.current) layoutObserver.observe(ref.current);
+    arrange();
+    return () => {
+      cancelAnimationFrame(frame);
+      layoutObserver.disconnect();
+      api.event.removeListener(map, 'idle', arrange);
+      overlays.forEach((overlay) => overlay.setMap(null));
+    };
   }, [geometry, ready]);
   const lats = places.map((x) => x.lat!),
     lons = places.map((x) => x.lon!);
@@ -208,7 +233,7 @@ export default function MissionMap({
       )}
       <span className="map-tag">
         {ready
-          ? 'Kakao 지도 · 개별 장소 길찾기는 아래에서'
+          ? 'Kakao 지도 · 가까운 번호는 간격을 띄워 표시'
           : '위치 개략도 · 길찾기 지도 연결 전'}
       </span>
     </div>
