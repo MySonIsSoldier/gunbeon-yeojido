@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-09-15T00:37:00Z",
+  "method": "In-app browser, existing local browser surface, manual UI",
+  "site": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+  "version": 16,
+  "checks": [
+    "Normal login as dedicated judge account opens home without extra test gate or ChatGPT login",
+    "3 planned trips, 1 record, 2 groups visible; pre-existing device travel not imported",
+    "Parent plan restores 20-minute walking preference and 30-minute buffer",
+    "Kakao map loaded with Gosukjeong, Cheorwon Labor Party Building and Deulkkot Hyanggi markers",
+    "Actual TourAPI content 2686670 appears in timeline and comparison",
+    "Removing Deulkkot Hyanggi in comparison changes return margin from +1 to +55 minutes and walking estimate20 to10; comparison was not applied"
+  ],
+  "remaining": [
+    "Physical Android/iPhone OS verification",
+    "Current Edge browser verification",
+    "Provider quota increase approval",
+    "Complete current operating/reservation conditions for representative itineraries"
+  ]
+}

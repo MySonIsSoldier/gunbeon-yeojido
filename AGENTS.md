@@ -91,3 +91,10 @@ npm run build
 - 기기 기록은 명시적으로 가져온다. 충돌 사본과 가져오는 현재 출타의 recordId는 같은 매핑을 사용한다. 기존 그룹/공유/제안은 검증한 이전 쿠키 권한만 연결하며 소비된 쿠키를 다시 익명 권한으로 쓰지 않는다.
 - 정상 TourAPI 응답/사진은 개인 DB에 저장하지 않는다. `cleanTravelState`의 user-authored/reference whitelist를 유지한다. 공개 DTO에 개인 계정 데이터가 섞이지 않게 한다.
 - `npm run test:accounts`, `npm run test:accounts-ui`와 기존 메뉴 회귀 검사를 유지한다. migration0004는 추가 적용하며 기존 SQL/스냅샷을 다시 쓰지 않는다.
+
+## 9/15 심사 준비 보완
+
+- 최신 `docs/judging-scenario.md`, `reports/judging_readiness_review_2026-09-15.md` 확인. 지정 심사 계정은 이미 운영에 생성·검증되어 있어 일회 준비 스크립트를 다시 실행하거나 초기화하지 않는다.
+- `Entry.plan.conditions`를 저장/재열기/출타에 보존하고 group/public DTO에는 섞지 않는다. 그룹 사본의 복귀 기준을 임의로 만들지 않는다.
+- 인증 실패 제한의 check/consume 구분과 정상 로그인13회 회귀 검사를 유지한다. 특정 심사 아이디의 인증 우회를 추가하지 않는다.
+- `npm run test:judging`은 360/430/1440px 조건 독립성 검사이며 물리적 휴대폰/실 API 증거가 아니다.

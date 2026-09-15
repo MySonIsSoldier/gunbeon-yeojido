@@ -1,0 +1,58 @@
+{
+  "base": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+  "checkedAt": "2026-09-15T00:34:23.538Z",
+  "checks": [
+    "Four synthetic examples saved through account revision API; no provider response stored; no active outing",
+    "Fresh second session logs in directly without test gate; 4 entries, 2 groups, trip-specific conditions restored"
+  ],
+  "liveTourApi": {
+    "status": 200,
+    "mode": "live",
+    "error": null,
+    "fetchedAt": "2026-09-15T00:34:30.265Z",
+    "places": 114,
+    "categories": [
+      {
+        "contentTypeId": "12",
+        "total": 56,
+        "error": null,
+        "fetched": 56
+      },
+      {
+        "contentTypeId": "14",
+        "total": 2,
+        "error": null,
+        "fetched": 2
+      },
+      {
+        "contentTypeId": "15",
+        "total": 2,
+        "error": null,
+        "fetched": 2
+      },
+      {
+        "contentTypeId": "32",
+        "total": 12,
+        "error": null,
+        "fetched": 12
+      },
+      {
+        "contentTypeId": "39",
+        "total": 42,
+        "error": null,
+        "fetched": 42
+      }
+    ],
+    "chosenReference": {
+      "id": "tourapi:2686670",
+      "sourceId": "2686670",
+      "title": "들꽃향기"
+    }
+  },
+  "accountId": "39d8c079-f880-494c-8cbf-0ef93c88c2d3",
+  "groupIds": [
+    "3e2f668f-d118-4ddc-961a-2b02d322f0a7",
+    "a1efe392-4d6d-4ba8-9001-89537abffcf8"
+  ],
+  "status": "passed"
+}

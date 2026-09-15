@@ -1,0 +1,374 @@
+{
+  "custom": {
+    "startedAt": "2026-09-15T00:22:11.533Z",
+    "base": "http://localhost:3000",
+    "live": true,
+    "deviceMode": "Desktop Chrome/Edge with viewport and touch emulation, not physical phones",
+    "cases": [
+      {
+        "browser": "chromium",
+        "version": "151.0.7922.34",
+        "viewport": {
+          "name": "small",
+          "width": 360,
+          "height": 740
+        },
+        "checks": [
+          "Anonymous API denied; wrong password rejected; correct password admits without ChatGPT",
+          "TourAPI keyword search result added to a custom course",
+          "1/2/3/4 tile layouts, five-place cap, add/reorder/stay/manual place and missing-coordinate state",
+          "Reload restores exact manual and provider references; editing updates the same record",
+          "Public share strips free text; importing preserves original; discard leaves saved course intact"
+        ],
+        "pageErrors": [],
+        "apiRequests": {
+          "/api/account": 3,
+          "/api/test-access": 2,
+          "/api/groups": 2,
+          "/api/catalog": 2,
+          "/api/status": 2,
+          "/api/places": 2,
+          "/api/places/search": 1,
+          "/api/places/resolve": 1
+        },
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "version": "151.0.7922.34",
+        "viewport": {
+          "name": "desktop",
+          "width": 1440,
+          "height": 900
+        },
+        "checks": [
+          "Anonymous API denied; wrong password rejected; correct password admits without ChatGPT",
+          "TourAPI keyword search result added to a custom course",
+          "1/2/3/4 tile layouts, five-place cap, add/reorder/stay/manual place and missing-coordinate state",
+          "Reload restores exact manual and provider references; editing updates the same record",
+          "Public share strips free text; importing preserves original; discard leaves saved course intact"
+        ],
+        "pageErrors": [],
+        "apiRequests": {
+          "/api/account": 3,
+          "/api/test-access": 2,
+          "/api/groups": 2,
+          "/api/catalog": 2,
+          "/api/status": 2,
+          "/api/places": 2,
+          "/api/places/search": 1,
+          "/api/places/resolve": 1
+        },
+        "status": "passed"
+      }
+    ],
+    "completedAt": "2026-09-15T00:22:34.244Z",
+    "passed": 2,
+    "failed": 0
+  },
+  "groups": {
+    "base": "http://localhost:3000",
+    "startedAt": "2026-09-15T00:27:10.093Z",
+    "deviceMode": "Desktop Chrome/Edge viewport and touch emulation; not physical phones",
+    "cases": [
+      {
+        "channel": "chromium",
+        "version": "151.0.7922.34",
+        "size": {
+          "name": "small",
+          "width": 360,
+          "height": 740
+        },
+        "checks": [
+          "Date-free recommendations; page navigation reuses list response",
+          "Create family group and empty itinerary through UI",
+          "Group edit saved and invitation generated",
+          "Invitation survives test login; another browser session joins and reads the same plan",
+          "Home shows personal upcoming plan and two groups; group opens its own plans",
+          "Group copy opens with blank personal return criterion and saves only after explicit input",
+          "Group draft close confirmation retains changes"
+        ],
+        "errors": [],
+        "screenshots": [
+          "home-empty",
+          "browse",
+          "group-plans",
+          "home",
+          "editor"
+        ],
+        "status": "passed",
+        "guestRequests": [
+          {
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "method": "GET",
+            "status": 200
+          }
+        ]
+      },
+      {
+        "channel": "chromium",
+        "version": "151.0.7922.34",
+        "size": {
+          "name": "desktop",
+          "width": 1440,
+          "height": 900
+        },
+        "checks": [
+          "Date-free recommendations; page navigation reuses list response",
+          "Create family group and empty itinerary through UI",
+          "Group edit saved and invitation generated",
+          "Invitation survives test login; another browser session joins and reads the same plan",
+          "Home shows personal upcoming plan and two groups; group opens its own plans",
+          "Group copy opens with blank personal return criterion and saves only after explicit input",
+          "Group draft close confirmation retains changes"
+        ],
+        "errors": [],
+        "screenshots": [
+          "home-empty",
+          "browse",
+          "group-plans",
+          "home",
+          "editor"
+        ],
+        "status": "passed",
+        "guestRequests": [
+          {
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "method": "GET",
+            "status": 200
+          }
+        ]
+      }
+    ]
+  },
+  "outing": {
+    "startedAt": "2026-09-15T00:22:49.695Z",
+    "base": "http://localhost:3000",
+    "live": true,
+    "deviceMode": "Desktop browser viewport/touch emulation, not physical mobile devices",
+    "cases": [
+      {
+        "browser": "chromium",
+        "version": "151.0.7922.34",
+        "viewport": {
+          "name": "small",
+          "width": 360,
+          "height": 740
+        },
+        "checks": [
+          "Date-free discovery estimates remain fixed after 30 minutes; five navigation tabs fit",
+          "Blank course saves and restores; completion disabled until places exist",
+          "Map initializes after meeting coordinates arrive later than the SDK key",
+          "Meeting picker only offers favorites/map; favorite-first stop selection and personal place declaration removed",
+          "Delayed catalog shows loading instead of a premature failure; saved places finish restoring",
+          "Favorite deletion leaves saved meeting snapshot and future plan time intact",
+          "Active itinerary edit blocked centrally; current weather correction affects live risk",
+          "Explicit outing start; live clock ticks, progress restores/undoes, cancel preserves current outing",
+          "Confirmed completion alone adds selected stamps and ends the clock"
+        ],
+        "pageErrors": [],
+        "status": "passed"
+      }
+    ],
+    "completedAt": "2026-09-15T00:23:08.073Z",
+    "passed": 1,
+    "failed": 0
+  },
+  "browser": {
+    "startedAt": "2026-09-15T00:24:33.457Z",
+    "base": "http://localhost:3000",
+    "liveApis": false,
+    "deviceMode": "Desktop browsers with viewport/touch emulation; not physical phones or mobile OS browsers",
+    "cases": [
+      {
+        "browser": "chromium",
+        "version": "151.0.7922.34",
+        "viewport": {
+          "width": 360,
+          "height": 740
+        },
+        "touchEmulated": true,
+        "name": "small",
+        "checks": [
+          "Explicit keyless fallback",
+          "Home has no horizontal page overflow",
+          "Browser Back returns to the previous app screen",
+          "Mission has no horizontal page overflow",
+          "Explicit geographic fallback",
+          "Date-free course choice, explicit schedule editing, save/reload and exact place order restore",
+          "Family briefing has no horizontal page overflow",
+          "Independent parent briefing; server group invitation is covered in groups QA",
+          "Explicit preparation target; preparation/visit split; SVG share download"
+        ],
+        "screenshots": [
+          "chromium-small-home.png",
+          "chromium-small-course.png",
+          "chromium-small-editor.png",
+          "chromium-small-mission.png",
+          "chromium-small-family.png"
+        ],
+        "apiRequests": {
+          "/api/account": 4,
+          "/api/test-access": 1,
+          "/api/groups": 3,
+          "/api/catalog": 3,
+          "/api/status": 3,
+          "/api/places": 4,
+          "/api/weather": 2,
+          "/api/accessibility": 1
+        },
+        "pageErrors": [],
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "version": "151.0.7922.34",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "touchEmulated": false,
+        "name": "desktop",
+        "checks": [
+          "Explicit keyless fallback",
+          "Home has no horizontal page overflow",
+          "Browser Back returns to the previous app screen",
+          "Mission has no horizontal page overflow",
+          "Explicit geographic fallback",
+          "Date-free course choice, explicit schedule editing, save/reload and exact place order restore",
+          "Family briefing has no horizontal page overflow",
+          "Independent parent briefing; server group invitation is covered in groups QA",
+          "Explicit preparation target; preparation/visit split; SVG share download"
+        ],
+        "screenshots": [
+          "chromium-desktop-home.png",
+          "chromium-desktop-course.png",
+          "chromium-desktop-editor.png",
+          "chromium-desktop-mission.png",
+          "chromium-desktop-family.png"
+        ],
+        "apiRequests": {
+          "/api/account": 4,
+          "/api/test-access": 1,
+          "/api/groups": 3,
+          "/api/catalog": 3,
+          "/api/status": 3,
+          "/api/places": 4,
+          "/api/weather": 2,
+          "/api/accessibility": 1
+        },
+        "pageErrors": [],
+        "status": "passed"
+      }
+    ],
+    "completedAt": "2026-09-15T00:24:55.933Z",
+    "passed": 2,
+    "failed": 0
+  },
+  "conditions": {
+    "base": "http://localhost:3000",
+    "checkedAt": "2026-09-15T00:29:02.102Z",
+    "note": "Desktop viewport simulation; no physical phone verification; provider failure fixture",
+    "results": [
+      {
+        "channel": "chromium",
+        "version": "151.0.7922.34",
+        "width": 360,
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "channel": "chromium",
+        "version": "151.0.7922.34",
+        "width": 430,
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "channel": "chromium",
+        "version": "151.0.7922.34",
+        "width": 1440,
+        "status": "passed",
+        "errors": []
+      }
+    ]
+  },
+  "chrome": {
+    "base": "http://localhost:3000",
+    "checkedAt": "2026-09-15T00:29:36.666Z",
+    "note": "Desktop viewport simulation; no physical phone verification; provider failure fixture",
+    "results": [
+      {
+        "channel": "chrome",
+        "version": "153.0.8010.36",
+        "width": 360,
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "channel": "chrome",
+        "version": "153.0.8010.36",
+        "width": 430,
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "channel": "chrome",
+        "version": "153.0.8010.36",
+        "width": 1440,
+        "status": "passed",
+        "errors": []
+      }
+    ]
+  },
+  "accounts": {
+    "base": "http://localhost:3000",
+    "checkedAt": "2026-09-15T00:18:29.900Z",
+    "checks": [
+      "Explicit migration preserves group/share ownership and consumes old-cookie authority",
+      "Second browser restores travel, groups and public-share management",
+      "Imported anonymous suggestion remains owned and withdrawable after account migration",
+      "Old A tab cannot read/write/import/rename/logout through B cookies",
+      "Revision conflicts, malformed data, CSRF and invalid passwords fail safely",
+      "HttpOnly session and per-device logout; disabled/corrupt social login never authenticates",
+      "13 successful logins do not consume the failure limit",
+      "Unknown-handle failures are bounded without blocking another handle"
+    ],
+    "status": "passed",
+    "syntheticAccountIds": [
+      "d8365fa1-13f3-4cd8-9de2-35ead7969417",
+      "cc66b44b-6424-4dca-abbf-1f6573b6b0d1"
+    ],
+    "providerAuthentication": "Not configured; actual Google/Naver consent unverified"
+  }
+}
