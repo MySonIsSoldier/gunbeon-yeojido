@@ -4,15 +4,15 @@
 
 출타에 맞는 여행을 계획하고, 만나는 사람마다 그룹으로 일정을 나눕니다. 여행 중에는 개인 복귀 기준을 확인하고, 다녀온 뒤 비무장 패스포트에 기록합니다. **2026 관광데이터 활용 공모전 ① 웹·앱 개발 부문**을 위한 모바일 웹/PWA입니다.
 
-[테스트 사이트 열기](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/) · 개인 계정 로그인 · 체험 입장 **1234** · ChatGPT 로그인 불필요
+[테스트 사이트 열기](https://gunbeon.gangwon.kr/) · 개인 계정 로그인 · 체험 입장 **1234** · ChatGPT 로그인 불필요
 
-[화면으로 보는 사용 가이드](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/guide) · [사진 원문·이용조건 검토 목록](reports/photo_sources.md)
+[화면으로 보는 사용 가이드](https://gunbeon.gangwon.kr/guide) · [사진 원문·이용조건 검토 목록](reports/photo_sources.md)
 
-[서비스 이용약관](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/terms) · [개인정보 안내](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/privacy) · [확정 B 로고·이미지 키트](assets/brand-kit/README.md) · [키트 ZIP 다운로드](https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/brand/gunbeon-brand-kit-v1.zip)
+[서비스 이용약관](https://gunbeon.gangwon.kr/terms) · [개인정보 안내](https://gunbeon.gangwon.kr/privacy) · [확정 B 로고·이미지 키트](assets/brand-kit/README.md) · [키트 ZIP 다운로드](https://gunbeon.gangwon.kr/brand/gunbeon-brand-kit-v1.zip)
 
 소스 저장소: [MySonIsSoldier/gunbeon-yeojido](https://github.com/MySonIsSoldier/gunbeon-yeojido) · [기존 clone 연결 변경 안내](docs/local-setup.md#기존-clone의-조직-저장소-연결)
 
-[개발 전용 사이트](https://gunbeon-development.ybuser.chatgpt.site) · 소유자 전용, 운영과 별도 DB · [구매 도메인 연결과 배포 구조](docs/custom-domain-setup.md). 새 운영 도메인은 철자 확인·Hosting.kr DNS 설정 대기이며, 위 기존 공개 주소는 계속 이용할 수 있습니다.
+[개발 전용 사이트](https://gunbeon-development.ybuser.chatgpt.site) · 소유자 전용, 운영과 별도 DB · [구매 도메인 연결과 배포 구조](docs/custom-domain-setup.md). 새 운영 도메인 **gunbeon.gangwon.kr** 연결과 Google/Naver 실로그인·기존 여행 복원·Kakao 지도 확인을 완료했습니다. 기존 플랫폼 주소는 보존하며 소셜 로그인은 새 주소에서 이용합니다. [전환 검증·캡처](reports/custom_domain_live_2026-09-15.md).
 
 ## 일정 보기와 편집
 

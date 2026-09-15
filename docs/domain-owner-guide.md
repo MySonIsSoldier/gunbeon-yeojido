@@ -1,8 +1,8 @@
 # 새 도메인 등록과 Sites 한도 확인
 
-2026-09-15 확인. 대상은 `gunbeon.gangwon.kr`이다. Hosting.kr DNS 4개는 반영 완료했고, 16:47 KST 기준 Sites 도메인은 provider active / SSL pending_validation이다. 현재 운영은 기존 chatgpt.site를 사용한다.
+2026-09-15 **전환 완료**. 대상은 https://gunbeon.gangwon.kr 이며 DNS·SSL 모두 active다. 사용자 Google/Naver/Kakao 주소 추가 후 운영 v19/env5 전환과 두 소셜 로그인·기존 기록·지도를 확인했다. 아래 주소 추가 절차를 다시 실행할 필요는 없다. Google 브랜드 검수와 네이버 최종 검수는 별도 후속이다. [실제 검증·캡처](../reports/custom_domain_live_2026-09-15.md)
 
-## 사용자가 지금 할 일
+## 사용자 주소 등록 절차 — 완료 기록
 
 아래는 새 키 발급이 아니라 **현재 사용하는 앱에 새 주소를 추가**하는 절차다. 기존 chatgpt.site·localhost 등록값은 전환 검증 전까지 보존한다. SSL 발급을 기다리는 동안 1~3의 주소 등록은 먼저 할 수 있다.
 
@@ -56,7 +56,7 @@ https://gunbeon.gangwon.kr/api/auth/callback/google
 
 Google Branding의 검증 절차를 따라 승인 후 게시한다. 기존 chatgpt.site 주소의 소유 확인 때문에 검수가 막히면 오류 내용을 확인한 뒤 개발/운영 클라이언트 분리를 검토한다. 동작 중인 기존 콜백을 먼저 삭제하지 않는다. [Branding 안내](https://support.google.com/cloud/answer/15549049?hl=ko), [Search Console DNS 확인](https://support.google.com/webmasters/answer/9008080?hl=ko)
 
-## 이후 제가 처리할 일
+## 이후 운영 전환 절차 — 완료 기록
 
 위 세 서비스에 새 주소를 저장한 뒤 완료 사실을 알려주면, 다음 작업에서 HTTPS 상태를 다시 확인하고 운영 `AUTH_BASE_URL`·`PUBLIC_SITE_URL`을 함께 전환·재배포한다. 기존 Google/Naver 키와 D1은 유지한다. 현재 설정만 먼저 바꾸면 기존 주소의 소셜 로그인이 비활성화될 수 있어 미리 변경하지 않았다.
 

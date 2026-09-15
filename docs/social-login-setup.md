@@ -1,14 +1,14 @@
 # 구글·네이버 로그인 연결하기
 
-**구매 도메인 전환 준비:** [개발·운영 분리 및 DNS/OAuth 주소 안내](custom-domain-setup.md)를 먼저 확인하세요. 운영 v19/env4의 기존 콜백은 유지 중이며, `gunbeon.gangwon.kr`의 DNS 반영은 확인했고 SSL 활성화·제공자 콜백 등록 후 함께 전환합니다. 아래 기존 주소를 지금 일괄 삭제하거나 AUTH_BASE_URL만 먼저 바꾸지 않습니다. 개발 전용 사이트는 별도 DB이며 Google/Naver 키가 아직 없습니다.
+**운영 도메인 전환 완료:** 현재 공식 주소는 **https://gunbeon.gangwon.kr**이며 운영 v19/env5입니다. 2026-09-15 새 주소에서 Google 로그인·연결됨 표시와 Naver 기존 회원 재로그인·여행/그룹 복원을 확인했습니다. [실제 검증·캡처](../reports/custom_domain_live_2026-09-15.md).
 
-현재 개인 아이디·비밀번호 가입/로그인과 계정별 서버 저장은 구현되어 있습니다. **네이버는 2026-09-15 운영 연결과 기존 계정의 실제 재로그인까지 확인했습니다. Google은 운영 키 반영 후 실제 Google 인증 화면까지 확인했습니다.** Google 본인 인증 후 홈 복귀·재로그인은 아직 미검증입니다.
+기존 chatgpt.site는 보존하지만 소셜 로그인은 새 주소에서 이용합니다. 기존과 같은 계정/로그인 방식을 사용하세요. 개발 전용 사이트는 별도 DB이며 Google/Naver 키가 아직 없습니다. 아래 과거 기록의 미검증 상태보다 이 최신 결과가 우선합니다.
 
 **2026-09-15 16:27 업데이트:** 로컬에만 있던 Google Client ID/Secret을 Sites Secret에 반영하고 v19/env4 재배포를 완료했습니다. 운영 `/api/account`에서 google/naver 모두 사용 가능하며, `/login`의 Google 버튼이 인증 화면으로 연결됩니다. 마지막 본인 인증은 사용자가 직접 진행합니다. 로컬 `.env.local` 수정은 운영 환경으로 자동 전파되지 않습니다. [배포·검사·호스팅 기록](../reports/google_login_hosting_2026-09-15.md)
 
 **2026-09-15 13시 업데이트:** 로컬에 준비된 네이버 Client ID/Secret과 운영 AUTH_BASE_URL을 Sites env revision3에 반영하고 기존 v18을 재배포했습니다. 기존 네이버 동의 이력이 있는 브라우저에서 서비스 로그아웃 → 활성 네이버 버튼 → 서비스 홈 로그인 완료 → 내 계정의 ‘네이버 연결됨’을 직접 확인했습니다. 신규 회원 생성·새 네이버 동의 화면은 이번에 촬영하지 않았습니다. [검수 제출자료와 촬영 조건](../output/naver-review/README.md).
 
-현재 사용자가 할 일은 **Google 실제 로그인 완료 확인**, **네이버 검수 자료 첨부·신청**입니다. Google/Naver 키를 다시 발급할 필요는 없습니다. 새 도메인 전환과 Google 브랜드 검수는 별도이며, 개인 비밀번호·추가 동의와 검수 신청은 실제 해당 화면에서 진행합니다.
+현재 사용자 후속은 **Google 브랜드 검수**, **네이버 검수 자료의 최종 주소 확인·신청**입니다. Google/Naver 키를 다시 발급할 필요는 없습니다. 새 도메인에서 두 제공자의 실제 로그인은 확인했으며 브랜드 승인·신규 동의 검수 완료와는 구분합니다.
 
 ## 먼저 알아둘 것
 
@@ -29,7 +29,7 @@ NAVER_CLIENT_SECRET=
 운영 환경의 `AUTH_BASE_URL`은 다음 값입니다. 끝에 `/`는 붙이지 않습니다.
 
 ```text
-https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site
+https://gunbeon.gangwon.kr
 ```
 
 이 값은 로그인 요청을 보낸 사이트 주소와 정확히 같아야 합니다. 로컬은 `http://localhost:3000`으로 접속하세요. `127.0.0.1`, LAN IP, 다른 포트는 현재 로그인 설정과 같지 않습니다. 운영 주소에는 `/login`이나 콜백 경로를 붙이지 않습니다.
@@ -40,23 +40,23 @@ https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site
 
 | 항목 | 값 |
 |---|---|
-| 앱 홈페이지 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/about |
-| 개인정보 안내 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/privacy |
-| 서비스 이용약관 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/terms |
-| 140×140 앱 로고 PNG | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/brand/gunbeon-logo-140.png |
-| 로고·홍보 이미지 키트 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/brand/gunbeon-brand-kit-v1.zip |
+| 앱 홈페이지 | https://gunbeon.gangwon.kr/about |
+| 개인정보 안내 | https://gunbeon.gangwon.kr/privacy |
+| 서비스 이용약관 | https://gunbeon.gangwon.kr/terms |
+| 140×140 앱 로고 PNG | https://gunbeon.gangwon.kr/brand/gunbeon-logo-140.png |
+| 로고·홍보 이미지 키트 | https://gunbeon.gangwon.kr/brand/gunbeon-brand-kit-v1.zip |
 
 2026-09-15 B ‘다시 만나는 길’ 로고로 확정했습니다. 등록 화면이 파일 업로드를 요구하면 로고 이미지를 내려받아 올립니다. 위 안내 페이지와 로고는 로그인·체험 비밀번호 없이 접근할 수 있도록 공개합니다. 약관 URL은 Google Branding의 이용약관 항목 및 해당 등록 화면에 넣습니다. [Google OAuth 정책](https://developers.google.com/identity/protocols/oauth2/policies)은 공개 홈페이지의 약관·개인정보 링크를 요구합니다. URL 게시만으로 Google/Naver 검수나 별도 약관 동의 기록이 완료되는 것은 아닙니다.
 
 1. [Google Cloud Console](https://console.cloud.google.com/)에 로그인합니다. 프로젝트를 선택하거나 `군번여지도 강원` 프로젝트를 만듭니다.
-2. **Google Auth Platform → Branding**에서 앱 이름, 지원 이메일, 개발자 연락 이메일을 입력합니다. 앱 홈페이지는 `https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/about`, 개인정보 안내는 `https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/privacy`를 입력합니다. 승인된 도메인 또는 소유 확인을 요구하면 아래 ‘도메인 확인’ 설명을 따릅니다.
+2. **Google Auth Platform → Branding**에서 앱 이름, 지원 이메일, 개발자 연락 이메일을 입력합니다. 앱 홈페이지는 `https://gunbeon.gangwon.kr/about`, 개인정보 안내는 `https://gunbeon.gangwon.kr/privacy`를 입력합니다. 승인된 도메인 또는 소유 확인을 요구하면 아래 ‘도메인 확인’ 설명을 따릅니다.
 3. **Audience**에서 일반 이용자용 **External**을 선택합니다. 조직 내부용 Internal은 일반 Google 사용자에게 적합하지 않습니다.
 4. **Data Access**에서는 현재 구현에 필요한 `openid`만 사용합니다. 이메일, Drive, Gmail, 생일 등의 권한은 필요 없습니다.
 5. **Clients → Create Client → Web application**을 선택합니다.
 6. **Authorized redirect URIs(승인된 리디렉션 URI)**에 아래 주소를 줄별로 등록합니다.
 
 ```text
-https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/api/auth/callback/google
+https://gunbeon.gangwon.kr/api/auth/callback/google
 http://localhost:3000/api/auth/callback/google
 ```
 
@@ -68,9 +68,9 @@ http://localhost:3000/api/auth/callback/google
 
 기본 로그인 범위(`openid/email/profile`)에는 일반 Testing 사용자 수·만료 규칙의 예외가 있으므로, 무조건 ‘100명까지만’ 또는 ‘7일 후 로그인이 모두 만료’라고 해석하지 않습니다. 실제 콘솔의 게시 상태를 확인합니다. [Google Audience 안내](https://support.google.com/cloud/answer/15549945?hl=en)
 
-### 도메인 확인과 일반 공개
+### 이전 chatgpt.site 도메인 검토 기록과 일반 공개
 
-**현재 콘솔 메시지에 대한 조치:** ‘누락된 도메인: ybuser.chatgpt.site’는 먼저 Branding의 승인된 도메인 목록에 `ybuser.chatgpt.site`를 추가하라는 의미입니다. `https://`와 경로 없이 넣습니다. 목록 등록과 Search Console 소유 인증, 브랜드 검수는 별개의 단계입니다. [Google Branding 설정](https://support.google.com/cloud/answer/15549049?hl=en)
+**이전 도메인에서 보고된 콘솔 메시지:** ‘누락된 도메인: ybuser.chatgpt.site’는 먼저 Branding의 승인된 도메인 목록에 `ybuser.chatgpt.site`를 추가하라는 의미입니다. `https://`와 경로 없이 넣습니다. 목록 등록과 Search Console 소유 인증, 브랜드 검수는 별개의 단계입니다. [Google Branding 설정](https://support.google.com/cloud/answer/15549049?hl=en)
 
 이번 일정에서는 이 문자열을 등록한 뒤 웹 OAuth Client를 만들고 정확한 콜백을 입력하여 기본 로그인부터 시험할 수 있습니다. 현재 코드의 요청 범위는 `openid` 하나입니다. [공식 앱 상태표](https://developers.google.com/identity/protocols/oauth2/production-readiness/overview)에 따르면 기본 식별 범위만 사용하는 Testing/External은 테스트 사용자 제한의 예외가 있고, Published/Unverified에서도 접근이 가능하지만 앱 이름·로고는 표시되지 않습니다. Google은 Published/Unverified 상태의 운영을 강하게 권장하지 않으므로 임시 검증 경로로 검토하고, 정식 브랜딩에는 브랜드 검수를 진행합니다. 따라서 브랜드 검수를 미룬 기본 로그인 시험 경로는 존재합니다. 실제 콘솔 저장·클라이언트 발급·로그인 성공을 보장하는 뜻은 아니며 Workspace 관리자 정책도 별개입니다.
 
@@ -93,10 +93,10 @@ Google 브랜드 검수는 홈페이지·개인정보 안내·콜백 주소가 �
 
 ```text
 서비스 URL
-https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site
+https://gunbeon.gangwon.kr
 
 Callback URL
-https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/api/auth/callback/naver
+https://gunbeon.gangwon.kr/api/auth/callback/naver
 ```
 
 5. PC 웹 콜백은 최대 5개까지 등록할 수 있습니다. 같은 앱으로 로컬도 시험하려면 아래 주소를 추가하고, 서비스 URL에도 로컬 환경을 등록합니다. 별도 개발용 앱을 쓰는 경우 운영용 ID·Secret과 혼동하지 않습니다. [서비스 환경 공식 안내](https://developers.naver.com/docs/common/openapiguide/appregister.md)

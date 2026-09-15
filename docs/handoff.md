@@ -1,5 +1,19 @@
 # 개발 인수인계
 
+## 운영 도메인 전환 완료 — 2026-09-15 17:33 KST 배포
+
+**운영 주소·로그인·배포의 최신 상태는 이 절이 우선한다.** [전환 검증과 실제 캡처](../reports/custom_domain_live_2026-09-15.md).
+
+- 사용자 Google/Naver/Kakao 새 도메인 등록 완료 확인. 기존 domain ID `appgdom_6aa8d01a4d0481918a5c8ce10d2ed2ba`의 status/provider/SSL 모두 **active, 08:31:56 UTC**. HTTPS 정상 페이지 확인 후 변경했다.
+- 공식 **https://gunbeon.gangwon.kr**. 운영 `AUTH_BASE_URL`·`PUBLIC_SITE_URL` 모두 이 origin, **v19/env5**. Google/Naver/TourAPI/Kakao/체험 Secret·운영 D1 보존. 개발은 v2/env2 그대로.
+- source `9790ac308766aecae662e71d7bdc0e2b5050fb38`, version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_1094cb816de48191abd8ac1e8901721b`, deployment `appgdep_6aa902d37c9881919acaabdf9f2d45e1` **succeeded 08:33:36 UTC**. 배포 응답 URL은 기존 `https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site`이며 새 커스텀 도메인의 실제 접속도 별도로 검증했다.
+- IAB에서 Google 버튼 → 새 주소 홈 → Google 연결됨 확인. 로그아웃 후 Naver → 기존 예시 계획3·그룹2 복원, 가족 그룹 여행·읽기 전용 일정·실제 Kakao 지도3마커 확인. 계정 연결/병합·여행 수정·심사 계정 초기화 없음. 브랜드 승인/새 동의 검수는 완료로 취급하지 않는다.
+- 새 주소 `/api/account`의 google/naver true, 두 실제 start 요청의 새 callback, 공개 about/privacy/terms·OG origin 확인. 기존 chatgpt.site의 providers false는 origin 보호상 의도된 결과다. 소셜 이용자는 새 `/login`을 사용한다. 기존 일반 로그인과 체험 기록 접근을 위해 플랫폼 주소를 삭제하지 않는다.
+- 문서·캡처만 변경했으며 앱 코드/단위/빌드를 반복하지 않았다. 배포 대상 검사·HTTPS/API·실제 OAuth/복원/지도 완료. Python 기본 CA 문제는 TLS 검증을 끄지 않고 시스템 curl로 확인했다.
+- README·현행 소셜 설정·심사 진입 링크를 새 주소로 갱신하고 commit/push한다. 최종 GitHub SHA는 git log를 따른다. 이전 Naver 검수자료 URL은 과거 촬영 기록이며 제출 직전 새 주소와 정합성을 맞춘다.
+
+다음: 신규 초대 참여·지정 일반 심사 로그인·대표 여행의 운영/예약 정보를 최종 리허설하고 지정 기능설명서·이미지·접수를 마무리한다. Google 브랜드/네이버 검수와 DB 복구 경로 확인을 병행한다. 체험 localStorage를 서버 계정 데이터와 혼동하지 않는다.
+
 ## 사용자용 도메인 가이드·Sites 한도 — 2026-09-15 16:47 KST
 
 - [사용자용 가이드](domain-owner-guide.md)에 기존 Google/Naver/Kakao 앱에 새 주소를 추가하는 절차와 별도 Google 도메인 소유/브랜드 검수를 정리했다. 실제 콘솔 값은 변경하지 않았다.

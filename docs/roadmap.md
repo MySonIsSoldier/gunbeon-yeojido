@@ -1,12 +1,14 @@
 # 9월 21일 제출까지 남은 목표
 
+**9/15 17:33 KST 최신: https://gunbeon.gangwon.kr 운영 전환 완료(v19/env5).** HTTPS·Google 실제 로그인·Naver 기존 여행/그룹 복원·Kakao 지도를 검증했다. 아래 SSL/사용자 등록 대기 기록보다 이 상태가 우선한다. [검증·캡처](../reports/custom_domain_live_2026-09-15.md). 개발은 v2/env2이며 기존 Secret·D1 유지. 브랜드/네이버 검수·최종 제출 리허설은 남았다.
+
 9/15 최신 운영 상태: **운영 v19/env4·개발 v2/env2**. `gunbeon.gangwon.kr`의 A2·TXT2 반영은 확인했고 Sites provider active·SSL pending_validation이다. HTTPS → OAuth·Kakao 도메인 → 운영 origin/재배포 → 새 주소 실검사/검수 캡처 순서로 마무리한다. 그동안 기존 chatgpt.site를 유지한다. [구조·작업 절차](custom-domain-setup.md).
 
 9/15 소셜 로그인 최신 상태: **Google 키 운영 반영·Google 인증 화면 진입 완료**, 본인 인증 후 홈 복귀/재로그인 확인 대기. **네이버 운영 연결·기존 회원 실제 재로그인·검수용 캡처3장/PDF 완료**, 검수 신청/승인과 신규 회원·새 동의 실검증은 남아 있다. [검수 제출자료](../output/naver-review/README.md), [Google·호스팅 점검](../reports/google_login_hosting_2026-09-15.md). 아래 과거 미설정 기록보다 이 상태가 우선한다.
 
 심사 한 달은 현재 Sites 유지 권장. beta/요금제별 한도를 확인하고 제출 주소·검증 버전을 고정한다. DB 백업/복원 경로 확인과 운영 점검 담당 지정은 남았으며 자동 감시를 시작한 것은 아니다. 무료 서버 이전은 현재 진행하지 않는다.
 
-사용자 다음 작업: [도메인 연결 가이드](domain-owner-guide.md)의 Google/Naver/Kakao 새 주소 등록. Sites 계정별 트래픽/동시접속 수치는 공개 문서와 도구에서 미확인으로, 실제 계정 화면 또는 지원 답변 확인이 남았다. 공식 사이트당 DB 10GB와 구분한다.
+사용자 도메인 등록과 운영 전환은 완료했다. [도메인 연결 가이드](domain-owner-guide.md)의 Google 브랜드·네이버 검수 후속을 진행한다. Sites 계정별 트래픽/동시접속 수치는 공개 문서와 도구에서 미확인으로, 실제 계정 화면 또는 지원 답변 확인이 남았다. 공식 사이트당 DB 10GB와 구분한다.
 
 9/15 추가 완료: 공개 이용약관 /terms와 로그인·소개·개인정보 상호 링크, B ‘다시 만나는 길’ 로고 확정 및 140×140 포함 등록/홍보 키트, 앱/PWA 아이콘 반영. 공개 Sitesv18. [이미지 사용 안내](../assets/brand-kit/README.md). 지정 기능설명서와 실제 상세 화면 제출물은 별도로 남아 있다.
 
