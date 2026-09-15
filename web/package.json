@@ -24,6 +24,7 @@
     "test:advice-ui": "node scripts/advice-ui-qa.mjs",
     "test:accounts": "node scripts/accounts-api-qa.mjs",
     "test:accounts-ui": "node scripts/accounts-ui-qa.mjs",
+    "test:itinerary": "node scripts/itinerary-view-qa.mjs",
     "test:judging": "node scripts/judging-ui-qa.mjs"
   },
   "dependencies": {

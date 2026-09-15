@@ -184,9 +184,8 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       result.checks.push(
         'Guide is optional, reduced motion starts paused, manual navigation and skip work without provider calls',
       );
-      await p
-        .getByRole('button', { name: '계속 계획하기', exact: true })
-        .click();
+      await p.getByRole('button', { name: '일정 보기', exact: true }).click();
+      await p.getByRole('button', { name: '일정 편집', exact: true }).click();
       await p.locator('.course-builder').waitFor();
       await p.locator('.kakao-map').waitFor({ state: 'visible' });
       const initialStats = !live
@@ -276,6 +275,10 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         .getByRole('button', { name: '변경사항 저장', exact: true })
         .click();
       await p.locator('.course-builder').waitFor({ state: 'hidden' });
+      if (await p.locator('.trip-overview').count())
+        await p
+          .getByRole('button', { name: '일정 보기 닫기', exact: true })
+          .click();
       const saved = (await state()).entries[0];
       assert.equal(saved.plan.stops.length, 2);
       assert.equal(

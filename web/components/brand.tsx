@@ -27,7 +27,7 @@ export default function Brand({ compact = false }: { compact?: boolean }) {
           cx="31"
           cy="9"
           r="5"
-          fill="#2c68e8"
+          fill="#d68755"
           stroke="white"
           strokeWidth="2"
         />

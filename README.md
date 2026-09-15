@@ -10,6 +10,14 @@
 
 소스 저장소: [MySonIsSoldier/gunbeon-yeojido](https://github.com/MySonIsSoldier/gunbeon-yeojido) · [기존 clone 연결 변경 안내](docs/local-setup.md#기존-clone의-조직-저장소-연결)
 
+## 일정 보기와 편집
+
+홈·내 여행·그룹의 **일정 보기**에서 날짜, 장소 순서, 도착·체류 시간과 개인 복귀 여유를 확인합니다. **일정 편집**으로 들어가 수정하고 저장하면 갱신된 일정으로 돌아옵니다. 그룹 일정에는 개인 복귀 기준이 표시되지 않습니다.
+
+<img src="web/public/guide/25-itinerary-view.png" width="300" alt="읽기 전용 모바일 일정과 별도 일정 편집 버튼" />
+
+![데스크톱 일정 보기](reports/screenshots/itinerary-desktop.png)
+
 ## 실제 화면
 
 실행 중인 앱을 Chrome에서 촬영했습니다. 예시 그룹·일정은 검증용 데이터입니다.

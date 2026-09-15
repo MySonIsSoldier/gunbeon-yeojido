@@ -87,6 +87,10 @@ for (const channel of (
     async function shot(name) {
       if (name === 'group-plans')
         await p.locator('.group-share-sheet').waitFor({ state: 'hidden' });
+      if (await p.locator('.trip-overview').count())
+        await p
+          .getByRole('button', { name: '일정 보기 닫기', exact: true })
+          .click();
       const close = p.getByRole('button', { name: '알림 닫기', exact: true });
       if (await close.count()) await close.click();
       await p.evaluate(() => scrollTo(0, 0));
@@ -174,9 +178,11 @@ for (const channel of (
       await p.locator('.group-plan-card').first().waitFor();
       assert.match(await p.locator('.group-plan-card').innerText(), /0곳/);
       result.checks.push('Create family group and empty itinerary through UI');
-      await p
-        .getByRole('button', { name: '일정 보기·수정', exact: true })
-        .click();
+      await p.getByRole('button', { name: '일정 보기', exact: true }).click();
+      assert.equal(await p.locator('.trip-overview input').count(), 0);
+      assert.equal(await p.locator('.trip-read-margin').count(), 0);
+      assert.equal(await p.locator('[aria-label="개인 복귀 계획"]').count(), 0);
+      await p.getByRole('button', { name: '일정 편집', exact: true }).click();
       await p
         .getByLabel('코스 이름', { exact: true })
         .fill('철원, 느긋하게 만나는 하루');
@@ -192,6 +198,10 @@ for (const channel of (
           exact: true,
         })
         .waitFor();
+      if (await p.locator('.trip-overview').count())
+        await p
+          .getByRole('button', { name: '일정 보기 닫기', exact: true })
+          .click();
       await shot('group-plans');
       await p.getByRole('button', { name: '멤버·초대', exact: true }).click();
       await p.getByRole('button', { name: '초대 만들기', exact: true }).click();
@@ -309,6 +319,7 @@ for (const channel of (
       result.checks.push(
         'Home shows personal upcoming plan and two groups; group opens its own plans',
       );
+      await p.getByRole('button', { name: '일정 보기', exact: true }).click();
       await p
         .getByRole('button', { name: '내 여행에 담기', exact: true })
         .click();
@@ -340,9 +351,11 @@ for (const channel of (
         'Group copy opens with blank personal return criterion and saves only after explicit input',
       );
       await tab(p, '그룹').click();
-      await p
-        .getByRole('button', { name: '일정 보기·수정', exact: true })
-        .click();
+      await p.getByRole('button', { name: '일정 보기', exact: true }).click();
+      assert.equal(await p.locator('.trip-overview input').count(), 0);
+      assert.equal(await p.locator('.trip-read-margin').count(), 0);
+      assert.equal(await p.locator('[aria-label="개인 복귀 계획"]').count(), 0);
+      await p.getByRole('button', { name: '일정 편집', exact: true }).click();
       assert.equal(
         await p.getByRole('button', { name: '여유 조정', exact: true }).count(),
         0,

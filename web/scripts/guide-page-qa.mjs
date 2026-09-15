@@ -72,7 +72,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         .click();
       await p.locator('.usage-guide').waitFor();
       assert.equal(new URL(p.url()).pathname, '/guide');
-      assert.equal(await p.locator('.guide-steps section').count(), 22);
+      assert.equal(await p.locator('.guide-steps section').count(), 23);
       for (const img of await p.locator('.guide-steps img').all()) {
         await img.scrollIntoViewIfNeeded();
         await img.evaluate((i) => i.decode());
@@ -89,7 +89,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         animations: 'disabled',
       });
       result.checks.push(
-        'Guide login returns to requested page; all twenty-two real screenshots load; responsive layout',
+        'Guide login returns to requested page; all twenty-three real screenshots load; responsive layout',
       );
       await p
         .getByRole('link', { name: '군번여지도로 돌아가기', exact: true })

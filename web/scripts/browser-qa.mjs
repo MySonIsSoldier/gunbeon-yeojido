@@ -239,16 +239,40 @@ for (const channel of channels) {
         .click();
       await p.locator('.course-builder').waitFor({ state: 'hidden' });
       await (await recordMenu(p, '저장한 장소 다시 보기')).click();
-      await p.locator('.place-row').first().waitFor();
+      await p.locator('.trip-read-place').first().waitFor();
       await noOverflow(p, result.checks, 'Mission');
-      const before = await p.locator('.place-name').allTextContents();
+      const before = await p.locator('.trip-read-place h3').allTextContents();
       assert(
         before.length >= 2 && before.length <= 4,
         'A mission contains 2–4 stops',
       );
+      await p
+        .getByRole('button', { name: '지도에서 동선 보기', exact: true })
+        .click();
       if (live) {
         const pins = p.locator('.map-place-pin');
         await pins.first().waitFor();
+        await p.locator('.trip-read-map .map-wrap').scrollIntoViewIfNeeded();
+        await p.waitForFunction(
+          () => {
+            const boxes = [
+              ...document.querySelectorAll('.trip-overview .map-place-pin'),
+            ].map((e) => e.getBoundingClientRect());
+            return (
+              boxes.length >= 2 &&
+              boxes.every((a, i) =>
+                boxes.every(
+                  (b, j) =>
+                    i === j ||
+                    Math.abs(a.x - b.x) > 4 ||
+                    Math.abs(a.y - b.y) > 4,
+                ),
+              )
+            );
+          },
+          null,
+          { timeout: 10000 },
+        );
         const boxes = await pins.evaluateAll((es) =>
           es.map((e) => ({
             text: e.textContent,
@@ -263,6 +287,11 @@ for (const channel of channels) {
                 Math.abs(boxes[i].rect.y - boxes[j].rect.y) > 4,
               'Map pins overlap completely',
             );
+        const notice = p.getByRole('button', {
+          name: '알림 닫기',
+          exact: true,
+        });
+        if (await notice.count()) await notice.click();
         await pins.first().click();
         await p.getByRole('dialog').waitFor();
         await p.getByRole('button', { name: '닫기', exact: true }).click();
@@ -283,6 +312,10 @@ for (const channel of channels) {
       await p.evaluate(() => scrollTo(0, 0));
       await shot(p, mapShot);
       result.screenshots.push(mapShot);
+      if (await p.locator('.trip-overview').count())
+        await p
+          .getByRole('button', { name: '일정 보기 닫기', exact: true })
+          .click();
       await tab(p, '내 여행').click();
       await p.locator('.saved-mission').first().waitFor();
       const saved = await p.evaluate(() =>
@@ -294,11 +327,15 @@ for (const channel of channels) {
       await p.reload();
       await p.locator('.app-shell[data-ready="true"]').waitFor();
       await readyPlaces(p);
+      if (await p.locator('.trip-overview').count())
+        await p
+          .getByRole('button', { name: '일정 보기 닫기', exact: true })
+          .click();
       await tab(p, '내 여행').click();
       await (await recordMenu(p, '저장한 장소 다시 보기')).click();
-      await p.locator('.place-row').first().waitFor();
+      await p.locator('.trip-read-place').first().waitFor();
       assert.deepEqual(
-        await p.locator('.place-name').allTextContents(),
+        await p.locator('.trip-read-place h3').allTextContents(),
         before,
         'Saved itinerary survives reload and changed default duration',
       );
@@ -306,6 +343,10 @@ for (const channel of channels) {
         'Date-free course choice, explicit schedule editing, save/reload and exact place order restore',
       );
       if (['small', 'desktop'].includes(size.name)) {
+        if (await p.locator('.trip-overview').count())
+          await p
+            .getByRole('button', { name: '일정 보기 닫기', exact: true })
+            .click();
         await tab(p, '내 여행').click();
         await p
           .getByRole('button', { name: '동행 브리핑', exact: true })
@@ -325,6 +366,10 @@ for (const channel of channels) {
         result.checks.push(
           'Independent parent briefing; server group invitation is covered in groups QA',
         );
+        if (await p.locator('.trip-overview').count())
+          await p
+            .getByRole('button', { name: '일정 보기 닫기', exact: true })
+            .click();
         await tab(p, '내 여행').click();
         await p.getByRole('button', { name: /현충시설 방문 준비/ }).click();
         const seed = p.getByRole('button', {
@@ -339,6 +384,10 @@ for (const channel of channels) {
           .click();
         await p.getByRole('option').first().click();
         await seed.click();
+        if (await p.locator('.trip-overview').count())
+          await p
+            .getByRole('button', { name: '일정 보기 닫기', exact: true })
+            .click();
         await tab(p, '내 여행').click();
         assert.equal(
           await p.locator('.saved-mission').count(),
@@ -385,14 +434,15 @@ for (const channel of channels) {
         await p.locator('.app-shell[data-ready="true"]').waitFor();
         await tab(p, '둘러보기').click();
         await readyPlaces(p);
+        if (await p.locator('.trip-overview').count())
+          await p
+            .getByRole('button', { name: '일정 보기 닫기', exact: true })
+            .click();
         await tab(p, '내 여행').click();
         await p.getByRole('button', { name: /^여행 기록/ }).click();
         await (await recordMenu(p, '저장한 장소 다시 보기')).click();
         await p
-          .getByText(
-            '저장한 장소 정보를 연결하지 못했습니다. 다른 장소로 바꾸지 않았어요.',
-            { exact: false },
-          )
+          .getByText('장소 정보를 불러오지 못했어요', { exact: false })
           .waitFor();
         result.checks.push(
           'API failure preserves saved refs and shows explicit unavailable state',
@@ -407,6 +457,27 @@ for (const channel of channels) {
     } catch (e) {
       result.status = 'failed';
       result.error = scrub(e.message);
+      if (live)
+        result.mapRect = await p
+          .locator('.trip-overview .kakao-map')
+          .evaluateAll((es) =>
+            es.map((e) => ({
+              rect: e.getBoundingClientRect().toJSON(),
+              style: e.getAttribute('style'),
+            })),
+          );
+      if (live)
+        result.mapDiagnostic = await p
+          .locator('.map-place-pin')
+          .evaluateAll((es) =>
+            es.map((e) => ({
+              title: e.getAttribute('aria-label'),
+              inOverview: !!e.closest('.trip-overview'),
+              transform: e.style.transform,
+              rect: e.getBoundingClientRect().toJSON(),
+            })),
+          );
+
       await shot(p, channel + '-' + size.name + '-failure.png').catch(() => {});
     } finally {
       await ctx.close();

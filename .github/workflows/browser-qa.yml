@@ -49,6 +49,7 @@ jobs:
           QA_OUT_DIR=test-results/browser/judging npm run test:judging
           QA_OUT_FILE=test-results/browser/groups-api.json npm run test:groups
           QA_OUT_DIR=test-results/browser/groups npm run test:groups-ui
+          QA_OUT_DIR=test-results/browser/itinerary npm run test:itinerary
           npm run test:browser
           QA_OUT_DIR=test-results/browser/guide npm run test:guide
           QA_OUT_DIR=test-results/browser/custom npm run test:custom
