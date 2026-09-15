@@ -98,3 +98,9 @@ npm run build
 - `Entry.plan.conditions`를 저장/재열기/출타에 보존하고 group/public DTO에는 섞지 않는다. 그룹 사본의 복귀 기준을 임의로 만들지 않는다.
 - 인증 실패 제한의 check/consume 구분과 정상 로그인13회 회귀 검사를 유지한다. 특정 심사 아이디의 인증 우회를 추가하지 않는다.
 - `npm run test:judging`은 360/430/1440px 조건 독립성 검사이며 물리적 휴대폰/실 API 증거가 아니다.
+
+## 일정 보기 계약 · 9/15
+
+- 홈·내 여행·그룹의 기본 진입은 TripOverview 읽기 화면이다. 편집은 명시적인 일정 편집 버튼에서 기존 openBuilder/그룹 편집 경로로 연다.
+- itineraryView는 저장된 Entry를 읽기만 한다. 전역 Settings·현재 시각·기본 자차를 미정 일정에 끼워 넣지 않는다. 그룹에는 개인 복귀 마진을 표시하지 않는다. 누락 장소도 원래 순서와 표지 자리표시자를 유지한다.
+- 새 `npm run test:itinerary`와 기존 브라우저 회귀를 유지한다. 지도 라벨은 저장 좌표를 바꾸지 않는 DOM 배치이며, DOMRect 접근자·투명한 SDK 래퍼의 터치 차단에 주의한다.

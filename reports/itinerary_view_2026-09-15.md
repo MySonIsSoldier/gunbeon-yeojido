@@ -44,3 +44,7 @@
 5. 다녀온 기록은 내 여행 → 여행 기록. 제목으로 당시 일정 열람, 더보기로 기록 수정·계획 복원, 새 여행으로 가져오기로 사본 작성.
 
 공개 `/guide`와 README에 실제 합성 예시 화면을 추가했다. 신규 PC 검사는 `web/`에서 `npm run test:itinerary`; Chrome 설치가 없으면 기본 Chromium을 쓴다. 소셜 로그인은 [발급·설정 안내](../docs/social-login-setup.md)를 따른다.
+
+## 전달 결과
+
+[PR26](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/26) 병합, 전체 CI 통과. 공개 Sites v17 배포 성공(2026-09-15 10:51 KST). GitHub 앱 트리와 배포 소스가 일치한다. 기존 심사 계정의 철원 여행을 공개 IAB에서 열어 날짜·방문 순서·14:00 복귀·예상 여유+1분·출처·별도 편집 버튼을 재확인했다. 해당 계정의 데이터는 변경하지 않았다. 운영 API/DB 스키마/소셜로그인 설정은 유지한다.

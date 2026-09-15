@@ -5,12 +5,14 @@
 
 **아래 심사 준비 기록보다 이 절을 먼저 읽는다.** 홈·내 여행·그룹에서 읽기 전용 일정으로 진입하고 명시적인 ‘일정 편집’에서 수정한다. 수정 저장/취소 후 같은 일정 보기로 돌아온다. 개인 복귀 기준·현재 출타 잠금·그룹 공유 범위 계약을 유지한다. 청록색/살구색 날짜 표식과 사진 중심 디자인을 보완했고 `/guide`는23개 단계다.
 
-- 기능 커밋 `6a38dc9`, [PR26](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/26). 전달 상태는 아래 최종 반영 기록을 확인한다.
+- 기능 `6a38dc9`, 검사/보고 `f7a5e3f`, [PR26](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/26) 병합 `687705342813752c98d0f8d723792e2999fbdd2e` (9/15 01:49:53 UTC). 품질 검사와 [전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/34918459992)5분 통과. master push 완료. 이 문서의 최종 기록 커밋은 `git log -1`로 확인.
+- 공개 **Sites v17**: source `279030542d6fbc4bb8e7933807f9db16efc74985`, saved version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_b9e1a27359a48191bd9728280c2888e1`, deployment `appgdep_6aa8a46922588191ab8af2f8ffcb41f6` succeeded **9/15 01:51:03 UTC**, env revision2. GitHub의 `HEAD:web`과 Sites source tree가 `9ba93ae05686a91d0c3d52e9587904d2ff287387`로 일치. D1 스키마/키 변경 없음.
+- 공개 IAB에서 기존 심사 계정의 부모님 여행을 읽기 전용으로 열어 날짜, 노동당사/들꽃향기, 복귀14:00·여유+1분, 출처, 별도 편집 버튼을 확인했다. 계정·여행을 수정하거나 기기 기록을 가져오지 않았다. 초기 파일 전송2회 실패 후 같은 파일의 재시도 성공으로 완료했으며 중복 버전 없음.
 - TypeScript·단위99·빌드 통과. Chrome153/Chromium151 360·430·1440px의 보기/수정/저장/취소·미확정/누락 장소 확인. 실제 TourAPI/Kakao360px 10항목도 통과했다. [구현·시나리오·증빙](../reports/itinerary_view_2026-09-15.md).
 - 새 회귀검사 `npm run test:itinerary`는 키 없는 합성 여행이다. CI에 포함했다. 기본경로는 web/, Node22+이며 실제 휴대폰 OS/현재 Edge 검증은 별도다.
 - `itineraryView()`에 전역 Settings 또는 현재 시각을 넣지 않는다. 누락 참조를 삭제하거나 미정 이동수단으로 자차 시간을 계산하지 않는다. 그룹 화면은 개인 마진을 표시하지 않는다.
 - 가까운 Kakao 번호는 저장 좌표를 바꾸지 않고 화면 라벨만 배치한다. DOMRect 속성은 명시적으로 읽고, SDK 래퍼의 투명한 터치 영역이 버튼을 가리지 않게 한다.
-- Google/Naver 운영 제공자 상태는 둘 다미설정. [발급 안내](social-login-setup.md)의 네 값이 준비되면 로컬과 운영을 각각 설정하고 `/account` 연결→재로그인·다른 기기 복원·실패 복구를 확인한다. Google의 현도메인 소유 확인 가능성은 콘솔에서 확인하며 자체 도메인 구매를 필수로 단정하지 않는다.
+- Google/Naver 운영 제공자 상태는 둘 다 미설정. [발급 안내](social-login-setup.md)의 네 값이 준비되면 로컬과 운영을 각각 설정하고 `/account` 연결→재로그인·다른 기기 복원·실패 복구를 확인한다. Google의 현재 도메인 소유 확인 가능성은 콘솔에서 확인하며 자체 도메인 구매를 필수로 단정하지 않는다.
 - 지정 심사계정과 운영DB를 재준비/초기화하지 않는다. 제출 잔여 작업은 아래 ‘다음 첫 행동’을 그대로 이어간다.
 
 ## 심사 준비 기록 — 2026-09-15
