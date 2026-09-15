@@ -23,7 +23,8 @@
     "test:advice": "node scripts/advice-api-qa.mjs",
     "test:advice-ui": "node scripts/advice-ui-qa.mjs",
     "test:accounts": "node scripts/accounts-api-qa.mjs",
-    "test:accounts-ui": "node scripts/accounts-ui-qa.mjs"
+    "test:accounts-ui": "node scripts/accounts-ui-qa.mjs",
+    "test:judging": "node scripts/judging-ui-qa.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

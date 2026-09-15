@@ -1,3 +1,4 @@
+import { receivedAt } from '@/lib/data-provenance';
 import type { Place } from '@/lib/domain';
 import conditions from '@/lib/data/verified-conditions.json';
 const clean = (v: unknown) =>
@@ -69,9 +70,11 @@ const labels: Record<string, string> = {
 export function ApiFacts({
   data,
   loading,
+  fetchedAt,
 }: {
   data: unknown;
   loading: boolean;
+  fetchedAt?: string;
 }) {
   if (loading) return <p>관광·편의 정보를 확인하고 있어요.</p>;
   const response = data as {
@@ -82,6 +85,7 @@ export function ApiFacts({
       error?: string;
     }[];
     error?: string;
+    fetchedAt?: string;
   };
   if (!response?.results) return <p>상세 정보 연결을 다시 확인해 주세요.</p>;
   return (
@@ -114,8 +118,8 @@ export function ApiFacts({
         );
       })}
       <p className="helper">
-        출처: ⓒ한국관광공사 · 방금 조회한 응답. 현재 운영·빈자리·메뉴 적합성을
-        보증하지 않습니다.
+        출처: ⓒ한국관광공사 · {receivedAt(response.fetchedAt || fetchedAt)}.
+        현재 운영·빈자리·메뉴 적합성을 보증하지 않습니다.
       </p>
     </div>
   );

@@ -238,8 +238,7 @@ for (const channel of channels) {
         .getByRole('button', { name: '내 코스 저장', exact: true })
         .click();
       await p.locator('.course-builder').waitFor({ state: 'hidden' });
-      await (await recordMenu(p, '저장한 장소 다시 보기'))
-        .click();
+      await (await recordMenu(p, '저장한 장소 다시 보기')).click();
       await p.locator('.place-row').first().waitFor();
       await noOverflow(p, result.checks, 'Mission');
       const before = await p.locator('.place-name').allTextContents();
@@ -296,8 +295,7 @@ for (const channel of channels) {
       await p.locator('.app-shell[data-ready="true"]').waitFor();
       await readyPlaces(p);
       await tab(p, '내 여행').click();
-      await (await recordMenu(p, '저장한 장소 다시 보기'))
-        .click();
+      await (await recordMenu(p, '저장한 장소 다시 보기')).click();
       await p.locator('.place-row').first().waitFor();
       assert.deepEqual(
         await p.locator('.place-name').allTextContents(),
@@ -313,7 +311,10 @@ for (const channel of channels) {
           .getByRole('button', { name: '동행 브리핑', exact: true })
           .click();
         await p
-          .getByRole('button', { name: '우리 가족 여행안 보기', exact: true })
+          .getByRole('button', {
+            name: '동행 조건으로 여행안 보기',
+            exact: true,
+          })
           .click();
         await p.locator('.family-route-preview b').first().waitFor();
         await noOverflow(p, result.checks, 'Family briefing');
@@ -386,8 +387,7 @@ for (const channel of channels) {
         await readyPlaces(p);
         await tab(p, '내 여행').click();
         await p.getByRole('button', { name: /^여행 기록/ }).click();
-        await (await recordMenu(p, '저장한 장소 다시 보기'))
-          .click();
+        await (await recordMenu(p, '저장한 장소 다시 보기')).click();
         await p
           .getByText(
             '저장한 장소 정보를 연결하지 못했습니다. 다른 장소로 바꾸지 않았어요.',

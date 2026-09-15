@@ -355,9 +355,15 @@ export default function OutingPanel({
                   settings: {
                     transport:
                       resolved!.mission.transport || settings.transport,
-                    companion: settings.companion,
-                    walkLimit: settings.walkLimit,
-                    extraBuffer: settings.extraBuffer,
+                    companion:
+                      candidate?.plan?.conditions?.companion ||
+                      settings.companion,
+                    walkLimit:
+                      candidate?.plan?.conditions?.walkLimit ??
+                      settings.walkLimit,
+                    extraBuffer:
+                      candidate?.plan?.conditions?.extraBuffer ??
+                      settings.extraBuffer,
                     weather:
                       settings.region === candidate!.region
                         ? settings.weather

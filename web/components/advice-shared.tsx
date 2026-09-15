@@ -1,4 +1,5 @@
 'use client';
+import { sourceCredit } from '@/lib/data-provenance';
 import { useState } from 'react';
 import { ArrowUpRight, Check, Link2, Download, RefreshCw } from 'lucide-react';
 import { Button } from './ui/button';
@@ -39,6 +40,9 @@ export function AdviceRoute({
           </li>
         ))}
       </ol>
+      <p className="helper">
+        {sourceCredit(places.filter((p) => snapshot.placeIds.includes(p.id)))}
+      </p>
     </div>
   );
 }

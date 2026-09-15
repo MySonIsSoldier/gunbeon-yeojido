@@ -129,7 +129,6 @@ export function groupEntry(record: GroupPlan): Entry {
       manualPlaces: p.manualPlaces,
       departureAt: p.departureAt,
       transport: p.transport,
-      timeBudgetMinutes: 240,
     },
   };
 }

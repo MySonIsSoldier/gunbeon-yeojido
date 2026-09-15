@@ -112,6 +112,14 @@ export function cleanEntry(value: unknown): Entry {
     if (p.transport !== undefined) e.plan.transport = transport(p.transport);
     if (p.timeBudgetMinutes !== undefined)
       e.plan.timeBudgetMinutes = number(p.timeBudgetMinutes, 1, 10080);
+    if (p.conditions !== undefined) {
+      const c = object(p.conditions);
+      e.plan.conditions = {
+        companion: string(c.companion, 30),
+        walkLimit: number(c.walkLimit, 0, 1440),
+        extraBuffer: number(c.extraBuffer, 0, 1440),
+      };
+    }
     if (p.manualPlaces !== undefined)
       e.plan.manualPlaces = array(p.manualPlaces, 51, cleanManual);
   }

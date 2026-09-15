@@ -188,6 +188,7 @@ export async function authRate(
   kind: string,
   max: number,
   actor = '',
+  mode: 'consume' | 'check' = 'consume',
 ) {
   // Hash with a server secret; raw network addresses never enter the database.
   const secret = String(
@@ -206,6 +207,18 @@ export async function authRate(
       ':' +
       (actor || r.headers.get('cf-connecting-ip') || 'local-edge'),
   );
+  if (mode === 'check') {
+    const row = await database()
+      .prepare('SELECT count FROM advice_rate WHERE id=? AND expires_at>?')
+      .bind(id, time)
+      .first<{ count: number }>();
+    if ((row?.count || 0) >= max)
+      throw new AccountProblem(
+        429,
+        '로그인 실패가 여러 번 있었어요. 15분 뒤 다시 시도해 주세요.',
+      );
+    return;
+  }
   const row = await database()
     .prepare(
       'INSERT INTO advice_rate(id,count,expires_at) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET count=count+1 RETURNING count',

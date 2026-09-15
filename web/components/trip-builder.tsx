@@ -180,11 +180,20 @@ export default function TripBuilder({
             Date.parse(initial.plan.departureAt || settings.startedAt) +
               (initial.plan.timeBudgetMinutes || 240) * 60000,
           ).toISOString()
-        : settings.returnAt,
+        : initial?.plan && !initial.plan.timeBudgetMinutes
+          ? ''
+          : settings.returnAt,
     ),
   );
   const [transport, setTransport] = useState<Settings['transport']>(
     initial?.plan?.transport || settings.transport,
+  );
+  const [conditions, setConditions] = useState(
+    initial?.plan?.conditions || {
+      companion: settings.companion,
+      walkLimit: settings.walkLimit,
+      extraBuffer: settings.extraBuffer,
+    },
   );
   const [stage, setStage] = useState<'plan' | 'places' | 'manual'>('plan');
   const [selectionTarget, setSelectionTarget] = useState<'stop' | 'origin'>(
@@ -243,11 +252,15 @@ export default function TripBuilder({
       custom: true,
       departureAt: parseKoreaInput(departure),
       transport,
-      timeBudgetMinutes: Math.round(
-        (Date.parse(parseKoreaInput(deadline)) -
-          Date.parse(parseKoreaInput(departure))) /
-          60000,
-      ),
+      conditions: saveTarget === 'personal' ? conditions : undefined,
+      timeBudgetMinutes:
+        saveTarget === 'group' || !deadline
+          ? undefined
+          : Math.round(
+              (Date.parse(parseKoreaInput(deadline)) -
+                Date.parse(parseKoreaInput(departure))) /
+                60000,
+            ),
       brief: '직접 고른 장소와 순서로 계획한 하루입니다.',
       stops: stops.flatMap((s) => {
         const place = allPlaces.find((p) => p.id === s.placeId);
@@ -263,10 +276,22 @@ export default function TripBuilder({
           : [];
       }),
     }),
-    [initial, title, region, departure, deadline, transport, stops, allPlaces],
+    [
+      initial,
+      title,
+      region,
+      departure,
+      deadline,
+      transport,
+      stops,
+      allPlaces,
+      conditions,
+      saveTarget,
+    ],
   );
   const previewSettings = {
     ...settings,
+    ...conditions,
     region,
     transport,
     returnAt: parseKoreaInput(deadline),
@@ -426,6 +451,15 @@ export default function TripBuilder({
       setNotice('군 정보가 없는 코스 이름을 2~60자로 입력해 주세요.');
       return;
     }
+    if (
+      Object.values(conditions).some(
+        (v) =>
+          typeof v === 'number' && (!Number.isFinite(v) || v < 0 || v > 1440),
+      )
+    ) {
+      setNotice('도보 시간과 추가 여유를 0~1440분으로 입력해 주세요.');
+      return;
+    }
     if (missing.length) {
       setNotice(
         '조회하지 못한 장소는 다시 찾거나 제외해 주세요. 빈 코스도 저장할 수 있어요.',
@@ -434,12 +468,14 @@ export default function TripBuilder({
     }
     if (
       !Number.isFinite(Date.parse(mission.departureAt!)) ||
-      !Number.isFinite(Date.parse(previewSettings.returnAt))
+      (saveTarget === 'personal' &&
+        !Number.isFinite(Date.parse(previewSettings.returnAt)))
     ) {
       setNotice('출발과 복귀 기준 날짜·시간을 확인해 주세요.');
       return;
     }
     if (
+      saveTarget === 'personal' &&
       Date.parse(previewSettings.returnAt) <= Date.parse(mission.departureAt!)
     ) {
       setNotice('복귀 기준시각은 출발시각보다 뒤로 설정해 주세요.');
@@ -627,6 +663,73 @@ export default function TripBuilder({
                       }}
                     />
                   </div>
+                  {saveTarget === 'personal' && (
+                    <details className="builder-conditions">
+                      <summary>
+                        동행 조건 · {conditions.companion} · 도보{' '}
+                        {conditions.walkLimit}분 · 여유 {conditions.extraBuffer}
+                        분
+                      </summary>
+                      <div className="form-grid">
+                        <Choice
+                          label="함께 가는 사람"
+                          value={conditions.companion}
+                          values={Object.fromEntries(
+                            [
+                              '혼자',
+                              '전우',
+                              '부모님',
+                              '가족',
+                              '연인',
+                              '친구',
+                            ].map((v) => [v, v]),
+                          )}
+                          onChange={(companion) => {
+                            setConditions((v) => ({ ...v, companion }));
+                            change();
+                          }}
+                        />
+                        <label className="builder-field">
+                          <span>편안한 전체 도보 시간 · 분</span>
+                          <Input
+                            type="number"
+                            aria-label="편안한 전체 도보 시간"
+                            min={0}
+                            max={1440}
+                            value={conditions.walkLimit}
+                            onChange={(e) => {
+                              setConditions((v) => ({
+                                ...v,
+                                walkLimit: Number(e.target.value),
+                              }));
+                              change();
+                            }}
+                          />
+                        </label>
+                        <label className="builder-field">
+                          <span>추가로 남길 여유 · 분</span>
+                          <Input
+                            type="number"
+                            aria-label="추가로 남길 여유"
+                            min={0}
+                            max={1440}
+                            value={conditions.extraBuffer}
+                            onChange={(e) => {
+                              setConditions((v) => ({
+                                ...v,
+                                extraBuffer: Number(e.target.value),
+                              }));
+                              change();
+                            }}
+                          />
+                        </label>
+                      </div>
+                      <p className="helper">
+                        이 여행에만 저장해요. 다른 여행의 동행 조건은 바뀌지
+                        않아요.
+                      </p>
+                    </details>
+                  )}
                   <div className="builder-origin">
                     <MapPin size={21} />
                     <div>
@@ -662,22 +765,24 @@ export default function TripBuilder({
                         </Button>
                       </div>
                     )}
-                  <PlanAdjustment
-                    unresolved={missing.length > 0}
-                    mission={mission}
-                    settings={previewSettings}
-                    origin={origin}
-                    onApply={(next) => {
-                      setStops(
-                        next.map((s) => ({
-                          placeId: s.place.id,
-                          stay: s.stay,
-                          walk: s.walk,
-                        })),
-                      );
-                      change();
-                    }}
-                  />
+                  {saveTarget === 'personal' && (
+                    <PlanAdjustment
+                      unresolved={missing.length > 0}
+                      mission={mission}
+                      settings={previewSettings}
+                      origin={origin}
+                      onApply={(next) => {
+                        setStops(
+                          next.map((s) => ({
+                            placeId: s.place.id,
+                            stay: s.stay,
+                            walk: s.walk,
+                          })),
+                        );
+                        change();
+                      }}
+                    />
+                  )}
                   <ol className="builder-stops">
                     {stops.map((stop, i) => {
                       const p = allPlaces.find((p) => p.id === stop.placeId);
@@ -860,45 +965,52 @@ export default function TripBuilder({
                       mapKey={mapKey}
                     />
                   )}
-                  <section className="builder-margin">
-                    <label className="builder-field">
-                      <span>돌아올 예정 시각</span>
-                      <Input
-                        type="datetime-local"
-                        aria-label="돌아올 예정 시각"
-                        value={deadline}
-                        onChange={(e) => {
-                          setDeadline(e.target.value);
-                          change();
-                        }}
-                      />
-                    </label>
-                    <p>
-                      출발 계획과 사용 가능한 시간을 저장합니다. 현재 시각과
-                      무관하게 계획할 수 있어요.
+                  {saveTarget === 'group' ? (
+                    <p className="helper">
+                      그룹에서는 장소·순서·출발 시각을 함께 정해요. 복귀 기준과
+                      동행 보정은 내 여행에 사본을 담은 뒤 개인별로 설정합니다.
                     </p>
-                    <div className={score?.band || 'unknown'}>
-                      <span>이동·체류·안전 여유를 반영하면</span>
-                      <strong>
-                        {score?.margin == null
-                          ? '복귀 여유 확인 전'
-                          : score.margin >= 0
-                            ? `복귀 여유 +${score.margin}분`
-                            : `복귀 시간 ${Math.abs(score.margin)}분 부족`}
-                      </strong>
-                    </div>
-                    {score?.issues
-                      .filter((x) =>
-                        /공식|직접 입력|출발|운영 제한|도보 상한/.test(x),
-                      )
-                      .map((x) => (
-                        <p key={x}>{x}</p>
-                      ))}
-                    <p>
-                      이동은 거리 기반 추정입니다. 실제 교통·방문 조건과 소속
-                      부대 복귀 규정은 직접 확인해 주세요.
-                    </p>
-                  </section>
+                  ) : (
+                    <section className="builder-margin">
+                      <label className="builder-field">
+                        <span>돌아올 예정 시각</span>
+                        <Input
+                          type="datetime-local"
+                          aria-label="돌아올 예정 시각"
+                          value={deadline}
+                          onChange={(e) => {
+                            setDeadline(e.target.value);
+                            change();
+                          }}
+                        />
+                      </label>
+                      <p>
+                        출발 계획과 사용 가능한 시간을 저장합니다. 현재 시각과
+                        무관하게 계획할 수 있어요.
+                      </p>
+                      <div className={score?.band || 'unknown'}>
+                        <span>이동·체류·안전 여유를 반영하면</span>
+                        <strong>
+                          {score?.margin == null
+                            ? '복귀 여유 확인 전'
+                            : score.margin >= 0
+                              ? `복귀 여유 +${score.margin}분`
+                              : `복귀 시간 ${Math.abs(score.margin)}분 부족`}
+                        </strong>
+                      </div>
+                      {score?.issues
+                        .filter((x) =>
+                          /공식|직접 입력|출발|운영 제한|도보 상한/.test(x),
+                        )
+                        .map((x) => (
+                          <p key={x}>{x}</p>
+                        ))}
+                      <p>
+                        이동은 거리 기반 추정입니다. 실제 교통·방문 조건과 소속
+                        부대 복귀 규정은 직접 확인해 주세요.
+                      </p>
+                    </section>
+                  )}
                 </aside>
               </div>
             )}

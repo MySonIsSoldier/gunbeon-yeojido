@@ -1,3 +1,4 @@
+import { sourceCredit } from './data-provenance';
 import { accountContextHeaders } from '@/lib/account-client';
 import {
   adviceQuestions,
@@ -92,6 +93,13 @@ export async function downloadAdviceCard(
   c.fillStyle = '#536779';
   c.font = '400 24px sans-serif';
   c.fillText('스토리에 링크 스티커를 붙여 한 수를 받아보세요.', 80, 1470);
+  c.font = '400 18px sans-serif';
+  c.fillText(
+    sourceCredit(places.filter((p) => selected.includes(p.id))),
+    80,
+    1530,
+    920,
+  );
   const blob = await new Promise<Blob | null>((resolve) =>
     canvas.toBlob(resolve, 'image/png'),
   );
