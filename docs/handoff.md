@@ -1,6 +1,20 @@
 # 개발 인수인계
 
-## 여행·공유 UX 개선 — 2026-09-15 최신
+## Google 운영 활성화·DNS 반영·심사 호스팅 — 2026-09-15 최신
+
+**배포·소셜 로그인·도메인은 이 절이 아래 과거 기록보다 우선한다.** 상세 원인·증빙·공식 근거는 [운영 점검 보고](../reports/google_login_hosting_2026-09-15.md)에 있다.
+
+- Google 키가 로컬에만 있고 운영 env3에 없어 버튼이 비활성이었다. 두 값만 Sites Secret에 반영해 **운영 v19/env4** 재배포 완료. 소스 `9790ac308766aecae662e71d7bdc0e2b5050fb38`, version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_1094cb816de48191abd8ac1e8901721b`, deployment `appgdep_6aa8f31ecb40819186244a8bd052ea38` **succeeded 07:27:03 UTC**. 기존 코드·D1·Naver/TourAPI/Kakao/체험 Secret 보존. 환경만 바꿔 기존 저장 버전을 재사용했다.
+- 운영 `/api/account`는 google/naver 모두 true. 실제 공개 브라우저에서 Google 버튼 → Google 이메일/전화번호 입력 화면까지 정상. 본인 인증 후 callback·계정 생성/연결·재로그인은 아직 미확인이다. 사용자가 직접 시험하도록 열어 두었다. 지정 심사 계정의 데이터·연결은 변경하지 않았고 브라우저 세션만 로그아웃했다.
+- Hosting.kr A2·TXT2 설정은 권한 네임서버/공개 리졸버에서 확인 완료. 기존 도메인 ID `appgdom_6aa8d01a4d0481918a5c8ce10d2ed2ba`의 **07:32:36 UTC** 상태는 pending / provider active / SSL pending_validation, 오류 없음. HTTPS는 아직 실패. 도메인을 다시 등록하거나 임의 DNS를 추가하지 않는다.
+- 운영 `AUTH_BASE_URL`·`PUBLIC_SITE_URL`은 기존 chatgpt.site 유지. 새 도메인의 HTTPS 및 Google/Naver 콜백·Kakao SDK 등록 후 함께 전환/재배포하고 기존 계정·기록을 검증한다. DNS만 반영됐다고 origin을 먼저 바꾸지 않는다. [정확한 콘솔 주소](custom-domain-setup.md).
+- **한 달 심사에는 현재 Sites 유지 권장.** 대화/PC와 독립된 호스팅이나 beta·요금제별 한도이며 30일 SLA는 확인하지 못했다. 현재 계정/공개 접근 유지, 최종 검증한 주소/버전 고정, API 승인량 관리가 우선이다. 자동 모니터링이나 운영 DB 백업/복원은 이번에 실행하지 않았다. DB 복구 경로는 별도 확인할 과제다.
+- 개발 Site는 기존 **v2/env2**, 소유자 전용·별도 DB·Google/Naver 미설정 상태 유지. 배포 환경을 혼동하지 않는다. 다른 PC의 로컬 env 수정은 운영 Secret에 자동 전파되지 않는다.
+- 코드 변경 없이 실제 환경 API·브라우저·DNS·HTTPS를 검사했다. 기존 108개 단위/CI 결과를 이번 새 실행 결과로 표기하지 않는다. 문서 변경은 commit/push하고 최종 SHA는 git log에서 확인한다.
+
+다음 행동: Google 본인 로그인 결과 확인 → SSL 활성화/새 도메인 제공자 설정 → 최종 제출 주소 결정. 서버 이전보다 대표 여행 정보·지정 기능설명서·심사 리허설을 먼저 마무리한다. 개인 Cloudflare Workers+D1은 실제 이전 필요가 생겼을 때만 무료 CPU/DB 용량과 데이터 복구를 시험한다.
+
+## 여행·공유 UX 개선 — 2026-09-15 이전 배포 기록
 
 - 사용자 확정 도메인 **gunbeon.gangwon.kr**. Sites 등록 완료, ID `appgdom_6aa8d01a4d0481918a5c8ce10d2ed2ba`. 05:28 UTC 상태 `pending`, SSL `pending_validation`. DNS A는 여전히 Hosting.kr 주차 주소 두 개이며 검증 TXT가 없다. DNS 로그인/설정 대기. [정확한 A/TXT와 다음 순서](custom-domain-setup.md). 등록을 반복하지 않는다.
 - GitHub 기능 SHA `8ed28cc`, [PR #29](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/29) **merged** `d9aeb8347f93e18646f69baaf851496f3d5337f5`, master 동기화 완료. 본 최신 기록을 별도 문서 커밋으로 push한다.
@@ -15,7 +29,7 @@
 
 ## 개발/운영 분리·구매 도메인 연결 준비 — 2026-09-15
 
-**이 절이 배포 대상과 도메인에 대한 최신 상태다.** 개발 전용 사이트를 새로 배포했다. 운영은 기존 **v18/env revision3**을 그대로 유지한다. GitHub master의 환경 대응 변경은 개발에만 반영되었으므로 현재 master:web과 운영 v18이 동일하다고 기록하면 안 된다.
+**다음은 개발 환경 최초 분리 당시의 기록이다. 최신 상태는 문서 맨 위를 따른다.** 개발 전용 사이트를 새로 배포했다. 당시 운영은 기존 **v18/env revision3**을 유지했으며 환경 대응 변경은 개발에만 반영했다.
 
 - 개발 URL **https://gunbeon-development.ybuser.chatgpt.site**, 소유자 전용. Project `appgprj_6aa8c98dd2a08191a61d18c5e318a57f`, source `7a26875ba8af48454e39f03ce79c933c359e82d5`, saved version `appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_9c5329f1b8f8819198b0f9c0b3204e01` **v1**, deployment `appgdep_6aa8cc19acf8819196395be690693a38` **succeeded 9/15 04:40:15 UTC**, env2.
 - 개발 D1은 별도17테이블·accounts0건 확인. 운영 DB/계정 복제 없음. 개발 TEST_SESSION_SECRET은 새 값, TourAPI/Kakao 키는 기존 승인 값. 개발 소셜 키는 미설정이며 Kakao 개발 도메인 추가는 남아 있다. 운영 네이버 앱을 개발용 새 앱으로 교체하지 않는다.
