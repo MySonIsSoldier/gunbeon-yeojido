@@ -1,0 +1,109 @@
+{
+  "base": "http://localhost:3000",
+  "startedAt": "2026-09-15T05:16:56.165Z",
+  "deviceMode": "Desktop Chrome/Edge viewport and touch emulation; not physical phones",
+  "cases": [
+    {
+      "channel": "chromium",
+      "version": "151.0.7922.34",
+      "size": {
+        "name": "small",
+        "width": 360,
+        "height": 740
+      },
+      "checks": [
+        "Date-free recommendations; page navigation reuses list response",
+        "Create family group and empty itinerary through UI",
+        "Group edit saved and invitation generated",
+        "Invitation survives test login; another browser session joins and reads the same plan",
+        "Home shows personal upcoming plan and two groups; group opens its own plans",
+        "Group copy opens with blank personal return criterion and saves only after explicit input",
+        "Group draft close confirmation retains changes"
+      ],
+      "errors": [],
+      "screenshots": [
+        "home-empty",
+        "browse",
+        "group-plans",
+        "home",
+        "editor"
+      ],
+      "status": "passed",
+      "guestRequests": [
+        {
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "channel": "chromium",
+      "version": "151.0.7922.34",
+      "size": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "checks": [
+        "Date-free recommendations; page navigation reuses list response",
+        "Create family group and empty itinerary through UI",
+        "Group edit saved and invitation generated",
+        "Invitation survives test login; another browser session joins and reads the same plan",
+        "Home shows personal upcoming plan and two groups; group opens its own plans",
+        "Group copy opens with blank personal return criterion and saves only after explicit input",
+        "Group draft close confirmation retains changes"
+      ],
+      "errors": [],
+      "screenshots": [
+        "home-empty",
+        "browse",
+        "group-plans",
+        "home",
+        "editor"
+      ],
+      "status": "passed",
+      "guestRequests": [
+        {
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "status": 200
+        }
+      ]
+    }
+  ]
+}

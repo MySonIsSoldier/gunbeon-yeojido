@@ -48,3 +48,11 @@
 - Chrome153: 기존 개인 코스 흐름 **360·430·1440·1920px** 통과. 수동 IAB360px에서는 실제 관광목록 표시, Kakao 지도 표시와 입력 보호 확인창을 확인했다.
 - 중간 실행의 첫 360px 로딩은 HMR 중 타입 오류 수정과 겹쳐 실패했으며 수정 완료 후 같은 검사에 통과했다. 그룹 검사 라벨은 새 ‘초대 링크 또는 코드’에 맞춰 갱신 후 통과했다.
 - 이 PC에는 Microsoft Edge가 없어 Edge 검사는 수행하지 못했다. Chromium 결과를 Edge 실검사로 간주하지 않는다.
+
+## 저장소·배포
+
+[PR #29](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/29) 병합 완료. [전체 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/34932436559)는 로그인·계정·심사·그룹·일정·둘러보기·가이드·출타·기록·외부 제안 시나리오를 5분40초에 통과했다. 운영 v19/env3와 개발 v2/env2 배포 성공. 운영 인증 주소와 기존 데이터는 유지한다. 정확한 source SHA/배포 ID는 handoff에 기록했다.
+
+새 도메인의 DNS A는 05:28 UTC 현재 99.83.196.71/75.2.85.42이며 서비스 연결 전이다. 커스텀 도메인만 등록한 상태로 HTTPS 성공을 주장하지 않는다.
+
+운영 반영 후 /login, 익명 계정 응답, 1234 체험 입장과 새 /guide 문구를 확인했다. Naver 준비 상태 true·Google false이며 새 OAuth 동의/재로그인은 이번 검사 범위가 아니다. 개인정보를 포함한 응답이나 쿠키는 보고서에 저장하지 않았다.

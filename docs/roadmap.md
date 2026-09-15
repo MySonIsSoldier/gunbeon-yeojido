@@ -1,6 +1,6 @@
 # 9월 21일 제출까지 남은 목표
 
-9/15 도메인 전환 준비: 별도 개발 Sites v1·테스트 D1 배포, 환경별 OG와 소셜 버튼 origin 검사 완료. 운영은 v18/env3 유지. `gunbeon.gangwon.kr`로 확정해 커스텀 도메인 등록을 완료했고 Hosting.kr DNS 설정은 대기 중이며, DNS/HTTPS → OAuth·Kakao 도메인 → 운영 환경변수/검증된 배포 → 새 주소 실검사/검수 캡처 순서로 마무리한다. [구조·작업 절차](custom-domain-setup.md).
+9/15 도메인 전환 준비: 별도 개발 Sites·테스트 D1 배포, 환경별 OG와 소셜 버튼 origin 검사 완료. 9/15 UX 개선 배포는 운영 v19/env3·개발 v2/env2까지 완료했다. `gunbeon.gangwon.kr`로 확정해 커스텀 도메인 등록을 완료했고 Hosting.kr DNS 설정은 대기 중이며, DNS/HTTPS → OAuth·Kakao 도메인 → 운영 환경변수/검증된 배포 → 새 주소 실검사/검수 캡처 순서로 마무리한다. [구조·작업 절차](custom-domain-setup.md).
 
 9/15 소셜 로그인 최신 상태: **네이버 운영 연결·기존 회원 실제 재로그인·검수용 캡처3장/PDF 완료**. Sitesv18은 유지하고 env revision3으로 재배포했다. [검수 제출자료](../output/naver-review/README.md). 네이버 검수 신청/승인과 신규 회원·새 동의 실검증은 남아 있다. Google은 도메인 목록 등록 → 기본 openid Client 발급 가능 여부 확인 → 키 설정/실로그인 순서로 진행하고 브랜드 검수와 구분한다. 아래 과거 미설정 기록보다 이 상태가 우선한다.
 
@@ -76,3 +76,8 @@ API 정상 기능과 확대 목표를 최우선으로 유지한다. quota 대응
 - 구현/검증/공개 배포 완료(PR22·v14): 기록별 ⋮ 메뉴·별도 공유 카드, 아이디 계정, 서버 개인 여행·기기 가져오기, 계정 변경/저장 충돌 방어, Google/Naver OAuth 어댑터와 상세 설정 안내.
 - 후속: 사용자 Google/Naver Client ID/Secret 발급 → 로컬/운영 변수 설정 → 기존 계정 연결/재로그인 실제 검증 → 네이버 공개 검수 및 Google 콘솔 게시/도메인 요구 확인.
 - 초기 계정 후속: 비밀번호 복구와 탈퇴·운영자 문의 창구. 단순 키 입력/버튼 표시로 제공자 로그인이 검증되었다고 보고하지 않는다.
+
+
+## 9/15 사용자 관점 보완 완료
+
+[PR #29](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/29): 입력 중 닫기/뒤로 보호, 관광정보 재시도·참조 보존, 링크 초대 참여, 그룹 없는 공유·범위 재선택, 빈 코스 화면 정리. 운영 v19·개발 v2 배포 및 전체 CI 통과. [시나리오와 실제 캡처](../reports/journey_clarity_2026-09-15.md).

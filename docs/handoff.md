@@ -1,5 +1,18 @@
 # 개발 인수인계
 
+## 여행·공유 UX 개선 — 2026-09-15 최신
+
+- 사용자 확정 도메인 **gunbeon.gangwon.kr**. Sites 등록 완료, ID `appgdom_6aa8d01a4d0481918a5c8ce10d2ed2ba`. 05:28 UTC 상태 `pending`, SSL `pending_validation`. DNS A는 여전히 Hosting.kr 주차 주소 두 개이며 검증 TXT가 없다. DNS 로그인/설정 대기. [정확한 A/TXT와 다음 순서](custom-domain-setup.md). 등록을 반복하지 않는다.
+- GitHub 기능 SHA `8ed28cc`, [PR #29](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/29) **merged** `d9aeb8347f93e18646f69baaf851496f3d5337f5`, master 동기화 완료. 본 최신 기록을 별도 문서 커밋으로 push한다.
+- **운영 v19/env3**: source `9790ac308766aecae662e71d7bdc0e2b5050fb38`; version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_1094cb816de48191abd8ac1e8901721b`; deployment `appgdep_6aa8d7ae5fc88191aac0e80d9e05709e` **succeeded 05:29:34 UTC**. 기존 공개 chatgpt.site URL·D1·Naver/TourAPI/Kakao Secret 유지. AUTH_BASE_URL 전환 안 함.
+- **개발 v2/env2**: source `97650f2a8889b77d9fa7346475d49af88b47298f`; version `appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_1a33ae9986808191a8f967f8ed39c619`; deployment `appgdep_6aa8d69d142481918804d434e2fa6e74` **succeeded 05:25:14 UTC**. 소유자 전용·별도 DB. 네이티브 소유자 QA 인증과 1234 입장으로 새 가이드 문구, [개발] 제목/noindex를 확인. API account null·소셜 제공자 false. 브라우저 OpenAI 로그인까지 실검증한 것은 아님.
+- 수정: 미조회 만남 장소 저장 보존, HTTP 오류 캐시 제거와 일정 다시 불러오기, 관광지/만남 장소 입력 보호, 후보 없는 유형의 검색 전환, 전체 초대 링크·운영 도메인 호환, 공유 대상 변경 시 개인 장소 동의 초기화, 그룹 조회 오류/빈 상태, 빈 코스의 비활성 UI 축소.
+- 단위108·TypeScript·배포 빌드 통과. Chromium360/430/1440px 일정/복구/입력보호 각7시나리오, 개인 코스·로컬 D1 초대 링크 참여360/1440px 통과. Chrome 개인 코스360/430/1440/1920px 통과. Edge 미설치. GitHub PR 단위/빌드 및 전체 keyless-browser-flow **pass(5m40s)**. [실행·캡처·사용법](../reports/journey_clarity_2026-09-15.md).
+- 운영 소스 임시 checkout에는 의존성이 없어서 빌드 명령이 실패했지만, 모든 소스 파일을 검증한 web/ 빌드와 바이트 대조 후 **동일 소스의 성공한 빌드 산출물**을 재사용해 패키징했다. 미완료 빌드를 배포하지 않았다.
+- 운영 배포 후 익명 HTTP 확인: /login 정상, /api/account account null·naver true·google false, 1234 입장 후 /guide 새 초대/재시도 문구 정상, 운영 제목/noindex 없음. 이번 확인은 실제 Naver OAuth 재로그인이 아니며 기존 성공 기록을 유지한다. 브라우저 크기는 복원했고 운영 주소 열기는 Codex에 queued로 전달됐다.
+- 후속: DNS/HTTPS·제공자 도메인 전환 → 실제 사용자 첫 이용 관찰 → 철원 부모 동행/고성 친구 여행의 예약·휴무 최신성 확인 및 제출 버전 리허설. 기능 확대보다 이 검증을 먼저 한다.
+
+
 ## 개발/운영 분리·구매 도메인 연결 준비 — 2026-09-15
 
 **이 절이 배포 대상과 도메인에 대한 최신 상태다.** 개발 전용 사이트를 새로 배포했다. 운영은 기존 **v18/env revision3**을 그대로 유지한다. GitHub master의 환경 대응 변경은 개발에만 반영되었으므로 현재 master:web과 운영 v18이 동일하다고 기록하면 안 된다.
