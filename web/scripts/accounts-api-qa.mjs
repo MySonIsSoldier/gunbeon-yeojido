@@ -270,6 +270,47 @@ try {
   checks.push(
     'HttpOnly session and per-device logout; disabled/corrupt social login never authenticates',
   );
+  for (let i = 0; i < 13; i++)
+    await ok(
+      await post(b, '/api/account', {
+        action: 'login',
+        handle: tag + '_a',
+        password,
+      }),
+    );
+  checks.push('13 successful logins do not consume the failure limit');
+  const failedHandle = tag + '_missing';
+  for (let i = 0; i < 12; i++)
+    assert.equal(
+      (
+        await post(anonymous, '/api/account', {
+          action: 'login',
+          handle: failedHandle,
+          password,
+        })
+      ).status(),
+      401,
+    );
+  assert.equal(
+    (
+      await post(anonymous, '/api/account', {
+        action: 'login',
+        handle: failedHandle,
+        password,
+      })
+    ).status(),
+    429,
+  );
+  await ok(
+    await post(b, '/api/account', {
+      action: 'login',
+      handle: tag + '_a',
+      password,
+    }),
+  );
+  checks.push(
+    'Unknown-handle failures are bounded without blocking another handle',
+  );
   report.status = 'passed';
 } catch (e) {
   report.status = 'failed';

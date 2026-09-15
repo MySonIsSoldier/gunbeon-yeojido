@@ -1,4 +1,5 @@
 'use client';
+import { sourceCredit } from '@/lib/data-provenance';
 import { Check } from 'lucide-react';
 import { dayRecord } from '@/lib/day-passport';
 import type { Entry, Place } from '@/lib/domain';
@@ -58,6 +59,7 @@ export default function DayRecord({
           </span>
         ))}
       </div>
+      {!compact && <p className="helper">{sourceCredit(record.places)}</p>}
       {!compact && (
         <div className="day-record-footer">
           기다리던 하루를, 함께.<small>내가 직접 남긴 여행 기록</small>

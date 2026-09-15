@@ -14,6 +14,7 @@ import {
 import MemoryImage from './memory-image';
 import PhotoCredits from './photo-credits';
 import { withPhoto } from '@/lib/place-photos';
+import { apiReceiptLabel } from '@/lib/data-provenance';
 import Discovery from './discovery';
 import { recommendationEntry } from '@/lib/discovery';
 import { pageFetch, clearPageCache } from '@/lib/page-cache';
@@ -121,6 +122,7 @@ import {
   chapters,
   defaultSettings,
   makeMissions,
+  rankCompanionMissions,
   chooseOrigin,
   regionPlaces,
   assessPlan,
@@ -413,6 +415,8 @@ export default function PassportApp() {
     data: unknown;
     loading: boolean;
   } | null>(null);
+  const [familyCompanion, setFamilyCompanion] = useState('부모님');
+  const [briefContext, setBriefContext] = useState('');
   const [familyWalk, setFamilyWalk] = useState('20분');
   const [familyMeal, setFamilyMeal] = useState('한식');
   const [familyDate, setFamilyDate] = useState('');
@@ -761,17 +765,18 @@ export default function PassportApp() {
       Date.parse(familyStart) + settings.duration * 60000,
     ).toISOString(),
     originId: '',
-    companion: '부모님',
+    companion: familyCompanion,
     walkLimit: parseInt(familyWalk),
-    theme: '회복',
+    theme: '가족',
     meal: familyMeal,
     transport: transportValue(familyTransport),
   } as Settings;
   const familyPlaces = [...familyLive.places, ...places];
   const familyOrigin = chooseOrigin(familyPlaces, familySettings);
   const familyMissions = makeMissions(familyPlaces, familySettings);
-  const familyMission =
-    familyMissions.find((m) => m.variant === '회복') || familyMissions[0];
+  const familyMission = familyOrigin
+    ? rankCompanionMissions(familyMissions, familySettings, familyOrigin)[0]
+    : familyMissions[0];
   const familyIndoor = regionPlaces(familyPlaces, familyRegion)
     .filter((p) => /박물관|문학관|문화관|미술관/.test(p.title))
     .slice(0, 2);
@@ -949,13 +954,16 @@ export default function PassportApp() {
       openBuilder(entry, 'edit');
       return;
     }
-    if (!entry.plan?.timeBudgetMinutes)
-      setNotice(
-        '이전 버전 계획은 사용 시간이 저장되지 않아 4시간으로 열었어요. 계획 시간을 확인해 주세요.',
-      );
+    if (!entry.plan?.timeBudgetMinutes) {
+      openBuilder(entry, 'edit');
+      setNotice('이 여행의 출발·복귀 기준을 먼저 정해 주세요.');
+      return;
+    }
     setReviewEntry(entry);
     setSettings((s) => ({
       ...s,
+      ...(entry.plan?.conditions || {}),
+      transport: entry.plan?.transport || s.transport,
       region: entry.region,
       originId: entry.plan?.originId || '',
       startedAt: entry.plan?.departureAt || s.startedAt,
@@ -1250,14 +1258,38 @@ export default function PassportApp() {
             }
             onImport={(_group, record) => {
               const entry = groupEntry(record);
-              setEntries((v) => [entry, ...v]);
-              go('passport');
+              openBuilder(entry, 'copy');
               setNotice(
-                '내 여행에 사본을 담았어요. 만남 장소와 복귀 기준은 직접 확인해 주세요.',
+                '그룹 원본은 그대로 두고 개인 사본을 만들어요. 복귀 기준을 설정한 뒤 저장해 주세요. 이후 수정은 자동 동기화되지 않아요.',
               );
             }}
             onShare={(group) => setGroupSharing({ groupId: group.id })}
-            onBrief={() => go('family')}
+            onBrief={(group, record) => {
+              setFamilyCompanion(
+                group.kind === 'family'
+                  ? '부모님'
+                  : group.kind === 'partner'
+                    ? '연인'
+                    : '친구',
+              );
+              setBriefContext(
+                group.name +
+                  (record
+                    ? ' · ' +
+                      record.plan.title +
+                      '의 지역·날짜로 새 여행안 만들기'
+                    : ' · 새 여행안 만들기'),
+              );
+              if (record) {
+                setFamilyRegion(record.plan.region);
+                setFamilyDate(
+                  localInputDate(record.plan.departureAt).slice(0, 10),
+                );
+                setFamilyTransport(transportLabels[record.plan.transport]);
+              }
+              setBrief(false);
+              go('family');
+            }}
           />
         </TabsContent>
         <TabsContent value="home">
@@ -1688,13 +1720,25 @@ export default function PassportApp() {
         <TabsContent value="family">
           <main className="family-page content-page">
             <div className="content-heading">
-              <h1>우리 가족에게 편한 하루</h1>
-              <p>걷는 시간과 식사 취향부터 맞춰보세요.</p>
+              <h1>함께 가는 사람에게 편한 하루</h1>
+              <p>
+                {briefContext ||
+                  '부모님·연인·친구와 걷는 시간과 식사 취향부터 맞춰보세요.'}
+              </p>
             </div>
             <div className="family-planning-layout">
               <section className="family-form">
                 <h2>어떤 여행을 준비할까요?</h2>
                 <div className="form-grid">
+                  <Field
+                    label="함께 가는 사람"
+                    value={familyCompanion}
+                    options={['부모님', '가족', '연인', '친구', '전우', '혼자']}
+                    onChange={(v) => {
+                      setFamilyCompanion(v);
+                      setBrief(false);
+                    }}
+                  />
                   <Field
                     label="만나는 지역"
                     value={familyRegion}
@@ -1732,7 +1776,7 @@ export default function PassportApp() {
                   onChange={setFamilyMeal}
                 />
                 <Button className="primary-cta" onClick={() => setBrief(true)}>
-                  우리 가족 여행안 보기
+                  동행 조건으로 여행안 보기
                   <ArrowRight size={17} />
                 </Button>
               </section>
@@ -1749,8 +1793,8 @@ export default function PassportApp() {
                   그룹 만들기 · 초대 참여
                 </Button>
                 <p className="helper">
-                  이 브리핑은 부모님과의 여행을 준비할 때 도보·식사·날씨를
-                  확인하는 도구입니다.
+                  이 브리핑은 함께하는 사람에게 맞춰 도보·식사·날씨를 확인하는
+                  도구입니다.
                 </p>
               </aside>
             </div>
@@ -1759,7 +1803,9 @@ export default function PassportApp() {
                 <section className="family-briefing">
                   <div className="section-title">
                     <div>
-                      <span className="section-overline">부모 브리핑</span>
+                      <span className="section-overline">
+                        {familyCompanion} 동행 브리핑
+                      </span>
                       <h2>{familyRegion}에서 함께하는 여행</h2>
                       <p>
                         {familyDate ? familyDate + ' 희망' : '날짜 미정'} ·{' '}
@@ -1776,6 +1822,11 @@ export default function PassportApp() {
                       구성했습니다.
                     </p>
                   )}
+                  <p className="helper">
+                    복귀 여유와 방문 제약을 먼저 살피고, 도보 희망 시간을 덜
+                    넘는 여행안을 골랐어요. 도보는 추정값이며, 실제 이동 편의는
+                    시설별로 확인해 주세요.
+                  </p>
                   <div className="family-route-preview">
                     {familyMission?.stops.map((x, i) => (
                       <div key={x.place.id}>
@@ -1892,6 +1943,11 @@ export default function PassportApp() {
                       </p>
                     </div>
                   </div>
+                  <p className="helper">
+                    권역 내 별도 후보 정보입니다. 선택한 여행안에 포함된 시설은
+                    장소 이름으로 대조해 주세요. 목록에 없으면 해당 장소
+                    상세에서 편의 정보를 확인할 수 있어요.
+                  </p>
                   {access.mode === 'loading' && (
                     <p role="status">편의시설 정보를 확인하고 있어요.</p>
                   )}
@@ -1909,7 +1965,11 @@ export default function PassportApp() {
                         </span>
                         <ChevronRight size={19} />
                       </summary>
-                      <ApiFacts data={item} loading={false} />
+                      <ApiFacts
+                        data={item}
+                        loading={false}
+                        fetchedAt={access.fetchedAt}
+                      />
                       <VerifiedFacts place={item.place} />
                     </details>
                   ))}
@@ -2482,9 +2542,7 @@ export default function PassportApp() {
                 출처: ⓒ한국관광공사 · 국문 관광정보 서비스_GW / 무장애 여행 정보
               </p>
               <p className="status-line">
-                {live.mode === 'live'
-                  ? '실시간 호출 성공'
-                  : '실시간 호출 미완료'}{' '}
+                {apiReceiptLabel(live)}{' '}
                 {live.error &&
                   '· ' +
                     (live.error === 'DAILY_QUOTA_EXCEEDED'
@@ -2802,6 +2860,8 @@ export default function PassportApp() {
             setSettings((v) => ({
               ...v,
               region: entry.region,
+              ...(entry.plan?.conditions || {}),
+              transport: entry.plan?.transport || v.transport,
               originId: entry.plan!.originId,
               startedAt: entry.plan!.departureAt || v.startedAt,
               duration: entry.plan!.timeBudgetMinutes || v.duration,

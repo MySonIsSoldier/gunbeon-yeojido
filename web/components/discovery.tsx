@@ -23,6 +23,7 @@ import {
   discoveryThemes,
   type Recommendation,
 } from '@/lib/discovery';
+import { sourceCredit } from '@/lib/data-provenance';
 import { regions, type Place } from '@/lib/domain';
 export default function Discovery({
   places,
@@ -137,6 +138,9 @@ export default function Discovery({
         </div>
       )}
       <p className="explore-footnote">
+        {sourceCredit(items.flatMap((m) => m.stops.map((s) => s.place)))}
+      </p>
+      <p className="explore-footnote">
         시간은 자차 이동과 체류를 가정한 초안입니다. 만남 장소에서의
         왕복·식사·예약 대기는 포함하지 않아요.
       </p>
@@ -194,9 +198,10 @@ export default function Discovery({
                     결과나 예약 가능 여부가 아닙니다. 날짜·이동수단·만남 장소는
                     일정표에서 정하세요.
                   </p>
+                  <p>{sourceCredit(selected.stops.map((s) => s.place))}</p>
                   <p>
                     {selected.sourceCount
-                      ? `한국관광공사 최신 수신 장소 ${selected.sourceCount}곳 · `
+                      ? `한국관광공사 수신 장소 ${selected.sourceCount}곳 · `
                       : ''}
                     기본 장소: 통일부 공개 관광자료. 장소별 운영·예약·신분
                     확인은 방문 전에 확인하세요.

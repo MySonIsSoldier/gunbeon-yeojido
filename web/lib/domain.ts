@@ -83,6 +83,10 @@ export type Stop = {
   walk: number;
   walkVerified: false;
 };
+export type TripConditions = Pick<
+  Settings,
+  'companion' | 'walkLimit' | 'extraBuffer'
+>;
 export type Mission = {
   id: string;
   title: string;
@@ -94,6 +98,7 @@ export type Mission = {
   departureAt?: string;
   transport?: Settings['transport'];
   timeBudgetMinutes?: number;
+  conditions?: TripConditions;
 };
 export type Assessment = {
   margin: number | null;
@@ -610,6 +615,7 @@ export type Entry = {
     departureAt?: string;
     transport?: Settings['transport'];
     timeBudgetMinutes?: number;
+    conditions?: TripConditions;
     manualPlaces?: ManualPlace[];
   };
   missionId: string;
@@ -693,6 +699,7 @@ export function createEntry(
       departureAt: mission.departureAt,
       timeBudgetMinutes: mission.timeBudgetMinutes,
       transport: mission.transport,
+      conditions: mission.conditions ? { ...mission.conditions } : undefined,
       manualPlaces: [
         ...new Map(
           [...(origin ? [origin] : []), ...mission.stops.map((s) => s.place)]
@@ -766,6 +773,7 @@ export function resolveEntry(
       departureAt: plan.departureAt,
       timeBudgetMinutes: plan.timeBudgetMinutes,
       transport: plan.transport,
+      conditions: plan.conditions,
       brief:
         '저장한 장소와 순서입니다. 출발 계획 기준으로 시간과 방문 조건을 확인하세요.',
       stops: stops.map((s) => ({
@@ -896,6 +904,7 @@ export function planningSettings(
     duration,
     returnAt,
     transport: m?.transport || settings.transport,
+    ...(m?.conditions || {}),
   };
 }
 export function assessPlan(
@@ -916,6 +925,28 @@ export function assessPlan(
         issues: ['장소를 담으면 여행 시간을 계산할 수 있어요.'],
       };
 }
+/** Keep every candidate; prioritize constraints before a preferred theme. Walking remains an estimate. */
+export function rankCompanionMissions(
+  missions: Mission[],
+  settings: Settings,
+  origin: Place,
+): Mission[] {
+  const band = { safe: 0, caution: 1, avoid: 2, unknown: 3 };
+  return missions
+    .map((mission, index) => ({
+      mission,
+      index,
+      score: assessPlan(mission, settings, origin),
+    }))
+    .sort(
+      (a, b) =>
+        band[a.score.band] - band[b.score.band] ||
+        Math.max(0, a.score.walk - settings.walkLimit) -
+          Math.max(0, b.score.walk - settings.walkLimit) ||
+        a.index - b.index,
+    )
+    .map((x) => x.mission);
+}
 export function planSchedule(m: Mission, s: Settings, origin: Place) {
   const plan = planningSettings(m, s);
   return routeSchedule(m, plan, origin, new Date(plan.startedAt));
@@ -923,6 +954,11 @@ export function planSchedule(m: Mission, s: Settings, origin: Place) {
 export function withPlan(m: Mission, s: Settings): Mission {
   return {
     ...m,
+    conditions: m.conditions || {
+      companion: s.companion,
+      walkLimit: s.walkLimit,
+      extraBuffer: s.extraBuffer,
+    },
     departureAt: m.departureAt || s.startedAt,
     transport: m.transport || s.transport,
     timeBudgetMinutes:

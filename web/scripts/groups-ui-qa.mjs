@@ -211,7 +211,10 @@ for (const channel of (
       guest.on('pageerror', (e) => result.errors.push(`Guest: ${e.message}`));
       guest.on('response', (r) => {
         if (new URL(r.url()).pathname === '/api/groups')
-          (result.guestRequests ??= []).push({ method: r.request().method(), status: r.status() });
+          (result.guestRequests ??= []).push({
+            method: r.request().method(),
+            status: r.status(),
+          });
       });
       await guestContext.route('**/api/places?*', (r) =>
         r.fulfill({
@@ -233,8 +236,14 @@ for (const channel of (
         .click();
       await guest.locator('.app-shell[data-ready="true"]').waitFor();
       await guest.getByLabel('그룹에서 사용할 이름').fill('동행 테스트');
-      assert.equal(await guest.getByLabel('그룹에서 사용할 이름').inputValue(), '동행 테스트');
-      assert.equal(await guest.getByLabel('초대코드', { exact: true }).inputValue(), inviteCode);
+      assert.equal(
+        await guest.getByLabel('그룹에서 사용할 이름').inputValue(),
+        '동행 테스트',
+      );
+      assert.equal(
+        await guest.getByLabel('초대코드', { exact: true }).inputValue(),
+        inviteCode,
+      );
       await guest
         .getByRole('button', { name: '초대 확인', exact: true })
         .click();
@@ -301,8 +310,43 @@ for (const channel of (
         'Home shows personal upcoming plan and two groups; group opens its own plans',
       );
       await p
+        .getByRole('button', { name: '내 여행에 담기', exact: true })
+        .click();
+      assert.equal(
+        await p.getByLabel('돌아올 예정 시각', { exact: true }).inputValue(),
+        '',
+      );
+      await p
+        .getByRole('button', { name: '내 코스 저장', exact: true })
+        .click();
+      assert(
+        (await p.locator('.trip-builder').count()) ||
+          (await p.getByLabel('돌아올 예정 시각', { exact: true }).isVisible()),
+      );
+      const departure = await p
+        .getByLabel('출발 날짜·시간', { exact: true })
+        .inputValue();
+      const returnTime = new Date(Date.parse(departure + ':00Z') + 4 * 3600000)
+        .toISOString()
+        .slice(0, 16);
+      await p.getByLabel('돌아올 예정 시각', { exact: true }).fill(returnTime);
+      await p
+        .getByRole('button', { name: '내 코스 저장', exact: true })
+        .click();
+      await p
+        .getByLabel('돌아올 예정 시각', { exact: true })
+        .waitFor({ state: 'hidden' });
+      result.checks.push(
+        'Group copy opens with blank personal return criterion and saves only after explicit input',
+      );
+      await tab(p, '그룹').click();
+      await p
         .getByRole('button', { name: '일정 보기·수정', exact: true })
         .click();
+      assert.equal(
+        await p.getByRole('button', { name: '여유 조정', exact: true }).count(),
+        0,
+      );
       await shot('editor');
       await p
         .getByRole('button', { name: '코스 편집 닫기', exact: true })
@@ -315,7 +359,12 @@ for (const channel of (
     } catch (e) {
       result.status = 'failed';
       result.error = e.message;
-      if (guest) await guest.screenshot({ path: path.join(out, `${channel}-${size.name}-guest-failure.png`) }).catch(() => {});
+      if (guest)
+        await guest
+          .screenshot({
+            path: path.join(out, `${channel}-${size.name}-guest-failure.png`),
+          })
+          .catch(() => {});
       await p
         .screenshot({
           path: path.join(out, `${channel}-${size.name}-failure.png`),

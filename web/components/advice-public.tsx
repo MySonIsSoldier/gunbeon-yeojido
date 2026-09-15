@@ -490,7 +490,7 @@ export default function AdvicePublic({ id }: { id: string }) {
         )}
       </div>
       <footer className="advice-footer">
-        관광정보: ⓒ한국관광공사 · 통일부 DMZ · 국가보훈부. 링크는 30일간 열리며
+        출처: ⓒ한국관광공사 · 통일부 DMZ · 국가보훈부. 링크는 30일간 열리며
         작성자가 닫거나 삭제할 수 있습니다. 익명 참여 권한은 이 브라우저에
         보관됩니다.
       </footer>

@@ -348,7 +348,7 @@ export default function TravelGroups({
   onImport: (g: GroupDetail, p: GroupPlan) => void;
   onNew: (g: GroupDetail) => void;
   onShare: (g: GroupDetail) => void;
-  onBrief: () => void;
+  onBrief: (group: GroupDetail, record?: GroupPlan) => void;
 }) {
   const selectedRef = useRef(selectedId),
     generation = useRef(0),
@@ -682,7 +682,7 @@ export default function TravelGroups({
                 멤버·초대
               </button>
             </div>
-            <button className="text-link" onClick={onBrief}>
+            <button className="text-link" onClick={() => onBrief(group)}>
               동행 조건 브리핑 <ArrowRight size={16} />
             </button>
           </div>
@@ -725,6 +725,12 @@ export default function TravelGroups({
                         >
                           내 여행에 담기
                         </Button>
+                        <button
+                          className="text-link"
+                          onClick={() => onBrief(group, p)}
+                        >
+                          이 여행 동행 브리핑
+                        </button>
                         {(manager || p.authorId === store.profile?.id) && (
                           <button
                             className="text-link"
