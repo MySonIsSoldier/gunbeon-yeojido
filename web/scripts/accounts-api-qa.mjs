@@ -36,6 +36,7 @@ try {
   for (const route of [
     '/about',
     '/privacy',
+    '/terms',
     '/brand/google-g.png',
     '/brand/naver-n.png',
   ])

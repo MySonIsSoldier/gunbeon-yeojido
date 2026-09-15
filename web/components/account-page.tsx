@@ -458,6 +458,7 @@ export default function AccountPage() {
       </section>
       <footer className="account-footer">
         <a href="/about">군번여지도 소개</a>
+        <a href="/terms">서비스 이용약관</a>
         <a href="/privacy">개인정보 안내</a>
       </footer>
     </main>

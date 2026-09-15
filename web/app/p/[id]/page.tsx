@@ -26,13 +26,20 @@ export async function generateMetadata({
         description,
         type: 'website',
         siteName: '군번여지도 강원',
+        images: [],
       },
-      twitter: { card: 'summary', title, description },
+      twitter: { card: 'summary', title, description, images: [] },
     };
   } catch {
     return {
       title: '종료된 여행 공유 · 군번여지도',
       robots: { index: false, follow: false },
+      openGraph: { title: '종료된 여행 공유 · 군번여지도', images: [] },
+      twitter: {
+        card: 'summary',
+        title: '종료된 여행 공유 · 군번여지도',
+        images: [],
+      },
     };
   }
 }

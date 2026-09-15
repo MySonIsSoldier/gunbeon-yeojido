@@ -1,0 +1,102 @@
+{
+  "selected": "B · 다시 만나는 길",
+  "version": 1,
+  "files": [
+    {
+      "file": "logo-140.png",
+      "width": 140,
+      "height": 140,
+      "transparent": false
+    },
+    {
+      "file": "symbol-transparent-140.png",
+      "width": 140,
+      "height": 140,
+      "transparent": true
+    },
+    {
+      "file": "logo-180.png",
+      "width": 180,
+      "height": 180,
+      "transparent": false
+    },
+    {
+      "file": "logo-192.png",
+      "width": 192,
+      "height": 192,
+      "transparent": false
+    },
+    {
+      "file": "logo-512.png",
+      "width": 512,
+      "height": 512,
+      "transparent": false
+    },
+    {
+      "file": "symbol-transparent-512.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true
+    },
+    {
+      "file": "logo-1024.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": false
+    },
+    {
+      "file": "symbol-transparent-1024.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "icon-maskable-512.png",
+      "width": 512,
+      "height": 512,
+      "transparent": false
+    },
+    {
+      "file": "symbol-white-512.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true
+    },
+    {
+      "file": "symbol-teal-512.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true
+    },
+    {
+      "file": "wordmark-horizontal.png",
+      "width": 1200,
+      "height": 320,
+      "transparent": true
+    },
+    {
+      "file": "wordmark-dark.png",
+      "width": 1200,
+      "height": 320,
+      "transparent": false
+    },
+    {
+      "file": "representative-1200x630.png",
+      "width": 1200,
+      "height": 630,
+      "transparent": false
+    },
+    {
+      "file": "social-square-1080.png",
+      "width": 1080,
+      "height": 1080,
+      "transparent": false
+    },
+    {
+      "file": "story-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "transparent": false
+    }
+  ]
+}

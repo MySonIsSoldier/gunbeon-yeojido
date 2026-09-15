@@ -2726,6 +2726,8 @@ export default function PassportApp() {
         <a href="/guide">
           사용 가이드 <ArrowUpRight size={14} />
         </a>
+        <a href="/terms">서비스 이용약관</a>
+        <a href="/privacy">개인정보 안내</a>
         <button onClick={() => go('data')}>
           출처·데이터 상태 확인 <ArrowUpRight size={14} />
         </button>

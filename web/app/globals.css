@@ -6070,11 +6070,34 @@ input {
 }
 .account-footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   margin-top: 24px;
   color: #778691;
-  font-size: 12px;
+  font-size: 14px;
+}
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 24px 0;
+  font-size: 14px;
+}
+.legal-links a,
+.legal-copy p a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.terms-copy {
+  width: min(100%, 720px);
+}
+.terms-copy p {
+  overflow-wrap: anywhere;
+}
+.legal-copy.terms-copy p {
+  font-size: 16px;
 }
 .guest-back {
   position: absolute;
