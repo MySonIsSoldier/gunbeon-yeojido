@@ -334,6 +334,15 @@ for (const channel of channels) {
       await tab(p, '내 여행').click();
       await (await recordMenu(p, '저장한 장소 다시 보기')).click();
       await p.locator('.trip-read-place').first().waitFor();
+      await p.waitForFunction(
+        (names) =>
+          JSON.stringify(
+            [...document.querySelectorAll('.trip-read-place h3')].map(
+              (e) => e.textContent,
+            ),
+          ) === JSON.stringify(names),
+        before,
+      );
       assert.deepEqual(
         await p.locator('.trip-read-place h3').allTextContents(),
         before,
@@ -421,6 +430,13 @@ for (const channel of channels) {
       }
       // Fail both list and saved-place lookup; never replace the preserved itinerary.
       if (live && size.name === 'small') {
+        // The recommended route may contain only base-catalogue places. Make
+        // the missing-reference fixture explicit rather than relying on API order.
+        await p.evaluate(() => {
+          const s = JSON.parse(localStorage.getItem('gangwon-passport-v1'));
+          s.entries[0].plan.stops[0].placeId = 'tourapi:999999999';
+          localStorage.setItem('gangwon-passport-v1', JSON.stringify(s));
+        });
         await p.route('**/api/places/resolve', (r) =>
           r.fulfill({ status: 503, json: { places: [], error: 'QA_FAILURE' } }),
         );
