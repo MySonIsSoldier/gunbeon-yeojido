@@ -1,6 +1,6 @@
 # 9월 21일 제출까지 남은 목표
 
-9/15 도메인 전환 준비: 별도 개발 Sites v1·테스트 D1 배포, 환경별 OG와 소셜 버튼 origin 검사 완료. 운영은 v18/env3 유지. 사용자에게 정확한 구매 도메인과 Hosting.kr 로그인을 요청한 상태이며, DNS/HTTPS → OAuth·Kakao 도메인 → 운영 환경변수/검증된 배포 → 새 주소 실검사/검수 캡처 순서로 마무리한다. [구조·작업 절차](custom-domain-setup.md).
+9/15 도메인 전환 준비: 별도 개발 Sites v1·테스트 D1 배포, 환경별 OG와 소셜 버튼 origin 검사 완료. 운영은 v18/env3 유지. `gunbeon.gangwon.kr`로 확정해 커스텀 도메인 등록을 완료했고 Hosting.kr DNS 설정은 대기 중이며, DNS/HTTPS → OAuth·Kakao 도메인 → 운영 환경변수/검증된 배포 → 새 주소 실검사/검수 캡처 순서로 마무리한다. [구조·작업 절차](custom-domain-setup.md).
 
 9/15 소셜 로그인 최신 상태: **네이버 운영 연결·기존 회원 실제 재로그인·검수용 캡처3장/PDF 완료**. Sitesv18은 유지하고 env revision3으로 재배포했다. [검수 제출자료](../output/naver-review/README.md). 네이버 검수 신청/승인과 신규 회원·새 동의 실검증은 남아 있다. Google은 도메인 목록 등록 → 기본 openid Client 발급 가능 여부 확인 → 키 설정/실로그인 순서로 진행하고 브랜드 검수와 구분한다. 아래 과거 미설정 기록보다 이 상태가 우선한다.
 

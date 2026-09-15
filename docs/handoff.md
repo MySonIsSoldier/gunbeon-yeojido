@@ -10,9 +10,9 @@
 - 실제 개발 HTML/API: [개발] 제목, noindex/nofollow, 개발 OG 이미지 URL, providers false, account null. Sites 소유자용 QA 인증으로 읽기만 했다. IAB는 OpenAI 로그인 화면까지 확인했으며 브라우저 앱 로그인·지도 성공을 주장하지 않는다. [실행 보고](../reports/custom_domain_rollout_2026-09-15.md).
 - `config/sites-environments.json`과 `scripts/check-site-target.mjs` 사용. web/.openai/hosting.json은 운영 ID를 유지하고 개발 소스 checkout은 개발 ID를 유지한다. 배포마다 명시적 환경 검사 후 Sites 공식 skill을 수행한다. 개발/운영 원격 인증은 해당 프로젝트에서 새로 받는다.
 
-**필수 대기:** 사용자 메시지에 구매 주소 `gunbeon.gangwon.kr`와 실사용 주소 `gunbeon.ganwon.kr`가 함께 있어 정확한 철자를 질문했다. Hosting.kr 브라우저가 로그아웃이어서 로그인도 요청했다. 답변/로그인 전 커스텀 도메인 등록, DNS, 운영 AUTH_BASE_URL은 변경하지 않았다. Sites custom domains는 현재 빈 목록이다.
+**9/15 후속 확인:** 사용자가 `gunbeon.gangwon.kr`로 확정했다. 기존 운영 Site에 커스텀 도메인 `appgdom_6aa8d01a4d0481918a5c8ce10d2ed2ba`를 추가했으며 DNS/SSL 대기다. **다시 추가하지 않는다.** Hosting.kr 로그인 세션이 없어 DNS와 운영 AUTH_BASE_URL은 변경하지 않았다. 실제 반환된 A/TXT는 [설정 안내](custom-domain-setup.md)에 있다.
 
-다음 첫 행동: 사용자 확인 → 기존 운영 Site에 custom domain 추가(한 번) → 반환된 A/검증 레코드를 Hosting.kr에 설정 → DNS/SSL active 확인 → 기존 Naver 앱에 새 callback·Kakao SDK 도메인·Google TXT 확인 → 운영 AUTH_BASE_URL/PUBLIC_SITE_URL과 검증된 코드를 함께 배포 → 새 주소 로그인·기존 기록·지도·공유·네이버 캡처 재검증. [상세 연결 구조](custom-domain-setup.md). 기존 주소·DB·PWA 기록을 삭제하거나 운영 데이터를 개발로 복사하지 않는다.
+다음 첫 행동: Hosting.kr 로그인 후 A/TXT 설정 → 같은 custom domain ID의 DNS/SSL active 확인 → 기존 Naver 앱에 새 callback·Kakao SDK 도메인·Google TXT 확인 → 운영 AUTH_BASE_URL/PUBLIC_SITE_URL 전환 → 새 주소 로그인·기존 기록·지도·공유·네이버 캡처 재검증. 기존 주소·DB·PWA 기록을 삭제하거나 운영 데이터를 개발로 복사하지 않는다.
 
 ## 네이버 운영 로그인·검수 자료 — 2026-09-15
 

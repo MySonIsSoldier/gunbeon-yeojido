@@ -57,7 +57,7 @@
 
 ## 1차 심사 준비 · 9월 15일
 
-[현재 점검 보고서](reports/judging_readiness_review_2026-09-15.md) · [사용·시연 시나리오](docs/judging-scenario.md)
+[여행·공유 UX 보완과 사용 시나리오](reports/journey_clarity_2026-09-15.md) · [현재 점검 보고서](reports/judging_readiness_review_2026-09-15.md) · [사용·시연 시나리오](docs/judging-scenario.md)
 
 여행마다 동행자·도보 희망 시간·추가 여유를 따로 저장합니다. 그룹 여행을 내 여행에 가져올 때 개인 복귀 기준을 정하고, ‘여유 조정’으로 장소/시간 변경의 효과를 비교하세요. 변경된 사용법은 공개 가이드에 반영했습니다. 지정 전용 심사 계정과 합성 예시 여행·그룹을 준비했고 새 세션 복원까지 검증했습니다.
 

@@ -2,6 +2,7 @@
   "production": {
     "project_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc",
     "platform_origin": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+    "custom_domain": "gunbeon.gangwon.kr",
     "data_policy": "Preserve existing production D1 and Naver application identity."
   },
   "development": {

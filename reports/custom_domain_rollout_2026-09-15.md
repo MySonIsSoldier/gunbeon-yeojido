@@ -6,7 +6,7 @@
 - 개발 프로젝트 `appgprj_6aa8c98dd2a08191a61d18c5e318a57f`, saved version `appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_9c5329f1b8f8819198b0f9c0b3204e01` **v1**, source `7a26875ba8af48454e39f03ce79c933c359e82d5`, deployment `appgdep_6aa8cc19acf8819196395be690693a38` **succeeded 2026-09-15 04:40:15 UTC**, env revision2.
 - 개발 코드는 GitHub 기능 커밋 `e58c993`의 web/에서 내보냈다. 개발용 manifest의 project_id만 해당 Site로 유지한다. 별도 D1의 17개 테이블을 확인했고 accounts는 비어 있다. 운영 계정·DB 원문을 가져오지 않았다.
 - 개발 Secret은 새 TEST_SESSION_SECRET과 1234 체험 암호, 기존 승인된 관광공사·지도 키를 사용한다. 개발 Naver/Google 키는 넣지 않았다. 개발/운영의 새로운 도메인은 Kakao SDK 도메인 추가가 필요하다.
-- 운영은 기존 **v18/env revision3** 그대로다. 사용자 요청의 구매 도메인 철자 확인과 Hosting.kr 로그인이 없어 커스텀 도메인 등록·DNS·운영 AUTH_BASE_URL 변경은 아직 하지 않았다.
+- 운영은 기존 **v18/env revision3** 그대로다. 최초 환경 분리 시점에는 도메인 철자 확인과 Hosting.kr 로그인이 없어 전환하지 않았다. 후속 사용자 확인으로 `gunbeon.gangwon.kr` 커스텀 도메인 등록 완료, DNS/SSL은 대기 중이다. 최신 운영 배포는 handoff를 따른다.
 
 ## 원인과 변경
 

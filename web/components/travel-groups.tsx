@@ -22,6 +22,7 @@ import {
   DropdownMenuItem,
 } from './ui/dropdown-menu';
 import { groupEntry } from '@/lib/group-model';
+import { invitationCode } from '@/lib/group-invite';
 import { itineraryView } from '@/lib/itinerary-view';
 import { Input } from './ui/input';
 import {
@@ -351,6 +352,8 @@ export default function TravelGroups({
   onNew,
   onShare,
   onBrief,
+  createRequested = false,
+  onCreateHandled,
 }: {
   store: TravelGroupStore;
   selectedId: string;
@@ -362,6 +365,8 @@ export default function TravelGroups({
   onNew: (g: GroupDetail) => void;
   onShare: (g: GroupDetail) => void;
   onBrief: (group: GroupDetail, record?: GroupPlan) => void;
+  createRequested?: boolean;
+  onCreateHandled?: () => void;
 }) {
   const selectedRef = useRef(selectedId),
     generation = useRef(0),
@@ -377,6 +382,12 @@ export default function TravelGroups({
     [nickname, setNickname] = useState(''),
     [code, setCode] = useState('');
   codeRef.current = code;
+  useEffect(() => {
+    if (createRequested) {
+      setForm('create');
+      onCreateHandled?.();
+    }
+  }, [createRequested, onCreateHandled]);
   const group = loadedGroup?.id === selectedId ? loadedGroup : null;
   const [preview, setPreview] = useState<{
       id: string;
@@ -547,12 +558,27 @@ export default function TravelGroups({
                 e.preventDefault();
                 if (form === 'create')
                   await run({ action: 'create', name, kind, nickname });
-                else if (!preview) {
-                  const d = await run({ action: 'preview', code });
-                  if (d?.invitation && code === codeRef.current)
-                    setPreview({ ...d.invitation, code });
-                } else if (preview.code === code)
-                  await run({ action: 'join', code: preview.code, nickname });
+                else {
+                  const normalized = invitationCode(
+                    code,
+                    window.location.origin,
+                  );
+                  if (!normalized) {
+                    setError(
+                      '이 서비스에서 받은 초대 링크 또는 48자리 초대코드를 확인해 주세요.',
+                    );
+                    return;
+                  }
+                  if (!preview) {
+                    const d = await run({
+                      action: 'preview',
+                      code: normalized,
+                    });
+                    if (d?.invitation && code === codeRef.current)
+                      setPreview({ ...d.invitation, code: normalized });
+                  } else if (preview.code === normalized)
+                    await run({ action: 'join', code: normalized, nickname });
+                }
               }}
             >
               <div className="section-title">
@@ -614,7 +640,7 @@ export default function TravelGroups({
                 </>
               ) : (
                 <label className="field">
-                  초대코드
+                  초대 링크 또는 코드
                   <Input
                     value={code}
                     disabled={busy}
@@ -624,7 +650,7 @@ export default function TravelGroups({
                     }}
                     autoComplete="off"
                     required
-                    placeholder="전달받은 초대코드를 붙여넣으세요"
+                    placeholder="복사한 초대 링크나 코드를 붙여넣으세요"
                   />
                 </label>
               )}

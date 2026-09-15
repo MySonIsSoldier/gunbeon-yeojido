@@ -208,10 +208,13 @@ export default function TripBuilder({
   const [page, setPage] = useState(1),
     [total, setTotal] = useState(0);
   const [category, setCategory] = useState('all');
+  const [finderTab, setFinderTab] = useState('nearby');
   const searchSerial = useRef(0);
   const [notice, setNotice] = useState('');
   const [dirty, setDirty] = useState(initialDirty),
     [confirmClose, setConfirmClose] = useState(false);
+  const [manualDirty, setManualDirty] = useState(false);
+  const [confirmManualBack, setConfirmManualBack] = useState(false);
   const [manual, setManual] = useState<ManualPlace>({
     id: 'manual:' + crypto.randomUUID(),
     title: '',
@@ -318,6 +321,13 @@ export default function TripBuilder({
         last && validCoord(last) ? distance(last, a) - distance(last, b) : 0,
       );
   }, [allPlaces, searchRegion, mission, origin]);
+  const nearbyCandidates = nearby.filter(
+    (p) =>
+      category === 'all' ||
+      (category === 'restaurant'
+        ? ['restaurant', 'cafe'].includes(p.category)
+        : p.category === category),
+  );
   useEffect(() => {
     let ignore = false;
     const ids = [...new Set([originId, ...stops.map((s) => s.placeId)])].filter(
@@ -349,6 +359,11 @@ export default function TripBuilder({
   }, [originId, stops, places, referenceRetry]);
   const change = () => {
     setDirty(true);
+    setNotice('');
+  };
+  const updateManual = (update: (place: ManualPlace) => ManualPlace) => {
+    setManual(update);
+    setManualDirty(true);
     setNotice('');
   };
   function choose(p: Place) {
@@ -509,6 +524,7 @@ export default function TripBuilder({
       },
       origin,
       recordId,
+      originId,
     );
     if (canUpdate) entry.stamps = initial.stamps;
     setSaving(true);
@@ -551,6 +567,7 @@ export default function TripBuilder({
           },
     );
     setStage('manual');
+    setManualDirty(false);
     setNotice('');
   }
   return (
@@ -559,7 +576,7 @@ export default function TripBuilder({
         open
         onOpenChange={(open) => {
           if (!open && !saving) {
-            if (dirty) setConfirmClose(true);
+            if (dirty || manualDirty) setConfirmClose(true);
             else onClose();
           }
         }}
@@ -578,6 +595,10 @@ export default function TripBuilder({
                   className="builder-back"
                   aria-label="코스 편집으로 돌아가기"
                   onClick={() => {
+                    if (manualDirty) {
+                      setConfirmManualBack(true);
+                      return;
+                    }
                     setStage('plan');
                     setNotice('');
                   }}
@@ -600,14 +621,18 @@ export default function TripBuilder({
                 <SheetDescription>
                   {stage === 'plan'
                     ? '장소와 순서, 머무는 시간을 자유롭게 정해요.'
-                    : '일정에 사용할 만남 장소를 정해요.'}
+                    : selectionTarget === 'origin'
+                      ? '일정에 사용할 만남 장소를 정해요.'
+                      : '가고 싶은 관광지와 식당을 일정에 담아보세요.'}
                 </SheetDescription>
               </div>
             </div>
             <button
               className="builder-close"
               aria-label="코스 편집 닫기"
-              onClick={() => (dirty ? setConfirmClose(true) : onClose())}
+              onClick={() =>
+                dirty || manualDirty ? setConfirmClose(true) : onClose()
+              }
             >
               <X size={22} />
             </button>
@@ -749,7 +774,7 @@ export default function TripBuilder({
                       변경
                     </Button>
                   </div>
-                  {missing.length > 0 &&
+                  {(missing.length > 0 || (!!originId && !origin)) &&
                     !referencesLoading &&
                     !placesLoading && (
                       <div className="warning">
@@ -765,7 +790,7 @@ export default function TripBuilder({
                         </Button>
                       </div>
                     )}
-                  {saveTarget === 'personal' && (
+                  {saveTarget === 'personal' && stops.length > 0 && (
                     <PlanAdjustment
                       unresolved={missing.length > 0}
                       mission={mission}
@@ -953,11 +978,15 @@ export default function TripBuilder({
                   )}
                 </section>
                 <aside className="builder-preview">
-                  <CourseCover places={mission.stops.map((s) => s.place)} />
-                  <p className="image-attribution">
-                    사진: 관광공사·공공누리·Wikimedia Commons. 자세한 표기는
-                    여행 정보와 출처에서 확인하세요.
-                  </p>
+                  {stops.length > 0 && (
+                    <>
+                      <CourseCover places={mission.stops.map((s) => s.place)} />
+                      <p className="image-attribution">
+                        사진: 관광공사·공공누리·Wikimedia Commons. 자세한 표기는
+                        여행 정보와 출처에서 확인하세요.
+                      </p>
+                    </>
+                  )}
                   {origin && validCoord(origin) && (
                     <MissionMap
                       mission={mission}
@@ -1016,6 +1045,7 @@ export default function TripBuilder({
             )}
             {stage === 'places' && selectionTarget === 'origin' && (
               <MeetingPicker
+                onDraftChange={setManualDirty}
                 favorites={favorites}
                 onFavoritesChange={onFavoritesChange}
                 onChoose={choose}
@@ -1047,7 +1077,7 @@ export default function TripBuilder({
                     setResults([]);
                   }}
                 />
-                <Tabs defaultValue="nearby">
+                <Tabs value={finderTab} onValueChange={setFinderTab}>
                   <TabsList>
                     <TabsTrigger value="nearby">가까운 후보</TabsTrigger>
                     <TabsTrigger value="search">관광정보 검색</TabsTrigger>
@@ -1069,32 +1099,47 @@ export default function TripBuilder({
                       onChange={setCategory}
                     />
                     <div className="finder-results">
-                      {nearby
-                        .filter(
-                          (p) =>
-                            category === 'all' ||
-                            (category === 'restaurant'
-                              ? ['restaurant', 'cafe'].includes(p.category)
-                              : p.category === category),
-                        )
-                        .slice(0, 24)
-                        .map((p) => (
-                          <PlaceResult
-                            key={p.id}
-                            place={p}
-                            selected={
-                              stops.some((s) => s.placeId === p.id) &&
-                              selectionTarget === 'stop'
-                            }
-                            onChoose={() => choose(p)}
-                          />
-                        ))}
+                      {nearbyCandidates.slice(0, 24).map((p) => (
+                        <PlaceResult
+                          key={p.id}
+                          place={p}
+                          selected={
+                            stops.some((s) => s.placeId === p.id) &&
+                            selectionTarget === 'stop'
+                          }
+                          onChoose={() => choose(p)}
+                        />
+                      ))}
                     </div>
-                    {!nearby.length && (
-                      <p>
-                        이 권역의 후보가 아직 없습니다. 관광정보 검색으로
-                        찾아보세요.
-                      </p>
+                    {!nearbyCandidates.length && (
+                      <div className="finder-empty" role="status">
+                        <p>
+                          {searchRegion}의{' '}
+                          {category === 'all'
+                            ? '가까운'
+                            : categories[
+                                category as keyof typeof categories
+                              ]}{' '}
+                          후보가 아직 없어요.
+                        </p>
+                        <p className="helper">
+                          관광정보에서 이름으로 찾거나 다른 유형을 둘러보세요.
+                        </p>
+                        <Button
+                          variant="outline"
+                          onClick={() => setFinderTab('search')}
+                        >
+                          관광정보에서 검색
+                        </Button>
+                        {category !== 'all' && (
+                          <Button
+                            variant="ghost"
+                            onClick={() => setCategory('all')}
+                          >
+                            전체 후보 보기
+                          </Button>
+                        )}
+                      </div>
                     )}
                   </TabsContent>
                   <TabsContent value="search">
@@ -1191,7 +1236,7 @@ export default function TripBuilder({
                     value={manual.title}
                     maxLength={60}
                     onChange={(e) =>
-                      setManual((p) => ({ ...p, title: e.target.value }))
+                      updateManual((p) => ({ ...p, title: e.target.value }))
                     }
                   />
                 </label>
@@ -1200,7 +1245,7 @@ export default function TripBuilder({
                   value={manual.sigungu}
                   values={Object.fromEntries(regions.map((r) => [r, r]))}
                   onChange={(v) =>
-                    setManual((p) => ({
+                    updateManual((p) => ({
                       ...p,
                       sigungu: v,
                       lat: null,
@@ -1218,7 +1263,7 @@ export default function TripBuilder({
                     culture: '문화시설',
                     other: '기타 장소',
                   }}
-                  onChange={(v) => setManual((p) => ({ ...p, category: v }))}
+                  onChange={(v) => updateManual((p) => ({ ...p, category: v }))}
                 />
                 <label className="builder-field">
                   <span>주소 · 선택</span>
@@ -1228,7 +1273,7 @@ export default function TripBuilder({
                     maxLength={160}
                     placeholder="주소 또는 만날 지점"
                     onChange={(e) =>
-                      setManual((p) => ({ ...p, address: e.target.value }))
+                      updateManual((p) => ({ ...p, address: e.target.value }))
                     }
                   />
                 </label>
@@ -1249,13 +1294,13 @@ export default function TripBuilder({
                         ? { lat: manual.lat, lon: manual.lon }
                         : null
                     }
-                    onChange={(v) => setManual((p) => ({ ...p, ...v }))}
+                    onChange={(v) => updateManual((p) => ({ ...p, ...v }))}
                   />
                   {manual.lat !== null && (
                     <button
                       className="text-action"
                       onClick={() =>
-                        setManual((p) => ({ ...p, lat: null, lon: null }))
+                        updateManual((p) => ({ ...p, lat: null, lon: null }))
                       }
                     >
                       선택한 위치 지우기
@@ -1287,6 +1332,7 @@ export default function TripBuilder({
                       ...v.filter((p) => p.id !== manual.id),
                       manual,
                     ]);
+                    setManualDirty(false);
                     const p = manualToPlace(manual);
                     setExtra((v) => v.filter((v) => v.id !== manual.id));
                     if (stops.some((s) => s.placeId === manual.id)) {
@@ -1334,11 +1380,35 @@ export default function TripBuilder({
             수정한 내용을 저장하지 않고 나갈까요?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            저장한 원래 코스는 그대로 남습니다.
+            {mode === 'edit'
+              ? '저장한 원래 코스는 그대로 남습니다.'
+              : '입력한 코스와 아직 추가하지 않은 장소는 저장되지 않아요.'}
           </AlertDialogDescription>
           <AlertDialogFooter>
             <AlertDialogCancel>계속 편집</AlertDialogCancel>
             <AlertDialogAction onClick={onClose}>변경 버리기</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <AlertDialog open={confirmManualBack} onOpenChange={setConfirmManualBack}>
+        <AlertDialogContent>
+          <AlertDialogTitle>입력 중인 장소를 두고 돌아갈까요?</AlertDialogTitle>
+          <AlertDialogDescription>
+            이 장소의 입력 내용은 버리고 일정 편집으로 돌아갑니다. 코스에 이미
+            담은 장소는 유지해요.
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogCancel>계속 입력</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                setConfirmManualBack(false);
+                setManualDirty(false);
+                setStage('plan');
+                setNotice('');
+              }}
+            >
+              입력 버리고 돌아가기
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
