@@ -1,6 +1,7 @@
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 import { env } from 'cloudflare:workers';
 import { database, hashSecret } from './db';
+import { configuredSiteOrigin, oauthReadyAtOrigin } from './site-origin';
 import {
   AccountProblem,
   authCookie,
@@ -26,16 +27,11 @@ function config(provider: Provider) {
   return {
     id: String(e[prefix + '_CLIENT_ID'] || ''),
     secret: String(e[prefix + '_CLIENT_SECRET'] || ''),
-    origin: String(e.AUTH_BASE_URL || '').replace(/\/$/, ''),
+    origin: configuredSiteOrigin(e.AUTH_BASE_URL) || '',
   };
 }
-export function providerReady(provider: Provider) {
-  const c = config(provider);
-  return !!(
-    c.id &&
-    c.secret &&
-    /^https:\/\/[^/?#]+$|^http:\/\/localhost:3000$/.test(c.origin)
-  );
+export function providerReady(provider: Provider, requestOrigin: string) {
+  return oauthReadyAtOrigin(config(provider), requestOrigin);
 }
 export function safeReturnTo(v: unknown) {
   if (
@@ -56,7 +52,7 @@ export async function startOAuth(
   link: boolean,
   returnTo: unknown,
 ) {
-  if (!providerReady(p) || config(p).origin !== new URL(r.url).origin)
+  if (!providerReady(p, new URL(r.url).origin))
     throw new AccountProblem(
       503,
       '소셜 로그인 연결을 준비 중입니다. 지금은 아이디로 로그인해 주세요.',
@@ -120,8 +116,7 @@ export async function finishOAuth(r: Request, p: Provider) {
     state = params.get('state') || '',
     browser = readCookie(r, 'gunbeon_oauth_' + p);
   if (
-    !providerReady(p) ||
-    config(p).origin !== new URL(r.url).origin ||
+    !providerReady(p, new URL(r.url).origin) ||
     !/^[a-f0-9]{64}$/.test(state) ||
     !/^[a-f0-9]{64}$/.test(browser)
   )

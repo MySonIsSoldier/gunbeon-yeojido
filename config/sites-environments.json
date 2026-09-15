@@ -1,0 +1,12 @@
+{
+  "production": {
+    "project_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc",
+    "platform_origin": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+    "data_policy": "Preserve existing production D1 and Naver application identity."
+  },
+  "development": {
+    "project_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f",
+    "platform_origin": "https://gunbeon-development.ybuser.chatgpt.site",
+    "data_policy": "Separate D1; synthetic test accounts only. Never copy production records."
+  }
+}
