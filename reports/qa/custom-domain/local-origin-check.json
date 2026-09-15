@@ -1,0 +1,14 @@
+{
+  "environment": "local",
+  "public_page_200": true,
+  "og_image": "http://localhost:3000/og.png",
+  "configured_origin_providers": {
+    "google": false,
+    "naver": true
+  },
+  "alternate_origin_providers": {
+    "google": false,
+    "naver": false
+  },
+  "note": "Same app, different request host: configured local Naver is enabled; 127.0.0.1 is disabled before starting OAuth. No login or account mutation."
+}

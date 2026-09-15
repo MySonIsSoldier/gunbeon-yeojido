@@ -38,8 +38,8 @@ export async function GET(r: Request) {
     return accountReply({
       account: a,
       providers: {
-        google: providerReady('google'),
-        naver: providerReady('naver'),
+        google: providerReady('google', new URL(r.url).origin),
+        naver: providerReady('naver', new URL(r.url).origin),
       },
       linked,
     });
