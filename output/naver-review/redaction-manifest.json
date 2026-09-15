@@ -1,0 +1,52 @@
+[
+  {
+    "file": "01-service-login.png",
+    "width": 612,
+    "height": 964,
+    "opaque_masks": []
+  },
+  {
+    "file": "02-login-complete.png",
+    "width": 612,
+    "height": 964,
+    "opaque_masks": [
+      [
+        176,
+        12,
+        301,
+        52
+      ],
+      [
+        19,
+        203,
+        267,
+        242
+      ]
+    ]
+  },
+  {
+    "file": "03-naver-linked.png",
+    "width": 612,
+    "height": 964,
+    "opaque_masks": [
+      [
+        107,
+        163,
+        505,
+        207
+      ],
+      [
+        107,
+        423,
+        438,
+        472
+      ],
+      [
+        107,
+        478,
+        505,
+        500
+      ]
+    ]
+  }
+]

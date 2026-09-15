@@ -1,10 +1,10 @@
 # 구글·네이버 로그인 연결하기
 
-현재 개인 아이디·비밀번호 가입/로그인과 계정별 서버 저장은 구현되어 있습니다. Google/Naver 로그인 경로도 구현했지만, 제공자 Client ID/Secret 발급 및 실제 계정 동의 검사는 별도로 해야 합니다. **설정되지 않은 소셜 버튼은 ‘연결 준비 중’으로 표시됩니다.**
+현재 개인 아이디·비밀번호 가입/로그인과 계정별 서버 저장은 구현되어 있습니다. **네이버는 2026-09-15 운영 연결과 기존 계정의 실제 재로그인까지 확인했습니다.** Google은 키 발급·실제 로그인 검사가 남아 있습니다. 설정되지 않은 소셜 버튼은 ‘연결 준비 중’으로 표시됩니다.
 
-**2026-09-15 10:03 KST 확인:** 운영 `/api/account`의 공개 응답은 `google: false`, `naver: false`입니다. 이는 각 ID·Secret·기준 주소의 준비 조건을 아직 충족하지 않았다는 뜻이며, 어떤 값이 없는지는 이 응답만으로 알 수 없습니다. `/about`, `/privacy`는 로그인 없이 HTTP 200과 본문을 확인했습니다. 실제 제공자 로그인·동의·콜백 성공은 아직 확인하지 않았습니다.
+**2026-09-15 13시 업데이트:** 로컬에 준비된 네이버 Client ID/Secret과 운영 AUTH_BASE_URL을 Sites env revision3에 반영하고 기존 v18을 재배포했습니다. 기존 네이버 동의 이력이 있는 브라우저에서 서비스 로그아웃 → 활성 네이버 버튼 → 서비스 홈 로그인 완료 → 내 계정의 ‘네이버 연결됨’을 직접 확인했습니다. 신규 회원 생성·새 네이버 동의 화면은 이번에 촬영하지 않았습니다. [검수 제출자료와 촬영 조건](../output/naver-review/README.md).
 
-사용자가 할 일은 **두 콘솔에서 앱 등록 → 아래 주소 입력 → 발급받은 값 4개를 환경 파일에 저장**입니다. 그다음 agent가 운영 환경 반영과 연결 점검을 진행하고, 사용자 계정의 비밀번호 입력·동의와 제공자 검수 신청은 사용자가 해당 화면에서 진행합니다.
+현재 사용자가 할 일은 **네이버 검수 자료 첨부·신청**, 선택적으로 **Google 승인된 도메인 목록 등록과 OAuth 키 발급**입니다. 네이버 키를 다시 발급할 필요는 없습니다. 개인 비밀번호·추가 동의와 검수 신청은 실제 해당 화면에서 진행합니다.
 
 ## 먼저 알아둘 것
 
@@ -66,9 +66,17 @@ http://localhost:3000/api/auth/callback/google
 
 ### 도메인 확인과 일반 공개
 
+**현재 콘솔 메시지에 대한 조치:** ‘누락된 도메인: ybuser.chatgpt.site’는 먼저 Branding의 승인된 도메인 목록에 `ybuser.chatgpt.site`를 추가하라는 의미입니다. `https://`와 경로 없이 넣습니다. 목록 등록과 Search Console 소유 인증, 브랜드 검수는 별개의 단계입니다. [Google Branding 설정](https://support.google.com/cloud/answer/15549049?hl=en)
+
+이번 일정에서는 이 문자열을 등록한 뒤 웹 OAuth Client를 만들고 정확한 콜백을 입력하여 기본 로그인부터 시험할 수 있습니다. 현재 코드의 요청 범위는 `openid` 하나입니다. [공식 앱 상태표](https://developers.google.com/identity/protocols/oauth2/production-readiness/overview)에 따르면 기본 식별 범위만 사용하는 Testing/External은 테스트 사용자 제한의 예외가 있고, Published/Unverified에서도 접근이 가능하지만 앱 이름·로고는 표시되지 않습니다. Google은 Published/Unverified 상태의 운영을 강하게 권장하지 않으므로 임시 검증 경로로 검토하고, 정식 브랜딩에는 브랜드 검수를 진행합니다. 따라서 브랜드 검수를 미룬 기본 로그인 시험 경로는 존재합니다. 실제 콘솔 저장·클라이언트 발급·로그인 성공을 보장하는 뜻은 아니며 Workspace 관리자 정책도 별개입니다.
+
+다른 승인된 도메인 문자열만 빌리는 것은 해결책이 아닙니다. 소유/사용 권한이 있는 도메인으로 실제 홈페이지·정책·OAuth 콜백을 운영해야 하며, 현재 콜백 도메인이 남아 있으면 그 도메인도 대상입니다. 콘솔이 목록 등록/클라이언트 저장을 막으면 이번 제출은 이미 연결된 네이버와 자체 계정을 사용하고 Google 브랜드 검수는 후속으로 둡니다. [OAuth 정책](https://developers.google.com/identity/protocols/oauth2/policies)
+
+정식 브랜드 검수의 도메인 소유 인증은 최신 [도메인 인증 지침](https://support.google.com/cloud/answer/13804266?hl=en)의 DNS 수준 Domain Property 기준을 확인합니다. URL-prefix나 HTML 메타태그만 넣으면 즉시 해결된다고 안내하지 않습니다.
+
 Google 브랜드 검수는 홈페이지·개인정보 안내·콜백 주소가 속한 **public suffix 바로 아래 도메인**을 Search Console에서 확인하도록 요구합니다. 홈페이지와 개인정보 안내는 로그인 없이 열려야 합니다. 현재 공개 페이지는 이 접속 조건을 확인했지만, 브랜드 검수 승인을 받은 것은 아닙니다. [브랜드 검수 요건](https://developers.google.com/identity/verification/authentication-verification)
 
-2026-09-15 확인한 [공식 Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat)에는 `chatgpt.site`가 등록되어 있습니다. 따라서 Google의 설명을 이 주소에 적용하면 승인 도메인은 `ybuser.chatgpt.site`로 해석됩니다. 콘솔이 실제로 이 값을 받는지와 Search Console 소유 확인이 가능한지는 아직 확인하지 않았습니다. 현재 제어하는 개별 사이트 주소만으로 그 상위 주소의 소유 확인까지 된다고 가정하지 않습니다. 콘솔에서 해당 주소의 검증을 완료할 수 없다면 사용자 소유 도메인을 연결한 뒤 홈페이지·개인정보·콜백·`AUTH_BASE_URL`을 함께 변경합니다. **키 발급 전부터 도메인 구매가 필수라고 단정하지 않습니다.**
+2026-09-15 확인한 [공식 Public Suffix List](https://publicsuffix.org/list/public_suffix_list.dat)에는 `chatgpt.site`가 등록되어 있습니다. 사용자가 보고한 Google 콘솔의 누락 도메인도 `ybuser.chatgpt.site`입니다. 목록 추가 성공 여부와 Search Console 소유 확인 가능성은 아직 확인하지 않았습니다. 현재 제어하는 개별 사이트 주소만으로 그 상위 주소의 소유 확인까지 된다고 가정하지 않습니다. 정식 브랜딩을 위해 해당 주소 검증이 불가능하면 사용자 소유 도메인으로 실제 홈페이지·개인정보·약관·콜백·`AUTH_BASE_URL`을 함께 운영하는 방안을 검토합니다. **기본 로그인 시험 전에 도메인 구매가 필수라고 단정하지 않습니다.**
 
 일반 공개 단계에서는 **Audience → Publish app**과 **Verification Center**의 남은 항목을 확인합니다. `openid`만 쓰는 로그인 범위와 앱 이름·로고의 브랜드 검수는 별개입니다. 테스터 등록이나 버튼 활성화를 브랜드 검수 완료로 기록하지 않습니다. [Google Audience 안내](https://support.google.com/cloud/answer/15549945?hl=en)
 
