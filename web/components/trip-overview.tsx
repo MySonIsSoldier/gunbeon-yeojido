@@ -62,6 +62,7 @@ export default function TripOverview({
   onStart,
   onImport,
   onPlace,
+  onRetryPlaces,
 }: {
   entry: Entry;
   places: Place[];
@@ -74,6 +75,7 @@ export default function TripOverview({
   onStart: () => void;
   onImport?: () => void;
   onPlace: (place: Place) => void;
+  onRetryPlaces: () => void;
 }) {
   const [mapOpen, setMapOpen] = useState(false);
   const shared = groupName !== undefined,
@@ -186,6 +188,24 @@ export default function TripOverview({
               )}
               {plan && (
                 <>
+                  {(view.stops.some((s) => !s.place) ||
+                    (!!plan.originId && !view.origin)) && (
+                    <div className="trip-read-note" role="status">
+                      <p>
+                        저장한 장소와 순서는 그대로 유지하고 있어요. 연결 상태를
+                        확인한 뒤 다시 불러올 수 있습니다.
+                      </p>
+                      <Button
+                        variant="outline"
+                        disabled={loading}
+                        onClick={onRetryPlaces}
+                      >
+                        {loading
+                          ? '장소 정보 불러오는 중…'
+                          : '장소 정보 다시 불러오기'}
+                      </Button>
+                    </div>
+                  )}
                   <div className="trip-read-endpoint">
                     <span className="trip-read-dot">
                       <MapPin size={17} />

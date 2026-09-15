@@ -3953,6 +3953,12 @@ input {
   color: #8090a1;
   font-size: 13px;
 }
+.finder-empty,
+.group-share-empty {
+  display: grid;
+  gap: 12px;
+  padding: 24px 0;
+}
 .group-card-buttons {
   display: flex;
   gap: 10px;

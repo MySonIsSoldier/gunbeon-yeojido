@@ -3,6 +3,15 @@ import { useState } from 'react';
 import { Star, MapPin, Plus, Trash2, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from '@/components/ui/alert-dialog';
 import PublicPlacePicker from './public-place-picker';
 import {
   manualToPlace,
@@ -68,6 +77,7 @@ export default function MeetingPicker({
   region,
   mapKey,
   center,
+  onDraftChange,
 }: {
   favorites: ManualPlace[];
   onFavoritesChange: (places: ManualPlace[]) => void;
@@ -75,10 +85,26 @@ export default function MeetingPicker({
   region: string;
   mapKey: string;
   center?: { lat: number; lon: number };
+  onDraftChange?: (dirty: boolean) => void;
 }) {
   const [form, setForm] = useState<ManualPlace | null>(null);
   const [saveFavorite, setSaveFavorite] = useState(false);
   const [error, setError] = useState('');
+  const [dirty, setDirty] = useState(false);
+  const [discard, setDiscard] = useState(false);
+  function update(next: ManualPlace) {
+    setForm(next);
+    setDirty(true);
+    onDraftChange?.(true);
+    setError('');
+  }
+  function closeForm() {
+    setDiscard(false);
+    setForm(null);
+    setDirty(false);
+    onDraftChange?.(false);
+    setError('');
+  }
   function begin(favorite: boolean, existing?: ManualPlace) {
     setError('');
     setSaveFavorite(favorite);
@@ -100,8 +126,8 @@ export default function MeetingPicker({
         <button
           className="text-action"
           onClick={() => {
-            setForm(null);
-            setError('');
+            if (dirty) setDiscard(true);
+            else closeForm();
           }}
         >
           ← 즐겨찾기로 돌아가기
@@ -114,7 +140,7 @@ export default function MeetingPicker({
             value={form.title}
             placeholder="예: 늘 만나는 정문 앞"
             maxLength={60}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            onChange={(e) => update({ ...form, title: e.target.value })}
           />
         </label>
         <PublicPlacePicker
@@ -126,7 +152,7 @@ export default function MeetingPicker({
               ? { lat: form.lat, lon: form.lon }
               : null
           }
-          onChange={(v) => setForm({ ...form, ...v })}
+          onChange={(v) => update({ ...form, ...v })}
         />
         <label className="builder-field">
           주소 또는 만날 지점 · 선택
@@ -135,12 +161,12 @@ export default function MeetingPicker({
             value={form.address}
             maxLength={160}
             placeholder="예: 정문 맞은편 버스 정류장"
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
+            onChange={(e) => update({ ...form, address: e.target.value })}
           />
         </label>
         <p className="helper">
-          이 브라우저에 보관합니다. 공개 공유 카드에는 표시되지 않으며, 그룹에는
-          공유 범위를 확인한 뒤 보낼 수 있어요.
+          공개 공유 카드에는 표시되지 않으며, 그룹에는 공유 범위를 확인한 뒤
+          보낼 수 있어요.
         </p>
         {error && (
           <p role="alert" className="builder-notice">
@@ -160,11 +186,27 @@ export default function MeetingPicker({
                 form,
               ]);
             onChoose(manualToPlace(form));
-            setForm(null);
+            closeForm();
           }}
         >
           {saveFavorite ? '즐겨찾기에 저장하고 선택' : '이 위치로 설정'}
         </Button>
+        <AlertDialog open={discard} onOpenChange={setDiscard}>
+          <AlertDialogContent>
+            <AlertDialogTitle>
+              입력한 장소를 저장하지 않고 돌아갈까요?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              기존 즐겨찾기는 유지하고 지금 입력한 내용만 버립니다.
+            </AlertDialogDescription>
+            <AlertDialogFooter>
+              <AlertDialogCancel>계속 입력</AlertDialogCancel>
+              <AlertDialogAction onClick={closeForm}>
+                입력 버리고 돌아가기
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     );
   return (

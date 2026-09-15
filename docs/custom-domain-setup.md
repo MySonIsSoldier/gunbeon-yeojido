@@ -6,12 +6,27 @@
 
 | 환경 | 주소 | 배포·데이터 |
 |---|---|---|
-| 운영 | 구매 도메인 확인 후 연결. 입력 후보 `gunbeon.gangwon.kr` | 기존 Sites 프로젝트·운영 D1·기존 네이버 앱 유지 |
+| 운영 | `gunbeon.gangwon.kr` (확정, DNS 연결 대기) | 기존 Sites 프로젝트·운영 D1·기존 네이버 앱 유지 |
 | 운영의 기존 주소 | `gunbeon-yeojido-gangwon.ybuser.chatgpt.site` | 기존 회원·기기 기록 이전을 위한 과도기 접속 주소. 개발 환경으로 취급하지 않음 |
 | 개발 | `gunbeon-development.ybuser.chatgpt.site` | 별도 Sites 프로젝트와 테스트 D1. 소유자 전용으로 시작 |
 | PC 개발 | `http://localhost:3000` | 로컬 D1, 로컬 환경 파일 |
 
-사용자가 같은 메시지에서 `gunbeon.gangwon.kr`와 `gunbeon.ganwon.kr`를 모두 적어 정확한 철자를 확인 중이다. 확인 전에는 커스텀 도메인 등록·DNS 변경·운영 AUTH_BASE_URL 전환을 하지 않는다. 개발 주소는 Sites가 반환한 실제 expected_url이며 배포 완료 여부는 handoff.md의 최신 기록을 따른다.
+사용자가 **gunbeon.gangwon.kr**로 확정했다. 기존 운영 Site에 커스텀 도메인을 등록했으며 DNS/HTTPS 활성화를 기다린다. 도메인을 다시 추가하지 않는다. 운영 AUTH_BASE_URL은 DNS와 로그인 제공자 설정이 준비된 뒤 전환한다. 개발 주소는 Sites가 반환한 실제 expected_url이며 배포 완료 여부는 handoff.md의 최신 기록을 따른다.
+
+## 지금 Hosting.kr에 설정할 레코드
+
+9/15 Sites가 이 도메인에 실제 반환한 값이다. Hosting.kr **나의 서비스 → 도메인 관리 → gunbeon.gangwon.kr → 네임서버/DNS → DNS 레코드 관리**에서 설정한다. 현재 네임서버를 유지한다. 루트 이름은 해당 화면의 빈칸 또는 @ 표기를 따른다. `gunbeon.gangwon.kr`는 루트 도메인이므로 일반 CNAME 대신 아래 A 두 개를 쓴다.
+
+| 종류 | 호스트(도메인이 자동으로 붙는 입력창 기준) | 값 |
+|---|---|---|
+| A | @ | 162.159.143.30 |
+| A | @ | 172.66.3.26 |
+| TXT | _openai-site-verification | openai-site-verification=vs2ccmJcrws6akQbY59EPvn_lmj2aiesEpBmTDQRwBU |
+| TXT | _cf-custom-hostname | 01ffe553-e7d6-4b06-81b9-bd68dbda60bd |
+
+기존 루트 A의 주차 페이지 주소 두 개(75.2.85.42, 99.83.196.71)는 위 A로 교체한다. 다른 MX/TXT와 네임서버는 지우지 않는다. 이미 레코드가 변경돼 있다면 현황부터 확인한다. TXT는 공개 DNS 검증값이며 API 키가 아니다. Google Search Console 확인용 TXT는 별도로 발급받아 추가한다.
+
+커스텀 도메인 ID: `appgdom_6aa8d01a4d0481918a5c8ce10d2ed2ba`. 최초 상태 `pending`, SSL `initializing`. Hosting.kr 로그인 세션이 확인되지 않아 DNS는 아직 변경하지 않았다. DNS 반영 후 이 ID로 상태를 새로고침하고 HTTPS를 확인한다.
 
 운영 프로젝트를 새로 만들고 기존 계정을 옮기는 방식 대신, 이미 사용자 데이터를 가진 프로젝트에 도메인을 연결한다. 개발에는 운영 계정·여행 원문·운영 DB를 복제하지 않는다. 같은 앱에 주소 두 개만 붙이는 것은 개발/운영 분리가 아니다.
 

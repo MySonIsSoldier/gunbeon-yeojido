@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { enterGuest } from './qa-navigation.mjs';
+import { enterGuest, recordMenu } from './qa-navigation.mjs';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -55,8 +55,17 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         json: { places: [], mode: 'unavailable', error: 'QA_UNAVAILABLE' },
       }),
     );
+    let recovered = false;
+    const recoveredPlace = {
+      ...stops[0],
+      id: 'tourapi:999999999',
+      title: '다시 불러온 장소',
+    };
     await c.route('**/api/places/resolve', (r) =>
-      r.fulfill({ json: { places: [] } }),
+      r.fulfill({
+        status: recovered ? 200 : 503,
+        json: { places: recovered ? [recoveredPlace] : [] },
+      }),
     );
     const p = await c.newPage();
     p.setDefaultTimeout(15000);
@@ -140,6 +149,64 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         .click();
       await p.locator('.course-builder').waitFor();
       assert.equal(await p.locator('.trip-overview').count(), 0);
+      await p.getByRole('button', { name: /장소 추가/ }).click();
+      await p.getByLabel('장소 유형', { exact: true }).click();
+      await p.getByRole('option', { name: '문화시설', exact: true }).click();
+      await p.locator('.finder-empty').waitFor();
+      await p
+        .getByRole('button', { name: '관광정보에서 검색', exact: true })
+        .click();
+      await p.getByLabel('관광장소 검색어', { exact: true }).waitFor();
+      await p.getByRole('button', { name: '직접 추가', exact: true }).click();
+      await p.getByLabel('장소 이름', { exact: true }).fill('입력 중인 식당');
+      await p
+        .getByRole('button', { name: '코스 편집 닫기', exact: true })
+        .click();
+      await p.getByRole('button', { name: '계속 편집', exact: true }).click();
+      assert.equal(
+        await p.getByLabel('장소 이름', { exact: true }).inputValue(),
+        '입력 중인 식당',
+      );
+      await p
+        .getByRole('button', { name: '코스 편집으로 돌아가기', exact: true })
+        .click();
+      await shot('draft-protection');
+      await p
+        .getByRole('button', { name: '입력 버리고 돌아가기', exact: true })
+        .click();
+      await p.getByLabel('코스 이름', { exact: true }).waitFor();
+      assert.equal(await p.getByRole('alertdialog').count(), 0);
+      await p.getByRole('button', { name: '변경', exact: true }).click();
+      await p
+        .getByRole('button', { name: '직접 설정하기', exact: true })
+        .click();
+      await p
+        .getByLabel('만남 장소 이름', { exact: true })
+        .fill('입력 중인 만남 장소');
+      await p
+        .getByRole('button', { name: '코스 편집으로 돌아가기', exact: true })
+        .click();
+      await p.getByRole('button', { name: '계속 입력', exact: true }).click();
+      assert.equal(
+        await p.getByLabel('만남 장소 이름', { exact: true }).inputValue(),
+        '입력 중인 만남 장소',
+      );
+      await p
+        .getByRole('button', { name: '← 즐겨찾기로 돌아가기', exact: true })
+        .click();
+      await p
+        .getByRole('button', { name: '입력 버리고 돌아가기', exact: true })
+        .click();
+      await p
+        .getByRole('button', { name: '직접 설정하기', exact: true })
+        .click();
+      assert.equal(await p.getByRole('alertdialog').count(), 0);
+      await p
+        .getByRole('button', { name: '코스 편집으로 돌아가기', exact: true })
+        .click();
+      result.checks.push(
+        'Filtered empty results lead to search; stop and meeting drafts survive cancelled close/back; discard dialogs close and stay closed',
+      );
       await p.getByLabel('코스 이름', { exact: true }).fill('수정한 바다 여행');
       await p.getByLabel('1번 머무는 시간', { exact: true }).fill('65');
       await shot('edit');
@@ -208,6 +275,20 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
       result.checks.push(
         'Unresolved place preserves index and all following stops; no invented movement or margin',
       );
+      recovered = true;
+      await p
+        .getByRole('button', { name: '장소 정보 다시 불러오기', exact: true })
+        .click();
+      await p
+        .getByRole('heading', { name: recoveredPlace.title, exact: true })
+        .waitFor();
+      assert.equal(
+        (await state()).entries[0].plan.stops[1].placeId,
+        recoveredPlace.id,
+      );
+      result.checks.push(
+        'HTTP 503 recovers through explicit retry without reloading or losing saved stop order',
+      );
       await p
         .getByRole('button', { name: '일정 보기 닫기', exact: true })
         .click();
@@ -216,6 +297,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         s.entries[0].plan.stops = [];
         delete s.entries[0].plan.departureAt;
         delete s.entries[0].plan.timeBudgetMinutes;
+        s.entries[0].plan.originId = 'tourapi:999999998';
         localStorage.setItem('gangwon-passport-v1', JSON.stringify(s));
       });
       await p.reload();
@@ -232,6 +314,43 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
       assert.equal(await p.locator('.trip-read-margin').count(), 0);
       result.checks.push(
         'Empty, undated itinerary remains viewable and points explicitly to editing',
+      );
+      await p.getByRole('button', { name: '일정 편집', exact: true }).click();
+      await p
+        .getByLabel('코스 이름', { exact: true })
+        .fill('만남 장소를 보존한 빈 여행');
+      await p
+        .getByLabel('출발 날짜·시간', { exact: true })
+        .fill('2026-10-04T10:00');
+      await p
+        .getByLabel('돌아올 예정 시각', { exact: true })
+        .fill('2026-10-04T18:00');
+      await p
+        .getByRole('button', { name: '변경사항 저장', exact: true })
+        .click();
+      await p.locator('.trip-overview').waitFor();
+      assert.equal(
+        (await state()).entries[0].plan.originId,
+        'tourapi:999999998',
+      );
+      await p
+        .getByRole('button', { name: '일정 보기 닫기', exact: true })
+        .click();
+      await (await recordMenu(p, '그룹에 공유', 0)).click();
+      await p
+        .getByRole('button', { name: '그룹 만들러 가기', exact: true })
+        .waitFor();
+      await shot('no-group-share');
+      await p
+        .getByRole('button', { name: '그룹 만들러 가기', exact: true })
+        .click();
+      await p.getByLabel('그룹 이름', { exact: true }).waitFor();
+      assert.equal(
+        (await state()).entries[0].title,
+        '만남 장소를 보존한 빈 여행',
+      );
+      result.checks.push(
+        'Saving an empty plan retains an unresolved meeting reference; share without a group opens creation and keeps the personal plan',
       );
       assert.deepEqual(result.errors, []);
       result.status = 'passed';

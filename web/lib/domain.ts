@@ -687,6 +687,7 @@ export function createEntry(
   mission: Mission,
   origin: Place | undefined,
   recordId = crypto.randomUUID(),
+  originReference = origin?.id || '',
 ): Entry {
   return {
     recordId,
@@ -707,7 +708,8 @@ export function createEntry(
             .map((p) => [p.id, manualReference(p)]),
         ).values(),
       ],
-      originId: origin?.id || '',
+      // A temporary provider failure must not erase the saved meeting place.
+      originId: originReference,
       variant: mission.variant,
       stops: mission.stops.map(({ place, stay, walk }) => ({
         placeId: place.id,

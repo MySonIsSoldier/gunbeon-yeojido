@@ -101,6 +101,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogCancel,
+  AlertDialogAction,
 } from './ui/alert-dialog';
 import DayRecord from './day-record';
 import AdviceManager from './advice-manager';
@@ -382,6 +383,10 @@ export default function PassportApp() {
   } | null>(null);
   const [reviewEntry, setReviewEntry] = useState<Entry | null>(null);
   const [savedReferencesLoading, setSavedReferencesLoading] = useState(false);
+  const [savedReferenceRetry, setSavedReferenceRetry] = useState(0);
+  const [createGroupRequested, setCreateGroupRequested] = useState(false);
+  const [meetingDirty, setMeetingDirty] = useState(false);
+  const [discardMeeting, setDiscardMeeting] = useState(false);
   const [radarRecordId, setRadarRecordId] = useState('');
   const [notice, setNotice] = useState('');
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -722,6 +727,7 @@ export default function PassportApp() {
     startCandidate,
     live.mode,
     refresh,
+    savedReferenceRetry,
   ]);
   const resolvedEntry = useMemo(
     () => (reviewEntry ? resolveEntry(reviewEntry, places) : null),
@@ -1218,6 +1224,8 @@ export default function PassportApp() {
         </TabsContent>
         <TabsContent value="groups">
           <TravelGroups
+            createRequested={createGroupRequested}
+            onCreateHandled={() => setCreateGroupRequested(false)}
             places={places}
             key={groupReload}
             store={groupStore}
@@ -2165,11 +2173,7 @@ export default function PassportApp() {
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               disabled={!e.plan}
-                              onClick={() =>
-                                groupStore.groups.length
-                                  ? setGroupSharing({ entry: e })
-                                  : go('groups')
-                              }
+                              onClick={() => setGroupSharing({ entry: e })}
                             >
                               그룹에 공유
                             </DropdownMenuItem>
@@ -2756,9 +2760,20 @@ export default function PassportApp() {
         <GroupShare
           entries={entries}
           groups={groupStore.groups}
+          groupsLoading={groupStore.loading}
+          groupsError={groupStore.error}
+          onRetryGroups={() => void groupStore.load(true)}
           entry={groupSharing.entry}
           groupId={groupSharing.groupId}
           record={groupSharing.record}
+          onCreateGroup={() => {
+            setCreateGroupRequested(true);
+            setGroupSharing(null);
+            setOverview(null);
+            setSelectedGroupId('');
+            setGroupReload((v) => v + 1);
+            go('groups');
+          }}
           onClose={() => {
             if (groupSharing.resume) setComposer(groupSharing.resume);
             setGroupSharing(null);
@@ -2806,6 +2821,10 @@ export default function PassportApp() {
           }
           places={places}
           loading={catalogLoading || savedReferencesLoading}
+          onRetryPlaces={() => {
+            clearPageCache('/api/places/resolve');
+            setSavedReferenceRetry((v) => v + 1);
+          }}
           groupName={overview.group?.name}
           active={
             !!activeOuting &&
@@ -3168,6 +3187,10 @@ export default function PassportApp() {
         open={Boolean(meetingContext)}
         onOpenChange={(v) => {
           if (!v) {
+            if (meetingDirty) {
+              setDiscardMeeting(true);
+              return;
+            }
             if (meetingContext === 'draft') setEditing(true);
             setMeetingContext(null);
           }
@@ -3182,6 +3205,7 @@ export default function PassportApp() {
           </SheetHeader>
           <div className="editor-body">
             <MeetingPicker
+              onDraftChange={setMeetingDirty}
               favorites={favorites}
               onFavoritesChange={setFavorites}
               region={draft?.region || settings.region}
@@ -3203,6 +3227,29 @@ export default function PassportApp() {
           </div>
         </SheetContent>
       </Sheet>
+      <AlertDialog open={discardMeeting} onOpenChange={setDiscardMeeting}>
+        <AlertDialogContent>
+          <AlertDialogTitle>
+            입력한 만남 장소를 저장하지 않고 나갈까요?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            이전에 저장한 즐겨찾기와 만남 장소는 그대로 유지합니다.
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogCancel>계속 입력</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                setDiscardMeeting(false);
+                setMeetingDirty(false);
+                if (meetingContext === 'draft') setEditing(true);
+                setMeetingContext(null);
+              }}
+            >
+              입력 버리기
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       <Sheet open={editing} onOpenChange={setEditing}>
         <SheetContent side="bottom" className="trip-editor">
           <SheetHeader>

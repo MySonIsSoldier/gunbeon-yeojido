@@ -35,8 +35,12 @@ export function pageFetch(
     headers.set(key, value);
   const promise = fetch(input, { ...sharedInit, headers, cache: 'no-store' });
   requests.set(key, { promise, started: Date.now() });
-  promise.catch(() => {
+  const evict = () => {
     if (requests.get(key)?.promise === promise) requests.delete(key);
-  });
+  };
+  // Share in-flight requests, but let a later attempt recover from HTTP errors.
+  void promise.then((response) => {
+    if (!response.ok) evict();
+  }, evict);
   return promise.then((r) => r.clone());
 }

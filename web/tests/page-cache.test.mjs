@@ -10,6 +10,45 @@ const response = (value, status = 200) =>
 test.beforeEach(() => clearPageCache(''));
 test.afterEach(() => clearPageCache(''));
 
+test('HTTP 429 and 503 are not cached after completion; recovered responses remain cached', async (t) => {
+  for (const status of [429, 503]) {
+    const url = `/api/places/retry-${status}`;
+    let calls = 0;
+    const network = t.mock.method(globalThis, 'fetch', async () =>
+      ++calls === 1
+        ? response({ error: 'temporary' }, status)
+        : response({ places: ['recovered'] }),
+    );
+    assert.equal((await pageFetch(url)).status, status);
+    assert.deepEqual(await (await pageFetch(url)).json(), {
+      places: ['recovered'],
+    });
+    await pageFetch(url);
+    assert.equal(network.mock.callCount(), 2);
+    network.mock.restore();
+  }
+});
+
+test('late HTTP failure does not evict a newer successful refresh', async (t) => {
+  let finish;
+  let calls = 0;
+  const network = t.mock.method(globalThis, 'fetch', () =>
+    ++calls === 1
+      ? new Promise((resolve) => {
+          finish = resolve;
+        })
+      : Promise.resolve(response({ recovered: true })),
+  );
+  const stale = pageFetch('/api/places/late-error');
+  await pageFetch('/api/places/late-error', {}, { refresh: true });
+  finish(response({ error: 'old failure' }, 503));
+  assert.equal((await stale).status, 503);
+  assert.deepEqual(await (await pageFetch('/api/places/late-error')).json(), {
+    recovered: true,
+  });
+  assert.equal(network.mock.callCount(), 2);
+});
+
 test('concurrent consumers share one request and receive independently readable bodies', async (t) => {
   let finish;
   const network = t.mock.method(

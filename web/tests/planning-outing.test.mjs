@@ -51,6 +51,25 @@ const mission = withPlan(
   settings,
 );
 const entry = createEntry(mission, origin, 'record');
+
+test('editing with an unavailable meeting place preserves its reference and can resolve after recovery', () => {
+  const edited = createEntry(
+    { ...mission, title: '변경한 여행' },
+    undefined,
+    'record',
+    origin.id,
+  );
+  assert.equal(edited.plan.originId, origin.id);
+  assert.equal(edited.title, '변경한 여행');
+  assert.deepEqual(edited.plan.stops, entry.plan.stops);
+  const recovered = resolveEntry(edited, [
+    origin,
+    ...mission.stops.map((s) => s.place),
+  ]);
+  assert.equal(recovered.origin.id, origin.id);
+  const cleared = createEntry(mission, undefined, 'record', '');
+  assert.equal(cleared.plan.originId, '');
+});
 test('planning stays fixed while only the current outing loses elapsed minutes', () => {
   const later = new Date(morning.getTime() + 30 * 60000);
   assert.equal(

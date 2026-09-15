@@ -251,9 +251,15 @@ for (const channel of (
         '동행 테스트',
       );
       assert.equal(
-        await guest.getByLabel('초대코드', { exact: true }).inputValue(),
+        await guest
+          .getByLabel('초대 링크 또는 코드', { exact: true })
+          .inputValue(),
         inviteCode,
       );
+      // Pasting the exact link copied by the owner must also preview and join.
+      await guest
+        .getByLabel('초대 링크 또는 코드', { exact: true })
+        .fill(base + '/?join=' + inviteCode + '#groups');
       await guest
         .getByRole('button', { name: '초대 확인', exact: true })
         .click();
