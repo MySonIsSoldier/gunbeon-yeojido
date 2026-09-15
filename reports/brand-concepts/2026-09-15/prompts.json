@@ -1,5 +1,5 @@
 {
-  "status": "concepts-awaiting-selection",
+  "status": "selected-B",
   "method": "built-in image_gen",
   "brand": "군번여지도 강원",
   "options": [
@@ -18,5 +18,6 @@
       "name": "강원의 네 창",
       "prompt": "Use case: logo-brand. Create ONE high-quality logo concept presentation for the Korean shared travel app \"군번여지도\" (Gunbeon Yeojido). Its signature course covers are made of up to four windows, each showing one stop in a journey through Gangwon.\nConcept C: \"Four windows, one journey.\" Create a distinctive compact symbol built from FOUR broad geometric window/paper-tile forms arranged in an asymmetric 2-by-2 composition. Unify them with a generous meandering white passage through the center, suggesting moving between stops. Three forms are deep teal; the upper-right form is a warm apricot curved sun-like window that breaks the square silhouette slightly. Outer curves and flat inner cuts must be optically deliberate and a little playful. The result is a SINGLE clever emblem, not a grid of separate icons. Let landscape and daylight be implied by contours and negative space, with NO literal mountain drawing, NO tiny scenes inside. Avoid four identical squares or clover/pinwheel symmetry; make the top-right curve and central white passage distinct. Warm, clear and memorable at 24px and 140px. This logo's silhouette should be squarish and modular, visibly unlike a loop or an open book.\nFlat vector-style illustration, precise solid shapes, clean sharp edges, no shading. Deep sea teal #246568 dominant, one warm apricot #D68755 shape, pure white background.\nSquare presentation with generous white margins, primary symbol centered in the upper-middle around 52% of canvas width. Under it put the exact Korean wordmark \"군번여지도\" in a polished bold contemporary Korean sans-serif, dark teal, excellent kerning. Small \"강원\" centered below. Exact syllables 군 / 번 / 여 / 지 / 도 with no slash marks or extra characters. No other text. ONE concept only.\nAvoid Microsoft-like equal squares, Slack-like pill cross, generic flower marks, map pins, compass icons, passports with decorative borders, flags, shields, medals, military insignia, camouflage, gradients, shadows, texture, device mockups or marketing layouts. Refined independent travel brand, not generic government clip-art."
     }
-  ]
+  ],
+  "selected": "B"
 }

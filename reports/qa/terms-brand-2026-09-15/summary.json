@@ -1,0 +1,35 @@
+[
+  {
+    "width": 320,
+    "browser": "151.0.7922.34",
+    "anonymousTerms": 200,
+    "sections": 10,
+    "links": true,
+    "assets": true,
+    "privateAPI": 401,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "width": 430,
+    "browser": "151.0.7922.34",
+    "anonymousTerms": 200,
+    "sections": 10,
+    "links": true,
+    "assets": true,
+    "privateAPI": 401,
+    "overflow": false,
+    "pageErrors": []
+  },
+  {
+    "width": 1440,
+    "browser": "151.0.7922.34",
+    "anonymousTerms": 200,
+    "sections": 10,
+    "links": true,
+    "assets": true,
+    "privateAPI": 401,
+    "overflow": false,
+    "pageErrors": []
+  }
+]

@@ -32,6 +32,18 @@ https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site
 
 ## 1. Google
 
+### 등록 화면에 넣을 공개 주소와 로고
+
+| 항목 | 값 |
+|---|---|
+| 앱 홈페이지 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/about |
+| 개인정보 안내 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/privacy |
+| 서비스 이용약관 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/terms |
+| 140×140 앱 로고 PNG | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/brand/gunbeon-logo-140.png |
+| 로고·홍보 이미지 키트 | https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/brand/gunbeon-brand-kit-v1.zip |
+
+2026-09-15 B ‘다시 만나는 길’ 로고로 확정했습니다. 등록 화면이 파일 업로드를 요구하면 로고 이미지를 내려받아 올립니다. 위 안내 페이지와 로고는 로그인·체험 비밀번호 없이 접근할 수 있도록 공개합니다. 약관 URL은 Google Branding의 이용약관 항목 및 해당 등록 화면에 넣습니다. [Google OAuth 정책](https://developers.google.com/identity/protocols/oauth2/policies)은 공개 홈페이지의 약관·개인정보 링크를 요구합니다. URL 게시만으로 Google/Naver 검수나 별도 약관 동의 기록이 완료되는 것은 아닙니다.
+
 1. [Google Cloud Console](https://console.cloud.google.com/)에 로그인합니다. 프로젝트를 선택하거나 `군번여지도 강원` 프로젝트를 만듭니다.
 2. **Google Auth Platform → Branding**에서 앱 이름, 지원 이메일, 개발자 연락 이메일을 입력합니다. 앱 홈페이지는 `https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/about`, 개인정보 안내는 `https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/privacy`를 입력합니다. 승인된 도메인 또는 소유 확인을 요구하면 아래 ‘도메인 확인’ 설명을 따릅니다.
 3. **Audience**에서 일반 이용자용 **External**을 선택합니다. 조직 내부용 Internal은 일반 Google 사용자에게 적합하지 않습니다.
