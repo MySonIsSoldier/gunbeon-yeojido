@@ -12,7 +12,7 @@
 - 현재 사용자에게 확인이 필요한 항목은 **예선 이후 팀원 변경 여부**입니다. 답변 전 기존 팀원을 임의로 추가·삭제하지 않습니다.
 - 제출 유형은 **웹 서비스(모바일 웹/PWA)**입니다. 제출 URL은 `https://gunbeon.gangwon.kr`이며 로그인 진입 경로는 `/login`입니다. 앱스토어 링크를 웹 제출의 필수 조건으로 적용하지 않습니다.
 
-근거: [참가자 Notion](https://lowly-polyanthus-1fb.notion.site/2026-36b5dce406e380e0a3d1f80525667a11), [1차 심사자료 제출 안내](https://drive.google.com/file/d/140IdldqAGRvwmmX8Q88LkuM0CsdjtsY5/view)의 4·6~9쪽. 기존 원문 검토 범위는 [제출자료 확인 기록](../../../reports/submission_assets.md)에 있습니다.
+근거: [참가자 Notion](https://lowly-polyanthus-1fb.notion.site/2026-36b5dce406e380e0a3d1f80525667a11), [1차 심사자료 제출 안내](https://drive.google.com/file/d/140IdldqAGRvwmmX8Q88LkuM0CsdjtsY5/view)의 4·6~9쪽. 기존 원문 검토 범위는 [제출자료 확인 기록](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/submission_assets.md)에 있습니다.
 
 ## 제출물과 형식
 
@@ -58,7 +58,7 @@
 4. 현재 출타에서 하루 여권까지
 5. 한 수를 받아 여행에 반영하기
 
-목록과 상세 흐름도의 기능명은 같게 유지합니다. 로그인·계정 저장·오류 대응은 완성도 근거로 설명하고, 별도의 여섯 번째 핵심 기능으로 늘리지 않습니다. [구현 범위와 시연 대응](../../../reports/judging_readiness_review_2026-09-15.md), [심사 시나리오](../../judging-scenario.md).
+목록과 상세 흐름도의 기능명은 같게 유지합니다. 로그인·계정 저장·오류 대응은 완성도 근거로 설명하고, 별도의 여섯 번째 핵심 기능으로 늘리지 않습니다. [구현 범위와 시연 대응](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/judging_readiness_review_2026-09-15.md), [심사 시나리오](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/docs/judging-scenario.md).
 
 ## 실제 API 활용과 인증키
 
@@ -72,7 +72,7 @@
 - TourAPI 응답의 로컬 DB 저장에는 별도 신청 조건이 있습니다. 이번 서비스는 관광공사 원문 응답·사진을 운영 DB에 적재하지 않고 직접 작성한 일정과 장소 참조를 저장합니다.
 - 권장 출처 문구는 `출처: ⓒ한국관광공사` 또는 `출처: ⓒ한국관광콘텐츠랩`입니다. 기관 CI/BI로 공식 운영 서비스처럼 보이게 하지 않습니다.
 
-근거: [인증키 확인 및 운영계정 신청방법](https://drive.google.com/file/d/1iAy4zLbWT4gWbc7PkW2mujdQBFD-2-BC/view), [Notion 확인 기록](../../../reports/notion_requirements.md), [TourAPI 운영 정책](../../../reports/tourapi_operations_policy.md).
+근거: [인증키 확인 및 운영계정 신청방법](https://drive.google.com/file/d/1iAy4zLbWT4gWbc7PkW2mujdQBFD-2-BC/view), [Notion 확인 기록](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/notion_requirements.md), [TourAPI 운영 정책](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/tourapi_operations_policy.md).
 
 ### 대표 API 운영계정 신청은 선택
 
@@ -92,7 +92,7 @@
 
 오늘 운영 주소에서 지정 심사 계정의 새 로그인이 HTTP 200으로 성공했고, 기존 예시 4개와 revision 2를 읽기만 하여 보존했습니다. 국문 관광정보는 **11:29 KST 철원 113개**를 수신했습니다(관광지 55·문화시설 2·축제 2·숙박 12·음식점 42). 이전 날짜의 건수를 현재 조회값으로 재사용하지 않습니다.
 
-고석정 꽃밭의 국문 공통상세·소개·무장애 상세는 각각 1행을 반환했으며 주차·접근로·휠체어 정보의 실제 값도 확인했습니다. 기상청은 8시간 예보 HTTP 200/live를 확인했습니다. 기상청은 한국관광공사 2종 목록과 구분한 기타 API 근거이며, 최신 운영 검증과 최종 제출 버전의 화면·설명 일치 여부는 따로 확인합니다. [실제 로그인·API 검증](../../../reports/qa/submission-2026-09-16/live-api.json)
+고석정 꽃밭의 국문 공통상세·소개·무장애 상세는 각각 1행을 반환했으며 주차·접근로·휠체어 정보의 실제 값도 확인했습니다. 기상청은 8시간 예보 HTTP 200/live를 확인했습니다. 기상청은 한국관광공사 2종 목록과 구분한 기타 API 근거이며, 최신 운영 검증과 최종 제출 버전의 화면·설명 일치 여부는 따로 확인합니다. [실제 로그인·API 검증](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/qa/submission-2026-09-16/live-api.json)
 
 ## 최종 접수 전 확인표
 

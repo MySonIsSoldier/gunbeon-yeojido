@@ -1,0 +1,105 @@
+{
+  "date": "2026-09-16",
+  "screenshots": "Actual production UI, synthetic example trips, Chromium 430x900 viewport; no API success mocks; not physical-device/field-visit evidence.",
+  "standaloneImages": [
+    {
+      "file": "images/representative-1200x630.png",
+      "title": "대표 이미지",
+      "source": "assets/brand-kit/v1/representative-1200x630.png",
+      "width": 1200,
+      "height": 630,
+      "bytes": 42761,
+      "sha256": "e59dd7970d7707223dd3b217e6c66be9e3fad697220fe72d3fb839938c5525f9"
+    },
+    {
+      "file": "images/detail-01-home.png",
+      "title": "함께 준비하는 홈",
+      "source": "reports/qa/submission-2026-09-16/screens/29-ready-live-home.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 188214,
+      "sha256": "9d3cb5970dd650587fca6962efea55ab9b5a0b041445d0f03001171497f7e70e"
+    },
+    {
+      "file": "images/detail-02-itinerary.png",
+      "title": "읽기 쉬운 일정표",
+      "source": "reports/qa/submission-2026-09-16/screens/30-ready-live-itinerary.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 203491,
+      "sha256": "82122326bf1c223f7b74488107fd7e37de1047eef33ef9968efd2a91c6a1b0ae"
+    },
+    {
+      "file": "images/detail-03-margin.png",
+      "title": "복귀 여유 비교",
+      "source": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 57728,
+      "sha256": "3c7cea075aa5b41874777340e037323f9d26425a7dc2cb25d050aefa2cf10f53"
+    },
+    {
+      "file": "images/detail-04-accessibility.png",
+      "title": "동행 편의시설 안내",
+      "source": "reports/qa/submission-2026-09-16/screens/24-live-accessibility.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 66505,
+      "sha256": "b04d4ce32f75e3b4dcade30db89af96cd429f93975cb765b8b737ec793793026"
+    },
+    {
+      "file": "images/detail-05-advice.png",
+      "title": "여행에 한 수",
+      "source": "reports/qa/submission-2026-09-16/screens/55-matched-advice-public.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 207732,
+      "sha256": "33ea5ec90b5e11fee27637bfd812be01cb3fc592904b99da3359c6ba69636e18"
+    },
+    {
+      "file": "images/logo-140.png",
+      "title": "등록용 로고",
+      "source": "assets/brand-kit/v1/logo-140.png",
+      "width": 140,
+      "height": 140,
+      "bytes": 3462,
+      "sha256": "e4c114e23671527f217f9cae3618e50b5d11fd498f18985cfb5c78fe534cdad6"
+    }
+  ],
+  "deckScreenshotMap": {
+    "home": "reports/qa/submission-2026-09-16/screens/29-ready-live-home.png",
+    "discover": "reports/qa/submission-2026-09-16/screens/32-ready-discover.png",
+    "itinerary": "reports/qa/submission-2026-09-16/screens/30-ready-live-itinerary.png",
+    "editor": "reports/qa/submission-2026-09-16/screens/31-companion-conditions.png",
+    "search": "reports/qa/submission-2026-09-16/screens/07-tourapi-search.png",
+    "comparison": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+    "adjust": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+    "adjusted": "reports/qa/submission-2026-09-16/screens/35-adjustment-applied-undo.png",
+    "conditions": "reports/qa/submission-2026-09-16/screens/31-companion-conditions.png",
+    "accessibility": "reports/qa/submission-2026-09-16/screens/24-live-accessibility.png",
+    "group": "reports/qa/submission-2026-09-16/screens/38-group-invitation.png",
+    "group-plan": "reports/qa/submission-2026-09-16/screens/09-group-itinerary.png",
+    "personal-copy": "reports/qa/submission-2026-09-16/screens/39-group-private-copy.png",
+    "start": "reports/qa/submission-2026-09-16/screens/17-outing-confirm.png",
+    "outing": "reports/qa/submission-2026-09-16/screens/18-outing.png",
+    "complete": "reports/qa/submission-2026-09-16/screens/40-consistent-completion-confirm.png",
+    "record": "reports/qa/submission-2026-09-16/screens/41-consistent-completed-record.png",
+    "advice-preview": "reports/qa/submission-2026-09-16/screens/54-matched-advice-preview.png",
+    "advice": "reports/qa/submission-2026-09-16/screens/55-matched-advice-public.png",
+    "proposal": "reports/qa/submission-2026-09-16/screens/57-matched-advice-owner-review.png",
+    "adopted": "reports/qa/submission-2026-09-16/screens/59-matched-advice-adopted.png"
+  },
+  "consistentFlows": {
+    "completion": [
+      "reports/qa/submission-2026-09-16/screens/40-consistent-completion-confirm.png",
+      "reports/qa/submission-2026-09-16/screens/41-consistent-completed-record.png"
+    ],
+    "advice": [
+      "reports/qa/submission-2026-09-16/screens/54-matched-advice-preview.png",
+      "reports/qa/submission-2026-09-16/screens/55-matched-advice-public.png",
+      "reports/qa/submission-2026-09-16/screens/57-matched-advice-owner-review.png",
+      "reports/qa/submission-2026-09-16/screens/59-matched-advice-adopted.png"
+    ]
+  },
+  "creditFile": "IMAGE-SOURCES.md"
+}

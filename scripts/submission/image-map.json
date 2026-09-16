@@ -1,0 +1,23 @@
+{
+  "home": "reports/qa/submission-2026-09-16/screens/29-ready-live-home.png",
+  "discover": "reports/qa/submission-2026-09-16/screens/32-ready-discover.png",
+  "itinerary": "reports/qa/submission-2026-09-16/screens/30-ready-live-itinerary.png",
+  "editor": "reports/qa/submission-2026-09-16/screens/31-companion-conditions.png",
+  "search": "reports/qa/submission-2026-09-16/screens/07-tourapi-search.png",
+  "comparison": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+  "adjust": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+  "adjusted": "reports/qa/submission-2026-09-16/screens/35-adjustment-applied-undo.png",
+  "conditions": "reports/qa/submission-2026-09-16/screens/31-companion-conditions.png",
+  "accessibility": "reports/qa/submission-2026-09-16/screens/24-live-accessibility.png",
+  "group": "reports/qa/submission-2026-09-16/screens/38-group-invitation.png",
+  "group-plan": "reports/qa/submission-2026-09-16/screens/09-group-itinerary.png",
+  "personal-copy": "reports/qa/submission-2026-09-16/screens/39-group-private-copy.png",
+  "start": "reports/qa/submission-2026-09-16/screens/17-outing-confirm.png",
+  "outing": "reports/qa/submission-2026-09-16/screens/18-outing.png",
+  "complete": "reports/qa/submission-2026-09-16/screens/40-consistent-completion-confirm.png",
+  "record": "reports/qa/submission-2026-09-16/screens/41-consistent-completed-record.png",
+  "advice-preview": "reports/qa/submission-2026-09-16/screens/54-matched-advice-preview.png",
+  "advice": "reports/qa/submission-2026-09-16/screens/55-matched-advice-public.png",
+  "proposal": "reports/qa/submission-2026-09-16/screens/57-matched-advice-owner-review.png",
+  "adopted": "reports/qa/submission-2026-09-16/screens/59-matched-advice-adopted.png"
+}

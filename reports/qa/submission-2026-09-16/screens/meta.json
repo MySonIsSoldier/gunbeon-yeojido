@@ -1,0 +1,1196 @@
+{
+  "startedAt": "2026-09-16T02:29:51.687Z",
+  "base": "https://gunbeon.gangwon.kr",
+  "viewport": {
+    "width": 430,
+    "height": 900
+  },
+  "mode": "Live deployed app. Fresh guest context. Synthetic personal itinerary seeded to guest localStorage only. No API routes intercepted or mocked. No designated judge account used or modified.",
+  "screens": [
+    {
+      "file": "01-login.png",
+      "caption": "실제 운영 로그인 화면 · 소셜/일반 로그인",
+      "url": "https://gunbeon.gangwon.kr/login",
+      "capturedAt": "2026-09-16T02:29:53.529Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "02-home.png",
+      "caption": "예시 개인 계획을 보여주는 홈",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:29:55.197Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "supersededBy": "29-ready-live-home.png",
+      "exclusionReason": "Earlier placeholder/partial image state. Superseded by manually inspected fully hydrated capture."
+    },
+    {
+      "file": "03-discover.png",
+      "caption": "출발 날짜 없이 강원 여행안을 탐색",
+      "url": "https://gunbeon.gangwon.kr/#home",
+      "capturedAt": "2026-09-16T02:29:55.310Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "exclusionReason": "Captured before asynchronous place/image hydration completed. Use later ready-state screenshots.",
+      "supersededBy": "32-ready-discover.png"
+    },
+    {
+      "file": "04-itinerary.png",
+      "caption": "예시 여행 읽기 전용 일정표",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:29:55.987Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "supersededBy": "30-ready-live-itinerary.png",
+      "exclusionReason": "Earlier placeholder/partial image state. Superseded by manually inspected fully hydrated capture."
+    },
+    {
+      "file": "05-editor.png",
+      "caption": "장소·날짜·동행 조건을 편집",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:29:56.496Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "06-margin-comparison.png",
+      "caption": "한 장소 생략 전후의 추정 복귀 여유 비교",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:29:56.837Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "07-tourapi-search.png",
+      "caption": "실제 TourAPI 검색 응답 화면 · 실패 시 상태 그대로 표시",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:30:00.371Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "08-group.png",
+      "caption": "실제로 만든 촬영용 그룹과 공유 여행",
+      "url": "https://gunbeon.gangwon.kr/#groups",
+      "capturedAt": "2026-09-16T02:30:07.675Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "09-group-itinerary.png",
+      "caption": "그룹 공동 일정 · 개인 복귀 기준 제외",
+      "url": "https://gunbeon.gangwon.kr/#groups",
+      "capturedAt": "2026-09-16T02:30:07.762Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "10-advice-preview.png",
+      "caption": "공개할 관광지와 질문을 확인",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:30:09.016Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "notForSequentialFinalFlow": true
+    },
+    {
+      "file": "11-public-advice.png",
+      "caption": "다른 브라우저에서 열리는 공개 여행 제안",
+      "url": "https://gunbeon.gangwon.kr/p/cf5ba160be4b4817b9ebb5c22c731dee",
+      "capturedAt": "2026-09-16T02:30:13.361Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "supersededBy": "33-ready-public-advice.png",
+      "exclusionReason": "Earlier placeholder/partial image state. Superseded by manually inspected fully hydrated capture."
+    },
+    {
+      "file": "12-place-suggestion.png",
+      "caption": "후보 장소를 골라 구체적인 한 수 제안",
+      "url": "https://gunbeon.gangwon.kr/p/cf5ba160be4b4817b9ebb5c22c731dee",
+      "capturedAt": "2026-09-16T02:30:13.518Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "13-suggestion-sent.png",
+      "caption": "실제 공개 제안 등록 완료",
+      "url": "https://gunbeon.gangwon.kr/p/cf5ba160be4b4817b9ebb5c22c731dee",
+      "capturedAt": "2026-09-16T02:30:16.404Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "14-advice-review.png",
+      "caption": "작성자가 받은 한 수를 검토",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:30:17.866Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "notForSequentialFinalFlow": true
+    },
+    {
+      "file": "15-advice-edit.png",
+      "caption": "제안을 적용할 개인 일정 편집",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:30:17.984Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "notForSequentialFinalFlow": true
+    },
+    {
+      "file": "16-advice-adopted.png",
+      "caption": "개인 계획을 실제 저장한 후 반영 완료 표시",
+      "url": "https://gunbeon.gangwon.kr/p/cf5ba160be4b4817b9ebb5c22c731dee",
+      "capturedAt": "2026-09-16T02:30:19.901Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "notForSequentialFinalFlow": true
+    },
+    {
+      "file": "17-outing-confirm.png",
+      "caption": "현재 출타를 시작하기 전 개인 기준 확인",
+      "url": "https://gunbeon.gangwon.kr/#outing",
+      "capturedAt": "2026-09-16T02:30:20.880Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "18-outing.png",
+      "caption": "계획과 분리된 현재 출타 화면",
+      "url": "https://gunbeon.gangwon.kr/#outing",
+      "capturedAt": "2026-09-16T02:30:20.929Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "19-completion.png",
+      "caption": "실제로 다녀온 장소를 고르는 완료 확인",
+      "url": "https://gunbeon.gangwon.kr/#outing",
+      "capturedAt": "2026-09-16T02:30:21.024Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "notForSequentialFinalFlow": true
+    },
+    {
+      "file": "21-live-tourapi-home.png",
+      "caption": "실제 TourAPI 장소 3곳의 참조로 구성한 예시 여행 홈",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:32:34.297Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "exclusionReason": "Captured before asynchronous place/image hydration completed. Use later ready-state screenshots.",
+      "supersededBy": "29-ready-live-home.png"
+    },
+    {
+      "file": "22-live-tourapi-itinerary.png",
+      "caption": "실제 TourAPI 대표사진과 관광지 3곳의 예시 일정",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:32:34.371Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "exclusionReason": "Captured before asynchronous place/image hydration completed. Use later ready-state screenshots.",
+      "supersededBy": "30-ready-live-itinerary.png"
+    },
+    {
+      "file": "23-live-tourapi-detail.png",
+      "caption": "고석정 꽃밭 실제 국문 상세·운영정보",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:32:36.854Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "24-live-accessibility.png",
+      "caption": "고석정 꽃밭 실제 무장애 정보 · 주차/접근동선/휠체어 안내",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:32:36.920Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "25-live-kakao-itinerary.png",
+      "caption": "실제 Kakao 지도와 실제 TourAPI 장소 동선",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:34:10.180Z",
+      "syntheticItinerary": true,
+      "apiMock": false
+    },
+    {
+      "file": "28-live-public-advice.png",
+      "caption": "실제 TourAPI 관광지 사진과 공개 한 수 · 예시 여행",
+      "url": "https://gunbeon.gangwon.kr/p/d93000ca995e43f0824aed7cd82835a2",
+      "capturedAt": "2026-09-16T02:34:16.386Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "exclusionReason": "Captured before asynchronous place/image hydration completed. Use later ready-state screenshots.",
+      "supersededBy": "33-ready-public-advice.png"
+    },
+    {
+      "file": "27-day-record.png",
+      "caption": "합성 완료 예시의 하루 공유 카드 · 실제 방문 증명 아님",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:34:18.363Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "exclusionReason": "Captured before asynchronous place/image hydration completed. Use later ready-state screenshots.",
+      "supersededBy": "34-ready-day-record.png"
+    },
+    {
+      "file": "29-ready-live-home.png",
+      "caption": "실제 TourAPI 사진 3곳을 불러온 내 여행 홈 · 합성 예시",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:39:33.703Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "explicit naturalWidth + visibility validation"
+    },
+    {
+      "file": "30-ready-live-itinerary.png",
+      "caption": "실제 TourAPI 장소를 복원한 읽기 전용 일정 · 합성 예시",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:39:33.863Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "explicit naturalWidth + visibility validation"
+    },
+    {
+      "file": "31-companion-conditions.png",
+      "caption": "여행별 동행자·전체 도보·추가 여유 설정 펼침",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:39:34.039Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Form/action readiness and manual visual review; no cover-image prerequisite for this UI."
+    },
+    {
+      "file": "32-ready-discover.png",
+      "caption": "추천 코스 둘러보기 · 날짜 설정 없이 관광 코스 탐색",
+      "url": "https://gunbeon.gangwon.kr/#home",
+      "capturedAt": "2026-09-16T02:39:37.844Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "explicit naturalWidth + visibility validation"
+    },
+    {
+      "file": "33-ready-public-advice.png",
+      "caption": "로그인 없이 공개 관광지만 보고 구체적인 한 수 제안",
+      "url": "https://gunbeon.gangwon.kr/p/1543a261514b42f4b0970a347636346b",
+      "capturedAt": "2026-09-16T02:39:43.440Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "explicit naturalWidth + visibility validation"
+    },
+    {
+      "file": "34-ready-day-record.png",
+      "caption": "3곳 방문 선택이 반영된 합성 완료 기록 카드 · 실제 현장 방문 증명 아님",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:39:47.265Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "notForSequentialFinalFlow": true
+    },
+    {
+      "file": "35-adjustment-applied-undo.png",
+      "caption": "06과 같은 예시 · 조정안 적용 후 되돌리기와 2곳 일정",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:41:17.102Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Form/action readiness and manual visual review; no cover-image prerequisite for this UI."
+    },
+    {
+      "file": "36-adjustment-margin.png",
+      "caption": "06과 같은 예시 · 조정 후 복귀 여유와 저장 버튼",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:41:17.165Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Form/action readiness and manual visual review; no cover-image prerequisite for this UI."
+    },
+    {
+      "file": "37-adjustment-undone.png",
+      "caption": "같은 예시 · 조정 전 장소와 시간으로 되돌리기",
+      "url": "https://gunbeon.gangwon.kr/",
+      "capturedAt": "2026-09-16T02:41:17.264Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Form/action readiness and manual visual review; no cover-image prerequisite for this UI."
+    },
+    {
+      "file": "38-group-invitation.png",
+      "caption": "실제 촬영용 그룹 · 멤버와 72시간 초대 기능 · 초대 토큰 미노출",
+      "url": "https://gunbeon.gangwon.kr/#groups",
+      "capturedAt": "2026-09-16T02:41:23.365Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Form/action readiness and manual visual review; no cover-image prerequisite for this UI."
+    },
+    {
+      "file": "39-group-private-copy.png",
+      "caption": "그룹 여행의 개인 사본 · 복귀 예정 시각을 각자 설정 · 그룹 자동 동기화 아님",
+      "url": "https://gunbeon.gangwon.kr/#groups",
+      "capturedAt": "2026-09-16T02:41:30.983Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Form/action readiness and manual visual review; no cover-image prerequisite for this UI."
+    },
+    {
+      "file": "40-consistent-completion-confirm.png",
+      "caption": "동일 TourAPI 3곳과 입경·복귀·동행 선택 · 합성 예시 완료 확인",
+      "url": "https://gunbeon.gangwon.kr/#outing",
+      "capturedAt": "2026-09-16T02:47:14.593Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "41-consistent-completed-record.png",
+      "caption": "40의 실제 완료 저장 직후 동일한 3곳·3스탬프 기록 카드",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:47:15.056Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "42-consistent-advice-preview.png",
+      "caption": "한 공유 흐름 시작 · 꽃밭/역사공원만 공개 · 개인 만남 장소 제외",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:47:19.441Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "43-consistent-advice-public.png",
+      "caption": "42에서 생성한 동일 링크 · 꽃밭/역사공원 공개",
+      "url": "https://gunbeon.gangwon.kr/p/61f15a3d188b47d89fa3051c7b5245c7",
+      "capturedAt": "2026-09-16T02:47:24.907Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "44-consistent-advice-proposal.png",
+      "caption": "동일 공개 여행 · 고석정 꽃밭 대신 삼부연폭포 제안",
+      "url": "https://gunbeon.gangwon.kr/p/61f15a3d188b47d89fa3051c7b5245c7",
+      "capturedAt": "2026-09-16T02:47:25.074Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "45-consistent-advice-owner-review.png",
+      "caption": "같은 링크의 실제 제안 내용과 이유 · 작성자의 내 계획에서 검토 버튼",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:47:32.489Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "46-consistent-advice-editor.png",
+      "caption": "45 제안의 삼부연폭포를 넣은 개인 계획 · 아직 저장 전",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:47:32.600Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "47-consistent-advice-adopted.png",
+      "caption": "같은 제안이 개인 일정 저장 후 반영 완료로 표시됨",
+      "url": "https://gunbeon.gangwon.kr/p/61f15a3d188b47d89fa3051c7b5245c7",
+      "capturedAt": "2026-09-16T02:47:35.533Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "48-final-advice-preview.png",
+      "caption": "한 공유 흐름 시작 · 꽃밭/역사공원만 공개 · 개인 만남 장소 제외",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:48:58.398Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "49-final-advice-public.png",
+      "caption": "48에서 생성한 동일 링크 · 꽃밭/역사공원 공개",
+      "url": "https://gunbeon.gangwon.kr/p/b9a305df33114988b5140d54a822599c",
+      "capturedAt": "2026-09-16T02:49:04.201Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "50-final-advice-proposal.png",
+      "caption": "동일 공개 여행 · 고석정 꽃밭 대신 삼부연폭포 제안",
+      "url": "https://gunbeon.gangwon.kr/p/b9a305df33114988b5140d54a822599c",
+      "capturedAt": "2026-09-16T02:49:06.004Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "51-final-advice-owner-review.png",
+      "caption": "같은 링크의 실제 제안 내용과 이유 · 작성자의 내 계획에서 검토 버튼",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:49:10.798Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": false,
+      "imageReadiness": "explicit naturalWidth + visibility validation",
+      "exclusionReason": "Superseded by one final consistent live TourAPI advice flow 54–59; earlier run used an unsuitable demonstration reason or ended at a selector mismatch."
+    },
+    {
+      "file": "54-matched-advice-preview.png",
+      "caption": "한 공유 흐름 시작 · 꽃밭/역사공원만 공개 · 개인 만남 장소 제외",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:50:31.761Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "55-matched-advice-public.png",
+      "caption": "54에서 생성한 동일 링크 · 꽃밭/역사공원 공개",
+      "url": "https://gunbeon.gangwon.kr/p/5d908085d18d4569a7c0912eb1704197",
+      "capturedAt": "2026-09-16T02:50:36.929Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "56-matched-advice-proposal.png",
+      "caption": "동일 공개 여행 · 고석정 꽃밭 대신 삼부연폭포 제안",
+      "url": "https://gunbeon.gangwon.kr/p/5d908085d18d4569a7c0912eb1704197",
+      "capturedAt": "2026-09-16T02:50:38.767Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "57-matched-advice-owner-review.png",
+      "caption": "같은 링크의 실제 제안 내용과 이유 · 작성자의 내 계획에서 검토 버튼",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:50:43.634Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "58-matched-advice-editor.png",
+      "caption": "57 제안의 삼부연폭포를 넣은 개인 계획 · 아직 저장 전",
+      "url": "https://gunbeon.gangwon.kr/#passport",
+      "capturedAt": "2026-09-16T02:50:43.779Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    },
+    {
+      "file": "59-matched-advice-adopted.png",
+      "caption": "같은 제안이 개인 일정 저장 후 반영 완료로 표시됨",
+      "url": "https://gunbeon.gangwon.kr/p/5d908085d18d4569a7c0912eb1704197",
+      "capturedAt": "2026-09-16T02:50:46.415Z",
+      "syntheticItinerary": true,
+      "apiMock": false,
+      "usableForSubmission": true,
+      "imageReadiness": "Actual UI state and screenshot manually verified; cover photos explicitly awaited where present.",
+      "manualVisualReview": "passed"
+    }
+  ],
+  "steps": [
+    {
+      "name": "home",
+      "status": "passed"
+    },
+    {
+      "name": "discover",
+      "status": "passed"
+    },
+    {
+      "name": "overview and editor",
+      "status": "passed"
+    },
+    {
+      "name": "group",
+      "status": "passed"
+    },
+    {
+      "name": "public advice",
+      "status": "passed"
+    },
+    {
+      "name": "outing and completion",
+      "status": "failed",
+      "message": "locator.waitFor: Timeout 16000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.day-record-sheet') to be visible\u001b[22m\n"
+    },
+    {
+      "name": "live TourAPI itinerary and details",
+      "status": "failed",
+      "message": "locator.click: Timeout 16000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.place-sheet').getByRole('button', { name: 'Close', exact: true })\u001b[22m\n"
+    },
+    {
+      "name": "record card actual UI",
+      "status": "failed",
+      "message": "locator.click: Timeout 16000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '여행 완료', exact: true }).first()\u001b[22m\n"
+    },
+    {
+      "name": "map capture",
+      "status": "passed"
+    },
+    {
+      "name": "live public link cover",
+      "status": "passed"
+    },
+    {
+      "name": "record card capture",
+      "status": "passed"
+    },
+    {
+      "name": "ready live home",
+      "status": "passed"
+    },
+    {
+      "name": "ready live itinerary",
+      "status": "passed"
+    },
+    {
+      "name": "expanded companions",
+      "status": "passed"
+    },
+    {
+      "name": "ready discover",
+      "status": "passed"
+    },
+    {
+      "name": "ready public cover",
+      "status": "passed"
+    },
+    {
+      "name": "ready completed record",
+      "status": "passed"
+    },
+    {
+      "name": "adjustment applied and undo",
+      "status": "passed"
+    },
+    {
+      "name": "group invitation and private copy",
+      "status": "passed"
+    },
+    {
+      "name": "consistent completion confirmation and resulting record",
+      "status": "passed"
+    },
+    {
+      "name": "consistent advice end to end",
+      "status": "passed"
+    },
+    {
+      "name": "consistent advice end to end",
+      "status": "failed",
+      "message": "locator.waitFor: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.builder-stops').getByText('삼부연폭포', { exact: true }) to be visible\u001b[22m\n"
+    },
+    {
+      "name": "consistent advice end to end",
+      "status": "passed"
+    }
+  ],
+  "apiResponses": [
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/test-access",
+      "status": 200
+    },
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/status",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/status",
+      "status": 200
+    },
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/status",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "receivedAt": "2026-09-16T02:29:58.983Z",
+      "count": 113
+    },
+    {
+      "path": "/api/places/search",
+      "status": 200,
+      "mode": "live",
+      "count": 4
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/status",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "receivedAt": "2026-09-16T02:30:04.559Z",
+      "count": 113
+    },
+    {
+      "path": "/api/groups",
+      "status": 201
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/status",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "receivedAt": "2026-09-16T02:30:11.969Z",
+      "count": 113
+    },
+    {
+      "path": "/api/advice",
+      "status": 201
+    },
+    {
+      "path": "/api/advice",
+      "status": 200
+    },
+    {
+      "path": "/api/advice",
+      "status": 200
+    },
+    {
+      "path": "/api/advice",
+      "status": 200
+    },
+    {
+      "path": "/api/status",
+      "status": 200
+    },
+    {
+      "path": "/api/account",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "receivedAt": "2026-09-16T02:30:23.902Z",
+      "count": 113
+    },
+    {
+      "path": "/api/advice",
+      "status": 200
+    },
+    {
+      "path": "/api/groups",
+      "status": 200
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:32:35.729Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:32:37.443Z"
+    },
+    {
+      "path": "/api/place-detail",
+      "status": 200,
+      "receivedAt": "2026-09-16T02:32:38.155Z",
+      "sections": [
+        {
+          "service": "관광 상세",
+          "status": "fulfilled",
+          "rowCount": 1,
+          "error": null
+        },
+        {
+          "service": "운영·이용 정보",
+          "status": "fulfilled",
+          "rowCount": 1,
+          "error": null
+        },
+        {
+          "service": "무장애 정보",
+          "status": "fulfilled",
+          "rowCount": 1,
+          "error": null
+        }
+      ]
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:34:08.140Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:34:09.600Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:34:14.033Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:39:31.808Z",
+      "observedAt": "2026-09-16T02:39:29.714Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:39:35.085Z",
+      "observedAt": "2026-09-16T02:39:33.006Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:39:37.831Z",
+      "observedAt": "2026-09-16T02:39:35.827Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:39:41.470Z",
+      "observedAt": "2026-09-16T02:39:39.363Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:39:47.807Z",
+      "observedAt": "2026-09-16T02:39:45.706Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:39:49.215Z",
+      "observedAt": "2026-09-16T02:39:47.126Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:41:16.542Z",
+      "observedAt": "2026-09-16T02:41:14.445Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:41:18.935Z",
+      "observedAt": "2026-09-16T02:41:16.825Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:41:21.975Z",
+      "observedAt": "2026-09-16T02:41:19.869Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:47:13.602Z",
+      "observedAt": "2026-09-16T02:47:11.465Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:47:15.644Z",
+      "observedAt": "2026-09-16T02:47:13.631Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:47:19.754Z",
+      "observedAt": "2026-09-16T02:47:17.593Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:47:21.162Z",
+      "observedAt": "2026-09-16T02:47:19.033Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:48:57.955Z",
+      "observedAt": "2026-09-16T02:48:55.803Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:48:59.551Z",
+      "observedAt": "2026-09-16T02:48:57.522Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:50:27.836Z",
+      "observedAt": "2026-09-16T02:50:25.692Z"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "count": 113,
+      "receivedAt": "2026-09-16T02:50:33.006Z",
+      "observedAt": "2026-09-16T02:50:30.878Z"
+    }
+  ],
+  "errors": [],
+  "cleanup": [
+    {
+      "resource": "created public advice",
+      "status": 200
+    },
+    {
+      "resource": "created group only",
+      "status": 200
+    },
+    {
+      "resource": "second created public advice",
+      "status": 200
+    },
+    {
+      "resource": "ready-capture public advice",
+      "status": 200
+    },
+    {
+      "resource": "extra-capture group only",
+      "status": 200
+    },
+    {
+      "resource": "consistent-capture public advice",
+      "status": 200
+    },
+    {
+      "resource": "final-consistent-capture public advice",
+      "status": 200
+    },
+    {
+      "resource": "final-consistent-capture public advice",
+      "status": 200
+    }
+  ],
+  "completedAt": "2026-09-16T02:50:47.000Z",
+  "additionalRunStartedAt": "2026-09-16T02:33:56.484Z",
+  "readyCaptureStartedAt": "2026-09-16T02:50:22.350Z",
+  "sameExampleMargin": "현재 계획\n+119분\n3곳 · 도보 추정 30분\n조정 후 복귀 여유\n+192분\n2곳 · 도보 추정 15분",
+  "placeholderDiagnosis": {
+    "summary": "Earlier shots were taken before real API response/state hydration or MemoryImage fetched/decoded its source. No API interception or success mock was used. Captures 29–34 await place response and/or naturalWidth > 0, visibility and real rendered text, then passed manual visual inspection.",
+    "example": "22-live-tourapi-itinerary captured at 2026-09-16T02:32:34.371Z; its real /api/places 200/live response recorded fetchedAt 2026-09-16T02:32:35.729Z. These are separate client/server timestamps; subsequent ready captures establish successful restoration, not a quota failure.",
+    "noCodeChanges": true
+  },
+  "manualVisualReview": {
+    "passed": [
+      "24-live-accessibility.png",
+      "25-live-kakao-itinerary.png",
+      "29-ready-live-home.png",
+      "30-ready-live-itinerary.png",
+      "31-companion-conditions.png",
+      "32-ready-discover.png",
+      "33-ready-public-advice.png",
+      "34-ready-day-record.png",
+      "35-adjustment-applied-undo.png",
+      "36-adjustment-margin.png",
+      "37-adjustment-undone.png",
+      "38-group-invitation.png",
+      "39-group-private-copy.png"
+    ],
+    "note": "Synthetic itinerary and completion record; no physical visit or mobile-device claim. 35–37 use the same original example as06 (119→192minutes). 29–34 use real TourAPI references 125782/2749319/3072021; no response payload was persisted."
+  },
+  "consistentCompletion": {
+    "files": [
+      "40-consistent-completion-confirm.png",
+      "41-consistent-completed-record.png"
+    ],
+    "placeIds": [
+      "tourapi:125782",
+      "tourapi:2749319",
+      "tourapi:3072021"
+    ],
+    "stamps": [
+      "입경",
+      "복귀",
+      "동행"
+    ],
+    "completedAt": "2026-09-16T02:47:14.613Z",
+    "fromActualUICompletion": true,
+    "syntheticTripNotFieldVisit": true
+  },
+  "consistentAdvice": {
+    "shareId": "5d908085d18d4569a7c0912eb1704197",
+    "sourcePlaceIds": [
+      "tourapi:125782",
+      "tourapi:2749319",
+      "tourapi:3072021"
+    ],
+    "publicPlaceIds": [
+      "tourapi:2749319",
+      "tourapi:3072021"
+    ],
+    "responseText": "대신 이곳\n고석정 꽃밭 대신 삼부연폭포 (한탄강 유네스코 세계지질공원)\n\n제가 좋아하는 곳이에요\n\n내 계획에서 검토\n숨기기",
+    "sameShareForAllScreens": true,
+    "apiMock": false,
+    "savedStopIds": [
+      "tourapi:125782",
+      "tourapi:125652",
+      "tourapi:3072021"
+    ],
+    "adoptedText": "대신 이곳\n작성자가 계획에 반영했어요\n고석정 꽃밭 대신 삼부연폭포 (한탄강 유네스코 세계지질공원)\n\n제가 좋아하는 곳이에요\n\n내 제안 삭제",
+    "files": [
+      "54-matched-advice-preview.png",
+      "55-matched-advice-public.png",
+      "56-matched-advice-proposal.png",
+      "57-matched-advice-owner-review.png",
+      "58-matched-advice-editor.png",
+      "59-matched-advice-adopted.png"
+    ]
+  },
+  "supersededAdviceFlow": {
+    "shareId": "b9a305df33114988b5140d54a822599c",
+    "sourcePlaceIds": [
+      "tourapi:125782",
+      "tourapi:2749319",
+      "tourapi:3072021"
+    ],
+    "publicPlaceIds": [
+      "tourapi:2749319",
+      "tourapi:3072021"
+    ],
+    "responseText": "대신 이곳\n고석정 꽃밭 대신 삼부연폭포 (한탄강 유네스코 세계지질공원)\n\n제가 좋아하는 곳이에요\n\n내 계획에서 검토\n숨기기",
+    "sameShareForAllScreens": true,
+    "apiMock": false
+  },
+  "publicSearchEvidence": {
+    "status": 200,
+    "count": 1,
+    "sources": [
+      "tourapi"
+    ],
+    "query": "삼부연폭포",
+    "observedAt": "2026-09-16T02:50:38.664Z"
+  },
+  "adoptionApiStatus": 200,
+  "finalSubmissionFlow": {
+    "completion": [
+      "40-consistent-completion-confirm.png",
+      "41-consistent-completed-record.png"
+    ],
+    "adviceFourSteps": [
+      "54-matched-advice-preview.png",
+      "55-matched-advice-public.png",
+      "57-matched-advice-owner-review.png",
+      "59-matched-advice-adopted.png"
+    ],
+    "adviceSupporting": [
+      "56-matched-advice-proposal.png",
+      "58-matched-advice-editor.png"
+    ],
+    "consistency": "Each listed flow is one continuous actual UI session. Completion stored by actual confirm. Advice is one shareId, live TourAPI result, actual plan save, then successful adoption POST. Guest state uses synthetic itinerary only; no API mocks and no field-visit claim."
+  },
+  "finalFlowCleanupConfirmed": true
+}

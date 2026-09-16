@@ -51,7 +51,7 @@
 | 한국관광공사 국문 관광정보 서비스_GW | 강원 관광지·음식점·숙박·문화시설·행사의 목록·검색·상세·이미지·좌표를 조회해 추천 탐색과 장소 선택, 개인 일정 작성, 지도 표시 및 이동시간 추정에 활용합니다. |
 | 한국관광공사 무장애 여행 정보 | 제공되는 주차·접근로·화장실 등 편의 정보를 장소 상세와 동행 조건 확인에 활용합니다. 응답이 없거나 제공되지 않은 항목은 이용 가능으로 단정하지 않고 미확인으로 표시합니다. |
 
-집중률·중심 관광지·연관 관광지는 단순 호출 시험만으로 실제 활용 목록에 추가하지 않습니다. 실제 사용 2종의 신청 승인과 서비스 연결이 확인된 키를 제출합니다. 9월 16일 철원 국문 113개와 고석정 꽃밭의 국문·무장애 상세 실응답을 다시 확인했습니다. 이 확인은 해당 날짜·범위의 결과이며, 모든 관광지 조건이 실시간으로 검증됐다는 뜻은 아닙니다. [실호출 근거](../../../reports/qa/submission-2026-09-16/live-api.json)
+집중률·중심 관광지·연관 관광지는 단순 호출 시험만으로 실제 활용 목록에 추가하지 않습니다. 실제 사용 2종의 신청 승인과 서비스 연결이 확인된 키를 제출합니다. 9월 16일 철원 국문 113개와 고석정 꽃밭의 국문·무장애 상세 실응답을 다시 확인했습니다. 이 확인은 해당 날짜·범위의 결과이며, 모든 관광지 조건이 실시간으로 검증됐다는 뜻은 아닙니다. [실호출 근거](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/qa/submission-2026-09-16/live-api.json)
 
 ### 인증키 입력은 비공개 접수란에서
 
@@ -68,21 +68,21 @@
 
 > [공모전 웹·앱 개발 부문 제출 서비스] 군번여지도 강원: 휴전선 밖 첫 하루 — https://gunbeon.gangwon.kr — 장병과 동행자의 강원 여행 탐색·일정 작성을 위해 국문 관광정보를 활용합니다.
 
-운영계정 신청은 선택이며 승인 여부를 제출 필수 조건으로 쓰지 않습니다. 현재 신청·승인 상태는 실제 포털에서 확인한 결과만 기록합니다. 추가 제공량 요청 준비는 [API 용량 요청 자료](../../../reports/api_capacity_requests.md)를 참고합니다.
+운영계정 신청은 선택이며 승인 여부를 제출 필수 조건으로 쓰지 않습니다. 현재 신청·승인 상태는 실제 포털에서 확인한 결과만 기록합니다. 추가 제공량 요청 준비는 [API 용량 요청 자료](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/reports/api_capacity_requests.md)를 참고합니다.
 
 ## 접속 및 심사 안내 입력란
 
 > PC와 스마트폰 브라우저에서 https://gunbeon.gangwon.kr 에 접속할 수 있습니다. 앱 설치 없이 이용 가능합니다. 일반 로그인용 전용 심사 계정을 제공합니다. 홈의 예시 여행에서 일정 보기·편집, 동행 그룹, 개인 복귀 여유 비교, 현재 출타와 여행 기록, 공개 한 수 제안 기능을 확인할 수 있습니다. 예시 일정은 기능 확인을 위해 만든 자료이며 실제 이용자의 군 복무·여행 기록이 아닙니다.
 
-일반 로그인 계정란에는 이미 운영에 준비한 **주최 측 지정 전용 심사 계정**을 입력합니다. 개인 계정을 제출하지 않고 기존 심사 계정을 다시 생성하거나 초기화하지 않습니다. 사용자는 추가 체험 비밀번호나 소셜 계정 동의 없이 지정 일반 계정으로 진입할 수 있어야 합니다. 실제 URL과 계정 동작은 제출 직전 새 세션에서 확인합니다. [재현 시나리오](../../judging-scenario.md)
+일반 로그인 계정란에는 이미 운영에 준비한 **주최 측 지정 전용 심사 계정**을 입력합니다. 개인 계정을 제출하지 않고 기존 심사 계정을 다시 생성하거나 초기화하지 않습니다. 사용자는 추가 체험 비밀번호나 소셜 계정 동의 없이 지정 일반 계정으로 진입할 수 있어야 합니다. 실제 URL과 계정 동작은 제출 직전 새 세션에서 확인합니다. [재현 시나리오](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/docs/judging-scenario.md)
 
 ## 첨부 파일 준비
 
 - 제출 PDF 파일명: **`gunbeon-2026-round1-functions.pdf`**
 - 편집 원본 파일명: **`gunbeon-2026-round1-functions.pptx`**
-- PDF는 지정 양식 항목을 유지한 13쪽 구성, 10MB 이하로 확인합니다. 13쪽 선택 이유는 [제출 기준](requirements.md)에 있습니다.
+- PDF는 지정 양식 항목을 유지한 13쪽 구성, 10MB 이하로 확인합니다. 13쪽 선택 이유는 [제출 기준](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/docs/submission/2026-round1/requirements.md)에 있습니다.
 - 대표 이미지 1개·주요 화면 3~5개를 준비합니다. 접수 시스템에서 별도 이미지 업로드를 요구하면 실제 표시된 형식·용량에 맞는 파일을 선택합니다.
-- [제출 PDF](../../../output/pdf/gunbeon-2026-round1-functions.pdf), [편집 PPTX](../../../output/submission/2026-round1/gunbeon-2026-round1-functions.pptx), [이미지·사용 안내](../../../output/submission/2026-round1/README.md)를 사용합니다. 파일 용량·해시·최종 화면 매핑은 같은 폴더의 validation.json/selected-images.json에서 확인합니다.
+- [제출 PDF](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/output/pdf/gunbeon-2026-round1-functions.pdf), [편집 PPTX](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/output/submission/2026-round1/gunbeon-2026-round1-functions.pptx), [이미지·사용 안내](https://github.com/MySonIsSoldier/gunbeon-yeojido/blob/master/output/submission/2026-round1/README.md)를 사용합니다. 파일 용량·해시·최종 화면 매핑은 같은 폴더의 validation.json/selected-images.json에서 확인합니다.
 - 컨셉 목업, 예전 서비스 화면, 개인정보·키가 포함된 화면을 현재 구현 증거로 제출하지 않습니다.
 
 ## 접수 순서
