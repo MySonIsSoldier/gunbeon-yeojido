@@ -1,0 +1,175 @@
+{
+  "startedAt": "2026-09-16T04:04:12.255Z",
+  "base": "https://gunbeon.gangwon.kr",
+  "viewport": {
+    "width": 430,
+    "height": 900
+  },
+  "guestOnly": true,
+  "apiMock": false,
+  "judgeAccountUntouched": true,
+  "syntheticSettings": true,
+  "screens": [
+    {
+      "file": "01-live-weather.png",
+      "caption": "실제 기상청 8시간 예보를 체험 여행의 날씨 조건 초안에 적용 · 예보 출처와 계산 조건 표시",
+      "url": "https://gunbeon.gangwon.kr/#planner",
+      "capturedAt": "2026-09-16T04:04:51.447Z"
+    },
+    {
+      "file": "02-dmz-memorial-sources.png",
+      "caption": "백마고지의 통일부 DMZ·국가보훈부 원천 자료 · 출처와 품질 상태 구분",
+      "url": "https://gunbeon.gangwon.kr/#data",
+      "capturedAt": "2026-09-16T04:04:56.748Z"
+    }
+  ],
+  "api": [
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "fetchedAt": "2026-09-16T04:04:22.951Z",
+      "count": 113
+    },
+    {
+      "path": "/api/weather",
+      "status": 200,
+      "mode": "live",
+      "fetchedAt": "2026-09-16T04:04:23.521Z",
+      "hours": 8,
+      "region": "철원군",
+      "baseDate": "20260916",
+      "baseTime": "1100",
+      "coverageComplete": true,
+      "maxRainProbability": 0,
+      "maxWindSpeed": 2.4,
+      "condition": "clear"
+    },
+    {
+      "path": "/api/places",
+      "status": 200,
+      "mode": "live",
+      "fetchedAt": "2026-09-16T04:04:24.501Z",
+      "count": 113
+    }
+  ],
+  "failures": [],
+  "previousAttempt": {
+    "startedAt": "2026-09-16T04:03:09.237Z",
+    "failures": [
+      "page.goto: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://gunbeon.gangwon.kr/login\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    ]
+  },
+  "sourceVisible": "백마고지 위령비와 기념관\n\n철원군 · attraction\n\n출처: 통일부 공개데이터\n좌표 범위 유효\n원천·품질 플래그\n백마고지 전적 기념관\n\n철원군 · memorial\n\n출처: 국가보훈부\n좌표 범위 유효\n원천·품질 플래그",
+  "completedAt": "2026-09-16T04:04:56.751Z",
+  "manualVisualReview": {
+    "result": "passed",
+    "screens": [
+      "01-live-weather.png",
+      "02-dmz-memorial-sources.png"
+    ],
+    "weatherNormalAfterRealClockTick": true,
+    "mockOrClockOverride": false
+  },
+  "observedUiIssue": {
+    "reproduction": "In a fresh guest session open trip conditions step3, receive actual live forecast, immediately press 이 예보를 시간 보정에 반영. The helper can briefly say the forecast expired.",
+    "cause": "PassportApp now is updated every 30000ms. effectiveWeather checks fetchedAt <= now; a newly received server timestamp can be newer than the component now snapshot (and small client/server time difference), triggering the expired branch until the next actual tick.",
+    "effect": "Transient erroneous expired label and unknown weather assessment; actual provider response remains 200/live/8hours.",
+    "evidenceFiles": [
+      "web/components/passport-app.tsx:550",
+      "web/lib/domain.ts:803"
+    ],
+    "captureTreatment": "Waited for the ordinary real-time update and verified the expired text disappeared. No mock data, clock change, CSS/DOM editing, or app code changes.",
+    "applicationCodeChanged": false
+  },
+  "groupCapture": {
+    "startedAt": "2026-09-16T04:26:38.695Z",
+    "syntheticExample": true,
+    "guestSessions": 2,
+    "apiMock": false,
+    "designatedJudgeAccountUntouched": true,
+    "actions": [
+      {
+        "action": "create own temporary group through UI",
+        "status": 201,
+        "groupName": "철원 가족 여행"
+      },
+      {
+        "action": "shared synthetic private course through UI",
+        "title": "부모님과 철원 나들이",
+        "placeCount": 3
+      },
+      {
+        "action": "created invitation through UI",
+        "status": 200,
+        "tokenPersisted": false
+      },
+      {
+        "action": "second fresh guest previewed and joined through UI",
+        "status": 200,
+        "memberCount": 2
+      }
+    ],
+    "screens": [
+      {
+        "file": "03-group-plan.png",
+        "caption": "실제 체험 사용자2명이 참여한 임시 그룹과 실제 TourAPI 3곳 여행1개",
+        "capturedAt": "2026-09-16T04:27:04.065Z",
+        "url": "https://gunbeon.gangwon.kr/#groups"
+      },
+      {
+        "file": "04-private-copy.png",
+        "caption": "동일 공동여행의 개인 사본 · 개인 복귀시각은 빈값에서 별도 설정 · 저장 전",
+        "capturedAt": "2026-09-16T04:27:04.252Z",
+        "url": "https://gunbeon.gangwon.kr/#groups"
+      }
+    ],
+    "cleanup": [
+      {
+        "action": "delete only group created in this run",
+        "status": 200
+      },
+      {
+        "action": "read-only confirm own test group absent",
+        "absent": true
+      }
+    ],
+    "tourapi": {
+      "mode": "live",
+      "count": 113,
+      "sourceIds": [
+        "125782",
+        "2749319",
+        "3072021"
+      ],
+      "titles": [
+        "고석정국민관광지",
+        "고석정 꽃밭",
+        "철원역사문화공원"
+      ]
+    },
+    "groupState": {
+      "memberCount": 2,
+      "planCount": 1,
+      "planTitles": [
+        "부모님과 철원 나들이"
+      ]
+    },
+    "privateCopy": {
+      "returnAt": "",
+      "saveButton": 1,
+      "saved": false
+    },
+    "completedAt": "2026-09-16T04:27:05.311Z",
+    "manualVisualReview": {
+      "result": "passed",
+      "screens": [
+        "03-group-plan.png",
+        "04-private-copy.png"
+      ],
+      "group": "Group name, 2 members, 1 plan, all three TourAPI cover photos, trip date and 일정 보기 button visibly present.",
+      "privateCopy": "Same shared plan imported through actual UI. Return input empty, 복귀 여유 확인 전 and 내 코스 저장 button visibly present. Walking-limit warning reflects the new private defaults, not inherited shared conditions.",
+      "applicationCodeChanged": false
+    }
+  }
+}
