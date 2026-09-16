@@ -1,5 +1,21 @@
 # 개발 인수인계
 
+## 기능설명서 v2 편집·검수 — 2026-09-16 최신
+
+사용자의 심사위원 관점 피드백을 반영한 **v2가 현재 제출 준비본**이다. [제출 자료](submission/2026-round1/README.md), [편집 검토](submission/2026-round1/editorial-review-v2.md)를 기준으로 이어간다. 아래 13쪽 v1은 제작 이력으로 보존한다.
+
+- 공식 표지·섹션·필수 항목을 유지하고 본문을 Pretendard Regular/SemiBold로 재편집했다. 핵심 기능은 5개, 상세 흐름도 8쪽, 총16쪽이다. 기능 설명을 동작·입력·결과 중심으로 정리했고 화면은 1~2개씩 확대했다.
+- 실제 활용 관광공사 API는 국문·무장애2종 그대로다. 빈 행과 반복 footer를 없애고 API·기상·DMZ/보훈·카카오 화면을 추가했다. 저장 전 되돌리기, 게스트 초대 참여, 사용자 선택 날씨 보정을 정확히 설명한다.
+- 최종 `output/pdf/gunbeon-2026-round1-functions-v2.pdf`: **16쪽·1,439,903바이트**, 글꼴 실제 포함. `output/submission/2026-round1-v2/`에 PPTX·대표1/상세3/140px로고·OTF/OFL·문서·검수기록, `output/submission/gunbeon-2026-round1-kit-v2.zip`에 전체 자료가 있다. 정확한 SHA는 키트 `validation.json`을 따른다.
+- 전16쪽 PDF를 개별 이미지로 열어 확인했고 PPTX 구조/폰트/재열기/레이아웃 검사는 오류·경고0이다. [검수 증빙](../reports/qa/submission-2026-09-16/description-v2-review.json). Microsoft PowerPoint 직접 실행 검사는 하지 않았다.
+- 새 게스트2명의 실제 초대·공동여행1개·개인사본을 촬영했다. 기상청8시간 실응답과 DMZ/현충 자료도 추가 촬영. API 응답 조작 없이 검증하고 생성한 임시 그룹만 삭제했다. 지정 심사 계정·운영DB 기존 자료·앱 코드·배포는 그대로다(운영v19/env5).
+- [재제작](../scripts/submission/README.md)은 v2 builder→finalizer→PDF export→전페이지검수→package 순서다. 공식 원본9쪽에서 시작한다. Artifact Tool의 cover 내보내기 중앙 crop/테두리 문제는 native OOXML 속성만 보완했고 원본 캡처 픽셀은 바꾸지 않았다. 최종 PDF를 시각검수 기준으로 사용한다.
+- 글꼴 OTF/OFL을 `assets/document-fonts/`에 보존했다. 이 PC의 사용자 Fonts에 동일 파일을 추가했고 기존 파일은 덮어쓰지 않았다. PDF 변환은 작업별 fontconfig만 사용한다. 다른 PC의 PPTX 편집자는 먼저 OTF를 설치한다.
+
+**미접수 상태 유지.** 다음은 최종 팀원·메일 인증, 실제 휴대폰 리허설, 비공개 API/일반 심사 계정 입력, 최종 PDF 접수와 증빙 보관이다. 제출 마감은9/21 16:00KST다. 문서 작업으로 앱 단위검사/재배포를 반복하지 않았다.
+
+별도 후속: 새 예보 수신 직후 앱의30초 시계 갱신보다 `fetchedAt`이 앞서 일시적으로 ‘만료’가 뜨는 표시 문제를 발견했다. 실제 시계 갱신 후 정상으로 돌아왔고 문서 촬영에는 정상 상태를 사용했다. [재현과 코드 위치](../reports/qa/submission-2026-09-16/redesign/meta.json)의 `observedUiIssue`를 확인하고 다음 앱 결함 수정에서 처리한다. 이번에는 앱 코드를 변경하지 않았다.
+
 ## 1차 제출 자료 제작 — 2026-09-16
 
 **이번 작업은 제출 준비 완료이며 대회 접수 완료가 아니다.** [자료·접수 문서 모음](submission/2026-round1/README.md)을 시작점으로 사용한다. ① 웹·앱 개발 부문 공식 Notion 본문·FAQ와 연결 제출/키 매뉴얼에 실제로 접근해 다시 확인했다. 제출 마감 **9/21(월) 16:00 KST**. 사용자에게 예선 이후 팀원 변경 여부를 물었으며 답변 대기 중이다. 이름/팀원을 추측해 등록하지 않는다.

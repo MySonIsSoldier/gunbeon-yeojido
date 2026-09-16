@@ -1,0 +1,137 @@
+{
+  "preparedAt": "2026-09-16T04:37:37.419374+00:00",
+  "revision": "v2",
+  "competitionTrack": "① 웹·앱 개발 부문",
+  "deadline": "2026-09-21T16:00:00+09:00",
+  "applicationSubmitted": false,
+  "production": {
+    "url": "https://gunbeon.gangwon.kr",
+    "version": "v19/env5",
+    "sourceSha": "9790ac308766aecae662e71d7bdc0e2b5050fb38",
+    "deployedDuringThisTask": false
+  },
+  "pdf": {
+    "path": "output/pdf/gunbeon-2026-round1-functions-v2.pdf",
+    "bytes": 1439903,
+    "sha256": "62b07f250f637f8ddc4297c498376354079b00cea089931a8b81928d86665aa6",
+    "pages": 16,
+    "under10MB": true,
+    "exportedFromFinalPptxSha": "083412012e680b27204dc26dde9c5359e717e4026de15d7957fe69b6ba8df3f2",
+    "allTextFontsEmbedded": true,
+    "fontFamilies": [
+      "Pretendard Regular",
+      "Pretendard SemiBold"
+    ]
+  },
+  "pptx": {
+    "path": "output/submission/2026-round1-v2/gunbeon-2026-round1-functions-v2.pptx",
+    "bytes": 2618824,
+    "sha256": "083412012e680b27204dc26dde9c5359e717e4026de15d7957fe69b6ba8df3f2",
+    "slides": 16,
+    "nativeTableCounts": {
+      "1": 1,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 1,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0
+    },
+    "packageIntegrity": "pass",
+    "artifactToolReimportPassed": true,
+    "fontPolicyPassed": true
+  },
+  "template": {
+    "sha256": "f6b4c38eb2eeb3dd7ab5cacd7bd798cdfcf6671cc423771a7b139ac19342af1a",
+    "originalSlides": 9,
+    "flowSlidesExpandedTo": 8,
+    "originalMediaCount": 7,
+    "byteIdenticalRetainedMediaCount": 7,
+    "requiredSectionsPreserved": true
+  },
+  "visualReview": {
+    "status": "passed",
+    "date": "2026-09-16",
+    "revision": "v2",
+    "pagesReviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "pdfSha256": "62b07f250f637f8ddc4297c498376354079b00cea089931a8b81928d86665aa6",
+    "pptxSha256": "083412012e680b27204dc26dde9c5359e717e4026de15d7957fe69b6ba8df3f2",
+    "reviewMethod": "Each finalized PDF page rendered to 1600x900 PNG and opened individually. Text, tables, full controls, crop boundaries, data claims and source credits reviewed. Draft rendering and structural checks are supplementary.",
+    "nativePowerPointTested": false,
+    "fontCheck": "Every text FontDescriptor has an embedded Pretendard Regular/SemiBold font stream; no fallback family remains.",
+    "layoutWarnings": [],
+    "templateReview": "Original cover and section headings retained; required fields preserved; five functions described in eight flow slides, 16 pages total.",
+    "changes": [
+      "Professional typography and aligned number columns",
+      "One or two enlarged actual UI screens per function page",
+      "Explicit native image crop and table border preservation",
+      "Only two active KTO service rows, each with usage and UI evidence",
+      "Other data paired with actual DMZ/memorial, weather and map views",
+      "Three current distinctions separated from three future validation stages",
+      "Repeated date/provenance footers and generic warning paragraphs removed"
+    ],
+    "repairedDuringReview": [
+      "Slide8 empty group replaced by actual two-guest group with one plan; saved-copy button shown in full",
+      "Slide9 departure field label and companion controls shown in full; steps match the crop",
+      "Slide12 full suggestion title and clean preview crop boundary",
+      "Table inner black fallback borders replaced by explicit native formatting"
+    ],
+    "factsChecked": [
+      "KorService2 and KorWithService2 are the two actual KTO runtime services",
+      "Group invites allow guest participation; not mandatory registration",
+      "Adjustment undo applies before saving",
+      "119-to-192 minute margin and30-to15 minute walking comparison are reference estimates, not field performance",
+      "Weather affects the estimate when the user applies the weather condition"
+    ],
+    "screenshots": "Actual production UI with synthetic example plans; no success-response mocks, no real visitor/field validation claims. New temporary group deleted after capture.",
+    "productionChanged": false,
+    "applicationSubmitted": false
+  },
+  "images": {
+    "representative": 1,
+    "details": 3,
+    "logo140": 1,
+    "manifest": "selected-images.json",
+    "creditFile": "IMAGE-SOURCES.md"
+  },
+  "evidence": {
+    "api": "reports/qa/submission-2026-09-16/live-api.json",
+    "screens": "reports/qa/submission-2026-09-16/screens/meta.json",
+    "newScreens": "reports/qa/submission-2026-09-16/redesign/meta.json",
+    "noApiMocks": true,
+    "notPhysicalDeviceTesting": true
+  },
+  "remaining": [
+    "Final team members and applicant email confirmation",
+    "Actual phone final rehearsal",
+    "Private API key/account fields and final portal submission",
+    "Submission receipt retention",
+    "Hosting/database recovery owner confirmation"
+  ]
+}

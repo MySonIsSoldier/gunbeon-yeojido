@@ -2,12 +2,14 @@
 
 **2026 관광데이터 활용 공모전 ① 웹·앱 개발 부문**. 확인일 2026-09-16 KST, 제출 마감 **2026-09-21(월) 16:00 KST**. 자료 준비 상태이며 최종 접수는 아직 하지 않았다.
 
-## 제출 파일
+## v2 제출 파일
 
-- [기능설명서 PDF](../../../output/pdf/gunbeon-2026-round1-functions.pdf): 공식 지정 양식, 핵심 기능 5개, 실제 화면과 데이터 활용을 담은 13쪽. 포털에 올릴 본파일이다.
-- [편집 원본 PPTX](../../../output/submission/2026-round1/gunbeon-2026-round1-functions.pptx): 추후 수정용이다. 제출 PDF를 대신하지 않는다.
-- [대표·상세 이미지 및 사용 안내](../../../output/submission/2026-round1/README.md): 대표 1장, 상세 5장, 로고 140×140. 이미지는 설명서 안에도 포함했다. 별도 업로드는 접수 화면에 해당 항목이 있을 때 사용한다.
-- [한 번에 받는 자료 ZIP](../../../output/submission/gunbeon-2026-round1-kit.zip).
+- [기능설명서 PDF](../../../output/pdf/gunbeon-2026-round1-functions-v2.pdf): 지정 양식의 필수 항목을 유지한 **16쪽**, 핵심 기능 5개·상세 흐름도 8쪽으로 구성한다. 포털에 올릴 본파일이다.
+- [편집 원본 PPTX](../../../output/submission/2026-round1-v2/gunbeon-2026-round1-functions-v2.pptx): 추후 수정용이다. 제출 PDF를 대신하지 않는다.
+- [대표·상세 이미지 및 사용 안내](../../../output/submission/2026-round1-v2/README.md): 대표 1장, 상세 3장(일정 보기·복귀 여유 비교·공개 장소 제안), 로고 140×140. 별도 이미지 업로드는 접수 화면에 해당 항목이 있을 때 사용한다.
+- [한 번에 받는 v2 자료 ZIP](../../../output/submission/gunbeon-2026-round1-kit-v2.zip).
+
+v2 최종 PDF **16쪽·1.44MB**의 전 페이지 시각 검수, 글꼴 포함, PPTX 구조·재열기 검사를 완료했다. [검수 기록](../../../reports/qa/submission-2026-09-16/description-v2-review.json)과 키트의 `validation.json`에 최종 해시를 남겼다. v1은 제작 이력으로 보존하며 접수에는 v2를 사용한다. **대회 접수는 아직 하지 않았다.**
 
 ## 접수 및 점검 문서
 
@@ -19,6 +21,7 @@
 | [시연 순서](rehearsal.md) | 구현한 핵심 기능 5개를 보여주는 팀 내부 약 7분 동선 |
 | [관광지 공식 안내 확인](place-verification.md) | 대표 철원·고성 여행 4개 장소의 확인 범위와 미확인 조건 |
 | [화면·사진 출처](image-sources.md) | 실제 촬영 화면, TourAPI·외부 사진의 원문과 이용조건 |
+| [v2 편집 검토](editorial-review-v2.md) | 16쪽 구성, 큰 화면과 흐름도, 데이터 활용 설명의 편집 근거 |
 | [제작 재현](../../../scripts/submission/README.md) | 원본 양식을 유지한 문서 빌드·검사·PDF 내보내기 |
 
 ## 구현과 자료의 기준

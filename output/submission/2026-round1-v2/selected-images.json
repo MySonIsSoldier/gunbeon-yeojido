@@ -1,0 +1,443 @@
+{
+  "date": "2026-09-16",
+  "screenshots": "Actual production UI, synthetic example trips, desktop Chromium 430x900 viewport; no API success mocks; not physical-device/field-visit evidence.",
+  "standaloneImages": [
+    {
+      "file": "images/representative-1200x630.png",
+      "title": "대표 이미지",
+      "source": "assets/brand-kit/v1/representative-1200x630.png",
+      "width": 1200,
+      "height": 630,
+      "bytes": 42761,
+      "sha256": "e59dd7970d7707223dd3b217e6c66be9e3fad697220fe72d3fb839938c5525f9"
+    },
+    {
+      "file": "images/detail-01-itinerary.png",
+      "title": "일정 보기",
+      "source": "reports/qa/submission-2026-09-16/screens/30-ready-live-itinerary.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 203491,
+      "sha256": "82122326bf1c223f7b74488107fd7e37de1047eef33ef9968efd2a91c6a1b0ae"
+    },
+    {
+      "file": "images/detail-02-margin.png",
+      "title": "복귀 여유 비교",
+      "source": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 57728,
+      "sha256": "3c7cea075aa5b41874777340e037323f9d26425a7dc2cb25d050aefa2cf10f53"
+    },
+    {
+      "file": "images/detail-03-advice.png",
+      "title": "장소 제안",
+      "source": "reports/qa/submission-2026-09-16/screens/55-matched-advice-public.png",
+      "width": 430,
+      "height": 900,
+      "bytes": 207732,
+      "sha256": "33ea5ec90b5e11fee27637bfd812be01cb3fc592904b99da3359c6ba69636e18"
+    },
+    {
+      "file": "images/logo-140.png",
+      "title": "등록용 로고",
+      "source": "assets/brand-kit/v1/logo-140.png",
+      "width": 140,
+      "height": 140,
+      "bytes": 3462,
+      "sha256": "e4c114e23671527f217f9cae3618e50b5d11fd498f18985cfb5c78fe534cdad6"
+    }
+  ],
+  "deckImages": [
+    {
+      "slideId": "jyx0ra1s",
+      "key": "assets/brand-kit/v1/representative-1200x630.png",
+      "file": "assets/brand-kit/v1/representative-1200x630.png",
+      "frame": {
+        "left": 52,
+        "top": 192,
+        "width": 295,
+        "height": 155
+      },
+      "crop": null,
+      "slide": 4
+    },
+    {
+      "slideId": "jyx0ra1s",
+      "key": "itinerary",
+      "file": "reports/qa/submission-2026-09-16/screens/30-ready-live-itinerary.png",
+      "frame": {
+        "left": 408,
+        "top": 180,
+        "width": 244,
+        "height": 464
+      },
+      "crop": null,
+      "slide": 4
+    },
+    {
+      "slideId": "jyx0ra1s",
+      "key": "comparison",
+      "file": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+      "frame": {
+        "left": 682,
+        "top": 180,
+        "width": 244,
+        "height": 464
+      },
+      "crop": null,
+      "slide": 4
+    },
+    {
+      "slideId": "jyx0ra1s",
+      "key": "public",
+      "file": "reports/qa/submission-2026-09-16/screens/55-matched-advice-public.png",
+      "frame": {
+        "left": 956,
+        "top": 180,
+        "width": 244,
+        "height": 464
+      },
+      "crop": null,
+      "slide": 4
+    },
+    {
+      "slideId": "x8f69ofe",
+      "key": "search",
+      "file": "reports/qa/submission-2026-09-16/screens/07-tourapi-search.png",
+      "frame": {
+        "left": 689.5129015271195,
+        "top": 188,
+        "width": 350.9741969457609,
+        "height": 465
+      },
+      "crop": {
+        "left": 0,
+        "right": 0,
+        "top": 0.219,
+        "bottom": 0.148
+      },
+      "slide": 6
+    },
+    {
+      "slideId": "3mcfru",
+      "key": "conditions",
+      "file": "reports/qa/submission-2026-09-16/screens/31-companion-conditions.png",
+      "frame": {
+        "left": 500,
+        "top": 195.17441860465112,
+        "width": 300,
+        "height": 437.65116279069775
+      },
+      "crop": {
+        "left": 0,
+        "right": 0,
+        "top": 0.116,
+        "bottom": 0.187
+      },
+      "slide": 7
+    },
+    {
+      "slideId": "3mcfru",
+      "key": "itinerary",
+      "file": "reports/qa/submission-2026-09-16/screens/30-ready-live-itinerary.png",
+      "frame": {
+        "left": 873,
+        "top": 176,
+        "width": 309,
+        "height": 485
+      },
+      "crop": null,
+      "slide": 7
+    },
+    {
+      "slideId": "yyphby",
+      "key": "group",
+      "file": "reports/qa/submission-2026-09-16/redesign/03-group-plan.png",
+      "frame": {
+        "left": 495.9680483592401,
+        "top": 175.99999999999997,
+        "width": 297.06390328151986,
+        "height": 480.00000000000006
+      },
+      "crop": {
+        "left": 0,
+        "right": 0,
+        "top": 0.15,
+        "bottom": 0.078
+      },
+      "slide": 8
+    },
+    {
+      "slideId": "yyphby",
+      "key": "copy",
+      "file": "reports/qa/submission-2026-09-16/redesign/04-private-copy.png",
+      "frame": {
+        "left": 891,
+        "top": 232.32418604651164,
+        "width": 314,
+        "height": 369.3516279069767
+      },
+      "crop": {
+        "left": 0,
+        "right": 0,
+        "top": 0.427,
+        "bottom": 0.011
+      },
+      "slide": 8
+    },
+    {
+      "slideId": "a9g6h7",
+      "key": "conditions",
+      "file": "reports/qa/submission-2026-09-16/screens/31-companion-conditions.png",
+      "frame": {
+        "left": 722.8100448933783,
+        "top": 190,
+        "width": 331.37991021324353,
+        "height": 443
+      },
+      "crop": {
+        "left": 0.035,
+        "right": 0.035,
+        "top": 0.221,
+        "bottom": 0.185
+      },
+      "slide": 9
+    },
+    {
+      "slideId": "r6hc57",
+      "key": "comparison",
+      "file": "reports/qa/submission-2026-09-16/screens/06-margin-comparison.png",
+      "frame": {
+        "left": 738.899665201925,
+        "top": 179,
+        "width": 392.20066959614985,
+        "height": 479
+      },
+      "crop": {
+        "left": 0.045,
+        "right": 0.045,
+        "top": 0.34,
+        "bottom": 0.129
+      },
+      "slide": 10
+    },
+    {
+      "slideId": "knp71r",
+      "key": "complete",
+      "file": "reports/qa/submission-2026-09-16/screens/40-consistent-completion-confirm.png",
+      "frame": {
+        "left": 545.4140485312898,
+        "top": 177.00000000000003,
+        "width": 201.1719029374202,
+        "height": 481.99999999999994
+      },
+      "crop": {
+        "left": 0.12,
+        "right": 0.12,
+        "top": 0.07,
+        "bottom": 0.06
+      },
+      "slide": 11
+    },
+    {
+      "slideId": "knp71r",
+      "key": "record",
+      "file": "reports/qa/submission-2026-09-16/screens/41-consistent-completed-record.png",
+      "frame": {
+        "left": 872,
+        "top": 197.3884953026336,
+        "width": 325,
+        "height": 439.2230093947328
+      },
+      "crop": {
+        "left": 0.047,
+        "right": 0.047,
+        "top": 0.265,
+        "bottom": 0.15
+      },
+      "slide": 11
+    },
+    {
+      "slideId": "gepwku",
+      "key": "share",
+      "file": "reports/qa/submission-2026-09-16/screens/54-matched-advice-preview.png",
+      "frame": {
+        "left": 491,
+        "top": 244.5950433582972,
+        "width": 315,
+        "height": 347.8099132834056
+      },
+      "crop": {
+        "left": 0.028,
+        "right": 0.028,
+        "top": 0.23,
+        "bottom": 0.272
+      },
+      "slide": 12
+    },
+    {
+      "slideId": "gepwku",
+      "key": "suggest",
+      "file": "reports/qa/submission-2026-09-16/screens/56-matched-advice-proposal.png",
+      "frame": {
+        "left": 921.2545454545455,
+        "top": 184,
+        "width": 245.4909090909091,
+        "height": 471
+      },
+      "crop": {
+        "left": 0.02,
+        "right": 0.02,
+        "top": 0,
+        "bottom": 0.12
+      },
+      "slide": 12
+    },
+    {
+      "slideId": "einbno",
+      "key": "review",
+      "file": "reports/qa/submission-2026-09-16/screens/57-matched-advice-owner-review.png",
+      "frame": {
+        "left": 492,
+        "top": 241.69954988747185,
+        "width": 366,
+        "height": 333.6009002250563
+      },
+      "crop": {
+        "left": 0.035,
+        "right": 0.035,
+        "top": 0.52,
+        "bottom": 0.075
+      },
+      "slide": 13
+    },
+    {
+      "slideId": "einbno",
+      "key": "adopted",
+      "file": "reports/qa/submission-2026-09-16/screens/59-matched-advice-adopted.png",
+      "frame": {
+        "left": 930.1008489388265,
+        "top": 179,
+        "width": 244.79830212234705,
+        "height": 479
+      },
+      "crop": {
+        "left": 0.024,
+        "right": 0.024,
+        "top": 0,
+        "bottom": 0.11
+      },
+      "slide": 13
+    },
+    {
+      "slideId": "gnmp4jqx",
+      "key": "search",
+      "file": "reports/qa/submission-2026-09-16/screens/07-tourapi-search.png",
+      "frame": {
+        "left": 936.2709580838323,
+        "top": 195,
+        "width": 269.4580838323353,
+        "height": 207
+      },
+      "crop": {
+        "left": 0.045,
+        "right": 0.045,
+        "top": 0.395,
+        "bottom": 0.271
+      },
+      "slide": 14
+    },
+    {
+      "slideId": "gnmp4jqx",
+      "key": "accessibility",
+      "file": "reports/qa/submission-2026-09-16/screens/24-live-accessibility.png",
+      "frame": {
+        "left": 918,
+        "top": 470.5169946332737,
+        "width": 294,
+        "height": 162.96601073345258
+      },
+      "crop": {
+        "left": 0.045,
+        "right": 0.045,
+        "top": 0.541,
+        "bottom": 0.218
+      },
+      "slide": 14
+    },
+    {
+      "slideId": "fu1gfa1s",
+      "key": "sources",
+      "file": "reports/qa/submission-2026-09-16/redesign/02-dmz-memorial-sources.png",
+      "frame": {
+        "left": 52,
+        "top": 463.43866849065205,
+        "width": 361,
+        "height": 97.12266301869585
+      },
+      "crop": {
+        "left": 0.041,
+        "right": 0.041,
+        "top": 0.272,
+        "bottom": 0.61
+      },
+      "slide": 15
+    },
+    {
+      "slideId": "fu1gfa1s",
+      "key": "sources",
+      "file": "reports/qa/submission-2026-09-16/redesign/02-dmz-memorial-sources.png",
+      "frame": {
+        "left": 52,
+        "top": 572.4963520291838,
+        "width": 361,
+        "height": 93.00729594163246
+      },
+      "crop": {
+        "left": 0.041,
+        "right": 0.041,
+        "top": 0.496,
+        "bottom": 0.391
+      },
+      "slide": 15
+    },
+    {
+      "slideId": "fu1gfa1s",
+      "key": "weather",
+      "file": "reports/qa/submission-2026-09-16/redesign/01-live-weather.png",
+      "frame": {
+        "left": 452,
+        "top": 480.10003080240256,
+        "width": 365,
+        "height": 167.79993839519486
+      },
+      "crop": {
+        "left": 0.047,
+        "right": 0.047,
+        "top": 0.617,
+        "bottom": 0.184
+      },
+      "slide": 15
+    },
+    {
+      "slideId": "fu1gfa1s",
+      "key": "map",
+      "file": "reports/qa/submission-2026-09-16/screens/25-live-kakao-itinerary.png",
+      "frame": {
+        "left": 887.730959446093,
+        "top": 459,
+        "width": 288.53808110781404,
+        "height": 212
+      },
+      "crop": {
+        "left": 0.02,
+        "right": 0.02,
+        "top": 0.585,
+        "bottom": 0.078
+      },
+      "slide": 15
+    }
+  ],
+  "creditFile": "IMAGE-SOURCES.md"
+}
