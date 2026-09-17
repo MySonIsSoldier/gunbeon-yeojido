@@ -285,15 +285,36 @@ for (const channel of (
       r.checks.push(
         'Reload restores exact manual and provider references; editing updates the same record',
       );
+      await p.evaluate(() => {
+        window.__qaSocialCardText = [];
+        const fillText = CanvasRenderingContext2D.prototype.fillText;
+        CanvasRenderingContext2D.prototype.fillText = function (...args) {
+          if (
+            this.canvas.width === 1080 &&
+            [1920, 1350].includes(this.canvas.height)
+          )
+            window.__qaSocialCardText.push(String(args[0]));
+          return Reflect.apply(fillText, this, args);
+        };
+      });
       await p.getByRole('button', { name: '공유 카드', exact: true }).click();
-      await p.getByRole('dialog').waitFor();
+      await p.locator('.social-studio').waitFor();
+      await p.locator('.social-card-preview img').waitFor({ timeout: 90000 });
       const [download] = await Promise.all([
         p.waitForEvent('download'),
-        p
-          .getByRole('button', { name: '카드 이미지 저장', exact: true })
-          .click(),
+        p.getByRole('button', { name: 'PNG 저장', exact: true }).click(),
       ]);
-      const svg = await fs.readFile(await download.path(), 'utf8');
+      const png = await fs.readFile(await download.path());
+      assert.deepEqual(
+        png.subarray(0, 8),
+        Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
+      );
+      assert.equal(png.readUInt32BE(16), 1080);
+      assert.equal(png.readUInt32BE(20), 1920);
+      const cardText = await p.evaluate(() =>
+        window.__qaSocialCardText.join('\n'),
+      );
+      assert(cardText.includes('이번 휴가, 여기.'));
       for (const text of [
         '가족과 만드는 첫 코스',
         '가족이 찾은 공개 카페',
@@ -302,9 +323,9 @@ for (const channel of (
         'returnAt',
         'manual:',
       ])
-        assert(!svg.includes(text));
-      await p.getByRole('button', { name: '닫기', exact: true }).click();
-      await p.getByRole('dialog').waitFor({ state: 'hidden' });
+        assert(!cardText.includes(text), text);
+      await p.keyboard.press('Escape');
+      await p.locator('.social-studio').waitFor({ state: 'hidden' });
       await tab(p, '둘러보기').click();
       await p.locator('.journey-image').first().click();
       await p
@@ -318,8 +339,7 @@ for (const channel of (
         .click();
       await p.locator('.course-builder').waitFor({ state: 'hidden' });
       assert.equal(await p.locator('.saved-mission').count(), 2);
-      await (await recordMenu(p, '코스 수정'))
-        .click();
+      await (await recordMenu(p, '코스 수정')).click();
       await p
         .getByLabel('코스 이름', { exact: true })
         .fill('저장하지 않을 변경');

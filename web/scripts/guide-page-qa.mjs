@@ -72,7 +72,12 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         .click();
       await p.locator('.usage-guide').waitFor();
       assert.equal(new URL(p.url()).pathname, '/guide');
-      assert.equal(await p.locator('.guide-steps section').count(), 23);
+      assert.equal(await p.locator('.guide-steps section').count(), 25);
+      for (const title of [
+        '민준의 여행으로 7분 체험하기',
+        '이번 휴가 한 장으로 다음 한 수 받기',
+      ])
+        await p.getByRole('heading', { name: title, exact: true }).waitFor();
       for (const img of await p.locator('.guide-steps img').all()) {
         await img.scrollIntoViewIfNeeded();
         await img.evaluate((i) => i.decode());
@@ -89,7 +94,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         animations: 'disabled',
       });
       result.checks.push(
-        'Guide login returns to requested page; all twenty-three real screenshots load; responsive layout',
+        'Guide login returns to requested page; all twenty-five real screenshots including tester and social-card guides load; responsive layout',
       );
       await p
         .getByRole('link', { name: '군번여지도로 돌아가기', exact: true })

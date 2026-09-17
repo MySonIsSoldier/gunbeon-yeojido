@@ -48,3 +48,10 @@
 2026-09-17 운영 https://gunbeon.gangwon.kr 에서 Chrome 360/430/1440px를 각각 검사했다. 체험 계정 선택·로그인, 선택형 안내, 실제 일정 보기, 스토리/피드 PNG 저장, 새로고침 후 계정 여행 복원, 가이드에서 그룹 열기가 모두 통과했다. 페이지 오류·가로 넘침이 없으며 360px 환영 화면과 1440px 공유 스튜디오는 캡처도 직접 열어 검토했다. 이는 브라우저 크기 모의이며 물리 기기 검사와 구분한다. [결과 및 화면](qa/tester-social/production-responsive/ui.json).
 
 앱 코드는 운영 v20/env5에 반영되어 있다. GitHub 구현 `ee2f9e4`, 설명서·운영 증빙 `d338bcf`, [PR #30](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/30). 최종 병합 상태는 PR과 `docs/handoff.md`를 따른다.
+
+
+## 기존 브라우저 회귀 검사 보완
+
+PR #30의 첫 전체 브라우저 CI에서 이전 `카드 이미지 저장`/SVG 다운로드를 기다리던 검사가 새 공유 스튜디오 흐름과 맞지 않아 실패했다. 앱 오류로 처리하거나 검사를 생략하지 않고 browser/custom-trip/day-passport 검사를 실제 미리보기 → PNG 저장 → 닫기 순서로 변경했다. 내려받은 PNG 시그니처·1080×1920 크기를 검증하고, 직접 입력 장소·개인 제목·시각·좌표·방문하지 않은 장소 제외는 실제 canvas 텍스트 관찰로 유지했다. 가이드 검사도 현재 25개 화면과 신규 2개 항목을 확인한다.
+
+수정한 4개 검사는 로컬 Chromium small/desktop에서 모두 통과했다. [최종 로컬 회귀 결과](qa/tester-social/regression-refresh/). 키 없는 관광 응답으로 검사한 부분은 실제 TourAPI 성공과 구분한다. 이번 후속은 검사 스크립트만 바뀌어 운영 앱 v20/env5 재배포는 필요하지 않다. GitHub 전체 검사와 병합 결과는 PR을 따른다.

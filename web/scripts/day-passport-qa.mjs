@@ -311,17 +311,37 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       assert.deepEqual((await state()).entries[0].visitedPlaceIds, [
         stops[0].id,
       ]);
+      await p.evaluate(() => {
+        window.__qaSocialCardText = [];
+        const fillText = CanvasRenderingContext2D.prototype.fillText;
+        CanvasRenderingContext2D.prototype.fillText = function (...args) {
+          if (
+            this.canvas.width === 1080 &&
+            [1920, 1350].includes(this.canvas.height)
+          )
+            window.__qaSocialCardText.push(String(args[0]));
+          return Reflect.apply(fillText, this, args);
+        };
+      });
       await p.getByRole('button', { name: '공유 카드', exact: true }).click();
-      await p.locator('.share-sheet').waitFor();
+      await p.locator('.social-studio').waitFor();
+      await p.locator('.social-card-preview img').waitFor({ timeout: 90000 });
       await shot('record');
       const [download] = await Promise.all([
         p.waitForEvent('download'),
-        p
-          .getByRole('button', { name: '카드 이미지 저장', exact: true })
-          .click(),
+        p.getByRole('button', { name: 'PNG 저장', exact: true }).click(),
       ]);
-      const svg = await fs.readFile(await download.path(), 'utf8');
-      assert(svg.includes(names[0]));
+      const png = await fs.readFile(await download.path());
+      assert.deepEqual(
+        png.subarray(0, 8),
+        Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
+      );
+      assert.equal(png.readUInt32BE(16), 1080);
+      assert.equal(png.readUInt32BE(20), 1920);
+      const cardText = await p.evaluate(() =>
+        window.__qaSocialCardText.join('\n'),
+      );
+      assert(cardText.includes(names[0]));
       for (const text of [
         names[1],
         names[2],
@@ -330,12 +350,12 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         entry.plan.departureAt,
         String(meeting.lat),
       ])
-        assert(!svg.includes(text), text);
+        assert(!cardText.includes(text), text);
       result.checks.push(
         'Cancel leaves plan; explicit visited subset only; exported card omits other stops and personal title/time/coordinates',
       );
       await p.keyboard.press('Escape');
-      await p.locator('.share-sheet').waitFor({ state: 'hidden' });
+      await p.locator('.social-studio').waitFor({ state: 'hidden' });
       await tab('홈').click();
       await p
         .getByRole('button', { name: '16초로 사용법 보기', exact: true })
