@@ -1,19 +1,35 @@
-# 9/17 최신: 공개 체험·SNS 카드·제출 설명서 보완
+# 9/17 최신: 공개 체험·SNS 카드·제출 설명서 완료
 
-이번 작업은 중단됐던 미커밋 구현을 이어서 검토·수정·운영반영했다. 최신 준비본은 **v3.2·18쪽**, 핵심기능5개·실사용TourAPI2종이다. [PDF](../output/pdf/gunbeon-2026-round1-functions-v3.2.pdf) · [PPTX/키트](../output/submission/2026-round1-v3/) · [상세검토](../reports/tester-social-delivery.md). 대회접수는 하지 않았다.
+중단됐던 미커밋 구현을 이어서 검토·수정하고 운영에 반영했다. 최신 제출 준비본은 **v3.2 · 18쪽**이며 핵심 기능 5개와 실제 사용 TourAPI 2종을 기준으로 작성했다. [PDF](../output/pdf/gunbeon-2026-round1-functions-v3.2.pdf) · [PPTX/키트](../output/submission/2026-round1-v3/) · [상세 검토](../reports/tester-social-delivery.md). **공모전 접수는 실행하지 않았다.**
 
-- 공개 민준 테스터: 로그인화면 선택→일반 비밀번호 검증→매번 독립 예시4계획/3그룹/1기록. 선택형5단계가이드가 실제 UI로 연결된다. 비공개 지정심사계정은 초기화하지 않았다. 0005 migration 추가. 실제회원/기존운영자료 보존.
-- 이번 휴가 한 장: 스토리·피드PNG, 색선택, 사진원본비율, 개인정보제외, 출타 상대시간기본비공개, 공개링크/QR, 실제저장후반영카드. 사진CORS는 보호된고정KTO호스트중계(no-store/8MB)로 처리. 공개안 이미지는 장소/QR중심. 인스타 직접게시는 사용자가 마무리한다.
-- 수정한회귀: 예보수신30초 시계차, 체험로그아웃시 기존게스트권한보존, OAuth연결/실그룹혼합방지,로그인후목적지유지,장소미조회 내보내기차단·실재시도.
-- GitHub 구현커밋 `ee2f9e4b9677cb509c53f91a39fb04c165c5c040`, 작업브랜치 `jun/tester-social-review` push완료. 설명서·배포 검증 문서 커밋 `d338bcf957d14b74d6b68a206160abc5d52a69c6`도 push 완료. [PR #30](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/30)에서 최종 검사 후 병합한다. Sites source와 GitHub SHA는 별개다.
-- 개발 **v3/env2**, source `788ddd6b579ad2f4183e147d62e6212c1549d874`, deployment `appgdep_6aab75e88a4c8191988fd6293a2e0402` succeeded05:09:10UTC. 소유자전용 유지. 실제체험로그인200/여행5/그룹3 확인.
-- 운영 **v20/env5**, source `567ea91c800b3077be41c7bf68fc88b5e2bb7409`, version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_f579cbdd92a08191882f605f3e39015e`, deployment `appgdep_6aab7697a500819193767635a28b7398` succeeded05:12:22UTC. https://gunbeon.gangwon.kr HTTPS, 기존공개접근/Secrets/D1 유지.
-- 로컬typecheck·115단위·빌드 통과. 실제D1 체험격리/API회귀, accounts회귀(정상로그인13회 포함), advice360/1440흐름 통과. Chrome/Chromium360/430/1440 초기UI검사, 최신운영430px 실제계정저장·공개익명제안·반영·상대시간카드까지 통과. [운영 시나리오 증거](../reports/qa/tester-social/production/result.json). 운영 Chrome 360/430/1440px에서도 체험 로그인·가이드·일정·그룹·스토리/피드 PNG 저장·새로고침 복원을 추가 확인했다. 오류·가로 넘침 없음. [운영 반응형 증거](../reports/qa/tester-social/production-responsive/ui.json). 물리기기·Edge(미설치)·인스타실제게시 미실행.
-- 설명서 원18쪽 개별시각검토, 최종변경6/15쪽재검토. PDF1,759,893바이트·Pretendard포함, PPTX3,679,968바이트·구조/레이아웃/재열기통과. [검수기록](../reports/qa/submission-2026-09-17/description-v3-review.json). MicrosoftPowerPoint 직접열기 미실행. 초기v3/v3.1 후보는tmp보존, 최종v3.2만접수준비본.
+## 구현과 GitHub
 
-**다음 첫 행동:** 운영/login에서 민준선택→7분가이드→실제휴대폰파일공유/링크스티커검사. 이어서신청자메일·팀원확인, 비공개API키/지정계정입력, 최종PDF접수와증빙보관. 마감9/21 16:00KST. 사용자확인에따라Google/Naver승인·연결완료이며, 이번에는개인소셜동의를새로실행하지않았다. 공식Notion은9/17접근재확인했다.
+- 로그인에서 민준 테스터를 선택하면 일반 비밀번호 검증을 거쳐 독립된 예시 계획 4개·그룹 3개·지난 기록 1개를 받는다. 선택형 5단계 가이드는 실제 화면으로 연결한다. 비공개 지정 심사 계정은 초기화하지 않았고 실제 회원 자료도 보존했다. D1 migration 0005를 추가했다.
+- ‘이번 휴가 한 장’은 스토리/피드 PNG, 색 선택, 원본 사진 비율과 출처, 공개 링크/QR, 실제 저장한 제안의 반영 카드를 제공한다. 개인 날짜·정확한 시각·만남 장소는 제외한다. 출타 상대시간은 기본 비공개이며 Instagram 최종 게시는 사용자가 완료한다.
+- 체험 로그아웃 시 기존 게스트 권한 보존, 체험 계정의 OAuth 연결/실제 그룹 혼합 방지, 로그인 후 목적지 유지, 장소 미조회 시 내보내기 차단과 재시도를 검증했다. 예보 수신 직후의 30초 시계 차이 표시도 수정했다.
+- 구현 `ee2f9e4b9677cb509c53f91a39fb04c165c5c040`, 설명서·배포 증빙 `d338bcf957d14b74d6b68a206160abc5d52a69c6`, 회귀 검사 수정 `0c59618`을 push했다. [PR #30](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/30)은 **2026-09-17 05:34:56 UTC 병합 완료**, 병합 SHA `8c260b963d21ad6910fba1ba9c818ac1204427d0`이다. 로컬도 `master`로 동기화했다. 이 인수인계 정리는 후속 문서 커밋으로 push하며 최신 SHA는 `git log -1`을 따른다.
 
-이하과거진행이력이다.
+## 배포
+
+- 개발 **v3/env2**, source `788ddd6b579ad2f4183e147d62e6212c1549d874`, deployment `appgdep_6aab75e88a4c8191988fd6293a2e0402`: **05:09:10 UTC succeeded**. 소유자 전용을 유지하며 실제 체험 로그인 200·여행 5·그룹 3을 확인했다.
+- 운영 **v20/env5**, source `567ea91c800b3077be41c7bf68fc88b5e2bb7409`, version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_f579cbdd92a08191882f605f3e39015e`, deployment `appgdep_6aab7697a500819193767635a28b7398`: **05:12:22 UTC succeeded**. https://gunbeon.gangwon.kr 의 HTTPS·공개 접근·기존 Secrets/D1을 유지했다.
+- Sites source와 GitHub SHA는 별개다. 앱 배포 후 변경한 것은 QA 스크립트와 문서뿐이며 추가 배포가 필요하지 않다. 검사를 위해 시작했던 로컬 개발 서버는 종료했다.
+
+## 검증과 제출 자료
+
+- typecheck·115개 단위검사·빌드 통과. 실제 D1 체험 격리, 기존 계정 API(정상 로그인 13회 포함), 공개 제안 회귀를 확인했다. PR의 품질 검사 2개와 [전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/35185901043)는 모두 통과했다.
+- 첫 전체 CI의 예전 SVG 다운로드 검사를 현재 미리보기 → PNG 저장으로 수정했다. 직접 코스·하루 여권의 개인정보 제외 검증과 가이드 25개 화면 검증을 유지했다. [로컬 회귀 증빙](../reports/qa/tester-social/regression-refresh/).
+- Chrome/Chromium 360/430/1440px UI 검사를 통과했다. 운영 430px에서 로그인 → 일정 수정 → 익명 제안 → 실제 계획 저장 → 반영 PNG → 출타 시간 선택을 확인했다. [운영 시나리오](../reports/qa/tester-social/production/result.json).
+- 운영 Chrome 360/430/1440px에서도 로그인·가이드·일정·그룹·PNG 저장·새로고침 복원을 확인했으며 페이지 오류와 가로 넘침이 없었다. [운영 반응형 증빙](../reports/qa/tester-social/production-responsive/ui.json). 물리 기기·Edge(미설치)·Instagram 실제 게시는 이번에 검사하지 않았다.
+- 설명서 18쪽을 개별 시각 검토하고 최종 변경 6/15쪽을 다시 확인했다. PDF 1,759,893바이트, Pretendard 포함. PPTX 3,679,968바이트, 구조·레이아웃·재열기 통과. [검수 기록](../reports/qa/submission-2026-09-17/description-v3-review.json). Microsoft PowerPoint 앱 직접 열기는 미실행이다. 초기 v3/v3.1 후보는 tmp에 보존하고 **최종 v3.2만 현재 접수 준비본**으로 제공한다.
+
+## 다음 첫 행동
+
+1. 운영 `/login`에서 민준 선택 → 7분 가이드를 실제 휴대폰으로 따라가며 파일 공유와 Instagram 링크 스티커를 확인한다.
+2. 신청자 메일·팀원 정보, 비공개 API 키·지정 심사 계정을 확인하고 최종 PDF와 이미지를 제출한 뒤 접수 증빙을 보관한다. 마감은 **9/21 16:00 KST**이며 제출 직전 공식 안내를 다시 확인한다.
+3. Google/Naver 승인·연결 완료는 사용자 확인과 기존 검증 기록을 따른다. 이번 작업에서는 개인 소셜 동의를 새로 실행하지 않았다. 공식 Notion 안내는 9/17 접근해 재확인했다.
+
+이하는 과거 진행 이력이다.
 
 # 개발 인수인계
 

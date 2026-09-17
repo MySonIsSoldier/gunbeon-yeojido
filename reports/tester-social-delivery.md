@@ -55,3 +55,8 @@
 PR #30의 첫 전체 브라우저 CI에서 이전 `카드 이미지 저장`/SVG 다운로드를 기다리던 검사가 새 공유 스튜디오 흐름과 맞지 않아 실패했다. 앱 오류로 처리하거나 검사를 생략하지 않고 browser/custom-trip/day-passport 검사를 실제 미리보기 → PNG 저장 → 닫기 순서로 변경했다. 내려받은 PNG 시그니처·1080×1920 크기를 검증하고, 직접 입력 장소·개인 제목·시각·좌표·방문하지 않은 장소 제외는 실제 canvas 텍스트 관찰로 유지했다. 가이드 검사도 현재 25개 화면과 신규 2개 항목을 확인한다.
 
 수정한 4개 검사는 로컬 Chromium small/desktop에서 모두 통과했다. [최종 로컬 회귀 결과](qa/tester-social/regression-refresh/). 키 없는 관광 응답으로 검사한 부분은 실제 TourAPI 성공과 구분한다. 이번 후속은 검사 스크립트만 바뀌어 운영 앱 v20/env5 재배포는 필요하지 않다. GitHub 전체 검사와 병합 결과는 PR을 따른다.
+
+
+## 최종 병합
+
+[PR #30](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/30)을 2026-09-17 05:34:56 UTC에 master로 병합했다. SHA `8c260b963d21ad6910fba1ba9c818ac1204427d0`. 최종 품질 검사 2개와 [전체 브라우저 검사](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/35185901043) 모두 통과했다(브라우저 5분46초). 작업 브랜치는 정리했고 로컬 master도 동기화했다. 운영 v20/env5와 개발 v3/env2는 그대로다.
