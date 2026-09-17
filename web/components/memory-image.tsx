@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type ImgHTMLAttributes } from 'react';
 const images = new Map<string, Promise<string>>();
 let retainedBytes = 0;
-function loadImage(src: string) {
+export function loadImage(src: string) {
   let cached = images.get(src);
   if (cached) return cached;
   cached = fetch(src, {

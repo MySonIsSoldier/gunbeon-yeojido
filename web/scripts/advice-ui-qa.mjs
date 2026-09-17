@@ -177,9 +177,11 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       await p
         .getByRole('button', { name: '스토리 이미지', exact: true })
         .waitFor();
+      await p.getByRole('button', { name: '스토리 이미지', exact: true }).click();
+      await p.locator('.social-card-preview img').waitFor();
       const [download] = await Promise.all([
         p.waitForEvent('download'),
-        p.getByRole('button', { name: '스토리 이미지', exact: true }).click(),
+        p.getByRole('button', { name: 'PNG 저장', exact: true }).click(),
       ]);
       await download.saveAs(
         path.join(out, `${channel}-${size.name}-story.png`),
@@ -188,6 +190,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         (await fs.readFile(await download.path())).subarray(1, 4).toString(),
         'PNG',
       );
+      await p.keyboard.press('Escape');
       await closeManager();
       result.checks.push(
         'Publish safe snapshot and export real PNG without private meeting, time or title',

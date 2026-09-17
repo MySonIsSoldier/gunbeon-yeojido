@@ -274,7 +274,7 @@ export default function AdvicePublic({ id }: { id: string }) {
                 <ArrowRight size={18} />
               </a>
               <p className="advice-note">
-                새 계획은 테스트 비밀번호로 입장한 뒤 만들어요.
+                로그인하거나 체험으로 시작해 내 여행을 만들어요.
               </p>
             </section>
           ) : detail.status === 'closed' ? (

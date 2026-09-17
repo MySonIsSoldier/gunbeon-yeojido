@@ -74,3 +74,12 @@ test('weather provider errors are never converted to clear conditions', async ()
     /PROVIDER_03/,
   );
 });
+
+// The app clock updates every 30 seconds; a just-received forecast may be ahead of it.
+test('fresh forecast tolerates one UI clock tick but rejects genuinely future receipt', async()=>{
+ const {effectiveWeather}=await import('../lib/domain.ts');
+ const now=new Date('2026-09-17T01:00:00Z');
+ const s={region:'철원군',weather:'rain',returnAt:'2026-09-17T02:00:00Z',weatherForecast:{region:'철원군',validUntil:'2026-09-17T04:00:00Z',fetchedAt:'2026-09-17T01:00:20Z'}};
+ assert.equal(effectiveWeather(s,now).condition,'rain');
+ assert.equal(effectiveWeather({...s,weatherForecast:{...s.weatherForecast,fetchedAt:'2026-09-17T01:02:00Z'}},now).condition,'unknown');
+});

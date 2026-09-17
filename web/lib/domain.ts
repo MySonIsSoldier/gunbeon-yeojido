@@ -800,7 +800,7 @@ export function effectiveWeather(
     };
   if (
     !(Date.parse(f.validUntil) > now.getTime()) ||
-    !(Date.parse(f.fetchedAt) <= now.getTime()) ||
+    !(Date.parse(f.fetchedAt) <= now.getTime() + 30000) ||
     now.getTime() - Date.parse(f.fetchedAt) > 3 * 3600000
   )
     return {

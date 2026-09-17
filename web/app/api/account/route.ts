@@ -21,6 +21,7 @@ import {
   authRate,
 } from '@/lib/account-server';
 import { providerReady } from '@/lib/oauth-server';
+import { createDemoWorkspace } from '@/lib/demo-server';
 import { cookieValue, validTestSession, equalText } from '@/lib/test-access';
 export async function GET(r: Request) {
   try {
@@ -52,7 +53,7 @@ export async function POST(r: Request) {
     const b = await accountBody(r),
       db = database();
     if (b.action === 'logout') {
-      await currentAccount(r);
+      const ending = await currentAccount(r);
       await db
         .prepare('DELETE FROM account_sessions WHERE token_hash=?')
         .bind(await hashSecret(readCookie(r, ACCOUNT_COOKIE)))
@@ -60,12 +61,12 @@ export async function POST(r: Request) {
       return accountReply(
         { ok: true },
         200,
-        [
+        (ending?.demoPersona ? [ACCOUNT_COOKIE] : [
           ACCOUNT_COOKIE,
           'gunbeon_member',
           'gunbeon_advice',
           'gangwon_test_session',
-        ].map((c) => authCookie(r, c, '', 0)),
+        ]).map((c) => authCookie(r, c, '', 0)),
       );
     }
     if (b.action === 'nickname') {
@@ -134,7 +135,7 @@ export async function POST(r: Request) {
       await authRate(r, 'login-failure-v2', 12, handle, 'check');
       const row = await db
         .prepare(
-          'SELECT id,nickname,handle,profile_id AS profileId,password_hash AS passwordHash FROM accounts WHERE handle=?',
+          'SELECT id,nickname,handle,profile_id AS profileId,password_hash AS passwordHash,demo_persona AS demoPersona FROM accounts WHERE handle=?',
         )
         .bind(handle)
         .first<{
@@ -143,6 +144,7 @@ export async function POST(r: Request) {
           handle: string;
           profileId: string;
           passwordHash: string;
+          demoPersona: string | null;
         }>();
       // Unknown handles do the same expensive derivation as valid ones.
       const hash =
@@ -158,7 +160,11 @@ export async function POST(r: Request) {
         nickname: row.nickname,
         handle: row.handle,
         profileId: row.profileId,
+        demoPersona: row.demoPersona,
       };
+      // Public template credentials still pass the normal password check above.
+      // Never issue a session for the template: each visitor owns a private copy.
+      if (row.demoPersona === 'template:minjun') a = await createDemoWorkspace();
     }
     return accountReply({ account: a }, 200, [await newSession(r, a)]);
   } catch (e) {

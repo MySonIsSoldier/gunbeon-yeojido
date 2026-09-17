@@ -1,0 +1,20 @@
+{
+  "base": "http://localhost:3000",
+  "checkedAt": "2026-09-17T05:00:10.708Z",
+  "checks": [
+    "Explicit migration preserves group/share ownership and consumes old-cookie authority",
+    "Second browser restores travel, groups and public-share management",
+    "Imported anonymous suggestion remains owned and withdrawable after account migration",
+    "Old A tab cannot read/write/import/rename/logout through B cookies",
+    "Revision conflicts, malformed data, CSRF and invalid passwords fail safely",
+    "HttpOnly session and per-device logout; disabled/corrupt social login never authenticates",
+    "13 successful logins do not consume the failure limit",
+    "Unknown-handle failures are bounded without blocking another handle"
+  ],
+  "status": "passed",
+  "syntheticAccountIds": [
+    "fbec0c98-b6f4-4bfc-8200-cc8cdcd78a6c",
+    "0b36465b-0aa7-4921-ad17-1aed826e6df5"
+  ],
+  "providerAuthentication": "Not configured; actual Google/Naver consent unverified"
+}

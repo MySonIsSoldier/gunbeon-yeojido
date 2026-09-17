@@ -1,0 +1,45 @@
+import {request} from 'playwright';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+const base=process.env.QA_BASE_URL||'http://localhost:3000';
+const out=process.env.QA_OUT_DIR||new URL('../../reports/qa/tester-social',import.meta.url).pathname;
+const contexts=await Promise.all([0,1,2].map(()=>request.newContext({baseURL:base,extraHTTPHeaders:{Origin:base}})));
+const [a,b,c]=contexts, checks=[];let legacyGroup, legacyShare;
+const post=(c,path,data,headers={})=>c.post(path,{data,headers});
+const ok=async r=>{const d=await r.json();assert(r.ok(),JSON.stringify({status:r.status(),message:d.message}));return d;};
+try {
+ assert.equal((await post(c,'/api/account',{action:'login',handle:'minjun_demo',password:'wrongpassword'})).status(),401);
+ await ok(await post(c,'/api/test-access',{password:'1234'}));
+ legacyGroup=(await ok(await post(c,'/api/groups',{action:'create',name:'QA guest rights preserved',kind:'friends',nickname:'QA guest'}))).group.id;
+ legacyShare=(await ok(await post(c,'/api/advice',{action:'create',snapshot:{region:'고성군',question:'change',placeIds:['dmz_tourism:3aff1b8a01323058']}}))).id;
+ await ok(await post(c,'/api/account',{action:'login',handle:'minjun_demo',password:'GangwonTrip2026!'}));
+ await ok(await post(c,'/api/account',{action:'logout'}));
+ assert((await c.get('/api/groups?id='+legacyGroup)).ok());assert((await c.get('/api/advice?id='+legacyShare)).ok());
+ await ok(await post(c,'/api/groups',{action:'deleteGroup',groupId:legacyGroup}));
+ await ok(await post(c,'/api/advice',{action:'delete',id:legacyShare}));
+ checks.push('Guest group and public-share ownership survive tester login and logout');
+
+ checks.push('Wrong tester password denied by normal authentication');
+ const login={action:'login',handle:'minjun_demo',password:'GangwonTrip2026!'};
+ const aa=(await ok(await post(a,'/api/account',login))).account,bb=(await ok(await post(b,'/api/account',login))).account;
+ assert.notEqual(aa.id,bb.id);assert.notEqual(aa.profileId,bb.profileId);assert.equal(aa.demoPersona,'minjun');
+ const sa=await ok(await a.get('/api/account/state')),sb=await ok(await b.get('/api/account/state'));
+ assert.equal(sa.state.entries.length,5);assert.equal(sb.state.entries.length,5);
+ const ga=await ok(await a.get('/api/groups')),gb=await ok(await b.get('/api/groups'));
+ assert.equal(ga.groups.length,3);assert.equal(gb.groups.length,3);assert.notEqual(ga.groups[0].id,gb.groups[0].id);
+ sa.state.entries[0].title='QA edited only my copy';
+ await ok(await post(a,'/api/account/state',{state:sa.state,revision:sa.revision},{'X-Gunbeon-Account':aa.id}));
+ assert.notEqual((await ok(await b.get('/api/account/state'))).state.entries[0].title,sa.state.entries[0].title);
+ assert.equal((await b.get('/api/groups?id='+ga.groups[0].id)).status(),403);
+ checks.push('Two simultaneous tester logins own different profiles, five entries and three groups; cross-read denied');
+ assert.equal((await post(a,'/api/account/import',{})).status(),403);
+ assert.equal((await post(a,'/api/auth/start',{provider:'google',link:true})).status(),403);
+ for(const action of ['invite','join','preview']) assert.equal((await post(a,'/api/groups',{action,groupId:ga.groups[0].id,code:'0'.repeat(48)})).status(),403);
+ checks.push('OAuth linking, personal device import and real group mixing blocked on server');
+ const re=(await ok(await post(a,'/api/account',login))).account;
+ assert.notEqual(re.id,aa.id);assert.equal((await ok(await a.get('/api/account/state'))).state.entries[0].title,'부모님과 천천히, 철원의 하루');
+ assert.equal((await post(a,'/api/account/state',{state:sa.state,revision:2},{'X-Gunbeon-Account':aa.id})).status(),409);
+ checks.push('Relogin creates fresh examples; old-tab write rejected; reload remains same account');
+ await fs.mkdir(out,{recursive:true});await fs.writeFile(out+'/api.json',JSON.stringify({base,at:new Date().toISOString(),checks,status:'passed'},null,2));
+ console.log(JSON.stringify({checks,status:'passed'}));
+}finally {for(const c of contexts){await post(c,'/api/account',{action:'logout'}).catch(()=>{});await c.dispose();}}

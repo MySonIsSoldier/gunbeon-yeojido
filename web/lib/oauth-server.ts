@@ -52,12 +52,14 @@ export async function startOAuth(
   link: boolean,
   returnTo: unknown,
 ) {
+  const a = await currentAccount(r);
+  if (a?.demoPersona)
+    throw new AccountProblem(403, '테스터 체험을 종료한 뒤 개인 계정으로 소셜 로그인을 시작해 주세요.');
   if (!providerReady(p, new URL(r.url).origin))
     throw new AccountProblem(
       503,
       '소셜 로그인 연결을 준비 중입니다. 지금은 아이디로 로그인해 주세요.',
     );
-  const a = await currentAccount(r);
   if (link && !a)
     throw new AccountProblem(401, '먼저 연결할 여행 계정에 로그인해 주세요.');
   const state = randomToken(),
@@ -134,6 +136,8 @@ export async function finishOAuth(r: Request, p: Provider) {
       '소셜 로그인이 완료되지 않았어요. 다시 시도해 주세요.',
     );
   const signedIn = await currentAccount(r);
+  if (signedIn?.demoPersona)
+    throw new AccountProblem(403, '테스터 계정에는 소셜 계정을 연결할 수 없어요.');
   if (flow.accountId && signedIn?.id !== flow.accountId)
     throw new AccountProblem(
       401,
