@@ -48,8 +48,9 @@ export async function adviceSession(r: Request, create = false) {
       hash: await accountAdviceHash(a.id),
       cookie: undefined,
       accountId: a.id,
+      demo: !!a.demoPersona,
     };
-  return { ...(await legacyAdviceSession(r, create)), accountId: null };
+  return { ...(await legacyAdviceSession(r, create)), accountId: null, demo: false };
 }
 export async function legacyAdviceSession(r: Request, create = false) {
   const raw =

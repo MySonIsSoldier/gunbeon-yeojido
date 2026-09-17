@@ -58,6 +58,7 @@ export default function TripOverview({
   active,
   mapKey,
   onClose,
+  onShare,
   onEdit,
   onStart,
   onImport,
@@ -71,6 +72,7 @@ export default function TripOverview({
   active: boolean;
   mapKey: string;
   onClose: () => void;
+  onShare?: () => void;
   onEdit: () => void;
   onStart: () => void;
   onImport?: () => void;
@@ -142,6 +144,7 @@ export default function TripOverview({
                   ? `${date(view.start)} · ${clock(view.start)} 출발`
                   : '날짜 미정'}
               </SheetDescription>
+              {onShare && <button className="trip-social-link" onClick={onShare}>이번 휴가 한 장 · 공유 카드 <ArrowUpRight size={16} /></button>}
               <div className="trip-read-stats">
                 <span>
                   <MapPin size={17} />

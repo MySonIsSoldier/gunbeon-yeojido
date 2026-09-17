@@ -6,6 +6,7 @@ export type Account = {
   nickname: string;
   handle: string | null;
   profileId: string;
+  demoPersona?: string | null;
 };
 export class AccountProblem extends Error {
   constructor(
@@ -50,7 +51,7 @@ export async function currentAccount(r: Request): Promise<Account | null> {
   }
   const a = await database()
     .prepare(
-      'SELECT a.id,a.nickname,a.handle,a.profile_id AS profileId FROM accounts a JOIN account_sessions s ON s.account_id=a.id WHERE s.token_hash=? AND s.expires_at>?',
+      'SELECT a.id,a.nickname,a.handle,a.profile_id AS profileId,a.demo_persona AS demoPersona FROM accounts a JOIN account_sessions s ON s.account_id=a.id WHERE s.token_hash=? AND s.expires_at>?',
     )
     .bind(await hashSecret(token), Date.now())
     .first<Account>();

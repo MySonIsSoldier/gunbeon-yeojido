@@ -1,3 +1,7 @@
+# v3 재제작 추가
+
+최신본은18쪽 v3입니다. 아래 v2환경준비후 `build-description-v3.mjs` → `finalize-description-v3.mjs` → `export-description-v3.py` → 전18쪽검수 → `package-description-v3.py`를 실행합니다. 네이티브표 소유페이지1·3·11, 빌드폴더`tmp/submission-v3`, 출력`output/submission/2026-round1-v3`입니다. 추가 실제캡처는 `reports/qa/tester-social/scenarios`에 있습니다.
+
 # 1차 기능설명서 재제작
 
 현행은 **v2 · 16쪽**이다. 공식 **① 웹·앱 개발 부문** 표지·섹션명·필수 작성 항목을 유지하고, 핵심 기능 5개의 흐름을 8쪽에 나눠 설명한다. 예전 13쪽은 보존용이며 제출 파일을 혼동하지 않는다. 앱 빌드와 별개인 문서 도구로, 일반 `npm install`만으로 실행되지 않는다.

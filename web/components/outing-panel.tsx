@@ -35,6 +35,7 @@ export default function OutingPanel({
   settings,
   now,
   onChange,
+  onShare,
   onCandidate,
   onComplete,
   onPlan,
@@ -50,6 +51,7 @@ export default function OutingPanel({
   settings: Settings;
   now: Date;
   onChange: (v: ActiveOuting | null) => void;
+  onShare: (entry: Entry, remainingMinutes: number) => void;
   onCandidate: (v: Entry | null) => void;
   onComplete: (e: Entry) => void;
   onPlan: () => void;
@@ -134,6 +136,7 @@ export default function OutingPanel({
             </p>
           </section>
           <h2>{active.entry.title}</h2>
+          <Button variant="outline" className="outing-social-link" onClick={() => onShare(active.entry, (Date.parse(active.startedAt) + active.timeBudgetMinutes * 60000 - Date.now()) / 60000)}>남은 하루, 한 장으로 공유</Button>
           {live ? (
             <>
               <div className={'outing-margin ' + live.score.band}>

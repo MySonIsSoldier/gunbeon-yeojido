@@ -79,6 +79,7 @@ export async function POST(r: Request) {
           region: s.region,
           question: s.question,
           placeIds: s.placeIds,
+          ...(session.demo ? { example: true } : {}),
         };
       await db
         .prepare(
@@ -89,7 +90,7 @@ export async function POST(r: Request) {
           session.hash,
           JSON.stringify(snapshot),
           new Date().toISOString(),
-          new Date(Date.now() + 30 * 86400000).toISOString(),
+          new Date(Date.now() + (session.demo ? 14 : 30) * 86400000).toISOString(),
         )
         .run();
       return adviceReply({ id, snapshot }, 201, session.cookie);

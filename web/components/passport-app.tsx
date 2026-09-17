@@ -93,6 +93,9 @@ import MissionMap from './mission-map';
 import CourseCover from './course-cover';
 import MeetingPicker from './meeting-picker';
 import OutingPanel from './outing-panel';
+import TesterGuide from './tester-guide';
+import SocialStudio from './social-studio';
+import { travelSocialCard } from '@/lib/social-card';
 import TripCompletion from './trip-completion';
 import {
   AlertDialog,
@@ -420,6 +423,7 @@ export default function PassportApp() {
   } | null>(null);
   const [recordTab, setRecordTab] = useState('plans');
   const [shared, setShared] = useState<Entry | null>(null);
+  const [shareRemaining, setShareRemaining] = useState<number>();
   const [radarChecks, setRadarChecks] = useState([false, false, false]);
   const [detail, setDetail] = useState<{
     id: string;
@@ -1021,52 +1025,6 @@ export default function PassportApp() {
       );
     }
   }
-  function downloadCard(e: Entry) {
-    if (e.completedAt && dayRecord(e, places).missingCount) {
-      setNotice('다녀온 관광지를 모두 불러온 뒤 카드를 저장해 주세요.');
-      return;
-    }
-    if (hasVisitRecord(e)) {
-      const url = URL.createObjectURL(
-        new Blob([dayRecordSvg(e, places)], { type: 'image/svg+xml' }),
-      );
-      const anchor = document.createElement('a');
-      anchor.href = url;
-      anchor.download = '군번여지도-하루의한장.svg';
-      anchor.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      return;
-    }
-    const card = publicCard(e);
-    const safe = (x: string) =>
-      x.replace(
-        /[&<>"']/g,
-        (c) =>
-          ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&apos;',
-          })[c]!,
-      );
-    const titleLines = card.mission.match(/.{1,19}/gu) || [];
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080"><rect width="1080" height="1080" fill="#ffffff"/><rect x="80" y="80" width="920" height="6" fill="#246fe5"/><text x="80" y="175" fill="#246fe5" font-family="sans-serif" font-size="32" font-weight="bold">군번여지도 강원</text><text x="80" y="340" fill="#8693a4" font-family="sans-serif" font-size="30">${safe(card.region)} 여행 기록</text>${titleLines
-      .slice(0, 4)
-      .map(
-        (line, i) =>
-          `<text x="80" y="${440 + i * 72}" fill="#222b36" font-family="sans-serif" font-size="44" font-weight="bold">${safe(line)}</text>`,
-      )
-      .join(
-        '',
-      )}<text x="80" y="775" fill="#667c99" font-family="sans-serif" font-size="30">${safe(card.stamps.join(' · ') || '여행 계획')}</text><line x1="80" y1="870" x2="1000" y2="870" stroke="#e0e7f0"/><text x="80" y="940" fill="#94a1b2" font-family="sans-serif" font-size="26">복무 경험을 관광 경험으로.</text></svg>`;
-    const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = '강원-관광여권.svg';
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
   const bandLabel =
     score?.band === 'safe'
       ? '시간상 안전권'
@@ -1152,7 +1110,16 @@ export default function PassportApp() {
           )}
         </div>
       )}
-      {account && deviceRecords > 0 && (
+      {account?.demoPersona && loaded && <TesterGuide accountId={account.id} onAction={(step) => {
+        const entry = entries.find(e => e.recordId === (step === 3 ? 'demo:partner' : 'demo:parents'));
+        if (step === 2) { const group = groupStore.groups.find(g => g.kind === 'family'); if (group) setSelectedGroupId(group.id); go('groups'); }
+        else if (!entry) { go('passport'); setNotice('예시 여행을 변경하거나 삭제했어요. 내 여행에서 다른 일정을 선택해 주세요.'); }
+        else if (step === 0) openEntry(entry);
+        else if (step === 1) openBuilder(entry, 'edit');
+        else if (step === 3) setAdviceManaging(entry);
+        else startTrip(entry);
+      }} />}
+      {account && !account.demoPersona && deviceRecords > 0 && (
         <div className="account-import-notice">
           <span>
             이 기기에서 만든 여행·즐겨찾기 {deviceRecords}개가 있어요.
@@ -1162,6 +1129,7 @@ export default function PassportApp() {
           </a>
         </div>
       )}
+      {shared && <SocialStudio onRetry={() => { clearPageCache('/api/places/resolve'); setSavedReferenceRetry(v => v + 1); }} card={travelSocialCard(shared, places, !!account?.demoPersona)} remainingMinutes={shareRemaining} onClose={() => setShared(null)} onAskAdvice={!hasVisitRecord(shared) && shared.plan?.stops.length ? () => { const entry = shared; setShared(null); setOverview(null); setAdviceManaging(entry); } : undefined} />}
       <Tabs value={view} onValueChange={(v) => go(String(v))}>
         <TabsList className="main-nav" variant="line">
           {Object.entries(LABELS)
@@ -1687,6 +1655,7 @@ export default function PassportApp() {
         </TabsContent>
         <TabsContent value="outing">
           <OutingPanel
+            onShare={(entry, remaining) => { setShared(entry); setShareRemaining(remaining); }}
             key={startCandidate ? entryKey(startCandidate) : 'active'}
             active={activeOuting}
             candidate={startCandidate}
@@ -2250,7 +2219,7 @@ export default function PassportApp() {
                       <Button
                         variant="outline"
                         className="record-share-card"
-                        onClick={() => setShared(e)}
+                        onClick={() => { setShareRemaining(undefined); setShared(e); }}
                       >
                         <ArrowUpRight size={18} /> 공유 카드
                       </Button>
@@ -2331,66 +2300,7 @@ export default function PassportApp() {
                 )}
               </aside>
             </div>
-            <Sheet
-              open={Boolean(shared)}
-              onOpenChange={(v) => !v && setShared(null)}
-            >
-              <SheetContent side="bottom" className="share-sheet">
-                <SheetHeader>
-                  <SheetTitle>우리의 여행 기록</SheetTitle>
-                  <SheetDescription>
-                    정확한 시간·좌표·부대 정보가 없는 카드입니다.
-                  </SheetDescription>
-                </SheetHeader>
-                {shared && (
-                  <div className="editor-body">
-                    {hasVisitRecord(shared) ? (
-                      <DayRecord entry={shared} places={places} />
-                    ) : (
-                      <div className="share-preview">
-                        <span>군번여지도 강원</span>
-                        <h2>{publicCard(shared).mission}</h2>
-                        <p>
-                          {shared.region} ·{' '}
-                          {shared.stamps.join(' · ') || '계획한 여행'}
-                        </p>
-                        <small>복무 경험을 관광 경험으로.</small>
-                      </div>
-                    )}
-                    <Button
-                      className="primary-cta"
-                      onClick={() => downloadCard(shared)}
-                      disabled={
-                        hasVisitRecord(shared) &&
-                        dayRecord(shared, places).missingCount > 0
-                      }
-                    >
-                      <Download size={17} />
-                      카드 이미지 저장
-                    </Button>
-                    <Button
-                      variant="outline"
-                      disabled={
-                        hasVisitRecord(shared) &&
-                        dayRecord(shared, places).missingCount > 0
-                      }
-                      onClick={() =>
-                        copy(
-                          hasVisitRecord(shared)
-                            ? dayRecordText(shared, places)
-                            : publicCard(shared).message +
-                                ' ' +
-                                publicCard(shared).mission,
-                        )
-                      }
-                    >
-                      공유 문구 복사
-                      <Copy size={16} />
-                    </Button>
-                  </div>
-                )}
-              </SheetContent>
-            </Sheet>
+
           </main>
         </TabsContent>
         <TabsContent value="radar">
@@ -2813,6 +2723,7 @@ export default function PassportApp() {
       </Sheet>
       {overview && !composer && !groupSharing && !placeOpen && (
         <TripOverview
+          onShare={!overview.group ? () => { setShared(overview.entry); setShareRemaining(undefined); } : undefined}
           entry={
             overview.group
               ? overview.entry

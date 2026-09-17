@@ -414,18 +414,22 @@ for (const channel of channels) {
         await p.locator('.saved-mission').first().waitFor();
         await p.getByRole('button', { name: '공유 카드', exact: true }).click();
         await p.getByRole('dialog').waitFor();
-        const download = p.waitForEvent('download');
-        await p
-          .getByRole('button', { name: '카드 이미지 저장', exact: true })
-          .click();
-        const d = await download;
-        const temp = await d.path();
-        const svg = await fs.readFile(temp, 'utf8');
-        assert(svg.includes('<svg'));
-        assert(!/returnAt|originId|placeId/.test(svg));
-        await p.getByRole('button', { name: '닫기', exact: true }).click();
+        await p.getByRole('heading', { name: '이번 휴가 한 장', exact: true }).waitFor();
+        await p.locator('.social-card-preview img').waitFor();
+        const [d] = await Promise.all([
+          p.waitForEvent('download'),
+          p.getByRole('button', { name: 'PNG 저장', exact: true }).click(),
+        ]);
+        const png = await fs.readFile(await d.path());
+        assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+        assert.equal(png.readUInt32BE(16), 1080);
+        assert.equal(png.readUInt32BE(20), 1920);
+        assert(d.suggestedFilename().endsWith('.png'));
+        // Privacy projection is covered by unit tests; inspect the actual export here.
+        await p.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
+        await p.locator('.social-studio').waitFor({ state: 'hidden' });
         result.checks.push(
-          'Explicit preparation target; preparation/visit split; SVG share download',
+          'Explicit preparation target; preparation/visit split; share studio preview and 1080×1920 PNG download',
         );
       }
       // Fail both list and saved-place lookup; never replace the preserved itinerary.

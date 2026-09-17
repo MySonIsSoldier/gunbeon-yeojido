@@ -4,6 +4,7 @@ export type AccountInfo = {
   id: string;
   nickname: string;
   handle: string | null;
+  demoPersona?: string | null;
 };
 export type AccountStatus = {
   account: AccountInfo | null;

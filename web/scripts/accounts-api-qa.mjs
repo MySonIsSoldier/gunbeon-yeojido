@@ -10,7 +10,7 @@ const contexts = [];
 const make = async () => {
   const c = await request.newContext({
     baseURL: base,
-    extraHTTPHeaders: { Origin: base },
+    extraHTTPHeaders: { Origin: base, Connection: 'close', ...(new URL(base).hostname === 'localhost' ? { 'cf-connecting-ip': '203.0.113.' + (1 + Math.floor(Math.random() * 250)) } : {}) },
   });
   contexts.push(c);
   return c;
@@ -26,7 +26,9 @@ const checks = [],
   report = { base, checkedAt: new Date().toISOString(), checks };
 const post = (c, url, data, headers = {}) => c.post(url, { data, headers });
 const ok = async (r) => {
-  const d = await r.json();
+  const raw = await r.text();
+  assert(raw, `Empty response: ${r.status()} ${r.url()}`);
+  const d = JSON.parse(raw);
   assert(r.ok(), JSON.stringify({ status: r.status(), message: d.message }));
   return d;
 };
@@ -90,7 +92,7 @@ try {
   const stale = await request.newContext({
     baseURL: base,
     storageState: legacyCookies,
-    extraHTTPHeaders: { Origin: base },
+    extraHTTPHeaders: { Origin: base, Connection: 'close', ...(new URL(base).hostname === 'localhost' ? { 'cf-connecting-ip': '203.0.113.' + (1 + Math.floor(Math.random() * 250)) } : {}) },
   });
   contexts.push(stale);
   assert.deepEqual((await ok(await stale.get('/api/groups'))).groups, []);

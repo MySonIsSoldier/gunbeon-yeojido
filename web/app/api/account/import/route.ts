@@ -6,6 +6,7 @@ import {
   accountAdviceHash,
   readCookie,
   requireAccount,
+  AccountProblem,
 } from "@/lib/account-server";
 import { legacyAdviceSession } from "@/lib/advice-server";
 export async function POST(r: Request) {
@@ -13,6 +14,7 @@ export async function POST(r: Request) {
     await accountBody(r);
     const a = await requireAccount(r),
       db = database();
+    if (a.demoPersona) throw new AccountProblem(403, '테스터 체험에는 개인 여행을 가져올 수 없어요. 개인 계정으로 로그인해 주세요.');
     const token = readCookie(r, "gunbeon_member"),
       hash = await hashSecret(token);
     const p = /^[a-f0-9]{48}$/.test(token)

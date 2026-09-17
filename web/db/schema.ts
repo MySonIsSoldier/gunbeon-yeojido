@@ -121,6 +121,7 @@ export const accounts = sqliteTable('accounts', {
   nickname: text('nickname').notNull(),
   handle: text('handle').unique(),
   passwordHash: text('password_hash'),
+  demoPersona: text('demo_persona'),
   profileId: text('profile_id').notNull().unique(),
   createdAt: text('created_at').notNull(),
 });

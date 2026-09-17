@@ -22,6 +22,8 @@ export async function proxy(request: Request) {
     '/brand/gunbeon-symbol.svg',
     '/brand/gunbeon-logo-140.png',
     '/brand/gunbeon-brand-kit-v1.zip',
+    '/brand/representative-1200x630.png',
+    '/fonts/PretendardVariable.woff2',
     '/brand/google-g.png',
     '/brand/naver-n.png',
     '/icon-512.png',

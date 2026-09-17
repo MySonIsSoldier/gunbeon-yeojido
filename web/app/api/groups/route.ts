@@ -134,6 +134,9 @@ export async function POST(r: Request) {
     }
     const db = database(),
       now = new Date().toISOString();
+    const account = await currentAccount(r);
+    if (account?.demoPersona && ['preview', 'join', 'invite'].includes(b.action))
+      throw new Problem(403, '체험 그룹은 나만의 예시 공간이에요. 실제 동행자 초대·참여는 개인 계정에서 이용해 주세요.');
     let p = await profile(r);
     if (!p && ["create", "join"].includes(b.action)) {
       const nickname = cleanName(b.nickname, 20);

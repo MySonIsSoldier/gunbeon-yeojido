@@ -1,0 +1,35 @@
+{
+  "at": "2026-09-17T05:13:01.841987+00:00",
+  "status": "passed",
+  "pagesReviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "pdfSha256": "5a9fa9e0bdf0eed48c54499b149977bb76dc8bf3213a0fc966694881bbc22265",
+  "pptxSha256": "f1925e420ed1f0b74734ab460fbb7b1df2ed82e08616ae311085326bb2b8fb65",
+  "reviewMethod": "Each page opened individually. Independent reviews 1–9 and10–18; final changed6/15 re-opened by root.",
+  "findingsResolved": [
+    "Login screenshot caption now matches entry screen",
+    "Separate Goseong case explicitly identified without overlapping image"
+  ],
+  "actualPowerPointOpened": false,
+  "nativeLayoutReceipt": "tmp/submission-v3/final-validation-v3.2.json",
+  "allFontsEmbedded": true,
+  "notes": "Added screenshots are actual local application with synthetic accounts, not field visit or user growth results."
+}

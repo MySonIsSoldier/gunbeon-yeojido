@@ -10,7 +10,9 @@ import {
   type AdviceSnapshot,
   type PublicPlace,
 } from '@/lib/advice-model';
-import { adviceLabel, downloadAdviceCard } from '@/lib/advice-client';
+import SocialStudio from './social-studio';
+import { adviceSocialCard, type SocialCard } from '@/lib/social-card';
+import { adviceLabel } from '@/lib/advice-client';
 export function AdviceRoute({
   snapshot,
   places,
@@ -20,6 +22,7 @@ export function AdviceRoute({
 }) {
   return (
     <div className="advice-route">
+      {snapshot.example && <p className="tester-public-note">가상 인물의 체험 여행입니다. 자유롭게 한 수를 보태 보세요.</p>}
       <CourseCover
         places={snapshot.placeIds.map(
           (id) =>
@@ -57,7 +60,7 @@ export function AdviceShareTools({
 }) {
   const [message, setMessage] = useState(''),
     [busy, setBusy] = useState(false),
-    [imageSaved, setImageSaved] = useState(false);
+    [imageSaved] = useState(false), [studio, setStudio] = useState(false);
   const url = () => window.location.origin + '/p/' + id;
   async function run(fn: () => Promise<void>, text: string) {
     setBusy(true);
@@ -65,13 +68,14 @@ export function AdviceShareTools({
       await fn();
       setMessage(text);
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : '공유를 취소했어요.');
+      if ((e as Error).name !== 'AbortError') setMessage(e instanceof Error ? e.message : '공유를 취소했어요.');
     } finally {
       setBusy(false);
     }
   }
   return (
     <div className="advice-share-tools">
+      {studio && <SocialStudio card={adviceSocialCard({ id, snapshot, places })} onClose={() => setStudio(false)} />}
       <div className="advice-button-row">
         <Button
           variant="outline"
@@ -89,12 +93,7 @@ export function AdviceShareTools({
         <Button
           variant="outline"
           disabled={busy}
-          onClick={() =>
-            run(async () => {
-              await downloadAdviceCard(snapshot, places, url());
-              setImageSaved(true);
-            }, 'PNG를 저장했어요. 다음으로 링크를 복사한 뒤, 인스타 스토리의 링크 스티커에 붙여주세요.')
-          }
+          onClick={() => setStudio(true)}
         >
           <Download size={16} />
           스토리 이미지
@@ -159,11 +158,13 @@ export function AdviceCards({
   onAction: (action: string, id: string) => void;
   onReview?: (s: AdviceDetail['suggestions'][number]) => void;
 }) {
+  const [impactCard, setImpactCard] = useState<SocialCard | null>(null);
   const visible = detail.suggestions.filter(
     (s) => s.status !== 'hidden' || detail.owner || s.own,
   );
   return (
     <section className="advice-responses">
+      {impactCard && <SocialStudio card={impactCard} onClose={() => setImpactCard(null)} />}
       <div className="advice-section-heading">
         <h2>
           모인 한 수{' '}
@@ -201,6 +202,7 @@ export function AdviceCards({
           <h3>{adviceLabel(s, detail.places)}</h3>
           <p>{s.reason}</p>
           <div className="advice-button-row">
+            {s.status === 'adopted' && <Button variant="outline" onClick={() => setImpactCard(adviceSocialCard(detail, s))}>한 수가 바꾼 여행 공유</Button>}
             {detail.owner && !publicView && (
               <>
                 {s.status === 'pending' && onReview && (

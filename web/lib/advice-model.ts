@@ -12,6 +12,7 @@ export const adviceReasons = [
   '한 곳을 더 여유 있게 보고 싶어요',
 ] as const;
 export type AdviceSnapshot = {
+  example?: boolean;
   region: string;
   question: keyof typeof adviceQuestions;
   placeIds: string[];

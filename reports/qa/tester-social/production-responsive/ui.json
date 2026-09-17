@@ -1,0 +1,39 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "at": "2026-09-17T05:16:14.846Z",
+  "results": [
+    {
+      "channel": "chrome",
+      "width": 360,
+      "checks": [
+        "Persona autofill, login, optional welcome, task 1 itinerary",
+        "Story/feed PNG preview and download; no horizontal overflow",
+        "Reload preserves workspace; guide can reopen family group"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 430,
+      "checks": [
+        "Persona autofill, login, optional welcome, task 1 itinerary",
+        "Story/feed PNG preview and download; no horizontal overflow",
+        "Reload preserves workspace; guide can reopen family group"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 1440,
+      "checks": [
+        "Persona autofill, login, optional welcome, task 1 itinerary",
+        "Story/feed PNG preview and download; no horizontal overflow",
+        "Reload preserves workspace; guide can reopen family group"
+      ],
+      "errors": [],
+      "status": "passed"
+    }
+  ]
+}
