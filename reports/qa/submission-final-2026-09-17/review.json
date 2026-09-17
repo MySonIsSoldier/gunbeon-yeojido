@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-09-17T05:55:52.137716+00:00",
+  "officialNotionAccess": "Full browser body, submission table, criteria and FAQ read",
+  "officialTemplateSha256": "f6b4c38eb2eeb3dd7ab5cacd7bd798cdfcf6671cc423771a7b139ac19342af1a",
+  "newTemplateIdenticalToPrevious": true,
+  "requiredSectionsReviewed": 9,
+  "finalPagesVisuallyReviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "templateReview": "No required content omitted; official section order retained; flow-page duplication permitted",
+  "summary": "군번여지도 강원은 장병과 가족·연인·친구가 휴가·외출·면회 여행을 함께 계획하는 모바일 웹 서비스입니다. 철원·화천·양구·인제·고성을 중심으로 한국관광공사 관광정보·무장애 정보와 DMZ·현충시설 자료를 활용합니다. 관광지·식사·휴식 장소를 골라 그룹별 일정을 만들고, 개인 복귀 기준과 이동·체류시간에 따른 여유를 비교·조정합니다. 출타 진행과 방문 기록을 관리하며, 공개 여행안으로 받은 장소 제안을 실제 일정에 반영하고 SNS 카드로 공유합니다. 개인 복귀 시각과 만남 장소는 공개 카드에서 제외합니다.",
+  "summaryCharacters": 283,
+  "pdf": {
+    "bytes": 1759893,
+    "pages": 18,
+    "sha256": "5a9fa9e0bdf0eed48c54499b149977bb76dc8bf3213a0fc966694881bbc22265",
+    "unchanged": true
+  },
+  "pptx": {
+    "sha256": "f1925e420ed1f0b74734ab460fbb7b1df2ed82e08616ae311085326bb2b8fb65",
+    "unchanged": true
+  },
+  "zip": {
+    "bytes": 8878567,
+    "sha256": "812de8fa2e00aed073c059182633f38ee207fd1efb56eec3af07b3264836f1a3",
+    "archiveIntegrity": "passed"
+  },
+  "internalLinksChecked": [
+    "docs/submission/2026-round1/portal-copy.md",
+    "docs/submission/2026-round1/README.md",
+    "docs/submission/2026-round1/requirements.md",
+    "docs/submission/2026-round1/final-checklist.md"
+  ],
+  "actualApiEvidence": "live-api.json",
+  "serviceModified": false,
+  "accountDataReset": false,
+  "portalSubmitted": false,
+  "secretsIncluded": false,
+  "status": "passed"
+}

@@ -1,0 +1,107 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "checkedAt": "2026-09-17T05:44:52.718Z",
+  "checks": [
+    {
+      "check": "Designated judge login in a fresh session",
+      "http": 200,
+      "passed": true
+    },
+    {
+      "check": "Existing groups and configured social providers",
+      "groupCount": 2,
+      "providers": {
+        "google": true,
+        "naver": true
+      }
+    },
+    {
+      "check": "Existing examples preserved; read only",
+      "entryCount": 4,
+      "revision": 2
+    },
+    {
+      "check": "Cheorwon tourism",
+      "http": 200,
+      "mode": "live",
+      "fetchedAt": "2026-09-17T05:44:58.422Z",
+      "error": null,
+      "count": 113,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 55,
+          "error": null,
+          "fetched": 55
+        },
+        {
+          "contentTypeId": "14",
+          "total": 2,
+          "error": null,
+          "fetched": 2
+        },
+        {
+          "contentTypeId": "15",
+          "total": 2,
+          "error": null,
+          "fetched": 2
+        },
+        {
+          "contentTypeId": "32",
+          "total": 12,
+          "error": null,
+          "fetched": 12
+        },
+        {
+          "contentTypeId": "39",
+          "total": 42,
+          "error": null,
+          "fetched": 42
+        }
+      ]
+    },
+    {
+      "check": "Place details and accessibility",
+      "http": 200,
+      "fetchedAt": "2026-09-17T05:44:58.968Z",
+      "error": null,
+      "results": [
+        {
+          "service": "관광 상세",
+          "status": "fulfilled",
+          "error": null,
+          "count": 1,
+          "nonemptyFields": []
+        },
+        {
+          "service": "운영·이용 정보",
+          "status": "fulfilled",
+          "error": null,
+          "count": 1,
+          "nonemptyFields": [
+            "parking"
+          ]
+        },
+        {
+          "service": "무장애 정보",
+          "status": "fulfilled",
+          "error": null,
+          "count": 1,
+          "nonemptyFields": [
+            "parking",
+            "route",
+            "wheelchair"
+          ]
+        }
+      ]
+    },
+    {
+      "check": "Weather",
+      "http": 200,
+      "mode": "live",
+      "fetchedAt": "2026-09-17T05:44:59.230Z",
+      "error": null,
+      "weather": 8
+    }
+  ]
+}

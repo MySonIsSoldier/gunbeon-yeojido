@@ -1,5 +1,5 @@
 {
-  "preparedAt": "2026-09-17T05:15:15.422827+00:00",
+  "preparedAt": "2026-09-17T05:55:07.764659+00:00",
   "revision": "v3.2",
   "competitionTrack": "① 웹·앱 개발 부문",
   "deadline": "2026-09-21T16:00:00+09:00",
@@ -8,7 +8,7 @@
     "url": "https://gunbeon.gangwon.kr",
     "version": "v20/env5",
     "sourceSha": "567ea91c800b3077be41c7bf68fc88b5e2bb7409",
-    "deployedDuringThisTask": true
+    "deploymentConfirmedAt": "2026-09-17T05:12:22Z"
   },
   "pdf": {
     "path": "output/pdf/gunbeon-2026-round1-functions-v3.2.pdf",
@@ -103,11 +103,12 @@
     "creditFile": "IMAGE-SOURCES.md"
   },
   "evidence": {
-    "api": "reports/qa/submission-2026-09-16/live-api.json",
+    "api": "reports/qa/submission-final-2026-09-17/live-api.json",
     "screens": "reports/qa/submission-2026-09-16/screens/meta.json",
     "newScreens": "reports/qa/tester-social/scenarios/result.json",
     "noApiMocks": true,
-    "notPhysicalDeviceTesting": true
+    "notPhysicalDeviceTesting": true,
+    "submissionReview": "reports/final_submission_review_2026-09-17.md"
   },
   "remaining": [
     "Final team members and applicant email confirmation",
