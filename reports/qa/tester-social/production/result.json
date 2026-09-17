@@ -1,0 +1,11 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "at": "2026-09-17T05:13:52.761Z",
+  "checks": [
+    "Guide opens actual editor and edited title saves to account",
+    "Public synthetic snapshot, anonymous proposal, real account save and adopted-impact QR card",
+    "Current outing share defaults to no time; approximate countdown requires opt-in"
+  ],
+  "errors": [],
+  "status": "passed"
+}

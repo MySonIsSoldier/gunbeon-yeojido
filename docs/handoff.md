@@ -1,3 +1,20 @@
+# 9/17 최신: 공개 체험·SNS 카드·제출 설명서 보완
+
+이번 작업은 중단됐던 미커밋 구현을 이어서 검토·수정·운영반영했다. 최신 준비본은 **v3.2·18쪽**, 핵심기능5개·실사용TourAPI2종이다. [PDF](../output/pdf/gunbeon-2026-round1-functions-v3.2.pdf) · [PPTX/키트](../output/submission/2026-round1-v3/) · [상세검토](../reports/tester-social-delivery.md). 대회접수는 하지 않았다.
+
+- 공개 민준 테스터: 로그인화면 선택→일반 비밀번호 검증→매번 독립 예시4계획/3그룹/1기록. 선택형5단계가이드가 실제 UI로 연결된다. 비공개 지정심사계정은 초기화하지 않았다. 0005 migration 추가. 실제회원/기존운영자료 보존.
+- 이번 휴가 한 장: 스토리·피드PNG, 색선택, 사진원본비율, 개인정보제외, 출타 상대시간기본비공개, 공개링크/QR, 실제저장후반영카드. 사진CORS는 보호된고정KTO호스트중계(no-store/8MB)로 처리. 공개안 이미지는 장소/QR중심. 인스타 직접게시는 사용자가 마무리한다.
+- 수정한회귀: 예보수신30초 시계차, 체험로그아웃시 기존게스트권한보존, OAuth연결/실그룹혼합방지,로그인후목적지유지,장소미조회 내보내기차단·실재시도.
+- GitHub 구현커밋 `ee2f9e4b9677cb509c53f91a39fb04c165c5c040`, 작업브랜치 `jun/tester-social-review` push완료. 후속문서커밋/PR병합 결과는 아래 최종기록을 확인한다. Sitessource와GitHubSHA는별개다.
+- 개발 **v3/env2**, source `788ddd6b579ad2f4183e147d62e6212c1549d874`, deployment `appgdep_6aab75e88a4c8191988fd6293a2e0402` succeeded05:09:10UTC. 소유자전용 유지. 실제체험로그인200/여행5/그룹3 확인.
+- 운영 **v20/env5**, source `567ea91c800b3077be41c7bf68fc88b5e2bb7409`, version `appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_f579cbdd92a08191882f605f3e39015e`, deployment `appgdep_6aab7697a500819193767635a28b7398` succeeded05:12:22UTC. https://gunbeon.gangwon.kr HTTPS, 기존공개접근/Secrets/D1 유지.
+- 로컬typecheck·115단위·빌드 통과. 실제D1 체험격리/API회귀, accounts회귀(정상로그인13회 포함), advice360/1440흐름 통과. Chrome/Chromium360/430/1440 초기UI검사, 최신운영430px 실제계정저장·공개익명제안·반영·상대시간카드까지 통과. [운영증거](../reports/qa/tester-social/production/result.json). 물리기기·Edge(미설치)·인스타실제게시 미실행.
+- 설명서 원18쪽 개별시각검토, 최종변경6/15쪽재검토. PDF1,759,893바이트·Pretendard포함, PPTX3,679,968바이트·구조/레이아웃/재열기통과. [검수기록](../reports/qa/submission-2026-09-17/description-v3-review.json). MicrosoftPowerPoint 직접열기 미실행. 초기v3/v3.1 후보는tmp보존, 최종v3.2만접수준비본.
+
+**다음 첫 행동:** 운영/login에서 민준선택→7분가이드→실제휴대폰파일공유/링크스티커검사. 이어서신청자메일·팀원확인, 비공개API키/지정계정입력, 최종PDF접수와증빙보관. 마감9/21 16:00KST. 사용자확인에따라Google/Naver승인·연결완료이며, 이번에는개인소셜동의를새로실행하지않았다. 공식Notion은9/17접근재확인했다.
+
+이하과거진행이력이다.
+
 # 개발 인수인계
 
 ## 기능설명서 v2 편집·검수 — 2026-09-16 최신
