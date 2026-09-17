@@ -41,3 +41,10 @@
 ## 최종 운영 확인
 
 운영v20/env5 배포성공05:12:22UTC. 실제운영 `tester-scenarios-qa` 통과:민준로그인→편집저장→익명제안→작성자저장→반영카드→출타시간옵트인. `reports/qa/tester-social/production/result.json`과같은폴더의실제캡처. 검증용공개링크만삭제, 민준사본은14일청소대상. 실제회원자료와지정심사계정은변경하지않았다.
+
+
+## 운영 반응형 최종 확인
+
+2026-09-17 운영 https://gunbeon.gangwon.kr 에서 Chrome 360/430/1440px를 각각 검사했다. 체험 계정 선택·로그인, 선택형 안내, 실제 일정 보기, 스토리/피드 PNG 저장, 새로고침 후 계정 여행 복원, 가이드에서 그룹 열기가 모두 통과했다. 페이지 오류·가로 넘침이 없으며 360px 환영 화면과 1440px 공유 스튜디오는 캡처도 직접 열어 검토했다. 이는 브라우저 크기 모의이며 물리 기기 검사와 구분한다. [결과 및 화면](qa/tester-social/production-responsive/ui.json).
+
+앱 코드는 운영 v20/env5에 반영되어 있다. GitHub 구현 `ee2f9e4`, 설명서·운영 증빙 `d338bcf`, [PR #30](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/30). 최종 병합 상태는 PR과 `docs/handoff.md`를 따른다.
