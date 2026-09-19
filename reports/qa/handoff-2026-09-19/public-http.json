@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-09-19T07:25:34.544969+00:00",
+  "method": "curl GET with TLS certificate verification",
+  "initialPythonProbe": "Local Python trust-store lacked issuer certificate; no TLS bypass used.",
+  "pages": [
+    {
+      "url": "https://gunbeon.gangwon.kr/login",
+      "status": 200,
+      "exitCode": 0
+    },
+    {
+      "url": "https://gunbeon.gangwon.kr/guide",
+      "status": 307,
+      "exitCode": 0
+    },
+    {
+      "url": "https://gunbeon.gangwon.kr/terms",
+      "status": 200,
+      "exitCode": 0
+    }
+  ]
+}

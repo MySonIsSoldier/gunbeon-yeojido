@@ -1,5 +1,7 @@
 # 다른 PC에서 로컬 개발 시작
 
+**2026-09-19 이전 묶음을 받은 경우:** 먼저 [PC 이전·비공개 백업 안내](pc-transfer.md)를 읽는다. GitHub clone 또는 오프라인 Git bundle로 코드를 받고, 백업 환경 파일을 쓸 경우 아래 2절의 새 파일 생성은 생략한다. 운영/개발 Secret과 서버 DB는 로컬 백업으로 대체되지 않는다.
+
 운영/개발 Sites는 이제 별도 프로젝트·DB다. [도메인·배포 환경 안내](custom-domain-setup.md)와 config/sites-environments.json을 읽고 `check-site-target.mjs`로 대상을 확인한다. web/.openai/hosting.json은 기존 운영 프로젝트이며 개발 배포 checkout에는 개발 프로젝트 ID를 유지한다. 로컬 D1 절차는 아래와 동일하다.
 
 Git, **Node 22(최소 22.13.0, 기존 CI 22.18)**, npm이 필요하다. 아래는 macOS/Linux/Windows WSL의 POSIX 셸 기준이다. PowerShell은 환경변수 문법을 해당 셸에 맞춘다. 사용자 홈·임시 브라우저·이전 배포 checkout 경로는 필요 없다.

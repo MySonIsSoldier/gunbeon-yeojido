@@ -1,0 +1,158 @@
+{
+  "checkedAt": "2026-09-19T07:22:02.262Z",
+  "runtimeSecretsExported": false,
+  "remoteDatabaseExported": false,
+  "environments": {
+    "production": {
+      "projectId": "appgprj_6a9e5a33eaa08191a72a52abf77522cc",
+      "status": "active",
+      "access": "public",
+      "version": 20,
+      "url": "https://gunbeon.gangwon.kr",
+      "environmentRevision": 5,
+      "variables": [
+        {
+          "name": "AUTH_BASE_URL",
+          "secret": false,
+          "value": "https://gunbeon.gangwon.kr"
+        },
+        {
+          "name": "DATA_GO_KR_SERVICE_KEY",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "GOOGLE_CLIENT_ID",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "GOOGLE_CLIENT_SECRET",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "KAKAO_MAP_JAVASCRIPT_KEY",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "NAVER_CLIENT_ID",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "NAVER_CLIENT_SECRET",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "PUBLIC_SITE_URL",
+          "secret": false,
+          "value": "https://gunbeon.gangwon.kr"
+        },
+        {
+          "name": "TEST_ACCESS_PASSWORD",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "TEST_SESSION_SECRET",
+          "secret": true,
+          "value": null
+        }
+      ],
+      "database": {
+        "binding": "DB",
+        "tables": [
+          "account_identities",
+          "account_sessions",
+          "account_travel_state",
+          "accounts",
+          "advice_rate",
+          "advice_reports",
+          "advice_shares",
+          "advice_suggestions",
+          "claimed_identities",
+          "former_members",
+          "group_invitations",
+          "group_members",
+          "group_plans",
+          "oauth_flows",
+          "profiles",
+          "provider_limits",
+          "travel_groups"
+        ],
+        "exported": false
+      }
+    },
+    "development": {
+      "projectId": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f",
+      "status": "active",
+      "access": "custom",
+      "version": 3,
+      "url": "https://gunbeon-development.ybuser.chatgpt.site",
+      "environmentRevision": 2,
+      "variables": [
+        {
+          "name": "AUTH_BASE_URL",
+          "secret": false,
+          "value": "https://gunbeon-development.ybuser.chatgpt.site"
+        },
+        {
+          "name": "DATA_GO_KR_SERVICE_KEY",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "KAKAO_MAP_JAVASCRIPT_KEY",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "PUBLIC_SITE_URL",
+          "secret": false,
+          "value": "https://gunbeon-development.ybuser.chatgpt.site"
+        },
+        {
+          "name": "SITE_ENVIRONMENT",
+          "secret": false,
+          "value": "development"
+        },
+        {
+          "name": "TEST_ACCESS_PASSWORD",
+          "secret": true,
+          "value": null
+        },
+        {
+          "name": "TEST_SESSION_SECRET",
+          "secret": true,
+          "value": null
+        }
+      ],
+      "database": {
+        "binding": "DB",
+        "tables": [
+          "account_identities",
+          "account_sessions",
+          "account_travel_state",
+          "accounts",
+          "advice_rate",
+          "advice_reports",
+          "advice_shares",
+          "advice_suggestions",
+          "claimed_identities",
+          "former_members",
+          "group_invitations",
+          "group_members",
+          "group_plans",
+          "oauth_flows",
+          "profiles",
+          "provider_limits",
+          "travel_groups"
+        ],
+        "exported": false
+      }
+    }
+  }
+}

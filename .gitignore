@@ -5,3 +5,6 @@ node_modules/
 .DS_Store
 # Locally reviewed third-party PDFs are linked, not redistributed.
 data/raw/public/*.pdf
+# Private PC transfer bundles must stay outside the repository.
+gunbeon-private-transfer*.zip
+private-transfer/
