@@ -14,9 +14,11 @@ GitHub의 `MySonIsSoldier/gunbeon-yeojido`에는 앱 소스, migration, 제작 �
 | `restore-root/.env.local`, `restore-root/web/.env.local` | 이 PC에 있던 환경 파일. 링크였던 파일도 실제 내용으로 보관 |
 | `restore-root/`의 그 외 파일 | Git에서 제외됐던 문서 제작 입력·검수 자료와 `data/raw/public/` 참고 PDF. 저장소 내 원래 상대 경로 유지 |
 | `local-d1/` | 로컬 Wrangler SQLite의 일관성 있는 백업. 내부에는 원래 저장소 상대 경로 유지 |
-| `source-originals/` | 사용자가 제공한 제안서·양식·API 문서 등의 원본 |
+| `source-originals/` | 사용자가 제공한 제안서 PDF와 API 가이드 ZIP 6개. 공식 양식은 `restore-root/`에 별도 보관 |
 
 이 ZIP은 **암호화되지 않았다.** 파일 권한은 소유자만 읽고 쓸 수 있는 `0600`, 보관 폴더는 `0700`으로 만든다. 권한 설정은 암호화가 아니며, 다른 디스크로 복사하면 유지되지 않을 수 있다. 암호화된 외장 디스크나 본인만 접근하는 안전한 저장소로 옮긴다. GitHub, 공개 링크, 이슈, PR, 공개 메일 첨부에 올리지 않는다. 파일 내용이나 전체 환경변수를 채팅·터미널 로그에 출력하지 않는다.
+
+ZIP과 같은 폴더의 `TRANSFER-CHECKSUM.txt`에 전체 파일 SHA256이 있다. 복사 후 `shasum -a 256 파일명.zip`(macOS/Linux) 또는 `Get-FileHash 파일명.zip -Algorithm SHA256`(PowerShell)의 결과를 비교한다. ZIP 안의 `SHA256SUMS`는 개별 파일 검사용이다. 환경파일·서버 Secret 값이 출력되는 명령을 검증 목적으로 실행하지 않는다.
 
 ## 새 PC에서 코드와 환경 복원
 

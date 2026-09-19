@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-09-19T07:29:21.958232+00:00",
+  "scope": "Preflight ZIP restore on this Mac; final ZIP regenerated after documentation push and separately hash-verified. No service/database restoration or other OS testing.",
+  "testedRepositoryHead": "2ee749f4be55ccdf623a1f321a2e7b148479f40d",
+  "checks": {
+    "zipCrc": true,
+    "privateDirectoryMode": "0o700",
+    "privateArchiveMode": "0o600",
+    "allContentHashes": true,
+    "environmentByteEqualityAndDereferencedLinks": true,
+    "originalAttachments": 7,
+    "sqliteSnapshotsVerified": 2,
+    "offlineCloneAndGitFsck": true,
+    "criticalDocumentsAndFinalSubmissionByteEquality": true,
+    "sitesSourceClones": {
+      "production": "567ea91c800b3077be41c7bf68fc88b5e2bb7409",
+      "development": "788ddd6b579ad2f4183e147d62e6212c1549d874"
+    }
+  },
+  "productionDatabaseExported": false,
+  "serverSecretsExported": false,
+  "encrypted": false,
+  "privateArchiveKeptOutsideGit": true
+}

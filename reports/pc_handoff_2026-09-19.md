@@ -10,6 +10,8 @@
 - `feat/judging-readiness`의 로컬 ahead 2개와 upstream 없는 `docs/naver-login-review`는 이미 원격 master에 포함돼 있었다. stash와 추가 worktree는 없었다.
 - 미추적 `output/submission/gunbeon-2026-round1-v3/`의 21개 파일은 추적 폴더·최종 ZIP의 내용과 모두 SHA256 동일하다. 사용자 파일을 삭제하지 않고 `.git/info/exclude`에 이 중복 압축해제 폴더만 추가했다. 새 PC에는 중복 폴더가 필요하지 않다.
 - 이번 변경은 문서와 로컬 백업 도구에 한정한다. 앱 코드·공모전 최종 산출물·운영 계정·배포를 변경하지 않는다. 이전 제품 PR은 #30이며, 이번 문서 정리는 master에 직접 commit/push한다. 최종 SHA는 `git log -1`과 비공개 ZIP의 `MANIFEST.json`에서 확인한다.
+- 이전 안내/도구 커밋 `2ee749f4be55ccdf623a1f321a2e7b148479f40d`를 master에 push한 뒤 오프라인 복원 검사를 완료했다. 이 검사 기록은 후속 문서 커밋으로 push하고 최종 ZIP을 그 HEAD로 다시 생성한다.
+- 열린 PR은 0개. [#15 API 증설](https://github.com/MySonIsSoldier/gunbeon-yeojido/issues/15), [#20 실사용/SNS 검증](https://github.com/MySonIsSoldier/gunbeon-yeojido/issues/20), [#25 심사 준비·실기기 확인](https://github.com/MySonIsSoldier/gunbeon-yeojido/issues/25)은 GitHub에 남아 있다. 1차 심사 완료라는 사용자 확인을 실제 휴대폰 검사 통과로 확대 해석해 일괄 종료하지 않았다. 다음 재개 시 남은 확인 항목만 정리한다.
 
 ## 로컬 비공개 이전 묶음
 
@@ -43,6 +45,6 @@
 
 ## 검사 범위
 
-Git 원격 도달성, 최종 제출물 중복 비교, Python 문법, 링크, diff 공백, SQLite 무결성, ZIP CRC/SHA256, 별도 clone 복원을 확인한다. 로컬의 긴 API/소셜/서명 자격증명 6개를 전체 Git 이력의 blob 1,377개와 비교해 일치가 없었다. [검사 범위](qa/handoff-2026-09-19/known-secret-scan.json)는 알려진 로컬 값에 한정하며 모든 가능한 비밀값 검출을 보증하지 않는다. 공개 테스트 비밀번호는 검사 대상에서 제외했다.
+Git 원격 도달성, 최종 제출물 중복 비교, Python 문법, 링크, diff 공백, SQLite 무결성, ZIP CRC/SHA256, 별도 clone 복원 검사를 통과했다. 오프라인 Git clone 3개(GitHub·운영 Sites·개발 Sites), Git fsck, 환경 파일의 원본 일치/링크 해제, SQLite 사본 2개, 원본 첨부 7개, 최종 제출물 바이트 일치를 확인했다. 로컬의 긴 API/소셜/서명 자격증명 6개를 전체 Git 이력의 blob 1,377개와 비교해 일치가 없었다. [검사 범위](qa/handoff-2026-09-19/known-secret-scan.json)는 알려진 로컬 값에 한정하며 모든 가능한 비밀값 검출을 보증하지 않는다. 공개 테스트 비밀번호는 검사 대상에서 제외했다.
 
 앱 구현을 바꾸지 않았으므로 이전에 통과한 115개 단위검사·브라우저 검사·실 API 검사를 다시 실행하거나 새 통과 결과로 기록하지 않는다. 최종 이전 검증은 같은 폴더의 `transfer-validation.json`을 따른다.

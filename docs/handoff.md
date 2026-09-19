@@ -8,6 +8,7 @@
 - Sites를 읽기 전용으로 재조회해 운영 **v20/env5 active/public**, 개발 **v3/env2 active/custom**을 확인했다. 운영 source `567ea91c800b3077be41c7bf68fc88b5e2bb7409`, 개발 source `788ddd6b579ad2f4183e147d62e6212c1549d874` 유지. 코드·DB·환경 설정을 변경하거나 재배포하지 않았다.
 - **운영 D1 전체 내용, 마스킹된 서버 Secret 원문, 브라우저 전용 여행/쿠키는 로컬 ZIP에 없다.** D1은 테이블 목록만 확인했다. 기존 서버는 유지하며 전체 export/복구 경로와 개인 보관 비밀값 대조는 후속이다.
 - 새 PC에서는 Git clone → 비공개 env/필요한 문서 입력 복원 → Node 22 설치·로컬 D1·검사 → 현재 서비스 읽기 확인 순서로 재개한다. 원격 연결/로그인은 새로 확보한다. 기존 Site·도메인·OAuth 앱·심사 계정을 다시 만들지 않는다.
+- 이전 안내/도구 `2ee749f4be55ccdf623a1f321a2e7b148479f40d` master push 완료 후 Git bundle 3개 clone·fsck·env 동일성·SQLite 사본 2개·ZIP CRC/SHA256·최종 제출물 복원을 검증했다. [복원 검사](../reports/qa/handoff-2026-09-19/transfer-validation.json). 이 검사 기록의 후속 문서 커밋까지 push한 최종 HEAD를 ZIP에 포함한다. 앱 전체 회귀·새 배포·운영 DB 복원 검사는 실행하지 않았다.
 
 **다음 첫 행동:** 다른 저장장치에 비공개 ZIP을 복사하고 무결성을 확인한다. 브라우저에만 있는 여행이 필요하면 이전 PC에서 계정 연결/JSON 백업을 직접 완료한다. 이후 대회 후속 일정과 사용자의 다음 목표를 확인한다. 점검 항목은 [로드맵](roadmap.md)의 최신 구간을 따른다.
 
