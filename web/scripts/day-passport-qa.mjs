@@ -163,23 +163,23 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
         .evaluate((i) => i.decode())
         .catch(() => {});
       await shot('home');
-      assert.equal(await p.locator('.day-story-dialog').count(), 0);
+      assert.equal(await p.locator('.quick-intro-dialog').count(), 0);
       const beforeStory = providerCalls;
       await p
-        .getByRole('button', { name: '16초로 사용법 보기', exact: true })
+        .getByRole('button', { name: '여행 가이드 다시 보기', exact: true })
         .click();
-      await p.locator('.day-story-dialog').waitFor();
+      await p.locator('.quick-intro-dialog').waitFor();
       assert(
         await p.getByRole('button', { name: '재생', exact: true }).isVisible(),
       );
       await p.clock.install({ time: new Date('2026-10-03T01:00:00Z') });
       await p.clock.fastForward(5000);
-      assert.equal(await p.locator('.scene-0').count(), 1);
-      await p.getByRole('button', { name: '다음 장면', exact: true }).click();
-      await p.getByRole('button', { name: '다음 장면', exact: true }).click();
+      assert.equal(await p.locator('.preview-0').count(), 1);
+      await p.getByRole('button', { name: '다음 안내 장면', exact: true }).click();
+      await p.getByRole('button', { name: '다음 안내 장면', exact: true }).click();
       await shot('story');
-      await p.getByRole('button', { name: '바로 시작', exact: true }).click();
-      await p.locator('.day-story-dialog').waitFor({ state: 'hidden' });
+      await p.getByRole('button', { name: '바로 둘러볼게요', exact: true }).click();
+      await p.locator('.quick-intro-dialog').waitFor({ state: 'hidden' });
       assert.equal(providerCalls, beforeStory);
       result.checks.push(
         'Guide is optional, reduced motion starts paused, manual navigation and skip work without provider calls',
@@ -358,16 +358,16 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       await p.locator('.social-studio').waitFor({ state: 'hidden' });
       await tab('홈').click();
       await p
-        .getByRole('button', { name: '16초로 사용법 보기', exact: true })
+        .getByRole('button', { name: '여행 가이드 다시 보기', exact: true })
         .click();
       await p.getByRole('button', { name: '재생', exact: true }).click();
-      await p.clock.runFor(16100);
+      await p.clock.runFor(20100);
       assert(
         await p
           .getByRole('button', { name: '다시 보기', exact: true })
           .isVisible(),
       );
-      await p.getByRole('button', { name: '바로 시작', exact: true }).click();
+      await p.getByRole('button', { name: '바로 둘러볼게요', exact: true }).click();
       assert(
         await p.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth + 1,

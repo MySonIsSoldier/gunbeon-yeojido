@@ -74,7 +74,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       assert.equal(new URL(p.url()).pathname, '/guide');
       assert.equal(await p.locator('.guide-steps section').count(), 25);
       for (const title of [
-        '민준의 여행으로 7분 체험하기',
+        '20초 안내로 빠르게 시작하기',
         '이번 휴가 한 장으로 다음 한 수 받기',
       ])
         await p.getByRole('heading', { name: title, exact: true }).waitFor();

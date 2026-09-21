@@ -7,7 +7,7 @@ const browser=await chromium.launch({headless:true});
 const context=await browser.newContext({viewport:{width:430,height:932},locale:'ko-KR',timezoneId:'Asia/Seoul',reducedMotion:'reduce',extraHTTPHeaders:new URL(base).hostname==='localhost'?{'cf-connecting-ip':'192.0.2.201'}:{}}),p=await context.newPage(),visitor=await browser.newContext({viewport:{width:430,height:932},locale:'ko-KR'}),v=await visitor.newPage();
 p.setDefaultTimeout(30000);v.setDefaultTimeout(30000);const checks=[],errors=[];p.on('pageerror',e=>errors.push(e.message));let id;
 const shot=async name=>p.screenshot({path:out+'/'+name+'.png'});
-const guide=async(step,action)=>{await p.locator('.tester-rail button').click();await p.locator('.tester-guide-layout nav button').nth(step).click();await p.getByRole('button',{name:action,exact:true}).click()};
+const guide=async(step,action)=>{await p.getByRole('button',{name:'여행 가이드 다시 보기',exact:true}).click();await p.getByRole('button',{name:'기능별로 따라 해볼게요'}).click();await p.locator('.tester-guide-layout nav button').nth(step).click();await p.getByRole('button',{name:action,exact:true}).click()};
 const png=async name=>{await p.locator('.social-card-preview img').waitFor({timeout:90000});const [d]=await Promise.all([p.waitForEvent('download'),p.getByRole('button',{name:'PNG 저장',exact:true}).click()]);await d.saveAs(out+'/'+name+'.png');};
 try{
  await p.goto(base+'/login');await p.locator('.account-page[data-ready=true]').waitFor();await shot('01-login');

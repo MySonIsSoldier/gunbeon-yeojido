@@ -7,7 +7,7 @@ permissions:
 jobs:
   keyless-browser-flow:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: web
@@ -50,6 +50,7 @@ jobs:
           QA_OUT_FILE=test-results/browser/groups-api.json npm run test:groups
           QA_OUT_DIR=test-results/browser/groups npm run test:groups-ui
           QA_OUT_DIR=test-results/browser/itinerary npm run test:itinerary
+          QA_OUT_DIR=test-results/browser/onboarding npm run test:onboarding
           npm run test:browser
           QA_OUT_DIR=test-results/browser/guide npm run test:guide
           QA_OUT_DIR=test-results/browser/custom npm run test:custom

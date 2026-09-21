@@ -30,7 +30,7 @@ for(const channel of (process.env.QA_BROWSER_CHANNELS||'chromium').split(',')) {
    r.checks.push('Story/feed PNG preview and download; no horizontal overflow');
    await p.keyboard.press('Escape');await p.keyboard.press('Escape');await p.reload();await p.locator('.app-shell[data-ready=true]').waitFor();
    assert.equal(await p.getByRole('heading',{name:'일정은 한눈에, 편집은 필요할 때.'}).count(),0);
-   await p.locator('.tester-rail button').click();await p.locator('.tester-guide-layout nav button').nth(2).click();
+   await p.getByRole('button',{name:'여행 가이드 다시 보기',exact:true}).click();await p.getByRole('button',{name:'기능별로 따라 해볼게요'}).click();await p.locator('.tester-guide-layout nav button').nth(2).click();
    await p.getByRole('button',{name:'동행 그룹 열어보기'}).click();await p.getByRole('heading',{name:'우리 가족의 주말'}).waitFor();await shot('group');
    r.checks.push('Reload preserves workspace; guide can reopen family group');assert.equal(errors.length,0,errors.join('\n'));r.status='passed';
   }catch(e){r.status='failed';r.error=e.message;await shot('failure');}
