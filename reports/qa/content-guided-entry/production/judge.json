@@ -1,0 +1,111 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "at": "2026-09-21T04:52:07.751Z",
+  "mode": "Real existing normal account authentication; read-only UI actions; no reset",
+  "results": [
+    {
+      "width": 360,
+      "status": "passed",
+      "loginToGuideMs": 2582,
+      "stateUnchanged": true,
+      "revision": 2,
+      "entries": 4,
+      "groups": 2,
+      "errors": [],
+      "slowestRequests": [
+        {
+          "path": "/_next/static/chunks/index-DaDaDn41.js",
+          "method": "GET",
+          "durationMs": 3013
+        },
+        {
+          "path": "/_next/static/chunks/account-page-wvgAgYZ3.js",
+          "method": "GET",
+          "durationMs": 2829
+        },
+        {
+          "path": "/login",
+          "method": "GET",
+          "durationMs": 2482
+        },
+        {
+          "path": "/_next/static/chunks/Icon-jpk45vUa.js",
+          "method": "GET",
+          "durationMs": 2274
+        },
+        {
+          "path": "/brand/gunbeon-symbol.svg",
+          "method": "GET",
+          "durationMs": 2242
+        },
+        {
+          "path": "/_next/static/css/index.C8QP7SDG.css",
+          "method": "GET",
+          "durationMs": 2111
+        },
+        {
+          "path": "/_next/static/chunks/rolldown-runtime-hePW80VL.js",
+          "method": "GET",
+          "durationMs": 2046
+        },
+        {
+          "path": "/_next/static/chunks/account-client--YFuH8x-.js",
+          "method": "GET",
+          "durationMs": 1996
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "loginToGuideMs": 2545,
+      "stateUnchanged": true,
+      "revision": 2,
+      "entries": 4,
+      "groups": 2,
+      "errors": [],
+      "slowestRequests": [
+        {
+          "path": "/api/places",
+          "method": "GET",
+          "durationMs": 2487
+        },
+        {
+          "path": "/api/groups",
+          "method": "GET",
+          "durationMs": 1412
+        },
+        {
+          "path": "/api/account",
+          "method": "POST",
+          "durationMs": 1199
+        },
+        {
+          "path": "/api/account",
+          "method": "GET",
+          "durationMs": 414
+        },
+        {
+          "path": "/api/catalog",
+          "method": "GET",
+          "durationMs": 294
+        },
+        {
+          "path": "/_next/static/chunks/framework-DTZGTDtF.js",
+          "method": "GET",
+          "durationMs": 265
+        },
+        {
+          "path": "/_next/static/chunks/vinext-D9A1ysjK.js",
+          "method": "GET",
+          "durationMs": 265
+        },
+        {
+          "path": "/",
+          "method": "GET",
+          "durationMs": 252
+        }
+      ]
+    }
+  ]
+}

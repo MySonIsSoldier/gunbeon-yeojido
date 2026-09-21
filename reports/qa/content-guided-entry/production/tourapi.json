@@ -1,0 +1,72 @@
+{
+  "at": "2026-09-21T04:52:36.201Z",
+  "checks": [
+    {
+      "path": "/api/places?region=%EC%B6%98%EC%B2%9C%EC%8B%9C",
+      "status": 200,
+      "mode": "live",
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 105,
+          "error": null,
+          "fetched": 100,
+          "nextPage": 2
+        },
+        {
+          "contentTypeId": "14",
+          "total": 27,
+          "error": null,
+          "fetched": 27,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 9,
+          "error": null,
+          "fetched": 9,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 56,
+          "error": null,
+          "fetched": 56,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 22,
+          "error": null,
+          "fetched": 22,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 73,
+          "error": null,
+          "fetched": 73,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 120,
+          "error": null,
+          "fetched": 100,
+          "nextPage": 2
+        }
+      ],
+      "fetched": 387,
+      "durationMs": 3533
+    },
+    {
+      "path": "/api/places/page?region=%EC%B6%98%EC%B2%9C%EC%8B%9C&type=12&page=2",
+      "status": 200,
+      "mode": "live",
+      "fetched": 5,
+      "page": 2,
+      "nextPage": null,
+      "durationMs": 854
+    }
+  ]
+}

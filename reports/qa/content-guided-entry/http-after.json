@@ -1,0 +1,114 @@
+{
+  "at": "2026-09-21T04:50:14Z",
+  "note": "Small post-deploy sample, not a load test or uptime guarantee. Login redirect included for root.",
+  "results": [
+    {
+      "http_code": 200,
+      "time_namelookup": 0.001507,
+      "time_connect": 0.055875,
+      "time_appconnect": 0.111907,
+      "time_starttransfer": 4.249998,
+      "time_total": 4.258565,
+      "num_redirects": 1,
+      "path": "/",
+      "iteration": 1,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.00242,
+      "time_connect": 0.050987,
+      "time_appconnect": 0.099515,
+      "time_starttransfer": 0.418753,
+      "time_total": 0.42728,
+      "num_redirects": 0,
+      "path": "/login",
+      "iteration": 1,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.002839,
+      "time_connect": 0.051997,
+      "time_appconnect": 0.113988,
+      "time_starttransfer": 0.189831,
+      "time_total": 0.190782,
+      "num_redirects": 0,
+      "path": "/api/account",
+      "iteration": 1,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.003237,
+      "time_connect": 0.044758,
+      "time_appconnect": 0.099708,
+      "time_starttransfer": 0.242363,
+      "time_total": 0.251835,
+      "num_redirects": 1,
+      "path": "/",
+      "iteration": 2,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.003215,
+      "time_connect": 0.050731,
+      "time_appconnect": 0.11468,
+      "time_starttransfer": 0.303108,
+      "time_total": 0.313476,
+      "num_redirects": 0,
+      "path": "/login",
+      "iteration": 2,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.002943,
+      "time_connect": 0.042675,
+      "time_appconnect": 0.102396,
+      "time_starttransfer": 0.172939,
+      "time_total": 0.173723,
+      "num_redirects": 0,
+      "path": "/api/account",
+      "iteration": 2,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.003387,
+      "time_connect": 0.061408,
+      "time_appconnect": 0.120666,
+      "time_starttransfer": 0.269467,
+      "time_total": 0.277139,
+      "num_redirects": 1,
+      "path": "/",
+      "iteration": 3,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.002629,
+      "time_connect": 0.040362,
+      "time_appconnect": 0.108693,
+      "time_starttransfer": 0.185309,
+      "time_total": 0.195199,
+      "num_redirects": 0,
+      "path": "/login",
+      "iteration": 3,
+      "exitCode": 0
+    },
+    {
+      "http_code": 200,
+      "time_namelookup": 0.003676,
+      "time_connect": 0.046766,
+      "time_appconnect": 0.102571,
+      "time_starttransfer": 0.186122,
+      "time_total": 0.186609,
+      "num_redirects": 0,
+      "path": "/api/account",
+      "iteration": 3,
+      "exitCode": 0
+    }
+  ]
+}

@@ -47,3 +47,15 @@
 [변경 전 HTTP 측정](qa/content-guided-entry/http-before.json): 공식 루트 최초 접속→로그인 총 4.47초, 바로 로그인 0.37초, 익명 계정 조회 0.17초. 플랫폼 루트도 3.89초, 직접 로그인 0.22초였다. 도메인 DNS/SSL만의 문제라고 단정할 근거는 없다. 플랫폼/Worker 첫 처리 지연 가능성이 있으며 단발 측정으로 원인을 확정하지 않는다.
 
 배포 전 최근 Worker 오류 조회의 제한된 표본은 주로 정상 401·스캐너 404였고 실행 예외나 5xx는 없었다. 이는 전체 무장애나 SLA 증거가 아니다. 앱에서 줄일 수 있는 직렬 통신·무한 대기·사용자 피드백부터 보완했다. 운영 반영 후 계정 보존·접속 재측정 결과는 아래에 추가한다.
+
+## 운영 반영과 최종 확인
+
+- GitHub 구현 `6650be2`, [PR #31](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/31) CI verify 통과·merge `c7ccb3897cf66e6a207ffdf05f720d234b8936e9`.
+- 개발 **v4/env2**, source `b1f563a78bb8a4c3f99d807f804f870a61b37e25`. 소유자 전용 유지, 실제 로그인·bootstrap 200 및 민준 여행 5개 확인.
+- 운영 **v21/env5**, source `c2dc51a132f38fc3f7ed670c9c34804422fb6ed2`. 2026-09-21 13:49 KST 배포 성공. [배포 기록](qa/content-guided-entry/deployment.json). 운영 Secret·D1 데이터·스키마·접근 정책 변경 없음.
+- 공식 도메인에서 **일반 지정 심사 계정**의 실제 ID/비밀번호 로그인 → 자동 재생 → 일시정지 → 기능 가이드 → 읽기 일정 열기를 360/1440px로 확인했다. [운영 검사](qa/content-guided-entry/production/judge.json). 기존 여행 4개·그룹 2개·revision 2와 상태/그룹 해시가 읽기 전후 동일하다. 인증 우회·계정 초기화·여행 자동 수정 없음. 비밀번호/쿠키는 결과에 기록하지 않았다.
+- 운영 TourAPI: 춘천 7종 목록 **331건**·관광지 페이지 2 **5건** 실제 응답 200. [운영 API 확인](qa/content-guided-entry/production/tourapi.json). 로컬에만 키가 있는 상태가 아님을 별도 확인했다.
+- [HTTP 재측정](qa/content-guided-entry/http-after.json): 9회 모두 200, 최초 루트 4.26초, 이후 루트 0.25/0.28초, 직접 로그인 0.20~0.43초. **최초 접속 지연이 완전히 해소됐다고 보고하지 않는다.** 일반 로그인→안내는 첫 검사 3.06/7.10초, 재검사 2.58/2.55초였다.
+- [Worker 실행 시간](qa/content-guided-entry/production/worker-timings.json): 비로그인 루트 리다이렉트는 1~12ms, 로그인한 루트 177~188ms, private bootstrap 약 328~340ms. 조회한 10분 오류 표본 0건. 브라우저의 느린 표본은 HTML·CSS·작은 이미지·JS에도 함께 나타나 **앱 계산보다 호스팅 전달 구간/연결 초기화의 영향이 있을 것으로 추론**한다. 제공자 내부 원인은 확인하지 못했다. DNS 설정 변경·재배포 반복·API 기능 축소로 해결된다고 단정하지 않는다.
+
+다음 운영 확인은 실제 다른 네트워크/LTE에서 접속 시간과 실패 시각을 확보하는 것이다. 지연이 반복되면 위 시각·HTTP/Worker 차이를 Sites 지원 문의에 사용한다. 기관/호스팅 문의를 발송하거나 자동 감시를 등록하지 않았다.
