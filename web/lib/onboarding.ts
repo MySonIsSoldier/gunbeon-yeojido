@@ -5,6 +5,7 @@ export function guideAudience(
     | null
     | undefined,
 ) {
+  if (account?.demoPersona === 'openapi') return 'judge' as const;
   if (account?.demoPersona) return 'demo' as const;
   return account?.handle === 'openapi' ? ('judge' as const) : null;
 }

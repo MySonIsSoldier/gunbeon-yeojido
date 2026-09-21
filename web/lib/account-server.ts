@@ -1,4 +1,5 @@
 import { database, hashSecret } from './db';
+import { createDemoWorkspace } from './demo-server';
 import { env } from 'cloudflare:workers';
 export const ACCOUNT_COOKIE = 'gunbeon_account';
 export type Account = {
@@ -49,12 +50,29 @@ export async function currentAccount(r: Request): Promise<Account | null> {
       );
     return null;
   }
-  const a = await database()
+  let a = await database()
     .prepare(
       'SELECT a.id,a.nickname,a.handle,a.profile_id AS profileId,a.demo_persona AS demoPersona FROM accounts a JOIN account_sessions s ON s.account_id=a.id WHERE s.token_hash=? AND s.expires_at>?',
     )
     .bind(await hashSecret(token), Date.now())
     .first<Account>();
+  if (a?.demoPersona === 'template:openapi') {
+    const previousId = a.id;
+    const copy = await createDemoWorkspace('openapi', a);
+    // Concurrent bootstrap/group requests must converge on one workspace per session.
+    await database()
+      .prepare(
+        'UPDATE account_sessions SET account_id=? WHERE token_hash=? AND account_id=? AND expires_at>?',
+      )
+      .bind(copy.id, await hashSecret(token), previousId, Date.now())
+      .run();
+    a = await database()
+      .prepare(
+        'SELECT a.id,a.nickname,a.handle,a.profile_id AS profileId,a.demo_persona AS demoPersona FROM accounts a JOIN account_sessions s ON s.account_id=a.id WHERE s.token_hash=? AND s.expires_at>?',
+      )
+      .bind(await hashSecret(token), Date.now())
+      .first<Account>();
+  }
   const expected = r.headers.get('X-Gunbeon-Account');
   if (expected && expected !== (a?.id || 'guest'))
     throw new AccountProblem(

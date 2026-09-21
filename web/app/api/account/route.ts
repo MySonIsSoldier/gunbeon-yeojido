@@ -184,8 +184,13 @@ export async function POST(r: Request) {
       };
       // Public template credentials still pass the normal password check above.
       // Never issue a session for the template: each visitor owns a private copy.
-      if (row.demoPersona === 'template:minjun')
-        a = await createDemoWorkspace();
+      if (
+        row.demoPersona === 'template:minjun' ||
+        row.demoPersona === 'template:openapi'
+      )
+        a = await createDemoWorkspace(
+          row.demoPersona === 'template:openapi' ? 'openapi' : 'minjun',
+        );
     }
     return accountReply({ account: a }, 200, [await newSession(r, a)]);
   } catch (e) {

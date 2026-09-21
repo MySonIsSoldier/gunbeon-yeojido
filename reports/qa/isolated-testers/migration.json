@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "mode": "Isolated SQLite fixtures only",
+  "checks": [
+    "fresh database creates usable public template",
+    "upgrade preserves original credentials, state, revision, groups and sessions"
+  ]
+}

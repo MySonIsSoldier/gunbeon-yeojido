@@ -26,6 +26,8 @@
     "test:accounts-ui": "node scripts/accounts-ui-qa.mjs",
     "test:itinerary": "node scripts/itinerary-view-qa.mjs",
     "test:judging": "node scripts/judging-ui-qa.mjs",
+    "test:tester-isolation": "node scripts/isolated-testers-qa.mjs",
+    "test:tester-isolation-ui": "node scripts/isolated-testers-ui-qa.mjs",
     "test:tester": "node scripts/tester-api-qa.mjs",
     "test:tester-ui": "node scripts/tester-ui-qa.mjs",
     "test:tester-scenarios": "node scripts/tester-scenarios-qa.mjs",

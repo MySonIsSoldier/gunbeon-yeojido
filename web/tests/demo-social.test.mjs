@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { demoSeed } from '../lib/demo-persona.ts';
+import { demoSeed, judgeSeed } from '../lib/demo-persona.ts';
 import { travelSocialCard, adviceSocialCard, approximateCountdown } from '../lib/social-card.ts';
 import { validSharedPlan, sharePlan } from '../lib/group-model.ts';
 const places=JSON.parse(await readFile(new URL('../lib/data/places.json',import.meta.url)));
@@ -41,4 +41,17 @@ test('unresolved public stops block export without treating excluded private pla
  const card=travelSocialCard(entry,places);assert.equal(card.missingCount,2);
  const privateOnly={...entry,plan:{...entry.plan,stops:[{placeId:'manual:secret',stay:10,walk:0}]}};
  assert.equal(travelSocialCard(privateOnly,places).missingCount,0);
+});
+
+test('public judging examples are clean independent plans, record and groups', () => {
+ const now=new Date('2026-09-21T04:00:00Z');
+ const a=judgeSeed(now),b=judgeSeed(now);
+ assert.equal(a.state.entries.length,4);assert.equal(a.groups.length,2);
+ assert.equal(a.state.entries[2].plan.stops.length,0);
+ assert.equal(a.state.entries[3].recordStatus,'completed');
+ assert.equal(a.state.activeOuting,null);
+ assert.equal(a.state.entries[0].plan.conditions.walkLimit,20);
+ for(const g of a.groups) for(const e of g.entries) assert(validSharedPlan(sharePlan(e)));
+ a.state.entries[0].title='A changed';assert.notEqual(b.state.entries[0].title,'A changed');
+ assert(!JSON.stringify(b).includes('image_url'));
 });

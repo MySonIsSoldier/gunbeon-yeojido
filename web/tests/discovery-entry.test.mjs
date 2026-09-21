@@ -28,6 +28,7 @@ test('six complete routes in each border county have coordinates, distinct stops
 test('guide is presentation-only for the authenticated judge or isolated persona', () => {
  assert.equal(guideAudience({handle:'openapi'}),'judge');
  assert.equal(guideAudience({handle:null,demoPersona:'minjun'}),'demo');
+ assert.equal(guideAudience({handle:null,demoPersona:'openapi'}),'judge');
  assert.equal(guideAudience({handle:'other'}),null);
  assert.equal(guideAudience(null),null);
 });
