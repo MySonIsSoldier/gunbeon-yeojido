@@ -129,3 +129,16 @@ API 검사는 쿠키가 분리된 작성자/방문자/외부인 3개 HTTP 세션
 - `cd web` 후 `npm run test:accounts`, `QA_BROWSER_CHANNELS=chromium QA_CASES=small,desktop npm run test:accounts-ui`를 실행한다.
 - 운영에서 같은 계정으로 로그인하면 개인 여행·그룹을 이어갈 수 있다. 로컬 D1과 운영 D1은 별도이므로 운영 계정이 로컬에도 자동 존재하는 것은 아니다.
 - 게스트의 기기 기록은 내 계정의 가져오기로 명시적으로 연결한다. Git clone이 localStorage/쿠키를 옮겨주지는 않는다.
+
+
+## 공개 테스트 계정 격리 (9/21)
+
+`0006_isolated_openapi_tester.sql`까지 로컬 migration을 적용하면 민준과 openapi 자동입력 로그인을 모두 검사할 수 있다. 기존 openapi 자료를 다시 준비하는 `prepare-judge-account.mjs`는 실행하지 않는다. 두 계정은 새 로그인마다 별도 체험 사본, 같은 유효 세션에서는 저장 유지다.
+
+```sh
+cd web
+npm run test:tester-isolation
+QA_BROWSER_CHANNELS=chromium npm run test:tester-isolation-ui
+```
+
+첫 검사는 실제 D1 계정/그룹 격리와 로컬 전용 합성 레거시 세션 전환을 검사한다. `QA_BASE_URL`이 localhost일 때만 직접 로컬 fixture를 구성하며 운영 원본/개인 계정은 수정하지 않는다. 자세한 계약과 실행 결과는 [보고서](../reports/isolated_test_accounts_2026-09-21.md)를 따른다.

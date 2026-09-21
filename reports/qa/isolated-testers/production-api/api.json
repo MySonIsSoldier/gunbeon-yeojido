@@ -1,0 +1,10 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "at": "2026-09-21T05:55:27.097Z",
+  "status": "passed",
+  "mode": "Real authentication and D1 APIs; only disposable tester workspaces changed",
+  "checks": [
+    "minjun_demo: concurrent login isolation; travel and group create/edit persist only within session; cookie restoration; logout revocation; pristine relogin; no cross-read/write or personal OAuth/import",
+    "openapi: concurrent login isolation; travel and group create/edit persist only within session; cookie restoration; logout revocation; pristine relogin; no cross-read/write or personal OAuth/import"
+  ]
+}

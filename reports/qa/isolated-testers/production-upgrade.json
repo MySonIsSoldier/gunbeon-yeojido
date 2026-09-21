@@ -1,0 +1,12 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "at": "2026-09-21T05:54:46.678Z",
+  "status": "passed",
+  "checks": [
+    "Pre-deployment real openapi session continued with the same cookie after release",
+    "Private travel and group plan fingerprints retained in its isolated workspace",
+    "New account identity; authentication template and other sessions not overwritten"
+  ],
+  "entries": 4,
+  "groups": 2
+}

@@ -1,0 +1,40 @@
+{
+  "base": "https://gunbeon.gangwon.kr",
+  "at": "2026-09-21T05:55:23.485Z",
+  "mode": "Real browser authentication and own disposable tester state; viewport emulation",
+  "results": [
+    {
+      "channel": "chromium",
+      "width": 320,
+      "checks": [
+        "Secondary openapi autofill and both-account notice",
+        "Judge automatic guide; actual empty trip save; reload keeps changes; logout and relogin starts clean",
+        "No horizontal overflow or uncaught errors"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chromium",
+      "width": 430,
+      "checks": [
+        "Secondary openapi autofill and both-account notice",
+        "Judge automatic guide; actual empty trip save; reload keeps changes; logout and relogin starts clean",
+        "No horizontal overflow or uncaught errors"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chromium",
+      "width": 1440,
+      "checks": [
+        "Secondary openapi autofill and both-account notice",
+        "Judge automatic guide; actual empty trip save; reload keeps changes; logout and relogin starts clean",
+        "No horizontal overflow or uncaught errors"
+      ],
+      "errors": [],
+      "status": "passed"
+    }
+  ]
+}

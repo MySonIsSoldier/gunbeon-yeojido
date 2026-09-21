@@ -31,4 +31,8 @@
 
 ## 배포
 
-로컬 검사 완료. 개발 환경 선행 배포 및 실제 격리 검사 후 운영에 반영하고 결과를 기록한다.
+- [PR #33](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/33) 병합 `08b3967edca0ab4d21c29fd81f538eae236dfde1`, 구현 `5110c0d`. 품질 CI 2개와 [전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/35565886997) 통과(6분51초). 중복 수동 브라우저 실행은 취소했다.
+- 개발 v6/env2 → 실제 두 계정 API 격리·UI 검사 → 운영 v23/env5 순서로 반영했다. [정확한 배포/source SHA](qa/isolated-testers/deployment.json). 기존 Secret/D1·접근 범위 유지. migration0006은 배포에 포함됐다.
+- 개발과 공식 운영 주소에서 동일한 실제 API 검사 및 Chromium 320/430/1440px 로그인→저장→새로고침→로그아웃→초기 예시 복귀가 각각 통과했다. 원본 인증 계정이나 개인 계정에 테스트 여행을 쓰지 않았다.
+- 배포 전 실제 openapi 세션을 확보한 뒤 배포 후 같은 쿠키로 확인했다. 새 독립 계정 ID로 바뀌었지만 원래 여행4개/그룹2개의 내용 fingerprint가 동일했다. [운영 전환 검증](qa/isolated-testers/production-upgrade.json). 검증용 private cookie 파일은 검사 후 삭제했다.
+- GitHub master에 소스·검사·캡처·agent/인계 문서를 보존한다. 제출 PDF v3.2는 이미 제출한 과거 자료로 유지했다.

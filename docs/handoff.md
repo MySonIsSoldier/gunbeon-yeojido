@@ -1,3 +1,17 @@
+# 9/21 최신: 공개 테스트 계정별 독립 체험 운영 반영
+
+[구현·전환·검증](../reports/isolated_test_accounts_2026-09-21.md). 운영 **v23/env5**, 개발 **v6/env2** 배포 완료. 로그인 화면의 민준 아래 작은 **openapi 테스트 계정 넣기**와 두 계정 주의사항을 추가했다.
+
+- 두 공개 계정 모두 정상 비밀번호 인증 후 로그인마다 독립 account/profile/travel/groups를 받는다. 같은 세션의 새로고침·재방문은 수정 유지, 로그아웃/다른 기기/재로그인은 초기 예시다. 개인 계정의 장기 저장은 유지한다. 민준 5개 entry/3그룹, openapi 4개 entry/2그룹.
+- 사용자 최신 요청은 과거 ‘openapi 공유 일반 계정 지속 저장’ 규칙을 대체한다. migration0006은 원본 비밀번호·여행·그룹·세션을 삭제하지 않는다. 이전 로그인 세션은 원래 저장 내용을 독립 사본으로 받아 계속 이용한다. 동시 변환과 이전 화면 쓰기 충돌을 보호한다.
+- GitHub `jun/isolated-test-accounts` 구현 `5110c0d`, [PR #33](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/33) 병합 `08b3967edca0ab4d21c29fd81f538eae236dfde1`. master로 동기화했다. 최종 운영 증빙·agent 문서는 후속 문서 commit으로 push하며 최종 SHA는 `git log -1`로 확인한다.
+- 개발 source `1f5255c93ca689130c86a3ed2c528e6185563ef8`, 운영 source `eb2a6d30b3cb017e0f1c4338d88243cb56d99149`. [배포 결과](../reports/qa/isolated-testers/deployment.json). 개발 owner-only/운영 public 및 Secret/기존 DB 유지.
+- typecheck·121단위·빌드·두 테스트 계정/기존 일반 계정 API 회귀·SQLite migration 보존 검사·Chrome/Chromium 320/430/1440px 로컬 6개 통과. [전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/35565886997) 및 품질 CI2개 통과.
+- 개발/공식 운영 주소 각각 실제 두 계정 API 격리와 3개 화면 UI 통과. 실제 배포 전 openapi 세션의 여행4개/그룹2개는 배포 후 독립 사본에도 fingerprint가 동일했다. 해당 검증용 쿠키는 tmp/0600에서만 사용 후 삭제했다. 물리 기기/Edge·새 Google/Naver 동의는 이번에 검사하지 않았다.
+- 기존 심사 계정 준비 스크립트를 다시 실행하지 않는다. `scripts/verify-guided-entry.mjs`는 새 공개 테스트 격리 검사를 실행한다. 신규 `test:tester-isolation`, `test:tester-isolation-ui`를 유지한다. 다른 PC는 migration0006까지 적용하고 최신 소스를 받는다.
+
+**다음 첫 행동:** 실제 휴대폰에서 테스트 계정 선택→편집→새로고침 유지→로그아웃→초기 예시를 확인한다. 실제 동행자 초대/소셜 계정 연결은 개인 계정에서 검사한다. 이전 서버 첫 접속 지연·운영 DB 전체 복구 준비는 별도 후속이다. 제출 PDF·이전 비공개 묶음은 과거 시점 자료를 보존한다.
+
 # 9/21 최신: 모든 사용자 상단 여행 가이드 배포 완료
 
 [구현·검증 기록](../reports/universal_guide_2026-09-21.md). 사용자 요청에 따라 회원/비회원 모두 상단 **여행 가이드 다시 보기**를 사용할 수 있다. 운영 **v22/env5**, 개발 **v5/env2**에 반영했다. 아래 콘텐츠 확장·심사 계정 기록은 그대로 유효하다.
