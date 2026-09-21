@@ -1,0 +1,37 @@
+{
+  "source": "output/submission/2026-round1-v3/gunbeon-2026-round1-functions-v3.2.pptx",
+  "changes": [
+    {"slide":5,"shape":8,"old":"접경 5군 추천 코스와 관광공사 장소 검색","text":"접경 5군·관문도시 추천 코스 36개와 장소 탐색"},
+    {"slide":6,"shape":5,"old":"Google·네이버로 내 여행을 시작하거나,\n민준의 휴가를 따라 체험합니다.\n준비된 일정에서 장소·시간을 바꿉니다.","text":"Google·네이버·아이디 로그인과 연결,\n민준·openapi 예시 체험을 제공합니다.\n20초 안내 뒤 기능별로 따라 해 봅니다."},
+    {"slide":6,"shape":9,"old":"개인 계정 로그인 또는 민준 체험","text":"개인 계정 또는 테스트 계정"},
+    {"slide":6,"shape":12,"old":"준비된 여행 확인","text":"여행·그룹 예시 확인"},
+    {"slide":6,"shape":13,"old":"계획 4개 · 그룹 3개 · 기록 1개","text":"로그인마다 독립된 예시 제공"},
+    {"slide":6,"shape":16,"old":"기능 화면에서 직접 실행","text":"실제 기능으로 이동"},
+    {"slide":6,"shape":17,"old":"5단계 가이드에서 바로 이동","text":"5단계 안내 · 상단에서 다시 보기"},
+    {"slide":6,"shape":19,"old":"민준의 단계별 체험 가이드","text":"누구나 따라 하는 기능 가이드"},
+    {"slide":6,"shape":22,"old":"개인 계정에서 로그인 수단 연결","text":"테스트: 로그인 중 유지 · 재로그인 초기화"},
+    {"slide":6,"shape":23,"old":"가상 인물 · 테스터별 별도 사본","text":"20초 안내 · 누구나 상단에서 다시 보기"},
+    {"slide":7,"shape":5,"old":"추천 코스를 가져오거나 빈 일정에서\n시작해 관광지·음식점·숙박을\n검색하고 추가합니다.","text":"추천 코스 36개 또는 빈 일정에서\n시작합니다. 장소를 골라 담고,\n저장한 일정에서 날짜·시간을 정합니다."},
+    {"slide":7,"shape":8,"old":"출발 권역 선택","text":"권역·관심사로 탐색"},
+    {"slide":7,"shape":9,"old":"강원 7개 권역에서 장소 탐색","text":"접경 5군과 춘천·속초 추천 코스"},
+    {"slide":7,"shape":12,"old":"관광정보 검색","text":"장소 찾기·상세 확인"},
+    {"slide":7,"shape":13,"old":"장소명·유형으로 후보 확인","text":"7개 유형 검색 · 추가 목록 조회"},
+    {"slide":7,"shape":16,"old":"일정에 추가","text":"내 일정으로 가져오기"},
+    {"slide":7,"shape":17,"old":"직접 입력한 장소도 추가 가능","text":"한 장소부터 시작 · 직접 입력 가능"},
+    {"slide":7,"shape":18,"old":"관광정보 검색 · 실제 장소 추가","text":"장소 찾기 · 상세 확인 후 일정으로"},
+    {"slide":9,"shape":9,"old":"초대코드로 동행자 연결","text":"실제 지인 초대는 개인 계정에서"},
+    {"slide":16,"shape":8,"old":"관광지·음식점·숙박 등 장소 검색\n선택한 장소로 일정표와 지도 구성\n좌표를 이용해 이동시간 추정","text":"7개 유형 검색·목록 추가 조회\n선택한 장소로 일정표와 지도 구성\n좌표를 활용한 이동시간 추정"}
+  ],
+  "images": [
+    {"slide":6,"picture":44,"path":"reports/qa/description-v3-3/screens/01-login.png"},
+    {"slide":6,"picture":45,"path":"reports/qa/description-v3-3/screens/03-guide.png"},
+    {"slide":7,"picture":39,"path":"reports/qa/description-v3-3/screens/04-places-full.png","cropPixels":[12,323,405,536]}
+  ],
+  "notes": {
+    "5":"2026-09-21 기준 추천 코스 36개: 철원·화천·양구·인제·고성 각 6개, 춘천·속초 각 3개. 관문 코스는 필요한 실제 API 장소가 조회될 때 표시된다. 근거: web/lib/discovery.ts, reports/content_guided_entry_2026-09-21.md.",
+    "6":"2026-09-21 운영 v23 기준. 민준 및 openapi 모두 로그인마다 독립 계정·여행·그룹 사본을 생성한다. 민준: 계획 4개·기록 1개·그룹 3개, openapi: 계획 3개·기록 1개·그룹 2개. 수정은 유효한 동일 로그인 세션에서 임시 유지되며 재로그인·별도 기기의 새 로그인은 초기 예시로 시작한다. 다른 기기의 로그인은 기존 세션을 초기화하지 않는다. 개인 계정의 지속 저장·Google/Naver 연결은 그대로이며 테스트 계정은 개인 OAuth 연결·실제 동행 초대/참여·기기자료 가져오기를 제한한다. 20초 안내와 5단계 가이드는 모든 사용자가 상단에서 다시 열 수 있다. 건너뛰기·일시정지·모션 감소 지원. 캡처: reports/qa/description-v3-3/screens. 구현 근거: reports/isolated_test_accounts_2026-09-21.md, reports/universal_guide_2026-09-21.md. 개인 소셜 동의 화면을 이번 문서 작업에서 다시 촬영한 것은 아니다.",
+    "7":"2026-09-21 현재 둘러보기는 날짜 없이 추천 코스·장소를 탐색한다. 저장 일정에서 출발 날짜/시각과 개인 복귀 기준을 입력한다. 관광공사 7개 유형은 관광지(12), 문화시설(14), 행사/축제(15), 레포츠(28), 숙박(32), 쇼핑(38), 음식점(39). 한 장소로 새 일정 작성·기존 일정 편집 중 추가·직접 입력·빈 일정 저장을 지원한다. 추가 조회는 제공자의 실제 pageNo로 요청한다. 캡처는 운영 서비스의 실제 검색 화면이며 관광지 사진 출처는 ⓒ한국관광공사. 증거: reports/qa/content-guided-entry/live-content.json, reports/qa/content-guided-entry/production/tourapi.json, reports/qa/description-v3-3/screens/capture.json.",
+    "9":"동행 그룹은 초대코드로 함께 일정을 작성하고 개인 사본으로 가져온다. 개인 복귀 시각·출타 진행·방문 기록은 그룹에 자동 전송되지 않으며 공동 원본과 개인 사본은 자동 동기화되지 않는다. 2026-09-21 기준 민준·openapi 테스트 계정은 실제 지인 초대·참여가 제한되고 예시 그룹 또는 자기 체험 공간의 그룹을 사용한다. 개인 계정에서 실제 초대·참여 기능을 이용한다. 캡처는 기존 9/16 검증의 실제 게스트 2인 초대/참여·공동 일정과 개인 사본이며 임시 그룹만 촬영 후 정리했다. 근거: reports/qa/submission-2026-09-16/redesign/meta.json, reports/isolated_test_accounts_2026-09-21.md.",
+    "16":"2026-09-21 확인: 한국관광공사 실사용 OpenAPI 서비스는 여전히 KorService2와 KorWithService2 2종이다. 7개 유형은 국문 서비스 안의 contentTypeId 분류로, API 서비스 7종이 아니다. 국문 지역 목록·키워드 검색·추가 페이지·공통/소개 상세·제공 대표 이미지를 사용하며 무장애 상세를 연결한다. 정상 API 응답과 사진 원문을 D1에 적재하지 않고 페이지 메모리에서 재사용한다. 개인 DB에는 사용자 작성 일정과 허용된 장소 참조만 저장한다. 집중률·중심·연관 API는 검증만 했으므로 실사용 목록에 추가하지 않는다. 실제 API 증거: reports/qa/content-guided-entry/production/tourapi.json. 구현: web/lib/tour-api.ts, web/lib/page-cache.ts. 운영 정책: reports/tourapi_operations_policy.md."
+  }
+}

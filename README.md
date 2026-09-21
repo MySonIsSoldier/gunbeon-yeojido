@@ -1,5 +1,7 @@
 # 군번여지도 강원
 
+[서비스 기능설명서 v3.3 PDF](output/pdf/gunbeon-2026-round1-functions-v3.3.pdf) · [편집 원본](output/submission/2026-round1-v3.3/gunbeon-2026-round1-functions-v3.3.pptx) · [9/21 보완 내역](docs/submission/2026-round1/editorial-review-v3-3.md). 기존 18쪽 양식을 유지한 현재 기능 설명본이며 이전 v3.2 제출 자료는 보존합니다.
+
 **회원가입 없이 체험:** [민준 테스터로 시작](https://gunbeon.gangwon.kr/login) → 민준 또는 작은 **openapi 테스트 계정 넣기** 선택 → 체험 시작. 두 계정 모두 로그인마다 독립된 초기 예시를 받습니다. 로그인 중 수정한 여행·그룹은 새로고침해도 유지되고, 로그아웃 후 재로그인하거나 다른 기기에서 로그인하면 새 예시로 시작합니다. 민준은 가상 계획4개·그룹3개·기록1개, openapi는 계획3개·그룹2개·기록1개를 각자 사본으로 이용하고, 20초 자동 안내와 기능별 가이드로 직접 따라할 수 있습니다. [사용법](https://gunbeon.gangwon.kr/guide) · [새 기능/검증 기록](reports/tester-social-delivery.md).
 
 

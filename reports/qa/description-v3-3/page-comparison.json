@@ -1,0 +1,92 @@
+[
+  {
+    "page": 1,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 2,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 3,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 4,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 5,
+    "identicalRenderedPixels": false,
+    "expectedChanged": true
+  },
+  {
+    "page": 6,
+    "identicalRenderedPixels": false,
+    "expectedChanged": true
+  },
+  {
+    "page": 7,
+    "identicalRenderedPixels": false,
+    "expectedChanged": true
+  },
+  {
+    "page": 8,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 9,
+    "identicalRenderedPixels": false,
+    "expectedChanged": true
+  },
+  {
+    "page": 10,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 11,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 12,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 13,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 14,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 15,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 16,
+    "identicalRenderedPixels": false,
+    "expectedChanged": true
+  },
+  {
+    "page": 17,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  },
+  {
+    "page": 18,
+    "identicalRenderedPixels": true,
+    "expectedChanged": false
+  }
+]

@@ -1,4 +1,25 @@
-# v3 재제작 추가
+# v3.3 · 기존 형식 보존 개정
+
+2026-09-21 최신 설명서 보완본은 **18쪽 v3.3**이다. 원본 v3.2를 다시 디자인하지 않고 5·6·7·9·16쪽의 내용만 바꾼다. [검토](../../docs/submission/2026-round1/editorial-review-v3-3.md).
+
+아래 환경 준비의 `RUNTIME_NODE_MODULES`, `RUNTIME_PYTHON`, `PRESENTATIONS_SKILL_DIR`, LibreOffice/Poppler를 먼저 설정한다. 원본 v3.2와 추적된 캡처가 있으면 네트워크 없이 문서를 재제작할 수 있다. `capture-description-v3-3.mjs`는 **화면 갱신이 필요한 경우에만** 운영 주소에서 독립 openapi 체험을 촬영한다. 캡처 프레임을 바꾸면 `description-v3-3.json`의 cropPixels도 실제 화면과 대조한다.
+
+```sh
+node scripts/submission/revise-description-v3-3.mjs
+node scripts/submission/finalize-description-v3-3.mjs
+SUBMISSION_BUILD_DIR=tmp/submission-v3-3 \
+SUBMISSION_FINAL_PATH=output/submission/2026-round1-v3.3/gunbeon-2026-round1-functions-v3.3.pptx \
+SUBMISSION_PDF_PATH=output/pdf/gunbeon-2026-round1-functions-v3.3.pdf \
+"$RUNTIME_PYTHON" scripts/submission/export-description-v3.py
+```
+
+- 기존 출력이 있으면 확정/변환은 중단한다. 새 개정은 `SUBMISSION_FINAL_PATH`, `SUBMISSION_PDF_PATH`, `SUBMISSION_BUILD_DIR`를 새 경로로 지정하고 기존 최종본을 덮어쓰지 않는다.
+- 내용 목록은 `description-v3-3.json`. Artifact Tool의 기존 객체 편집을 확인한 뒤 `preserve-description-v3-3.py`가 원본의 스타일·좌표·표·테마를 보존한 패키지를 만든다. 허용하지 않은 변경은 assert로 중단한다.
+- 최종화는 원본 글꼴 정책·18쪽·네이티브 표 1/3/11쪽과 재열기를 검사한다. PDF는 모든 Pretendard 글꼴 포함·10MB 이하를 검사하고 18쪽을 렌더한다.
+- 최종 변경 페이지는 원본과 나란히 검토하고, 나머지 페이지의 렌더 픽셀 동일성을 확인한다. 자동 검사만으로 시각 검수를 완료 처리하지 않는다. 결과는 `reports/qa/description-v3-3/`에 있다.
+- 예전 package-description-v3.py는 v3.2 제출 키트용이다. 새 수정본을 이 스크립트로 덮어쓰지 않는다.
+
+# v3 재제작 이력
 
 최신본은 **18쪽 v3.2**입니다. 9/17 새 공식 양식 대조 후 PDF/PPTX는 유지하고 접수 문서·키트만 갱신했습니다. 아래 v2환경준비후 `build-description-v3.mjs` → `finalize-description-v3.mjs` → `export-description-v3.py` → 전18쪽검수 → `package-description-v3.py`를 실행합니다. 네이티브표 소유페이지1·3·11, 빌드폴더`tmp/submission-v3`, 출력`output/submission/2026-round1-v3`입니다. 추가 실제캡처는 `reports/qa/tester-social/scenarios`에 있습니다.
 

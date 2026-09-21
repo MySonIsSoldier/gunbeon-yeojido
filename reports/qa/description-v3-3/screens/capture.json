@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-21T06:17:50.657Z",
+  "base": "https://gunbeon.gangwon.kr",
+  "viewport": {
+    "width": 430,
+    "height": 932
+  },
+  "mode": "Live production; isolated openapi demo; no response mocks; no travel/group edits; reduced motion for still capture",
+  "files": [
+    "01-login.png",
+    "02-intro.png",
+    "03-guide.png",
+    "04-places-full.png",
+    "04-places.png"
+  ],
+  "errors": []
+}

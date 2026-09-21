@@ -1,0 +1,57 @@
+{
+  "at": "2026-09-21T06:28:00.904230+00:00",
+  "baseline": "v3.2, 18 pages",
+  "changedPages": [
+    5,
+    6,
+    7,
+    9,
+    16
+  ],
+  "textEdits": 20,
+  "unchangedPagesPixelIdentical": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18
+  ],
+  "allSlideGeometryFontsTablesAndMastersPreserved": true,
+  "all18PagesRendered": true,
+  "deckContactSheetReviewed": true,
+  "changedPagesReviewedAtFullSize": [
+    5,
+    6,
+    7,
+    9,
+    16
+  ],
+  "pptxIntegrityLayoutAndReimport": "pass",
+  "pdfPages": 18,
+  "pdfAllFontsEmbedded": "Pretendard",
+  "pdfUnder10MB": true,
+  "originalV3_2Preserved": true,
+  "reviewedInPowerPointApp": false,
+  "siteDeploymentChanged": false,
+  "appChecksRerunLocally": false,
+  "files": [
+    {
+      "path": "output/pdf/gunbeon-2026-round1-functions-v3.3.pdf",
+      "bytes": 1823726,
+      "sha256": "b2d3934f9b8828ca35d7c36bb027e5bf8765f73e390270f7d1c10979e6a623f9"
+    },
+    {
+      "path": "output/submission/2026-round1-v3.3/gunbeon-2026-round1-functions-v3.3.pptx",
+      "bytes": 3690355,
+      "sha256": "7ac910f1ef4a9126965e02c24d9691ac1b3627fe2c70d1d921e53e38697e8d69"
+    }
+  ]
+}

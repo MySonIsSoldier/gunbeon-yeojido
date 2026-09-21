@@ -123,6 +123,13 @@ npm run build
 - `npm run test:tester`, `test:tester-ui`, `test:tester-scenarios`와115개단위/기존accounts·advice회귀. 로컬 반복검사의 네트워크주소 헤더는 localhost에만 적용한다.
 - 최신설명서 v3.2·18쪽. 제작스크립트는 v3 접미사, 최종파일은v3.2다. [전달기록](reports/tester-social-delivery.md), [공개체험 안내](docs/submission/2026-round1/rehearsal.md) 확인.
 
+## 9/21 기능설명서 형식 보존 개정
+
+- 현재 기능 설명용 최신본은 **v3.3·18쪽**, 기존 v3.2와 제출 ZIP은 당시 자료다. [보완 검토](docs/submission/2026-round1/editorial-review-v3-3.md), [재제작](scripts/submission/README.md)를 따른다.
+- 사용자가 형식 변경을 금지했다. 표지·순서·핵심 5개·글꼴·도형 좌표·표·이미지 프레임은 그대로 두고 내용만 수정한다. v3.3은 5/6/7/9/16쪽만 변경하며 13쪽의 렌더 픽셀은 v3.2와 같다.
+- 공개 테스트 계정 둘 다 독립 체험이다. 같은 로그인 중 임시 수정 유지·재로그인 초기 예시, 실제 지인 초대는 개인 계정에서 이용한다는 설명을 보존한다. 국문 7개 장소 유형을 OpenAPI 7종으로 세지 않는다. 실사용 공사 서비스는 2종이다.
+- 원본 PPTX를 보존하고 `revise-description-v3-3.mjs` → `finalize-description-v3-3.mjs` → 기존 PDF export에 새 경로를 지정한다. 재검수 없이 이전 제출 ZIP을 새 버전으로 덮어쓰지 않는다. 문서 수정만으로 앱 배포나 재접수를 실행하지 않는다.
+
 ## 9/21 콘텐츠와 빠른 시작
 
 - `reports/content_guided_entry_2026-09-21.md`·최신 handoff를 읽는다. 추천 36개는 전체 장소 참조가 있을 때 생성한다. 관문 코스에 가짜 기본 장소를 넣지 않는다. TourAPI 7종과 실제 페이지 연속 조회, 상세/검색/사진을 유지한다.

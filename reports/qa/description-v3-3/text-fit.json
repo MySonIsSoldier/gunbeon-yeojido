@@ -1,0 +1,142 @@
+[
+  {
+    "slide": 5,
+    "shape": 8,
+    "measuredWidthPx": 437.8,
+    "originalBoxWidthPx": 900.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 5,
+    "measuredWidthPx": 350.3,
+    "originalBoxWidthPx": 418.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 9,
+    "measuredWidthPx": 210.3,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 12,
+    "measuredWidthPx": 183.5,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 13,
+    "measuredWidthPx": 222.6,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 16,
+    "measuredWidthPx": 177.0,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 17,
+    "measuredWidthPx": 249.6,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 19,
+    "measuredWidthPx": 260.8,
+    "originalBoxWidthPx": 330.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 22,
+    "measuredWidthPx": 299.8,
+    "originalBoxWidthPx": 363.0,
+    "fits": true
+  },
+  {
+    "slide": 6,
+    "shape": 23,
+    "measuredWidthPx": 285.3,
+    "originalBoxWidthPx": 337.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 5,
+    "measuredWidthPx": 347.4,
+    "originalBoxWidthPx": 418.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 8,
+    "measuredWidthPx": 177.8,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 9,
+    "measuredWidthPx": 244.6,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 12,
+    "measuredWidthPx": 183.5,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 13,
+    "measuredWidthPx": 236.4,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 16,
+    "measuredWidthPx": 197.7,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 17,
+    "measuredWidthPx": 260.0,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 7,
+    "shape": 18,
+    "measuredWidthPx": 298.0,
+    "originalBoxWidthPx": 645.0,
+    "fits": true
+  },
+  {
+    "slide": 9,
+    "shape": 9,
+    "measuredWidthPx": 244.9,
+    "originalBoxWidthPx": 318.0,
+    "fits": true
+  },
+  {
+    "slide": 16,
+    "shape": 8,
+    "measuredWidthPx": 313.8,
+    "originalBoxWidthPx": 550.0,
+    "fits": true
+  }
+]

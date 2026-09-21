@@ -1,0 +1,61 @@
+{
+  "source": "output/submission/2026-round1-v3/gunbeon-2026-round1-functions-v3.2.pptx",
+  "sourceSha256": "f1925e420ed1f0b74734ab460fbb7b1df2ed82e08616ae311085326bb2b8fb65",
+  "candidateSha256": "7ac910f1ef4a9126965e02c24d9691ac1b3627fe2c70d1d921e53e38697e8d69",
+  "slideCount": 18,
+  "changedSlides": [
+    5,
+    6,
+    7,
+    9,
+    16
+  ],
+  "textEdits": 20,
+  "changedPackageParts": [
+    "ppt/media/image12.png",
+    "ppt/media/image13.png",
+    "ppt/media/image14.png",
+    "ppt/notesSlides/notesSlide16.xml",
+    "ppt/notesSlides/notesSlide5.xml",
+    "ppt/notesSlides/notesSlide6.xml",
+    "ppt/notesSlides/notesSlide7.xml",
+    "ppt/notesSlides/notesSlide9.xml",
+    "ppt/slides/slide16.xml",
+    "ppt/slides/slide5.xml",
+    "ppt/slides/slide6.xml",
+    "ppt/slides/slide7.xml",
+    "ppt/slides/slide9.xml"
+  ],
+  "identicalPackageParts": 125,
+  "allSlideGeometryAndTextFormattingUnchanged": true,
+  "mastersLayoutsThemesAndOrderingByteIdentical": true,
+  "images": [
+    {
+      "slide": 6,
+      "picture": 44,
+      "path": "reports/qa/description-v3-3/screens/01-login.png",
+      "media": "ppt/media/image12.png",
+      "sha256": "6bf252a8d2caa1e8fcc1f815e951c20281382fe47e0517573c35b01e9fe18b09"
+    },
+    {
+      "slide": 6,
+      "picture": 45,
+      "path": "reports/qa/description-v3-3/screens/03-guide.png",
+      "media": "ppt/media/image13.png",
+      "sha256": "cbc1f3322a04515ff8070d19d8970e2b119d6d166ba769983a38cfcdfb9551d5"
+    },
+    {
+      "slide": 7,
+      "picture": 39,
+      "path": "reports/qa/description-v3-3/screens/04-places-full.png",
+      "cropPixels": [
+        12,
+        323,
+        405,
+        536
+      ],
+      "media": "ppt/media/image14.png",
+      "sha256": "8ab3fe1ab657fa3e5cf30992eae92a6cf1525d916865262a511462cce4f9521e"
+    }
+  ]
+}
