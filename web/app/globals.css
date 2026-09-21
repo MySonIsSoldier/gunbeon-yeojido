@@ -129,7 +129,7 @@ input {
 .main-nav [data-slot='tabs-trigger']:after {
   display: none;
 }
-[data-slot='button'] {
+:is([data-slot='button'], [data-ui-button]) {
   min-height: 44px;
   padding: 10px 16px;
   font-size: 14px;
@@ -138,8 +138,13 @@ input {
   cursor: pointer;
   box-shadow: none;
 }
-[data-slot='button']:disabled {
+:is([data-slot='button'], [data-ui-button]):disabled {
   cursor: not-allowed;
+}
+[data-slot='alert-dialog-content'] {
+  width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
 }
 .primary-cta {
   width: 100%;
@@ -5265,7 +5270,7 @@ input {
   position: sticky;
   bottom: -16px;
   background: white;
-  padding: 12px 0 4px;
+  padding: 12px 16px 16px;
   z-index: 1;
 }
 
@@ -6685,7 +6690,12 @@ input {
   color: var(--muted-foreground);
   font-size: 14px;
 }
-.trip-read-footer > button {
+.trip-read-footer-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.trip-read-footer-actions > button {
   min-height: 48px;
   min-width: 160px;
 }
@@ -6752,12 +6762,16 @@ input {
   }
   .trip-read-footer {
     padding: 12px 20px max(12px, env(safe-area-inset-bottom));
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
   .trip-read-footer > span {
     font-size: 12px;
   }
-  .trip-read-footer > button {
-    min-width: 135px;
+  .trip-read-footer-actions > button {
+    flex: 1;
+    min-width: 0;
   }
   .trip-read-tip {
     margin: 0;
@@ -7035,11 +7049,13 @@ input {
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 28px;
+  min-width: 0;
 }
 .tester-guide-layout nav {
   display: flex;
   flex-direction: column;
   gap: 7px;
+  min-width: 0;
 }
 .tester-guide-layout nav button {
   text-align: left;
@@ -7105,6 +7121,7 @@ input {
   line-height: 1.8;
 }
 .tester-guide-task > button {
+  margin-top: 18px;
   width: 100%;
   min-height: 48px;
 }

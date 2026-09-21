@@ -35,12 +35,12 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         .getByRole('button', { name: '여행 가이드 다시 보기', exact: true })
         .click();
       await p
-        .getByRole('heading', { name: '일정은 한눈에, 편집은 필요할 때.' })
+        .getByRole('heading', { name: '기능별로 따라 해볼게요' })
         .waitFor();
     };
     const step = async (index) => {
       await open();
-      await p.getByRole('button', { name: '기능별로 따라 해볼게요' }).click();
+
       await p.locator('.tester-guide-layout nav button').nth(index).click();
     };
     try {
@@ -63,9 +63,12 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         .boundingBox();
       assert(guideBox.y < 220 && guideBox.height >= 40);
       await open();
+      assert.equal(await p.locator('.quick-intro-dialog').count(), 0);
+      await p.getByRole('button', { name: '20초 애니메이션으로 보기' }).click();
       assert(
         await p.getByRole('button', { name: '재생', exact: true }).isVisible(),
       );
+      await p.getByRole('button', { name: '기능별로 따라 해볼게요' }).click();
       await p.waitForTimeout(250);
       await shot('guide');
       await p

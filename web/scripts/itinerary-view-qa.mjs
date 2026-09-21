@@ -148,7 +148,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         .getByRole('button', { name: '일정 편집', exact: true })
         .click();
       await p.locator('.course-builder').waitFor();
-      assert.equal(await p.locator('.trip-overview').count(), 0);
+      await p.locator('.trip-overview').waitFor({ state: 'hidden' });
       await p.getByRole('button', { name: /장소 추가/ }).click();
       await p.getByLabel('장소 유형', { exact: true }).click();
       await p.getByRole('option', { name: '문화시설', exact: true }).click();

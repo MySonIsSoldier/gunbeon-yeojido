@@ -14,11 +14,13 @@ for(const channel of (process.env.QA_BROWSER_CHANNELS||'chromium').split(',')){
   try{
    await page.goto(base+'/login');await page.locator('.account-page[data-ready=true]').waitFor();
    await page.getByRole('button',{name:'민준 테스터 계정 선택'}).click();await page.getByRole('button',{name:'민준으로 체험 시작'}).click();
+   await page.getByRole('heading',{name:'기능별로 따라 해볼게요'}).waitFor();
+   await page.getByRole('button',{name:'20초 애니메이션으로 보기'}).click();
    await page.getByRole('heading',{name:'일정은 한눈에, 편집은 필요할 때.'}).waitFor();await shot('intro');
    await page.getByRole('heading',{name:'가고 싶은 곳과 돌아갈 여유를 함께.'}).waitFor({timeout:10000});
    await page.getByRole('button',{name:'일시정지',exact:true}).click();await shot('intro-action');
    assert.equal(await page.locator('.quick-intro-controls').getByRole('button',{name:'재생',exact:true}).count(),1);
-   await page.getByRole('button',{name:'바로 둘러볼게요'}).click();result.checks.push('Auto animation advances; pause and skip work');
+   await page.getByRole('button',{name:'바로 둘러볼게요'}).click();result.checks.push('Optional animation advances; pause and skip work');
    await page.getByRole('tab',{name:'둘러보기',exact:true}).click();
    await page.locator('.journey-card').nth(5).waitFor();assert.equal(await page.locator('.journey-card').count(),6);
    assert.equal(await page.locator('.discovery-page input[type=datetime-local]').count(),0);

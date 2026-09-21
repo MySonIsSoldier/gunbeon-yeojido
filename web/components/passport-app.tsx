@@ -1173,7 +1173,7 @@ export default function PassportApp() {
               else if (!groupStore.loading && !groupStore.error)
                 setCreateGroupRequested(true);
               go('groups');
-            } else if (step === 4 && activeOuting) {
+            } else if (step === 4 && (activeOuting || entry)) {
               go('outing');
             } else if (step === 1 && !entry) {
               openBuilder(null, 'new');
@@ -1190,12 +1190,7 @@ export default function PassportApp() {
                 openBuilder(entry, 'edit');
                 setNotice('먼저 관광지를 담고 저장한 뒤 한 수를 받아보세요.');
               }
-            } else if (!entry.plan?.stops.length) {
-              openBuilder(entry, 'edit');
-              setNotice(
-                '먼저 방문할 장소를 담고 저장해 주세요. 실제 출발할 때 출타를 시작할 수 있어요.',
-              );
-            } else startTrip(entry);
+            }
           }}
         />
       )}
@@ -2353,6 +2348,7 @@ export default function PassportApp() {
                           <Button
                             disabled={!e.plan?.stops.length}
                             onClick={() => setCompletion(e)}
+                            variant="outline"
                           >
                             여행 완료
                           </Button>
