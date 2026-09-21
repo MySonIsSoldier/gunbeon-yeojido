@@ -88,9 +88,12 @@ export default function OutingPanel({
             <Play size={30} />
             <h2>출발할 때 시작하세요</h2>
             <p>
-              계획한 일정은 그대로 두고
+              먼저 내 여행에 장소가 담긴 일정을 저장해 주세요.
               <br />
-              현재 시각으로 남은 시간을 계산합니다.
+              아래에서 여행을 고르고 복귀 기준을 확인하면 출타를 시작할 수
+              있어요.
+              <br />
+              계획을 둘러보는 동안에는 시간이 차감되지 않아요.
             </p>
           </section>
           {entries
@@ -136,7 +139,21 @@ export default function OutingPanel({
             </p>
           </section>
           <h2>{active.entry.title}</h2>
-          <Button variant="outline" className="outing-social-link" onClick={() => onShare(active.entry, (Date.parse(active.startedAt) + active.timeBudgetMinutes * 60000 - Date.now()) / 60000)}>남은 하루, 한 장으로 공유</Button>
+          <Button
+            variant="outline"
+            className="outing-social-link"
+            onClick={() =>
+              onShare(
+                active.entry,
+                (Date.parse(active.startedAt) +
+                  active.timeBudgetMinutes * 60000 -
+                  Date.now()) /
+                  60000,
+              )
+            }
+          >
+            남은 하루, 한 장으로 공유
+          </Button>
           {live ? (
             <>
               <div className={'outing-margin ' + live.score.band}>

@@ -114,17 +114,19 @@ const scenes = [
   },
 ];
 
-export default function TesterGuide({
+export default function TravelGuide({
   accountId,
   audience,
   planCount,
   groupCount,
+  outingActive = false,
   onAction,
 }: {
   accountId: string;
-  audience: 'demo' | 'judge';
+  audience: 'demo' | 'judge' | 'traveler';
   planCount: number;
   groupCount: number;
+  outingActive?: boolean;
   onAction: (step: number) => void;
 }) {
   const [mode, setMode] = useState<'closed' | 'intro' | 'guide'>('closed');
@@ -135,7 +137,71 @@ export default function TesterGuide({
     [reduced, setReduced] = useState(false);
   const key = 'gunbeon-quick-guide-v2:' + accountId;
   const scene = Math.min(3, Math.floor(elapsed / 5000));
-  const current = steps[step],
+  const availableSteps = steps.map((s) => ({ ...s }));
+  if (!planCount) {
+    availableSteps[0] = {
+      ...steps[0],
+      title: '가고 싶은 코스부터 골라보세요',
+      label: '첫 일정 만들기',
+      action: '추천 코스 고르기',
+      what: '날짜를 정하지 않아도 괜찮아요. 마음에 드는 코스를 내 일정으로 가져온 뒤 자유롭게 바꿀 수 있어요.',
+      how: [
+        '둘러보기에서 지역과 코스를 골라요.',
+        '‘이 코스로 일정 만들기’를 눌러요.',
+        '장소·날짜·시간을 정하고 저장하면 내 여행에 남아요.',
+      ],
+    };
+    availableSteps[1] = {
+      ...steps[1],
+      title: '빈 일정부터 시작해도 괜찮아요',
+      action: '빈 일정부터 만들기',
+      what: '추천 코스 없이 직접 짤 수도 있어요. 이름만 정해 빈 여행을 저장하고, 장소와 시간은 나중에 채워보세요.',
+      how: [
+        '나만의 코스 만들기에서 여행 이름을 정해요.',
+        '장소 추가로 관광지·맛집·즐겨찾기를 담아요.',
+        '저장한 여행은 내 여행에서 다시 열고 편집해요.',
+      ],
+    };
+    availableSteps[3] = {
+      ...steps[3],
+      action: '먼저 여행 계획 만들기',
+      what: '일정에 관광지를 담아 저장하면 공개 질문 링크를 만들 수 있어요. 친구가 추천한 곳은 내가 골라 반영해요.',
+      how: [
+        '먼저 코스나 관광지로 여행을 만들고 저장해요.',
+        '일정 보기에서 ‘한 수 부탁하기’를 열어요.',
+        '공개할 관광지와 질문을 확인한 뒤 링크를 나눠요.',
+      ],
+    };
+    availableSteps[4] = {
+      ...steps[4],
+      action: '여행 계획부터 준비하기',
+      what: '지금은 여행을 준비하는 단계예요. 장소가 담긴 일정을 저장하고, 실제로 출발하는 날 현재 출타를 시작하세요.',
+      how: [
+        '추천 코스로 여행을 만들고 저장해요.',
+        '떠나는 날 내 여행에서 ‘출타 시작’을 눌러요.',
+        '다녀온 뒤 ‘여행 완료’로 방문한 곳을 기록해요.',
+      ],
+    };
+  }
+  if (!groupCount)
+    availableSteps[2] = {
+      ...steps[2],
+      title: '함께 갈 사람들의 그룹을 만들어요',
+      action: '첫 동행 그룹 만들기',
+      what: '가족·연인·친구별로 그룹을 만들고 여행 일정을 함께 준비할 수 있어요. 혼자 준비할 때는 그룹 없이도 이용할 수 있어요.',
+      how: [
+        '그룹 이름과 함께 갈 사람의 유형을 정해요.',
+        '그룹을 만든 뒤 초대 링크를 동행자에게 보내요.',
+        '공유할 여행을 골라 그룹에 담아요. 개인 복귀 기준은 나만 봐요.',
+      ],
+    };
+  if (outingActive)
+    availableSteps[4] = {
+      ...steps[4],
+      action: '현재 출타 이어보기',
+      what: '이미 출발한 여행이 있어요. 지금 남은 시간과 다음 장소를 확인하고, 다녀온 뒤 여행 완료로 기록을 남겨요.',
+    };
+  const current = availableSteps[step],
     Icon = current.icon,
     SceneIcon = scenes[scene].icon;
   useEffect(() => {
@@ -162,7 +228,12 @@ export default function TesterGuide({
             : 0,
         );
       }
-      if (!saved || new URLSearchParams(location.search).get('tour') === '1') {
+      const params = new URLSearchParams(location.search);
+      if (
+        !params.has('join') &&
+        !params.has('advice') &&
+        ((!saved && audience !== 'traveler') || params.get('tour') === '1')
+      ) {
         setMode('intro');
         setPlaying(!media.matches);
       }
@@ -170,11 +241,13 @@ export default function TesterGuide({
       url.searchParams.delete('tour');
       history.replaceState(null, '', url);
     } catch {
-      setMode('intro');
-      setPlaying(!media.matches);
+      if (audience !== 'traveler') {
+        setMode('intro');
+        setPlaying(!media.matches);
+      }
     }
     return () => media.removeEventListener('change', update);
-  }, [key]);
+  }, [key, audience]);
   useEffect(() => {
     if (mode !== 'intro' || !playing || elapsed >= 20000) return;
     const timer = setInterval(
@@ -214,21 +287,21 @@ export default function TesterGuide({
   };
   return (
     <>
-      <div className="tester-rail">
+      <div className="tester-rail travel-guide-bar">
         <span>
-          <Compass size={15} />
-          <b>
-            {audience === 'demo' ? '민준의 여행 체험' : '군번여지도 빠른 시작'}
-          </b>
+          <Compass size={18} />
+          <b>여행 사용법</b>
           <span className="tester-rail-detail">
-            {audience === 'demo'
-              ? '나만의 예시 사본'
-              : '준비된 여행으로 직접 살펴보세요'}
+            계획부터 함께 다녀온 기록까지
           </span>
         </span>
-        <button onClick={() => setMode('guide')}>
-          기능 따라 해보기 <span>{checked.length}/5</span>
-          <ArrowRight size={14} />
+        <button
+          className="travel-guide-replay"
+          aria-haspopup="dialog"
+          onClick={replay}
+        >
+          <Play size={16} />
+          여행 가이드 다시 보기
         </button>
       </div>
       <Dialog
@@ -426,7 +499,9 @@ export default function TesterGuide({
                     {groupCount ? `동행 그룹 ${groupCount}개 · ` : ''}
                     {audience === 'demo'
                       ? '가상 인물·여행, 나만의 체험 사본'
-                      : '저장된 여행과 그룹은 유지됩니다'}
+                      : planCount
+                        ? '저장된 여행과 그룹은 유지됩니다'
+                        : '날짜가 미정이어도, 혼자 준비해도 괜찮아요'}
                   </span>
                 </div>
                 <Button onClick={() => act(0)}>
@@ -453,13 +528,13 @@ export default function TesterGuide({
                 <span className="tester-kicker">기능 하나씩, 직접 해보기</span>
                 <DialogTitle>보고, 바꾸고, 함께 계획해요</DialogTitle>
                 <DialogDescription>
-                  원하는 기능을 누르면 바로 해당 화면이 열려요. 저장 버튼을
-                  눌러야 일정에 반영됩니다.
+                  지금 필요한 단계부터 골라보세요. 아래 버튼을 누르면 직접 해볼
+                  수 있는 화면이 열려요.
                 </DialogDescription>
               </div>
               <div className="tester-guide-layout">
-                <nav aria-label="체험 단계">
-                  {steps.map((s, i) => (
+                <nav aria-label="여행 준비 단계">
+                  {availableSteps.map((s, i) => (
                     <button
                       key={s.label}
                       aria-current={i === step ? 'step' : undefined}

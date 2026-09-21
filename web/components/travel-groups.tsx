@@ -38,7 +38,6 @@ import { groupKinds } from '@/lib/group-model';
 import type { GroupSummary, GroupDetail, GroupPlan } from '@/lib/group-model';
 import type { Entry, ActiveOuting, Place } from '@/lib/domain';
 import CourseCover from './course-cover';
-import DayStory from './day-story';
 import { resolveEntry } from '@/lib/domain';
 import { entryKey, hasVisitRecord, localInputDate } from '@/lib/domain';
 type GroupReply = {
@@ -196,11 +195,6 @@ export function TravelHome({
           <Plus size={18} />새 여행
         </Button>
       </div>
-      <DayStory
-        places={places}
-        onBrowse={() => onGo('home')}
-        onJoin={() => onGo('groups')}
-      />
       {outing && (
         <button className="active-home-banner" onClick={() => onGo('outing')}>
           <span>
@@ -292,12 +286,38 @@ export function TravelHome({
           ) : (
             <div className="home-empty">
               <CalendarDays size={34} />
-              <h3>기다리던 하루를, 함께.</h3>
-              <p>아직 갈 곳을 정하지 않아도 저장할 수 있어요.</p>
-              <Button onClick={onNew}>빈 여행 만들기</Button>
-              <button className="text-link" onClick={() => onGo('home')}>
-                추천 여행 둘러보기
+              <h3>첫 여행, 코스 하나부터 골라볼까요?</h3>
+              <p>마음에 드는 코스를 가져와 우리 일정에 맞게 바꿔보세요.</p>
+              <Button onClick={() => onGo('home')}>
+                추천 코스로 시작하기
+                <ArrowRight size={17} />
+              </Button>
+              <button className="text-link" onClick={onNew}>
+                직접 빈 여행 만들기
               </button>
+              <ol className="first-trip-steps">
+                <li>
+                  <b>1</b>
+                  <span>
+                    <strong>갈 곳 고르기</strong>
+                    <small>추천 코스 또는 장소 찾기에서 시작</small>
+                  </span>
+                </li>
+                <li>
+                  <b>2</b>
+                  <span>
+                    <strong>우리 일정으로 저장</strong>
+                    <small>날짜·시간은 일정표에서 정해요</small>
+                  </span>
+                </li>
+                <li>
+                  <b>3</b>
+                  <span>
+                    <strong>함께 갈 사람과 나누기</strong>
+                    <small>원할 때 그룹에 공유해요</small>
+                  </span>
+                </li>
+              </ol>
             </div>
           )}
         </section>
@@ -705,7 +725,8 @@ export default function TravelGroups({
               <p>
                 그룹을 만들거나 초대코드로 참여하면
                 <br />
-                같은 여행을 다른 기기에서도 볼 수 있어요.
+                같은 여행을 다른 기기에서도 함께 볼 수 있어요. 만든 그룹에서
+                초대 링크를 보낼 수 있습니다.
               </p>
             </div>
           )}

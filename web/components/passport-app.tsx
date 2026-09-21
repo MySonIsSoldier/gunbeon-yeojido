@@ -93,7 +93,7 @@ import MissionMap from './mission-map';
 import CourseCover from './course-cover';
 import MeetingPicker from './meeting-picker';
 import OutingPanel from './outing-panel';
-import TesterGuide from './tester-guide';
+import TravelGuide from './tester-guide';
 import { guideAudience } from '@/lib/onboarding';
 import SocialStudio from './social-studio';
 import { travelSocialCard } from '@/lib/social-card';
@@ -1102,7 +1102,7 @@ export default function PassportApp() {
           <span>{account ? account.nickname : '로그인'}</span>
         </a>
         <button className="top-link" onClick={() => go('data')}>
-          <Layers3 size={17} /> 이용 안내
+          <Layers3 size={17} /> 여행 정보·출처
         </button>
       </header>
       {account && (
@@ -1146,16 +1146,15 @@ export default function PassportApp() {
           )}
         </div>
       )}
-      {account && guideAudience(account) && loaded && (
-        <TesterGuide
-          accountId={account.id}
-          audience={guideAudience(account)!}
+      {loaded && (
+        <TravelGuide
+          accountId={account?.id || 'guest'}
+          audience={guideAudience(account) || 'traveler'}
+          outingActive={!!activeOuting}
           planCount={entries.filter((e) => !hasVisitRecord(e)).length}
           groupCount={groupStore.groups.length}
           onAction={(step) => {
-            const candidates = entries.filter(
-              (e) => !hasVisitRecord(e) && e.plan?.stops.length,
-            );
+            const candidates = entries.filter((e) => !hasVisitRecord(e));
             const entry =
               candidates.find(
                 (e) =>
@@ -1167,9 +1166,17 @@ export default function PassportApp() {
               ) ||
               candidates[0];
             if (step === 2) {
-              const group = groupStore.groups.find((g) => g.kind === 'family');
+              const group =
+                groupStore.groups.find((g) => g.kind === 'family') ||
+                groupStore.groups[0];
               if (group) setSelectedGroupId(group.id);
+              else if (!groupStore.loading && !groupStore.error)
+                setCreateGroupRequested(true);
               go('groups');
+            } else if (step === 4 && activeOuting) {
+              go('outing');
+            } else if (step === 1 && !entry) {
+              openBuilder(null, 'new');
             } else if (!entry) {
               go('home');
               setNotice(
@@ -1177,8 +1184,18 @@ export default function PassportApp() {
               );
             } else if (step === 0) openEntry(entry);
             else if (step === 1) openBuilder(entry, 'edit');
-            else if (step === 3) setAdviceManaging(entry);
-            else startTrip(entry);
+            else if (step === 3) {
+              if (entry.plan?.stops.length) setAdviceManaging(entry);
+              else {
+                openBuilder(entry, 'edit');
+                setNotice('먼저 관광지를 담고 저장한 뒤 한 수를 받아보세요.');
+              }
+            } else if (!entry.plan?.stops.length) {
+              openBuilder(entry, 'edit');
+              setNotice(
+                '먼저 방문할 장소를 담고 저장해 주세요. 실제 출발할 때 출타를 시작할 수 있어요.',
+              );
+            } else startTrip(entry);
           }}
         />
       )}
@@ -2087,7 +2104,10 @@ export default function PassportApp() {
             <div className="content-heading">
               <div>
                 <h1>내 여행</h1>
-                <p>계획한 하루와 함께 다녀온 곳을 모아둬요.</p>
+                <p>
+                  저장한 일정은 여행 계획에서, 다녀온 하루는 여행 기록에서
+                  확인해요.
+                </p>
               </div>
               <button className="text-action" onClick={() => go('family')}>
                 동행 브리핑
@@ -2369,11 +2389,11 @@ export default function PassportApp() {
                     </h2>
                     <p>
                       {recordTab === 'plans'
-                        ? '마음에 드는 미션을 여기에 담아둘 수 있어요.'
-                        : '여행 완료를 확인하면 여기에 모입니다.'}
+                        ? '둘러보기에서 코스를 고르거나 빈 일정을 만들어 저장해 보세요.'
+                        : '현재 출타에서 ‘여행 완료’를 누르고 실제 다녀온 장소를 선택하면 여기에 남아요.'}
                     </p>
                     <Button variant="outline" onClick={() => go('home')}>
-                      미션 둘러보기
+                      추천 코스 둘러보기
                       <ArrowRight size={16} />
                     </Button>
                   </div>
