@@ -23,7 +23,10 @@
 
 ## 게시 상태
 
-로컬 구현/검증 완료. GitHub PR·빌드·개발/운영 배포 결과는 완료 후 아래에 기록한다.
+- [PR #32](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/32), 구현 `db98e8f`, master 병합 `5b14f81`. 품질 CI 통과. [전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/35564405442)도 신규 onboarding을 포함해 통과했다.
+- 개발 v5/env2, 운영 v22/env5 배포 성공. 개발은 owner-only, 운영은 공개를 유지했다. 두 환경 빌드/패키징 통과. [정확한 source SHA·배포 결과](qa/universal-guide/deployment.json).
+- 실제 개발/공식 운영 주소 각각 320·430·1440px 비회원 안내·코스 이동·다시 열기·모션 감소·가로 넘침/페이지 오류 없음 확인. 운영 준비시간 샘플은 1.96/0.72/0.75초이며 개발은 private dispatch를 거쳐 8.44/10.20/9.73초였다. 같은 호스팅의 일반 가용성이나 실기기 성능 보장을 뜻하지 않는다.
+- 운영 테스트는 기존 계정/여행/그룹을 수정하지 않았다. API 키·계정 Secret·DB 스키마·공개 범위는 변경하지 않았다. 검증 스크립트는 `scripts/verify-universal-guide.mjs`다.
 
 ## 다음 확인
 

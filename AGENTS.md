@@ -130,3 +130,11 @@ npm run build
 - `/api/account?include=travel`은 private/no-store이며 계정 문맥 대조·hydration 이후 저장 계약을 유지한다. 실패를 빈 여행으로 해석하지 않는다.
 - 검사: `npm run test:content`, `test:entry-network`(지연/실패 모의), `test:content-live`(실제 키 필요). 운영 지정 계정 읽기 검사는 `scripts/verify-guided-entry.mjs`의 비공개 환경 입력을 쓰고 초기화 스크립트는 실행하지 않는다.
 - 첫 접속 전달 지연은 남아 있다. 루트 반복 성공이나 Worker 오류 0개를 장기 안정성 보장으로 쓰지 않는다.
+
+
+## 9/21 모든 사용자 여행 가이드
+
+- 상단 `여행 가이드 다시 보기`는 일반 회원/비회원/민준/심사 계정 모두 제공한다. `TravelGuide`는 기존 `tester-guide.tsx`에 있다. 20초 안내와 기능별 5단계를 유지하며 이전 홈 16초 안내를 다시 중복 노출하지 않는다.
+- 없는 여행·그룹을 준비된 것처럼 안내하지 않는다. 첫 코스/빈 일정/첫 그룹으로 연결하고, 진행 중 출타는 이어본다. 가이드 열기만으로 여행/그룹 생성·출타 시작·개인 저장을 하지 않는다.
+- 일반 사용자는 수동으로 시작하고 기존 민준/심사 계정 자동 안내는 유지한다. 초대·제안 링크를 자동 안내로 가리지 않는다. 모션 감소·일시정지·건너뛰기를 보존한다.
+- `npm run test:onboarding`은 320/430/1440px 새 사용자 가이드 검사다. `scripts/verify-universal-guide.mjs`는 배포된 게스트 UI를 읽고, 계정/여행/그룹을 생성하지 않는다. 개발 bypass는 정확한 동일 origin에만 전송한다. [인계](docs/handoff.md), [기록](reports/universal_guide_2026-09-21.md).
