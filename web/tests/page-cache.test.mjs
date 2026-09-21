@@ -93,7 +93,8 @@ test('unmounting one consumer does not abort another consumer of the shared requ
   const second = pageFetch('/api/places?region=shared');
   controller.abort();
   const [, options] = network.mock.calls[0].arguments;
-  assert.equal(options.signal, undefined);
+  assert.notEqual(options.signal, controller.signal);
+  assert.equal(options.signal.aborted, false);
   assert.equal(options.cache, 'no-store');
   assert.equal(new Headers(options.headers).get('Accept'), 'application/json');
   finish(response({ ok: true }));

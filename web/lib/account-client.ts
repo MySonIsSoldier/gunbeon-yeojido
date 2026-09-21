@@ -46,13 +46,22 @@ export async function accountRequest<T>(
   const r = await fetch(path, {
     method: body === undefined ? 'GET' : 'POST',
     cache: 'no-store',
+    signal: AbortSignal.timeout(20000),
     headers: {
       ...accountContextHeaders(),
       ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
     },
     body: body === undefined ? undefined : JSON.stringify(body),
+  }).catch(() => {
+    throw new Error(
+      '연결이 지연되었어요. 기록은 보존하고 있습니다. 네트워크를 확인한 뒤 다시 시도해 주세요.',
+    );
   });
-  const data = (await r.json()) as T & { message?: string };
+  const data = (await r.json().catch(() => {
+    throw new Error(
+      '응답을 끝까지 받지 못했어요. 네트워크를 확인한 뒤 다시 시도해 주세요.',
+    );
+  })) as T & { message?: string };
   if (!r.ok)
     throw Object.assign(
       new Error(data.message || '저장 서버에 연결하지 못했어요.'),
@@ -61,17 +70,17 @@ export async function accountRequest<T>(
   return data;
 }
 export async function initializeTravelStorage() {
-  const session = await accountRequest<AccountStatus>('/api/account');
+  const session = await accountRequest<{
+    account: AccountInfo | null;
+    state: TravelState | null;
+    revision: number;
+  }>('/api/account?include=travel');
   identity = session.account;
   bindAccountContext(identity?.id || null);
   let saved;
   if (identity) {
-    const data = await accountRequest<{
-      state: TravelState | null;
-      revision: number;
-    }>('/api/account/state');
-    saved = data.state;
-    revision = data.revision;
+    saved = session.state;
+    revision = session.revision;
     persisted = saved ? JSON.stringify(cleanTravelState(saved)) : '';
   } else {
     try {

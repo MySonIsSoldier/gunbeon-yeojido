@@ -1,0 +1,19 @@
+{
+  "base": "http://localhost:3000",
+  "at": "2026-09-21T04:39:17.327Z",
+  "mode": "Real local APIs and isolated Minjun accounts; browser viewport simulation",
+  "results": [
+    {
+      "channel": "chromium",
+      "width": 430,
+      "checks": [
+        "Auto animation advances; pause and skip work",
+        "Six complete border courses; browse remains date-free",
+        "Place types/search/empty recovery/show more",
+        "Live gateway courses, place details and editable single-place plan"
+      ],
+      "errors": [],
+      "status": "passed"
+    }
+  ]
+}

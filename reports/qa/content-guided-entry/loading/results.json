@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "at": "2026-09-21T04:38:17.766Z",
+  "mode": "Mocked bootstrap delay/network abort, real guest authentication",
+  "checks": [
+    "Slow bootstrap exposes retry after six seconds and recovers",
+    "Network failure keeps app unhydrated; never falls back to an empty account state"
+  ]
+}

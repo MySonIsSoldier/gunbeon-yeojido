@@ -1,0 +1,21 @@
+{
+  "base": "http://localhost:3000",
+  "checkedAt": "2026-09-21T04:31:49.948Z",
+  "checks": [
+    "Private combined bootstrap validates account context, isolates anonymous reads, and prohibits caching",
+    "Explicit migration preserves group/share ownership and consumes old-cookie authority",
+    "Second browser restores travel, groups and public-share management",
+    "Imported anonymous suggestion remains owned and withdrawable after account migration",
+    "Old A tab cannot read/write/import/rename/logout through B cookies",
+    "Revision conflicts, malformed data, CSRF and invalid passwords fail safely",
+    "HttpOnly session and per-device logout; disabled/corrupt social login never authenticates",
+    "13 successful logins do not consume the failure limit",
+    "Unknown-handle failures are bounded without blocking another handle"
+  ],
+  "status": "passed",
+  "syntheticAccountIds": [
+    "17a91662-2f58-45cc-88a7-62473c1bcfe1",
+    "3d49bef6-0645-4687-9f93-963dded78cd3"
+  ],
+  "providerAuthentication": "Not configured; actual Google/Naver consent unverified"
+}

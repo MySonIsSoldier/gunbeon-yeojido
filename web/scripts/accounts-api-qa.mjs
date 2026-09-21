@@ -86,6 +86,12 @@ try {
   ).account;
   created.push(account.id);
   const headers = { 'X-Gunbeon-Account': account.id };
+  const bootstrap = await a.get('/api/account?include=travel', { headers });
+  assert.match(bootstrap.headers()['cache-control'], /no-store/);
+  assert.equal((await bootstrap.json()).account.id, account.id);
+  assert.equal((await anonymous.get('/api/account?include=travel').then(r => r.json())).state, null);
+  assert.equal((await a.get('/api/account?include=travel', { headers: { 'X-Gunbeon-Account': 'different-account' } })).status(), 409);
+  checks.push('Private combined bootstrap validates account context, isolates anonymous reads, and prohibits caching');
   assert.deepEqual((await ok(await a.get('/api/groups'))).groups, []);
   await ok(await post(a, '/api/account/import', {}, headers));
   assert.equal((await ok(await a.get('/api/groups'))).groups[0].id, groupId);

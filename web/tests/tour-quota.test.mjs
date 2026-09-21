@@ -84,7 +84,7 @@ test('daily quota in XML is recognized despite requested JSON', async () => {
     (e) => e.code === 'DAILY_QUOTA_EXCEEDED',
   );
 });
-test('healthy regional requests retain all five normal categories', async () => {
+test('healthy regional requests retain existing categories and add leisure and shopping', async () => {
   const types = [];
   const fake = async (u) => {
     const url = new URL(u);
@@ -103,7 +103,7 @@ test('healthy regional requests retain all five normal categories', async () => 
     });
   };
   await fetchRegion('fixture', '철원군', fake);
-  assert.deepEqual(types.sort(), ['12', '14', '15', '32', '39']);
+  assert.deepEqual(types.sort(), ['12', '14', '15', '28', '32', '38', '39']);
 });
 test('provider Retry-After respected; instantaneous rejection does not inherit a ten minute hold', async () => {
   const { providerRetryDelay } = await import('../lib/tour-api.ts');

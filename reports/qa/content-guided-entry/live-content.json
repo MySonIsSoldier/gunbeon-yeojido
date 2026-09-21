@@ -1,0 +1,657 @@
+{
+  "at": "2026-09-21T04:32:43.878Z",
+  "mode": "Real TourAPI through local server; only counts and curated route metadata retained",
+  "results": [
+    {
+      "region": "철원군",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 885,
+      "fetched": 143,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 55,
+          "error": null,
+          "fetched": 55,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "14",
+          "total": 2,
+          "error": null,
+          "fetched": 2,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 2,
+          "error": null,
+          "fetched": 2,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 24,
+          "error": null,
+          "fetched": 24,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 12,
+          "error": null,
+          "fetched": 12,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 6,
+          "error": null,
+          "fetched": 6,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 42,
+          "error": null,
+          "fetched": 42,
+          "nextPage": null
+        }
+      ],
+      "visiblePlaces": 242,
+      "courses": [
+        {
+          "id": "discovery:cw-river",
+          "title": "고석정에서 주상절리까지",
+          "stops": 3,
+          "liveSources": 3
+        },
+        {
+          "id": "discovery:cw-memory",
+          "title": "철원에 남은 기억을 따라",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:cw-flowers",
+          "title": "고석정 곁에서 천천히",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:cw-falls",
+          "title": "폭포에서 은하수교까지",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:cw-temple",
+          "title": "도피안사에서 옛 철원으로",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:cw-oldtown",
+          "title": "옛 철원, 세 곳의 이야기",
+          "stops": 3,
+          "liveSources": 3
+        }
+      ]
+    },
+    {
+      "region": "화천군",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 568,
+      "fetched": 101,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 52,
+          "error": null,
+          "fetched": 52,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "14",
+          "total": 7,
+          "error": null,
+          "fetched": 7,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 1,
+          "error": null,
+          "fetched": 1,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 18,
+          "error": null,
+          "fetched": 18,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 12,
+          "error": null,
+          "fetched": 12,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 2,
+          "error": null,
+          "fetched": 2,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 9,
+          "error": null,
+          "fetched": 9,
+          "nextPage": null
+        }
+      ],
+      "visiblePlaces": 158,
+      "courses": [
+        {
+          "id": "discovery:hc-river",
+          "title": "북한강 곁의 작은 쉼표",
+          "stops": 3,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:hc-peace",
+          "title": "평화의 댐에서 비목공원으로",
+          "stops": 3,
+          "liveSources": 1
+        },
+        {
+          "id": "discovery:hc-culture",
+          "title": "커피와 나무를 만나는 오후",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:hc-lake",
+          "title": "딴산에서 파로호 전망으로",
+          "stops": 2,
+          "liveSources": 1
+        },
+        {
+          "id": "discovery:hc-literature",
+          "title": "문학관과 계곡 사이",
+          "stops": 2,
+          "liveSources": 1
+        },
+        {
+          "id": "discovery:hc-indoors",
+          "title": "커피와 물고기가 있는 오후",
+          "stops": 2,
+          "liveSources": 1
+        }
+      ]
+    },
+    {
+      "region": "양구군",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 655,
+      "fetched": 85,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 39,
+          "error": null,
+          "fetched": 39,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "14",
+          "total": 7,
+          "error": null,
+          "fetched": 7,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 3,
+          "error": null,
+          "fetched": 3,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 13,
+          "error": null,
+          "fetched": 13,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 4,
+          "error": null,
+          "fetched": 4,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 2,
+          "error": null,
+          "fetched": 2,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 17,
+          "error": null,
+          "fetched": 17,
+          "nextPage": null
+        }
+      ],
+      "visiblePlaces": 135,
+      "courses": [
+        {
+          "id": "discovery:yg-water",
+          "title": "호수와 꽃섬을 잇는 하루",
+          "stops": 3,
+          "liveSources": 0
+        },
+        {
+          "id": "discovery:yg-dmz",
+          "title": "두타연과 펀치볼의 풍경",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:yg-culture",
+          "title": "양구의 이야기를 읽는 오후",
+          "stops": 2,
+          "liveSources": 1
+        },
+        {
+          "id": "discovery:yg-forest",
+          "title": "양구의 숲에서 숨 고르기",
+          "stops": 2,
+          "liveSources": 1
+        },
+        {
+          "id": "discovery:yg-stars",
+          "title": "국토의 가운데서 만나는 별",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:yg-town",
+          "title": "양구 읍내의 느긋한 산책",
+          "stops": 3,
+          "liveSources": 3
+        }
+      ]
+    },
+    {
+      "region": "인제군",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 668,
+      "fetched": 155,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 59,
+          "error": null,
+          "fetched": 59,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "14",
+          "total": 15,
+          "error": null,
+          "fetched": 15,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 1,
+          "error": null,
+          "fetched": 1,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 45,
+          "error": null,
+          "fetched": 45,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 15,
+          "error": null,
+          "fetched": 15,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 1,
+          "error": null,
+          "fetched": 1,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 19,
+          "error": null,
+          "fetched": 19,
+          "nextPage": null
+        }
+      ],
+      "visiblePlaces": 209,
+      "courses": [
+        {
+          "id": "discovery:ij-village",
+          "title": "만해마을에서 백담마을로",
+          "stops": 3,
+          "liveSources": 3
+        },
+        {
+          "id": "discovery:ij-forest",
+          "title": "비밀의정원과 방동약수",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:ij-river",
+          "title": "합강정에서 강을 바라보며",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:ij-bangtae",
+          "title": "방동약수에서 방태산 숲으로",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:ij-naetgang",
+          "title": "냇강마을과 리빙스턴교",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:ij-hwangtae",
+          "title": "용대리에서 맛과 문학을",
+          "stops": 3,
+          "liveSources": 3
+        }
+      ]
+    },
+    {
+      "region": "고성군",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 733,
+      "fetched": 184,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 78,
+          "error": null,
+          "fetched": 78,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "14",
+          "total": 9,
+          "error": null,
+          "fetched": 9,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 2,
+          "error": null,
+          "fetched": 2,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 29,
+          "error": null,
+          "fetched": 29,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 17,
+          "error": null,
+          "fetched": 17,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 5,
+          "error": null,
+          "fetched": 5,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 44,
+          "error": null,
+          "fetched": 44,
+          "nextPage": null
+        }
+      ],
+      "visiblePlaces": 256,
+      "courses": [
+        {
+          "id": "discovery:gs-coast",
+          "title": "능파대와 아야진의 바다",
+          "stops": 3,
+          "liveSources": 3
+        },
+        {
+          "id": "discovery:gs-village",
+          "title": "왕곡마을에서 송지호까지",
+          "stops": 3,
+          "liveSources": 3
+        },
+        {
+          "id": "discovery:gs-peace",
+          "title": "고성의 북쪽 바다를 만나는 길",
+          "stops": 3,
+          "liveSources": 3
+        },
+        {
+          "id": "discovery:gs-geojin",
+          "title": "거진에서 두 번 만나는 바다",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:gs-hwajinpo",
+          "title": "화진포의 소나무와 해변",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:gs-history",
+          "title": "화진포에 남은 이야기",
+          "stops": 3,
+          "liveSources": 2
+        }
+      ]
+    },
+    {
+      "region": "춘천시",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 777,
+      "fetched": 331,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 105,
+          "error": null,
+          "fetched": 100,
+          "nextPage": 2
+        },
+        {
+          "contentTypeId": "14",
+          "total": 27,
+          "error": null,
+          "fetched": 27,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 9,
+          "error": null,
+          "fetched": 9,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 0,
+          "error": "NETWORK_OR_TIMEOUT",
+          "fetched": 0,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 22,
+          "error": null,
+          "fetched": 22,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 73,
+          "error": null,
+          "fetched": 73,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 120,
+          "error": null,
+          "fetched": 100,
+          "nextPage": 2
+        }
+      ],
+      "visiblePlaces": 331,
+      "courses": [
+        {
+          "id": "discovery:cc-lake",
+          "title": "춘천에 도착하면, 호수부터",
+          "stops": 3,
+          "liveSources": 3
+        },
+        {
+          "id": "discovery:cc-books",
+          "title": "실레마을의 책과 문학",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:cc-museum",
+          "title": "박물관에서 공지천으로",
+          "stops": 2,
+          "liveSources": 2
+        }
+      ],
+      "pagination": {
+        "status": 200,
+        "page": 2,
+        "fetched": 5,
+        "total": 105,
+        "nextPage": null,
+        "distinct": true
+      }
+    },
+    {
+      "region": "속초시",
+      "status": 200,
+      "mode": "live",
+      "durationMs": 909,
+      "fetched": 256,
+      "categories": [
+        {
+          "contentTypeId": "12",
+          "total": 73,
+          "error": null,
+          "fetched": 73,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "14",
+          "total": 16,
+          "error": null,
+          "fetched": 16,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "15",
+          "total": 3,
+          "error": null,
+          "fetched": 3,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "28",
+          "total": 12,
+          "error": null,
+          "fetched": 12,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "32",
+          "total": 35,
+          "error": null,
+          "fetched": 35,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "38",
+          "total": 17,
+          "error": null,
+          "fetched": 17,
+          "nextPage": null
+        },
+        {
+          "contentTypeId": "39",
+          "total": 108,
+          "error": null,
+          "fetched": 100,
+          "nextPage": 2
+        }
+      ],
+      "visiblePlaces": 256,
+      "courses": [
+        {
+          "id": "discovery:sc-coast",
+          "title": "속초에서 외옹치까지",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:sc-market",
+          "title": "아바이마을과 시장의 하루",
+          "stops": 2,
+          "liveSources": 2
+        },
+        {
+          "id": "discovery:sc-view",
+          "title": "영금정에서 호수 산책으로",
+          "stops": 2,
+          "liveSources": 2
+        }
+      ]
+    }
+  ]
+}

@@ -247,8 +247,8 @@ test('TourAPI discovers current Gangwon and district codes from responses', asyn
   const r = await fetchRegion('TEST', '철원군', mock);
   assert.equal(r.lDongRegnCd, '88');
   assert.equal(r.lDongSignguCd, '77');
-  assert.equal(r.categories.length, 5);
-  assert.equal(calls.length, 7);
+  assert.equal(r.categories.length, 7);
+  assert.equal(calls.length, 9);
   assert(
     calls
       .slice(2)

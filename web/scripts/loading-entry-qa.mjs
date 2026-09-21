@@ -1,0 +1,18 @@
+import {chromium} from 'playwright';
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const base=process.env.QA_BASE_URL||'http://localhost:3000';
+if(new URL(base).hostname!=='localhost')throw new Error('Synthetic network tests are local only');
+const out='../reports/qa/content-guided-entry/loading';await fs.mkdir(out,{recursive:true});
+const browser=await chromium.launch({headless:true});
+const context=await browser.newContext({viewport:{width:360,height:740},locale:'ko-KR'});const p=await context.newPage();
+await context.request.post(base+'/api/test-access',{data:{password:'1234'}});
+await p.route('**/api/account?include=travel',async route=>{await new Promise(r=>setTimeout(r,7000));await route.continue();});
+await p.goto(base+'/');await p.getByText('연결이 평소보다 느려요. 저장된 여행은 그대로 보관하고 있어요.').waitFor();await p.screenshot({path:out+'/slow-connection.png'});
+await p.locator('.app-shell[data-ready=true]').waitFor();assert.equal(await p.locator('.app-loading').count(),0);
+await p.unroute('**/api/account?include=travel');
+await p.route('**/api/account?include=travel',route=>route.abort('failed'));await p.reload();
+await p.getByRole('alert').filter({hasText:'연결이 지연되었어요'}).waitFor();await p.screenshot({path:out+'/connection-failure.png'});
+assert.equal(await p.locator('.app-shell[data-ready=true]').count(),0);
+await fs.writeFile(out+'/results.json',JSON.stringify({status:'passed',at:new Date().toISOString(),mode:'Mocked bootstrap delay/network abort, real guest authentication',checks:['Slow bootstrap exposes retry after six seconds and recovers','Network failure keeps app unhydrated; never falls back to an empty account state']},null,2));
+await browser.close();console.log('Slow/failure network UX passed (synthetic network)');

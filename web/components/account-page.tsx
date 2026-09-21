@@ -22,6 +22,7 @@ import {
 import { cleanTravelState, type TravelState } from '@/lib/account-state';
 import { mergeDeviceTravel } from '@/lib/account-import';
 import { DEMO_PERSONA } from '@/lib/demo-persona';
+import { guideAudience } from '@/lib/onboarding';
 
 function returnTo() {
   const params = new URLSearchParams(location.search),
@@ -128,27 +129,69 @@ export default function AccountPage() {
       </>
     );
   return (
-    <main className={`account-page ${!session?.account ? 'with-tester' : ''}`} data-ready={!!session}>
+    <main
+      className={`account-page ${!session?.account ? 'with-tester' : ''}`}
+      data-ready={!!session}
+    >
       <a href="/" className="account-brand" aria-label="군번여지도 홈">
         <Brand />
       </a>
-      {!session?.account && <aside className="tester-login-card">
-        <p className="tester-kicker">처음 오셨나요? · 심사위원 / 테스터</p>
-        <div className="tester-monogram" aria-hidden="true">MJ<span>강원 여행자</span></div>
-        <h2>민준의 휴가를<br />함께 준비해 볼까요?</h2>
-        <p>{DEMO_PERSONA.description}</p>
-        <div className="tester-preview-list"><span>가족 · 천천히 걷는 철원</span><span>연인 · 고성 바다 산책</span><span>친구 · 화진포에서의 하루</span></div>
-        <button className="tester-select" disabled={busy || !session} onClick={() => {
-          setMode('login'); setHandle(DEMO_PERSONA.handle); setPassword(DEMO_PERSONA.password); setError('');
-          setTimeout(() => document.getElementById('tester-login-submit')?.focus(), 0);
-        }}>민준 테스터 계정 선택 <ArrowRight size={18} /></button>
-        <small>선택하면 아이디와 비밀번호가 채워집니다.<br />로그인마다 나만의 예시 사본을 준비해요. 자유롭게 수정해 보세요.</small>
-      </aside>}
+      {!session?.account && (
+        <aside className="tester-login-card">
+          <p className="tester-kicker">처음 오셨나요? · 심사위원 / 테스터</p>
+          <div className="tester-monogram" aria-hidden="true">
+            MJ<span>강원 여행자</span>
+          </div>
+          <h2>
+            민준의 휴가를
+            <br />
+            함께 준비해 볼까요?
+          </h2>
+          <p>{DEMO_PERSONA.description}</p>
+          <div className="tester-preview-list">
+            <span>가족 · 천천히 걷는 철원</span>
+            <span>연인 · 고성 바다 산책</span>
+            <span>친구 · 화진포에서의 하루</span>
+          </div>
+          <button
+            className="tester-select"
+            disabled={busy || !session}
+            onClick={() => {
+              setMode('login');
+              setHandle(DEMO_PERSONA.handle);
+              setPassword(DEMO_PERSONA.password);
+              setError('');
+              setTimeout(
+                () => document.getElementById('tester-login-submit')?.focus(),
+                0,
+              );
+            }}
+          >
+            민준 테스터 계정 선택 <ArrowRight size={18} />
+          </button>
+          <small>
+            선택하면 아이디와 비밀번호가 채워집니다.
+            <br />
+            로그인마다 나만의 예시 사본을 준비해요. 자유롭게 수정해 보세요.
+          </small>
+        </aside>
+      )}
       <section className="account-panel">
         {session?.account ? (
           <>
             <p className="account-eyebrow">내 여행 계정</p>
-            {session.account.demoPersona && <div className="tester-account-note"><b>민준 · 24세 장병 / 가상 인물</b><p>가족·연인·친구와 보내는 휴가를 준비 중이에요. 지금 여행은 나만의 체험 사본입니다. 다시 로그인하면 새 예시로 시작하며, 개인 소셜 계정과 연결되지 않아요. 체험 시작 후 14일이 지나고 로그인이 만료된 사본은 정리됩니다.</p><a href="/?tour=1">체험 가이드 다시 보기 →</a></div>}
+            {session.account.demoPersona && (
+              <div className="tester-account-note">
+                <b>민준 · 24세 장병 / 가상 인물</b>
+                <p>
+                  가족·연인·친구와 보내는 휴가를 준비 중이에요. 지금 여행은
+                  나만의 체험 사본입니다. 다시 로그인하면 새 예시로 시작하며,
+                  개인 소셜 계정과 연결되지 않아요. 체험 시작 후 14일이 지나고
+                  로그인이 만료된 사본은 정리됩니다.
+                </p>
+                <a href="/?tour=1">체험 가이드 다시 보기 →</a>
+              </div>
+            )}
             <h1>
               {session.account.nickname}님의
               <br />
@@ -200,85 +243,97 @@ export default function AccountPage() {
                 <small>로그인 아이디 · {session.account.handle}</small>
               )}
             </form>
-            {!session.account.demoPersona && <section className="account-section">
-              <h2>로그인 연결</h2>
-              <p>연결하면 같은 여행 계정을 소셜 로그인으로 사용할 수 있어요.</p>
-              {(['google', 'naver'] as const).map((p) => (
-                <button
-                  className={`social-login ${p}`}
-                  key={p}
-                  disabled={
-                    busy || !session.providers[p] || session.linked.includes(p)
-                  }
-                  onClick={() => void social(p, true)}
-                >
-                  <img
-                    className={p === 'naver' ? 'social-n' : 'social-g'}
-                    src={
-                      p === 'google'
-                        ? '/brand/google-g.png'
-                        : '/brand/naver-n.png'
+            {!session.account.demoPersona && (
+              <section className="account-section">
+                <h2>로그인 연결</h2>
+                <p>
+                  연결하면 같은 여행 계정을 소셜 로그인으로 사용할 수 있어요.
+                </p>
+                {(['google', 'naver'] as const).map((p) => (
+                  <button
+                    className={`social-login ${p}`}
+                    key={p}
+                    disabled={
+                      busy ||
+                      !session.providers[p] ||
+                      session.linked.includes(p)
                     }
-                    alt=""
-                  />
-                  {p === 'google' ? 'Google' : '네이버'}{' '}
-                  {session.linked.includes(p) ? (
-                    <>
-                      <Check size={17} /> 연결됨
-                    </>
-                  ) : session.providers[p] ? (
-                    '연결하기'
-                  ) : (
-                    '연결 준비 중'
-                  )}
-                </button>
-              ))}
-            </section>}
-            {!session.account.demoPersona && <section className="account-section">
-              <h2>이 기기에서 시작한 여행</h2>
-              <p>
-                로그인 전에 만든 여행과 그룹·공유 링크를 내 계정으로 가져올 수
-                있어요. 기존 계정 기록은 보존합니다.
-              </p>
-              <Button
-                variant="outline"
-                onClick={() => setImporting(!importing)}
-                disabled={busy}
-              >
-                이 기기의 여행·그룹 연결
-              </Button>
-              {importing && (
-                <div className="account-import-confirm">
-                  <b>계정으로 가져올까요?</b>
-                  <p>
-                    여행 {legacy?.entries.length || 0}개 · 즐겨찾기{' '}
-                    {legacy?.favorites.length || 0}개와 이 기기의 그룹·공유 관리
-                    권한을 연결합니다. 기존 기록과 겹치면서 내용이 다른 여행은 사본으로 보관하고,
-                    현재 출타가 이미 있으면 그대로 유지해요.
-                  </p>
-                  <div className="account-inline">
-                    <Button disabled={busy} onClick={() => void importDevice()}>
-                      가져오기 확인
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      disabled={busy}
-                      onClick={() => setImporting(false)}
-                    >
-                      취소
-                    </Button>
+                    onClick={() => void social(p, true)}
+                  >
+                    <img
+                      className={p === 'naver' ? 'social-n' : 'social-g'}
+                      src={
+                        p === 'google'
+                          ? '/brand/google-g.png'
+                          : '/brand/naver-n.png'
+                      }
+                      alt=""
+                    />
+                    {p === 'google' ? 'Google' : '네이버'}{' '}
+                    {session.linked.includes(p) ? (
+                      <>
+                        <Check size={17} /> 연결됨
+                      </>
+                    ) : session.providers[p] ? (
+                      '연결하기'
+                    ) : (
+                      '연결 준비 중'
+                    )}
+                  </button>
+                ))}
+              </section>
+            )}
+            {!session.account.demoPersona && (
+              <section className="account-section">
+                <h2>이 기기에서 시작한 여행</h2>
+                <p>
+                  로그인 전에 만든 여행과 그룹·공유 링크를 내 계정으로 가져올 수
+                  있어요. 기존 계정 기록은 보존합니다.
+                </p>
+                <Button
+                  variant="outline"
+                  onClick={() => setImporting(!importing)}
+                  disabled={busy}
+                >
+                  이 기기의 여행·그룹 연결
+                </Button>
+                {importing && (
+                  <div className="account-import-confirm">
+                    <b>계정으로 가져올까요?</b>
+                    <p>
+                      여행 {legacy?.entries.length || 0}개 · 즐겨찾기{' '}
+                      {legacy?.favorites.length || 0}개와 이 기기의 그룹·공유
+                      관리 권한을 연결합니다. 기존 기록과 겹치면서 내용이 다른
+                      여행은 사본으로 보관하고, 현재 출타가 이미 있으면 그대로
+                      유지해요.
+                    </p>
+                    <div className="account-inline">
+                      <Button
+                        disabled={busy}
+                        onClick={() => void importDevice()}
+                      >
+                        가져오기 확인
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        disabled={busy}
+                        onClick={() => setImporting(false)}
+                      >
+                        취소
+                      </Button>
+                    </div>
+                    {legacy && (
+                      <button
+                        className="account-text-link"
+                        onClick={() => downloadTravelBackup(legacy)}
+                      >
+                        <Download size={15} /> 기기 기록 먼저 백업
+                      </button>
+                    )}
                   </div>
-                  {legacy && (
-                    <button
-                      className="account-text-link"
-                      onClick={() => downloadTravelBackup(legacy)}
-                    >
-                      <Download size={15} /> 기기 기록 먼저 백업
-                    </button>
-                  )}
-                </div>
-              )}
-            </section>}
+                )}
+              </section>
+            )}
             <button
               className="account-text-link"
               disabled={busy}
@@ -348,7 +403,9 @@ export default function AccountPage() {
                     alt=""
                   />
                   {p === 'google' ? 'Google' : '네이버'}로 계속하기
-                  {!session?.providers[p] && <small>연결 준비 중</small>}
+                  {!session?.providers[p] && (
+                    <small>{session ? '연결 준비 중' : '확인 중…'}</small>
+                  )}
                 </button>
               ))}
             </div>
@@ -364,16 +421,24 @@ export default function AccountPage() {
                 setBusy(true);
                 setError('');
                 try {
-                  const result = await accountRequest<AccountStatus>('/api/account', {
-                    action: mode,
-                    handle,
-                    password,
-                    nickname,
-                    testPassword,
-                  });
+                  const result = await accountRequest<AccountStatus>(
+                    '/api/account',
+                    {
+                      action: mode,
+                      handle,
+                      password,
+                      nickname,
+                      testPassword,
+                    },
+                  );
                   const destination = new URL(returnTo(), location.origin);
-                  if (result.account?.demoPersona) destination.searchParams.set('tour', '1');
-                  location.assign(destination.pathname + destination.search + destination.hash);
+                  if (guideAudience(result.account))
+                    destination.searchParams.set('tour', '1');
+                  location.assign(
+                    destination.pathname +
+                      destination.search +
+                      destination.hash,
+                  );
                 } catch (e) {
                   setError((e as Error).message);
                   setBusy(false);
@@ -439,13 +504,23 @@ export default function AccountPage() {
                   </small>
                 </>
               )}
-              {handle === DEMO_PERSONA.handle && mode === 'login' && <p className="tester-filled" role="status">테스터 계정이 준비됐어요. 아래 버튼으로 시작하세요.</p>}
-              <Button id="tester-login-submit" type="submit" disabled={busy || !session}>
+              {handle === DEMO_PERSONA.handle && mode === 'login' && (
+                <p className="tester-filled" role="status">
+                  테스터 계정이 준비됐어요. 아래 버튼으로 시작하세요.
+                </p>
+              )}
+              <Button
+                id="tester-login-submit"
+                type="submit"
+                disabled={busy || !session}
+              >
                 {busy
                   ? '확인 중…'
                   : mode === 'register'
                     ? '내 여행 계정 만들기'
-                    : handle === DEMO_PERSONA.handle ? '민준으로 체험 시작' : '로그인'}
+                    : handle === DEMO_PERSONA.handle
+                      ? '민준으로 체험 시작'
+                      : '로그인'}
                 <ArrowRight size={17} />
               </Button>
             </form>
