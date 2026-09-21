@@ -1,0 +1,38 @@
+{
+  "at": "2026-09-21T06:42:52.746Z",
+  "base": "http://localhost:3000",
+  "mode": "Real app APIs; viewport simulations; only a synthetic local account created",
+  "results": [
+    {
+      "channel": "chromium",
+      "width": 320,
+      "checks": [
+        "Guest top replay, no forced popup, reduced motion, empty journey actions and group create form",
+        "Guide works across tabs and after reload; no automatic account or outing creation"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chromium",
+      "width": 430,
+      "checks": [
+        "Guest top replay, no forced popup, reduced motion, empty journey actions and group create form",
+        "Guide works across tabs and after reload; no automatic account or outing creation",
+        "New ordinary account can replay without adding sample trips or starting an outing"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chromium",
+      "width": 1440,
+      "checks": [
+        "Guest top replay, no forced popup, reduced motion, empty journey actions and group create form",
+        "Guide works across tabs and after reload; no automatic account or outing creation"
+      ],
+      "errors": [],
+      "status": "passed"
+    }
+  ]
+}

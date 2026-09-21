@@ -1,0 +1,451 @@
+{
+  "at": "2026-09-21T06:52:44.900Z",
+  "base": "http://localhost:3000",
+  "mode": "Actual UI and isolated tester sessions; desktop viewport simulation; no original account changes",
+  "results": [
+    {
+      "channel": "chromium",
+      "width": 320,
+      "checks": [
+        {
+          "handle": "minjun_demo",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 256,
+              "y": 508.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 256,
+              "y": 456.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 256,
+              "y": 664
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 256,
+              "y": 612
+            }
+          ]
+        },
+        {
+          "handle": "openapi",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 256,
+              "y": 508.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 256,
+              "y": 456.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 256,
+              "y": 664
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 256,
+              "y": 612
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chromium",
+      "width": 430,
+      "checks": [
+        {
+          "handle": "minjun_demo",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 288,
+              "y": 604.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 288,
+              "y": 552.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 288,
+              "y": 782.171875
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 288,
+              "y": 730.171875
+            }
+          ]
+        },
+        {
+          "handle": "openapi",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 288,
+              "y": 604.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 288,
+              "y": 552.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 288,
+              "y": 782.171875
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 288,
+              "y": 730.171875
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chromium",
+      "width": 1440,
+      "checks": [
+        {
+          "handle": "minjun_demo",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 101.921875,
+              "y": 612.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 86.125,
+              "y": 612.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 162.46875,
+              "y": 786.578125
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 126.140625,
+              "y": 786.578125
+            }
+          ]
+        },
+        {
+          "handle": "openapi",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 101.921875,
+              "y": 612.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 86.125,
+              "y": 612.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 162.46875,
+              "y": 786.578125
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 126.140625,
+              "y": 786.578125
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 320,
+      "checks": [
+        {
+          "handle": "minjun_demo",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 256,
+              "y": 508.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 256,
+              "y": 456.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 256,
+              "y": 664
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 256,
+              "y": 612
+            }
+          ]
+        },
+        {
+          "handle": "openapi",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 256,
+              "y": 508.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 256,
+              "y": 456.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 256,
+              "y": 664
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 256,
+              "y": 612
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 430,
+      "checks": [
+        {
+          "handle": "minjun_demo",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 288,
+              "y": 604.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 288,
+              "y": 552.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 288,
+              "y": 782.171875
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 288,
+              "y": 730.171875
+            }
+          ]
+        },
+        {
+          "handle": "openapi",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 288,
+              "y": 604.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 288,
+              "y": 552.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 288,
+              "y": 782.171875
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 288,
+              "y": 730.171875
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 1440,
+      "checks": [
+        {
+          "handle": "minjun_demo",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 101.921875,
+              "y": 612.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 86.125,
+              "y": 612.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 162.46875,
+              "y": 786.578125
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 126.140625,
+              "y": 786.578125
+            }
+          ]
+        },
+        {
+          "handle": "openapi",
+          "guide": "Default and replay functional guide; animation opt-in",
+          "outing": "Guide opens explanation only; cancel leaves no active outing",
+          "startButtons": [
+            {
+              "label": "아직 출발 전",
+              "height": 44,
+              "width": 101.921875,
+              "y": 612.9921875
+            },
+            {
+              "label": "출타 시작",
+              "height": 44,
+              "width": 86.125,
+              "y": 612.9921875
+            }
+          ],
+          "completeButtons": [
+            {
+              "label": "아직 다녀오기 전이에요",
+              "height": 44,
+              "width": 162.46875,
+              "y": 786.578125
+            },
+            {
+              "label": "여행 완료로 기록",
+              "height": 44,
+              "width": 126.140625,
+              "y": 786.578125
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    }
+  ]
+}

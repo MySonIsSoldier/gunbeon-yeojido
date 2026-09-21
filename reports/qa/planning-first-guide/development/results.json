@@ -1,0 +1,43 @@
+{
+  "base": "https://gunbeon-development.ybuser.chatgpt.site",
+  "at": "2026-09-21T06:50:16.528Z",
+  "mode": "Live guest UI; no account or travel creation; desktop viewport simulation",
+  "results": [
+    {
+      "width": 320,
+      "status": "passed",
+      "readyMs": 8691,
+      "checks": [
+        "Visible top guide for guest",
+        "First itinerary guidance opens recommendations",
+        "Guide reopens on another tab",
+        "Reduced motion, Escape and no overflow"
+      ],
+      "errors": []
+    },
+    {
+      "width": 430,
+      "status": "passed",
+      "readyMs": 6092,
+      "checks": [
+        "Visible top guide for guest",
+        "First itinerary guidance opens recommendations",
+        "Guide reopens on another tab",
+        "Reduced motion, Escape and no overflow"
+      ],
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "readyMs": 4382,
+      "checks": [
+        "Visible top guide for guest",
+        "First itinerary guidance opens recommendations",
+        "Guide reopens on another tab",
+        "Reduced motion, Escape and no overflow"
+      ],
+      "errors": []
+    }
+  ]
+}

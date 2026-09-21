@@ -1,0 +1,18 @@
+[
+  {
+    "channel": "chromium",
+    "version": "151.0.7922.34",
+    "width": 1440,
+    "status": "passed",
+    "errors": [],
+    "checks": [
+      "Home opens read-only saved itinerary without state mutation; schedule order, fixed date, return criteria and no overflow",
+      "Filtered empty results lead to search; stop and meeting drafts survive cancelled close/back; discard dialogs close and stay closed",
+      "Explicit edit → save returns updated view; cancel returns original view; saved-card access works",
+      "Unresolved place preserves index and all following stops; no invented movement or margin",
+      "HTTP 503 recovers through explicit retry without reloading or losing saved stop order",
+      "Empty, undated itinerary remains viewable and points explicitly to editing",
+      "Saving an empty plan retains an unresolved meeting reference; share without a group opens creation and keeps the personal plan"
+    ]
+  }
+]

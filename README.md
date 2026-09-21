@@ -21,6 +21,8 @@
 
 [개발 전용 사이트](https://gunbeon-development.ybuser.chatgpt.site) · 소유자 전용, 운영과 별도 DB · [구매 도메인 연결과 배포 구조](docs/custom-domain-setup.md). 새 운영 도메인 **gunbeon.gangwon.kr** 연결과 Google/Naver 실로그인·기존 여행 복원·Kakao 지도 확인을 완료했습니다. 기존 플랫폼 주소는 보존하며 소셜 로그인은 새 주소에서 이용합니다. [전환 검증·캡처](reports/custom_domain_live_2026-09-15.md).
 
+[첫 사용자 안내·버튼 정렬 보완 기록](reports/planning_first_guide_2026-09-21.md)
+
 ## 일정 보기와 편집
 
 홈·내 여행·그룹의 **일정 보기**에서 날짜, 장소 순서, 도착·체류 시간과 개인 복귀 여유를 확인합니다. **일정 편집**으로 들어가 수정하고 저장하면 갱신된 일정으로 돌아옵니다. 그룹 일정에는 개인 복귀 기준이 표시되지 않습니다.

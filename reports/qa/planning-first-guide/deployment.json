@@ -1,0 +1,35 @@
+{
+  "at": "2026-09-21T06:54:12.137Z",
+  "development": {
+    "source_sha": "f84cb63ea5deda6e9c244b4b98728a4120d079a6",
+    "version": 8,
+    "id": "appgdep_6ab0d41a9b948191a18b0052929259fb",
+    "project_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f",
+    "title": "군번여지도 강원 · 개발",
+    "version_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_4f569e501fa48191b7c02ea213483f80",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gunbeon-development.ybuser.chatgpt.site",
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aa8c98dd2a08191a61d18c5e318a57f",
+    "failure_message": null,
+    "env_set_revision": 2,
+    "updated_at": "2026-09-21T06:52:23.112327+00:00"
+  },
+  "production": {
+    "source_sha": "9e2e54e7e6c2361fdd1ca155ef3b19795f4b11ed",
+    "version": 24,
+    "id": "appgdep_6ab0d474e2e48191b627df3bce4e795e",
+    "project_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc",
+    "title": "군번여지도 강원",
+    "version_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_427072bae69c81919d5d1bbb1f6ea45b",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6a9e5a33eaa08191a72a52abf77522cc",
+    "failure_message": null,
+    "env_set_revision": 5,
+    "updated_at": "2026-09-21T06:53:50.809003+00:00"
+  }
+}
