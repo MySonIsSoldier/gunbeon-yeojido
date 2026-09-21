@@ -94,6 +94,7 @@ import CourseCover from './course-cover';
 import MeetingPicker from './meeting-picker';
 import OutingPanel from './outing-panel';
 import TesterGuide from './tester-guide';
+import { guideAudience } from '@/lib/onboarding';
 import SocialStudio from './social-studio';
 import { travelSocialCard } from '@/lib/social-card';
 import TripCompletion from './trip-completion';
@@ -343,6 +344,9 @@ function PlacePhoto({
   );
 }
 export default function PassportApp() {
+  const [loaded, setLoaded] = useState(false);
+  const [account, setAccount] = useState<AccountInfo | null>(null);
+  const [slowStart, setSlowStart] = useState(false);
   const [basePlaces, setBasePlaces] = useState<Place[]>([]);
   const [catalogLoading, setCatalogLoading] = useState(true);
   const [extraPlaces, setExtraPlaces] = useState<Place[]>([]);
@@ -357,7 +361,7 @@ export default function PassportApp() {
     advice?: { shareId: string; suggestion: AdviceSuggestion };
   } | null>(null);
   const [view, setView] = useState('dashboard');
-  const groupStore = useTravelGroups();
+  const groupStore = useTravelGroups(loaded);
   const [selectedGroupId, setSelectedGroupId] = useState('');
   const [groupReload, setGroupReload] = useState(0);
   const [groupSharing, setGroupSharing] = useState<{
@@ -407,8 +411,6 @@ export default function PassportApp() {
   >(null);
   const [family, setFamily] = useState<Family | null>(null);
   const joined = '';
-  const [loaded, setLoaded] = useState(false);
-  const [account, setAccount] = useState<AccountInfo | null>(null);
   const [loadError, setLoadError] = useState('');
   const [deviceRecords, setDeviceRecords] = useState(0);
   const saveStatus = useSyncExternalStore(
@@ -451,6 +453,11 @@ export default function PassportApp() {
     prompt: () => Promise<void>;
   } | null>(null);
   const requestedRegion = view === 'home' ? browseRegion : settings.region;
+  useEffect(() => {
+    if (loaded) return;
+    const timer = setTimeout(() => setSlowStart(true), 6000);
+    return () => clearTimeout(timer);
+  }, [loaded]);
   useEffect(() => {
     const readView = () => {
       const key = window.location.hash.slice(1).split('?')[0];
@@ -615,6 +622,7 @@ export default function PassportApp() {
     return () => window.removeEventListener('beforeunload', warn);
   }, [account]);
   useEffect(() => {
+    if (!loaded) return;
     let canceled = false;
     const controller = new AbortController();
     setLive({ mode: 'loading', places: [] });
@@ -634,7 +642,7 @@ export default function PassportApp() {
       canceled = true;
       controller.abort();
     };
-  }, [requestedRegion, refresh]);
+  }, [loaded, requestedRegion, refresh]);
   useEffect(() => {
     if (!notice) return;
     const t = setTimeout(() => setNotice(''), 7000);
@@ -1045,6 +1053,34 @@ export default function PassportApp() {
         </section>
       </main>
     );
+  if (!loaded)
+    return (
+      <main className="app-loading" aria-busy="true">
+        <Brand />
+        <div className="app-loading-content">
+          <span className="small-loader" />
+          <h1>준비한 여행을 가져오고 있어요</h1>
+          <p role="status">
+            {slowStart
+              ? '연결이 평소보다 느려요. 저장된 여행은 그대로 보관하고 있어요.'
+              : '나의 일정과 동행 그룹을 확인합니다.'}
+          </p>
+          <div className="loading-itinerary" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </div>
+          {slowStart && (
+            <div className="app-loading-actions">
+              <Button variant="outline" onClick={() => location.reload()}>
+                다시 연결
+              </Button>
+              <a href="/account">로그인 상태 확인</a>
+            </div>
+          )}
+        </div>
+      </main>
+    );
   return (
     <div
       className="app-shell"
@@ -1110,15 +1146,42 @@ export default function PassportApp() {
           )}
         </div>
       )}
-      {account?.demoPersona && loaded && <TesterGuide accountId={account.id} onAction={(step) => {
-        const entry = entries.find(e => e.recordId === (step === 3 ? 'demo:partner' : 'demo:parents'));
-        if (step === 2) { const group = groupStore.groups.find(g => g.kind === 'family'); if (group) setSelectedGroupId(group.id); go('groups'); }
-        else if (!entry) { go('passport'); setNotice('예시 여행을 변경하거나 삭제했어요. 내 여행에서 다른 일정을 선택해 주세요.'); }
-        else if (step === 0) openEntry(entry);
-        else if (step === 1) openBuilder(entry, 'edit');
-        else if (step === 3) setAdviceManaging(entry);
-        else startTrip(entry);
-      }} />}
+      {account && guideAudience(account) && loaded && (
+        <TesterGuide
+          accountId={account.id}
+          audience={guideAudience(account)!}
+          planCount={entries.filter((e) => !hasVisitRecord(e)).length}
+          groupCount={groupStore.groups.length}
+          onAction={(step) => {
+            const candidates = entries.filter(
+              (e) => !hasVisitRecord(e) && e.plan?.stops.length,
+            );
+            const entry =
+              candidates.find(
+                (e) =>
+                  e.recordId === (step === 3 ? 'demo:partner' : 'demo:parents'),
+              ) ||
+              candidates.find(
+                (e) =>
+                  !activeOuting || entryKey(e) !== entryKey(activeOuting.entry),
+              ) ||
+              candidates[0];
+            if (step === 2) {
+              const group = groupStore.groups.find((g) => g.kind === 'family');
+              if (group) setSelectedGroupId(group.id);
+              go('groups');
+            } else if (!entry) {
+              go('home');
+              setNotice(
+                '둘러보기에서 코스를 고르거나 직접 여행을 만들어 보세요.',
+              );
+            } else if (step === 0) openEntry(entry);
+            else if (step === 1) openBuilder(entry, 'edit');
+            else if (step === 3) setAdviceManaging(entry);
+            else startTrip(entry);
+          }}
+        />
+      )}
       {account && !account.demoPersona && deviceRecords > 0 && (
         <div className="account-import-notice">
           <span>
@@ -1129,7 +1192,27 @@ export default function PassportApp() {
           </a>
         </div>
       )}
-      {shared && <SocialStudio onRetry={() => { clearPageCache('/api/places/resolve'); setSavedReferenceRetry(v => v + 1); }} card={travelSocialCard(shared, places, !!account?.demoPersona)} remainingMinutes={shareRemaining} onClose={() => setShared(null)} onAskAdvice={!hasVisitRecord(shared) && shared.plan?.stops.length ? () => { const entry = shared; setShared(null); setOverview(null); setAdviceManaging(entry); } : undefined} />}
+      {shared && (
+        <SocialStudio
+          onRetry={() => {
+            clearPageCache('/api/places/resolve');
+            setSavedReferenceRetry((v) => v + 1);
+          }}
+          card={travelSocialCard(shared, places, !!account?.demoPersona)}
+          remainingMinutes={shareRemaining}
+          onClose={() => setShared(null)}
+          onAskAdvice={
+            !hasVisitRecord(shared) && shared.plan?.stops.length
+              ? () => {
+                  const entry = shared;
+                  setShared(null);
+                  setOverview(null);
+                  setAdviceManaging(entry);
+                }
+              : undefined
+          }
+        />
+      )}
       <Tabs value={view} onValueChange={(v) => go(String(v))}>
         <TabsList className="main-nav" variant="line">
           {Object.entries(LABELS)
@@ -1263,6 +1346,47 @@ export default function PassportApp() {
           <Discovery
             places={places}
             region={browseRegion}
+            live={live}
+            onRetry={() => {
+              clearPageCache(
+                '/api/places?region=' + encodeURIComponent(browseRegion),
+              );
+              setRefresh((v) => v + 1);
+            }}
+            onPlace={setPlaceOpen}
+            onMorePlaces={(found) =>
+              setExtraPlaces((v) => [
+                ...new Map([...v, ...found].map((p) => [p.id, p])).values(),
+              ])
+            }
+            onStartPlace={(place) =>
+              openBuilder(
+                {
+                  recordId: crypto.randomUUID(),
+                  missionId: 'custom:' + crypto.randomUUID(),
+                  title: place.title + '에서 시작하는 여행',
+                  region: browseRegion,
+                  stamps: [],
+                  plan: {
+                    kind: 'custom',
+                    variant: '직접 만든 코스',
+                    originId: '',
+                    stops: [
+                      {
+                        placeId: place.id,
+                        stay: ['restaurant', 'cafe'].includes(place.category)
+                          ? 60
+                          : 45,
+                        walk: 10,
+                      },
+                    ],
+                    manualPlaces: [],
+                    timeBudgetMinutes: 240,
+                  },
+                },
+                'new',
+              )
+            }
             onRegion={setBrowseRegion}
             onNew={() =>
               setComposer({
@@ -1655,7 +1779,10 @@ export default function PassportApp() {
         </TabsContent>
         <TabsContent value="outing">
           <OutingPanel
-            onShare={(entry, remaining) => { setShared(entry); setShareRemaining(remaining); }}
+            onShare={(entry, remaining) => {
+              setShared(entry);
+              setShareRemaining(remaining);
+            }}
             key={startCandidate ? entryKey(startCandidate) : 'active'}
             active={activeOuting}
             candidate={startCandidate}
@@ -2219,7 +2346,10 @@ export default function PassportApp() {
                       <Button
                         variant="outline"
                         className="record-share-card"
-                        onClick={() => { setShareRemaining(undefined); setShared(e); }}
+                        onClick={() => {
+                          setShareRemaining(undefined);
+                          setShared(e);
+                        }}
                       >
                         <ArrowUpRight size={18} /> 공유 카드
                       </Button>
@@ -2300,7 +2430,6 @@ export default function PassportApp() {
                 )}
               </aside>
             </div>
-
           </main>
         </TabsContent>
         <TabsContent value="radar">
@@ -2723,7 +2852,14 @@ export default function PassportApp() {
       </Sheet>
       {overview && !composer && !groupSharing && !placeOpen && (
         <TripOverview
-          onShare={!overview.group ? () => { setShared(overview.entry); setShareRemaining(undefined); } : undefined}
+          onShare={
+            !overview.group
+              ? () => {
+                  setShared(overview.entry);
+                  setShareRemaining(undefined);
+                }
+              : undefined
+          }
           entry={
             overview.group
               ? overview.entry

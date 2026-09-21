@@ -50,7 +50,7 @@ type GroupReply = {
   code?: string;
   expiresAt?: string;
 };
-export function useTravelGroups() {
+export function useTravelGroups(enabled = true) {
   const generation = useRef(0);
   const [groups, setGroups] = useState<GroupSummary[]>([]),
     [profile, setProfile] = useState<{ id: string; nickname: string } | null>(
@@ -58,24 +58,32 @@ export function useTravelGroups() {
     );
   const [loading, setLoading] = useState(true),
     [error, setError] = useState('');
-  const load = useCallback(async (refresh = false) => {
-    const request = ++generation.current;
-    setLoading(true);
-    setError('');
-    try {
-      const r = await pageFetch('/api/groups', {}, { refresh, maxAge: 60000 });
-      const d = (await r.json()) as GroupReply;
-      if (request !== generation.current) return;
-      if (!r.ok) throw new Error(d.message);
-      setGroups(d.groups || []);
-      setProfile(d.profile || null);
-    } catch (e) {
-      if (request !== generation.current) return;
-      setError(e instanceof Error ? e.message : '그룹을 불러오지 못했어요.');
-    } finally {
-      if (request === generation.current) setLoading(false);
-    }
-  }, []);
+  const load = useCallback(
+    async (refresh = false) => {
+      if (!enabled) return;
+      const request = ++generation.current;
+      setLoading(true);
+      setError('');
+      try {
+        const r = await pageFetch(
+          '/api/groups',
+          {},
+          { refresh, maxAge: 60000 },
+        );
+        const d = (await r.json()) as GroupReply;
+        if (request !== generation.current) return;
+        if (!r.ok) throw new Error(d.message);
+        setGroups(d.groups || []);
+        setProfile(d.profile || null);
+      } catch (e) {
+        if (request !== generation.current) return;
+        setError(e instanceof Error ? e.message : '그룹을 불러오지 못했어요.');
+      } finally {
+        if (request === generation.current) setLoading(false);
+      }
+    },
+    [enabled],
+  );
   useEffect(() => {
     void load();
     const focus = () => {

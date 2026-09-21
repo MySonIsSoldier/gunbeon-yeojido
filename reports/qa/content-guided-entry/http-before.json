@@ -1,0 +1,74 @@
+[
+  {
+    "url_effective": "https://gunbeon.gangwon.kr/login",
+    "http_code": 200,
+    "time_namelookup": 0.045319,
+    "time_connect": 0.079761,
+    "time_appconnect": 0.115334,
+    "time_starttransfer": 4.460078,
+    "time_total": 4.467728,
+    "num_redirects": 1,
+    "size_download": 20150,
+    "exitcode": 0
+  },
+  {
+    "url_effective": "https://gunbeon.gangwon.kr/login",
+    "http_code": 200,
+    "time_namelookup": 0.001689,
+    "time_connect": 0.035493,
+    "time_appconnect": 0.08503,
+    "time_starttransfer": 0.358413,
+    "time_total": 0.367923,
+    "num_redirects": 0,
+    "size_download": 20150,
+    "exitcode": 0
+  },
+  {
+    "url_effective": "https://gunbeon.gangwon.kr/api/account",
+    "http_code": 200,
+    "time_namelookup": 0.001617,
+    "time_connect": 0.043189,
+    "time_appconnect": 0.092016,
+    "time_starttransfer": 0.166163,
+    "time_total": 0.166409,
+    "num_redirects": 0,
+    "size_download": 69,
+    "exitcode": 0
+  },
+  {
+    "url_effective": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/login",
+    "http_code": 200,
+    "time_namelookup": 0.048769,
+    "time_connect": 0.08184,
+    "time_appconnect": 0.133627,
+    "time_starttransfer": 3.884351,
+    "time_total": 3.893667,
+    "num_redirects": 1,
+    "size_download": 20150,
+    "exitcode": 0
+  },
+  {
+    "url_effective": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/login",
+    "http_code": 200,
+    "time_namelookup": 0.001541,
+    "time_connect": 0.030701,
+    "time_appconnect": 0.085017,
+    "time_starttransfer": 0.173218,
+    "time_total": 0.21828,
+    "num_redirects": 0,
+    "size_download": 20150,
+    "exitcode": 0
+  },
+  {
+    "url_effective": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site/api/account",
+    "http_code": 200,
+    "time_namelookup": 0.001514,
+    "time_connect": 0.030601,
+    "time_appconnect": 0.087318,
+    "time_starttransfer": 0.191549,
+    "time_total": 0.191862,
+    "num_redirects": 0,
+    "size_download": 71,
+    "exitcode": 0
+  }
+]

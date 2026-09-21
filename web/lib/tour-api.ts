@@ -24,6 +24,15 @@ export function providerRetryDelay(
   return code === 'DAILY_QUOTA_EXCEEDED' ? 10 * 60000 : 30000;
 }
 export const API_BASE = 'https://apis.data.go.kr/B551011/';
+export const TOUR_CONTENT_TYPES = [
+  '12',
+  '14',
+  '15',
+  '28',
+  '32',
+  '38',
+  '39',
+] as const;
 export async function tourRequest(
   service: string,
   method: string,
@@ -232,9 +241,9 @@ export async function fetchRegion(
       };
     }
   };
-  // Probe one category before fan-out so a known daily quota does not spend five requests.
+  // Probe one category before fan-out so a known daily quota does not fan out more requests.
   const first = await requestCategory('12');
-  const rest = ['14', '15', '32', '39'];
+  const rest = TOUR_CONTENT_TYPES.filter((type) => type !== '12');
   const results = [
     first,
     ...(first.error === 'DAILY_QUOTA_EXCEEDED' || first.error === 'RATE_LIMITED'
@@ -265,11 +274,54 @@ export async function fetchRegion(
       total,
       error,
       fetched: items.length,
+      nextPage: !error && total > items.length && items.length > 0 ? 2 : null,
     })),
     fetchedAt: new Date().toISOString(),
     mode: 'live',
     source: '출처: ⓒ한국관광공사',
-    pagination: '유형별 첫 100개; 전체 수집은 검증 스크립트에서 실행',
+    pagination:
+      '유형별 첫 100개. 둘러보기의 장소 더 불러오기로 다음 페이지 조회',
+  };
+}
+
+/** User-requested continuation, not a persisted provider response or background crawl. */
+export async function fetchRegionPage(
+  key: string,
+  region: string,
+  contentTypeId: string,
+  page: number,
+  fetcher: typeof fetch = fetch,
+) {
+  if (
+    !TOUR_CONTENT_TYPES.some((type) => type === contentTypeId) ||
+    !Number.isSafeInteger(page) ||
+    page < 2 ||
+    page > 10000
+  )
+    throw new TourError('INVALID_PAGE');
+  const codes = await discoverDistrict(key, region, fetcher);
+  const result = await tourRequest(
+    'KorService2',
+    'areaBasedList2',
+    key,
+    {
+      ...codes,
+      contentTypeId,
+      arrange: 'C',
+      numOfRows: '100',
+      pageNo: String(page),
+    },
+    fetcher,
+  );
+  return {
+    places: result.items.map((row) => tourPlace(row, region)),
+    contentTypeId,
+    total: result.total,
+    page,
+    nextPage:
+      result.items.length > 0 && page * 100 < result.total ? page + 1 : null,
+    fetchedAt: new Date().toISOString(),
+    mode: 'live',
   };
 }
 

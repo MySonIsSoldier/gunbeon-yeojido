@@ -5,11 +5,11 @@ import { makeRecommendations, recommendationEntry } from '../lib/discovery.ts';
 const nodes = JSON.parse(
   fs.readFileSync(new URL('../lib/data/places.json', import.meta.url)),
 );
-test('each border county has three distinct, complete recommendation routes', () => {
+test('each border county has six distinct, complete recommendation routes', () => {
   for (const region of ['철원군', '화천군', '양구군', '인제군', '고성군']) {
     const list = makeRecommendations(nodes, region);
-    assert.equal(list.length, 3, region);
-    assert.equal(new Set(list.map((m) => m.title)).size, 3);
+    assert.equal(list.length, 6, region);
+    assert.equal(new Set(list.map((m) => m.title)).size, 6);
     for (const m of list) {
       assert.ok(m.stops.length >= 2);
       assert.equal(

@@ -26,6 +26,23 @@ import { cookieValue, validTestSession, equalText } from '@/lib/test-access';
 export async function GET(r: Request) {
   try {
     const a = await currentAccount(r);
+    // One private, authenticated bootstrap replaces two sequential browser round trips.
+    // This response is never placed in the public/page-lifetime API cache.
+    if (new URL(r.url).searchParams.get('include') === 'travel') {
+      const state = a
+        ? await database()
+            .prepare(
+              'SELECT payload,revision FROM account_travel_state WHERE account_id=?',
+            )
+            .bind(a.id)
+            .first<{ payload: string; revision: number }>()
+        : null;
+      return accountReply({
+        account: a,
+        state: state ? JSON.parse(state.payload) : null,
+        revision: state?.revision || 0,
+      });
+    }
     const linked = a
       ? (
           await database()
@@ -61,12 +78,15 @@ export async function POST(r: Request) {
       return accountReply(
         { ok: true },
         200,
-        (ending?.demoPersona ? [ACCOUNT_COOKIE] : [
-          ACCOUNT_COOKIE,
-          'gunbeon_member',
-          'gunbeon_advice',
-          'gangwon_test_session',
-        ]).map((c) => authCookie(r, c, '', 0)),
+        (ending?.demoPersona
+          ? [ACCOUNT_COOKIE]
+          : [
+              ACCOUNT_COOKIE,
+              'gunbeon_member',
+              'gunbeon_advice',
+              'gangwon_test_session',
+            ]
+        ).map((c) => authCookie(r, c, '', 0)),
       );
     }
     if (b.action === 'nickname') {
@@ -164,7 +184,8 @@ export async function POST(r: Request) {
       };
       // Public template credentials still pass the normal password check above.
       // Never issue a session for the template: each visitor owns a private copy.
-      if (row.demoPersona === 'template:minjun') a = await createDemoWorkspace();
+      if (row.demoPersona === 'template:minjun')
+        a = await createDemoWorkspace();
     }
     return accountReply({ account: a }, 200, [await newSession(r, a)]);
   } catch (e) {

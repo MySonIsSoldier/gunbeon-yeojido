@@ -33,7 +33,16 @@ export function pageFetch(
   const headers = new Headers(sharedInit.headers);
   for (const [key, value] of Object.entries(accountContextHeaders()))
     headers.set(key, value);
-  const promise = fetch(input, { ...sharedInit, headers, cache: 'no-store' });
+  const promise = fetch(input, {
+    ...sharedInit,
+    headers,
+    cache: 'no-store',
+    signal: AbortSignal.timeout(
+      input.startsWith('/api/places') || input.startsWith('/api/accessibility')
+        ? 45000
+        : 20000,
+    ),
+  });
   requests.set(key, { promise, started: Date.now() });
   const evict = () => {
     if (requests.get(key)?.promise === promise) requests.delete(key);

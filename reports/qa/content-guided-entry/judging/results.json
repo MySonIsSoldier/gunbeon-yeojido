@@ -1,0 +1,28 @@
+{
+  "base": "http://localhost:3000",
+  "checkedAt": "2026-09-21T04:37:05.604Z",
+  "note": "Desktop viewport simulation; no physical phone verification; provider failure fixture",
+  "results": [
+    {
+      "channel": "chromium",
+      "version": "151.0.7922.34",
+      "width": 360,
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "channel": "chromium",
+      "version": "151.0.7922.34",
+      "width": 430,
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "channel": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1440,
+      "status": "passed",
+      "errors": []
+    }
+  ]
+}

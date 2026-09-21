@@ -16,8 +16,8 @@ for(const channel of (process.env.QA_BROWSER_CHANNELS||'chromium').split(',')) {
    assert.equal(await p.getByLabel('아이디',{exact:true}).inputValue(),'minjun_demo');
    assert.equal(await p.getByLabel('비밀번호',{exact:true}).inputValue(),'GangwonTrip2026!');
    await p.getByRole('button',{name:'민준으로 체험 시작'}).click();
-   await p.getByRole('heading',{name:'가이드와 함께 둘러볼까요?'}).waitFor();await shot('welcome');
-   await p.getByRole('button',{name:'7분 체험 가이드 시작'}).click();await shot('guide');
+   await p.getByRole('heading',{name:'일정은 한눈에, 편집은 필요할 때.'}).waitFor();await shot('welcome');
+   await p.getByRole('button',{name:'기능별로 따라 해볼게요'}).click();await shot('guide');
    await p.getByRole('button',{name:'일정 열어보기',exact:true}).click();
    await p.locator('.trip-read-title').filter({hasText:'부모님과 천천히'}).waitFor();await shot('itinerary');
    r.checks.push('Persona autofill, login, optional welcome, task 1 itinerary');
@@ -29,9 +29,9 @@ for(const channel of (process.env.QA_BROWSER_CHANNELS||'chromium').split(',')) {
    assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
    r.checks.push('Story/feed PNG preview and download; no horizontal overflow');
    await p.keyboard.press('Escape');await p.keyboard.press('Escape');await p.reload();await p.locator('.app-shell[data-ready=true]').waitFor();
-   assert.equal(await p.getByRole('heading',{name:'가이드와 함께 둘러볼까요?'}).count(),0);
+   assert.equal(await p.getByRole('heading',{name:'일정은 한눈에, 편집은 필요할 때.'}).count(),0);
    await p.locator('.tester-rail button').click();await p.locator('.tester-guide-layout nav button').nth(2).click();
-   await p.getByRole('button',{name:'가족 그룹 열어보기'}).click();await p.getByRole('heading',{name:'우리 가족의 주말'}).waitFor();await shot('group');
+   await p.getByRole('button',{name:'동행 그룹 열어보기'}).click();await p.getByRole('heading',{name:'우리 가족의 주말'}).waitFor();await shot('group');
    r.checks.push('Reload preserves workspace; guide can reopen family group');assert.equal(errors.length,0,errors.join('\n'));r.status='passed';
   }catch(e){r.status='failed';r.error=e.message;await shot('failure');}
   results.push(r);console.log(JSON.stringify(r));await c.close();

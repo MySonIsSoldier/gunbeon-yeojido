@@ -28,7 +28,10 @@
     "test:judging": "node scripts/judging-ui-qa.mjs",
     "test:tester": "node scripts/tester-api-qa.mjs",
     "test:tester-ui": "node scripts/tester-ui-qa.mjs",
-    "test:tester-scenarios": "node scripts/tester-scenarios-qa.mjs"
+    "test:tester-scenarios": "node scripts/tester-scenarios-qa.mjs",
+    "test:content": "node scripts/content-guide-ui-qa.mjs",
+    "test:entry-network": "node scripts/loading-entry-qa.mjs",
+    "test:content-live": "node --experimental-strip-types --experimental-transform-types scripts/content-live-qa.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

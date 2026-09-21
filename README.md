@@ -1,9 +1,9 @@
 # 군번여지도 강원
 
-**회원가입 없이 체험:** [민준 테스터로 시작](https://gunbeon.gangwon.kr/login) → 계정 선택 → 체험 시작. 가상 계획4개·동행그룹3개·여행기록1개를 각자 사본으로 이용하고, 선택형7분가이드로 직접 따라할 수 있습니다. [사용법](https://gunbeon.gangwon.kr/guide) · [새 기능/검증 기록](reports/tester-social-delivery.md).
+**회원가입 없이 체험:** [민준 테스터로 시작](https://gunbeon.gangwon.kr/login) → 계정 선택 → 체험 시작. 가상 계획4개·동행그룹3개·여행기록1개를 각자 사본으로 이용하고, 20초 자동 안내와 기능별 가이드로 직접 따라할 수 있습니다. [사용법](https://gunbeon.gangwon.kr/guide) · [새 기능/검증 기록](reports/tester-social-delivery.md).
 
 
-> **2026-09-19 작업 인계:** 사용자 확인에 따라 1차 심사 완료 후 이 PC의 작업을 잠시 중단합니다. [다른 PC로 이전·백업 안내](docs/pc-transfer.md) · [현재 상태와 다음 작업](docs/handoff.md) · [보존한 기능설명서·제출 자료](docs/submission/2026-round1/README.md). 심사 결과와 접수 증빙은 별도 보관 대상입니다.
+> **2026-09-21 개선:** 추천 코스 36개·장소 찾기·관광정보 추가 페이지·지정 심사 계정 자동 안내를 보완했습니다. [실제 조회/검증 기록](reports/content_guided_entry_2026-09-21.md) · [진행 상태](docs/handoff.md) · [PC 이전·비공개 백업 안내](docs/pc-transfer.md).
 
 **휴전선 밖 첫 하루. 장병과 가족·연인·친구가 함께 만드는 강원 여행.**
 
@@ -37,7 +37,7 @@
 
 ![데스크톱 홈](reports/screenshots/day-passport-desktop.png)
 
-<img src="web/public/guide/01-discover.png" width="280" alt="날짜 없는 추천 코스 탐색" /> <img src="web/public/guide/02-course.png" width="280" alt="장소별 사진이 나뉜 코스 상세" />
+<img src="web/public/guide/30-richer-discovery.png" width="280" alt="날짜 없는 추천 코스 탐색" /> <img src="web/public/guide/02-course.png" width="280" alt="장소별 사진이 나뉜 코스 상세" />
 
 <img src="web/public/guide/15-advice-public.png" width="280" alt="외부 방문자에게 공유한 여행안" /> <img src="web/public/guide/16-advice-proposal.png" width="280" alt="특정 관광지에 구체적인 한 수 보태기" /> <img src="web/public/guide/18-record-edit.png" width="280" alt="여행 기록 수정" />
 

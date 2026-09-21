@@ -1,0 +1,43 @@
+{
+  "base": "http://localhost:3000",
+  "at": "2026-09-21T04:38:45.373Z",
+  "mode": "Real local APIs and isolated Minjun accounts; browser viewport simulation",
+  "results": [
+    {
+      "channel": "chrome",
+      "width": 360,
+      "checks": [
+        "Auto animation advances; pause and skip work",
+        "Six complete border courses; browse remains date-free",
+        "Place types/search/empty recovery/show more",
+        "Live gateway courses, place details and editable single-place plan"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 430,
+      "checks": [
+        "Auto animation advances; pause and skip work",
+        "Six complete border courses; browse remains date-free",
+        "Place types/search/empty recovery/show more",
+        "Live gateway courses, place details and editable single-place plan"
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    {
+      "channel": "chrome",
+      "width": 1440,
+      "checks": [
+        "Auto animation advances; pause and skip work",
+        "Six complete border courses; browse remains date-free",
+        "Place types/search/empty recovery/show more",
+        "Live gateway courses, place details and editable single-place plan"
+      ],
+      "errors": [],
+      "status": "passed"
+    }
+  ]
+}
