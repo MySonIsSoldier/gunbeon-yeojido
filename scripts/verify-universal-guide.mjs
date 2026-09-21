@@ -26,11 +26,11 @@ try {
     const button = p.getByRole('button', { name: '여행 가이드 다시 보기', exact: true });
     assert((await button.boundingBox()).y < 220);
     await p.screenshot({ path: `${out}/${width}-home.png` });
-    await button.click(); await p.getByRole('heading', { name: '일정은 한눈에, 편집은 필요할 때.' }).waitFor();
-    await p.getByRole('button', { name: '기능별로 따라 해볼게요' }).click();
+    await button.click(); await p.getByRole('heading', { name: '기능별로 따라 해볼게요' }).waitFor();
+
     await p.getByRole('button', { name: '추천 코스 고르기', exact: true }).click();
     await p.getByRole('heading', { name: '어떤 강원을 만나볼까요?' }).waitFor();
-    await button.click(); await p.getByRole('heading', { name: '일정은 한눈에, 편집은 필요할 때.' }).waitFor();
+    await button.click(); await p.getByRole('heading', { name: '기능별로 따라 해볼게요' }).waitFor();
     await p.screenshot({ path: `${out}/${width}-guide.png` });
     await p.keyboard.press('Escape');
     assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);

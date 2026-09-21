@@ -168,6 +168,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       await p
         .getByRole('button', { name: '여행 가이드 다시 보기', exact: true })
         .click();
+      await p.getByRole('button', { name: '20초 애니메이션으로 보기' }).click();
       await p.locator('.quick-intro-dialog').waitFor();
       assert(
         await p.getByRole('button', { name: '재생', exact: true }).isVisible(),
@@ -360,6 +361,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chrome').split(
       await p
         .getByRole('button', { name: '여행 가이드 다시 보기', exact: true })
         .click();
+      await p.getByRole('button', { name: '20초 애니메이션으로 보기' }).click();
       await p.getByRole('button', { name: '재생', exact: true }).click();
       await p.clock.runFor(20100);
       assert(

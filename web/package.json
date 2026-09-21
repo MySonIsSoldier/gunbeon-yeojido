@@ -31,6 +31,7 @@
     "test:tester": "node scripts/tester-api-qa.mjs",
     "test:tester-ui": "node scripts/tester-ui-qa.mjs",
     "test:tester-scenarios": "node scripts/tester-scenarios-qa.mjs",
+    "test:guide-first": "node scripts/planning-first-guide-qa.mjs",
     "test:onboarding": "node scripts/universal-guide-qa.mjs",
     "test:content": "node scripts/content-guide-ui-qa.mjs",
     "test:entry-network": "node scripts/loading-entry-qa.mjs",

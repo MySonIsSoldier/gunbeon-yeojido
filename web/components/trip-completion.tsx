@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -29,6 +29,7 @@ export default function TripCompletion({
   ) => void;
   editing?: boolean;
 }) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const [title, setTitle] = useState(entry.title);
   const [stamps, setStamps] = useState<string[]>(
     editing ? entry.stamps : ['입경', '복귀'],
@@ -51,8 +52,8 @@ export default function TripCompletion({
   });
   return (
     <AlertDialog open onOpenChange={(v) => !v && onClose()}>
-      <AlertDialogContent className="trip-completion">
-        <AlertDialogTitle>
+      <AlertDialogContent className="trip-completion" initialFocus={headingRef}>
+        <AlertDialogTitle ref={headingRef} tabIndex={-1}>
           {editing ? '여행 기록 수정' : '여행, 잘 다녀오셨나요?'}
         </AlertDialogTitle>
         <AlertDialogDescription>

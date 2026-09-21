@@ -53,6 +53,7 @@ jobs:
           QA_OUT_DIR=test-results/browser/groups npm run test:groups-ui
           QA_OUT_DIR=test-results/browser/itinerary npm run test:itinerary
           QA_OUT_DIR=test-results/browser/onboarding npm run test:onboarding
+          QA_OUT_DIR=test-results/browser/guide-first npm run test:guide-first
           npm run test:browser
           QA_OUT_DIR=test-results/browser/guide npm run test:guide
           QA_OUT_DIR=test-results/browser/custom npm run test:custom

@@ -148,7 +148,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         .getByRole('button', { name: '일정 편집', exact: true })
         .click();
       await p.locator('.course-builder').waitFor();
-      assert.equal(await p.locator('.trip-overview').count(), 0);
+      await p.locator('.trip-overview').waitFor({ state: 'hidden' });
       await p.getByRole('button', { name: /장소 추가/ }).click();
       await p.getByLabel('장소 유형', { exact: true }).click();
       await p.getByRole('option', { name: '문화시설', exact: true }).click();
@@ -175,7 +175,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
         .getByRole('button', { name: '입력 버리고 돌아가기', exact: true })
         .click();
       await p.getByLabel('코스 이름', { exact: true }).waitFor();
-      assert.equal(await p.getByRole('alertdialog').count(), 0);
+      await p.getByRole('alertdialog').waitFor({ state: 'hidden' });
       await p.getByRole('button', { name: '변경', exact: true }).click();
       await p
         .getByRole('button', { name: '직접 설정하기', exact: true })
@@ -200,7 +200,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
       await p
         .getByRole('button', { name: '직접 설정하기', exact: true })
         .click();
-      assert.equal(await p.getByRole('alertdialog').count(), 0);
+      await p.getByRole('alertdialog').waitFor({ state: 'hidden' });
       await p
         .getByRole('button', { name: '코스 편집으로 돌아가기', exact: true })
         .click();
@@ -310,7 +310,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
       await p
         .getByRole('heading', { name: '어디로 떠나볼까요?', exact: true })
         .waitFor();
-      assert.equal(await p.locator('.course-builder').count(), 0);
+      await p.locator('.course-builder').waitFor({ state: 'hidden' });
       assert.equal(await p.locator('.trip-read-margin').count(), 0);
       result.checks.push(
         'Empty, undated itinerary remains viewable and points explicitly to editing',

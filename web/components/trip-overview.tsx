@@ -144,7 +144,11 @@ export default function TripOverview({
                   ? `${date(view.start)} · ${clock(view.start)} 출발`
                   : '날짜 미정'}
               </SheetDescription>
-              {onShare && <button className="trip-social-link" onClick={onShare}>이번 휴가 한 장 · 공유 카드 <ArrowUpRight size={16} /></button>}
+              {onShare && (
+                <button className="trip-social-link" onClick={onShare}>
+                  이번 휴가 한 장 · 공유 카드 <ArrowUpRight size={16} />
+                </button>
+              )}
               <div className="trip-read-stats">
                 <span>
                   <MapPin size={17} />
@@ -487,16 +491,26 @@ export default function TripOverview({
                 ? '내 복귀 기준까지 준비하려면'
                 : active
                   ? '실시간 여유와 다음 장소 확인'
-                  : '떠나는 날, 준비가 끝났다면'}
+                  : '지금은 여행 준비 · 출타는 실제로 떠나는 날'}
             </span>
-            <Button onClick={onImport || onStart}>
-              {shared
-                ? '내 여행에 담기'
-                : active
-                  ? '현재 출타 이어보기'
-                  : '출타 시작'}
-              <ArrowUpRight size={17} />
-            </Button>
+            <div className="trip-read-footer-actions">
+              {!shared && !active && onEdit && (
+                <Button onClick={onEdit}>
+                  <Pencil size={17} /> 일정 수정하기
+                </Button>
+              )}
+              <Button
+                variant={!shared && !active ? 'outline' : 'default'}
+                onClick={onImport || onStart}
+              >
+                {shared
+                  ? '내 여행에 담기'
+                  : active
+                    ? '현재 출타 이어보기'
+                    : '출타 시작'}
+                <ArrowUpRight size={17} />
+              </Button>
+            </div>
           </footer>
         )}
       </SheetContent>

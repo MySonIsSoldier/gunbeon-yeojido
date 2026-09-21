@@ -89,7 +89,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
       );
       await p.getByRole('button', { name: 'openapi로 체험 시작' }).click();
       await p
-        .getByRole('heading', { name: '일정은 한눈에, 편집은 필요할 때.' })
+        .getByRole('heading', { name: '기능별로 따라 해볼게요' })
         .waitFor();
       await p.getByRole('button', { name: '바로 둘러볼게요' }).click();
       await p.getByRole('button', { name: '새 여행', exact: true }).click();
@@ -117,7 +117,7 @@ for (const channel of (process.env.QA_BROWSER_CHANNELS || 'chromium').split(
       await secondary.click();
       await p.getByRole('button', { name: 'openapi로 체험 시작' }).click();
       await p
-        .getByRole('heading', { name: '일정은 한눈에, 편집은 필요할 때.' })
+        .getByRole('heading', { name: '기능별로 따라 해볼게요' })
         .waitFor();
       await p.getByRole('button', { name: '바로 둘러볼게요' }).click();
       await p.getByRole('tab', { name: '내 여행', exact: true }).click();

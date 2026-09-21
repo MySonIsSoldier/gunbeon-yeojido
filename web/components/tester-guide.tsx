@@ -74,10 +74,11 @@ const steps = [
     title: '출발한 뒤에는 현재 출타로',
     label: '현재 출타 · 기록',
     icon: Clock3,
-    action: '출타 시작 화면 열기',
+    action: '여행 당일 화면 살펴보기',
     what: '여행 계획은 출발일 기준, 현재 출타는 지금 시각 기준입니다. 다녀온 여행은 기록으로 남겨요.',
     how: [
-      '출타 시작 전에 개인 복귀 기준을 확인해요.',
+      '계획 중에는 출타를 시작하지 않아도 돼요.',
+      '실제로 출발할 때 일정을 고르고 개인 복귀 기준을 확인해요.',
       '시작한 뒤 다음 장소와 남은 시간을 확인해요.',
       '‘여행 완료’에서 실제 다녀온 장소를 골라 스탬프를 남겨요.',
     ],
@@ -234,16 +235,14 @@ export default function TravelGuide({
         !params.has('advice') &&
         ((!saved && audience !== 'traveler') || params.get('tour') === '1')
       ) {
-        setMode('intro');
-        setPlaying(!media.matches);
+        setMode('guide');
       }
       const url = new URL(location.href);
       url.searchParams.delete('tour');
       history.replaceState(null, '', url);
     } catch {
       if (audience !== 'traveler') {
-        setMode('intro');
-        setPlaying(!media.matches);
+        setMode('guide');
       }
     }
     return () => media.removeEventListener('change', update);
@@ -285,6 +284,10 @@ export default function TravelGuide({
     setPlaying(!reduced);
     setMode('intro');
   };
+  const openGuide = () => {
+    setPlaying(false);
+    setMode('guide');
+  };
   return (
     <>
       <div className="tester-rail travel-guide-bar">
@@ -298,9 +301,9 @@ export default function TravelGuide({
         <button
           className="travel-guide-replay"
           aria-haspopup="dialog"
-          onClick={replay}
+          onClick={openGuide}
         >
-          <Play size={16} />
+          <BookOpen size={16} />
           여행 가이드 다시 보기
         </button>
       </div>
@@ -504,21 +507,12 @@ export default function TravelGuide({
                         : '날짜가 미정이어도, 혼자 준비해도 괜찮아요'}
                   </span>
                 </div>
-                <Button onClick={() => act(0)}>
-                  {planCount ? '준비된 일정 열기' : '추천 코스 고르기'}
+                <Button onClick={openGuide}>
+                  기능별로 따라 해볼게요
                   <ArrowRight size={17} />
                 </Button>
               </div>
               <div className="quick-intro-bottom">
-                <button
-                  onClick={() => {
-                    remember();
-                    setPlaying(false);
-                    setMode('guide');
-                  }}
-                >
-                  기능별로 따라 해볼게요
-                </button>
                 <button onClick={close}>바로 둘러볼게요</button>
               </div>
             </>
@@ -526,10 +520,10 @@ export default function TravelGuide({
             <>
               <div className="tester-guide-heading">
                 <span className="tester-kicker">기능 하나씩, 직접 해보기</span>
-                <DialogTitle>보고, 바꾸고, 함께 계획해요</DialogTitle>
+                <DialogTitle>기능별로 따라 해볼게요</DialogTitle>
                 <DialogDescription>
-                  지금 필요한 단계부터 골라보세요. 아래 버튼을 누르면 직접 해볼
-                  수 있는 화면이 열려요.
+                  먼저 일정을 살펴보고, 원하는 기능을 하나씩 써보세요. 여행은
+                  실제로 출발하는 날 시작하면 돼요.
                 </DialogDescription>
               </div>
               <div className="tester-guide-layout">
@@ -558,6 +552,10 @@ export default function TravelGuide({
                   <Icon size={26} />
                   <h3>{current.title}</h3>
                   <p>{current.what}</p>
+                  <Button onClick={() => act(step)}>
+                    {current.action}
+                    <ArrowRight size={17} />
+                  </Button>
                   <ol>
                     {current.how.map((t) => (
                       <li key={t}>{t}</li>
@@ -569,10 +567,6 @@ export default function TravelGuide({
                       계정에서 이용하세요.
                     </p>
                   )}
-                  <Button onClick={() => act(step)}>
-                    {current.action}
-                    <ArrowRight size={17} />
-                  </Button>
                   <label className="tester-step-check">
                     <input
                       type="checkbox"
@@ -592,8 +586,9 @@ export default function TravelGuide({
               <div className="quick-intro-bottom">
                 <button onClick={replay}>
                   <Play size={14} />
-                  20초 안내 다시 보기
+                  20초 애니메이션으로 보기
                 </button>
+                <button onClick={close}>바로 둘러볼게요</button>
                 <a href="/guide" target="_blank" rel="noreferrer">
                   화면별 자세한 사용법 ↗
                 </a>
