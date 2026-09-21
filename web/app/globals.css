@@ -8156,3 +8156,11 @@ input {
  .quick-intro-copy [data-slot=dialog-description] { font-size:14px; min-height:72px; }
  .first-trip-steps { margin:20px 0 24px; }
 }
+
+/* Secondary judging login remains easy to tap without competing with the persona. */
+.tester-select.tester-select-secondary { min-height:44px; margin:0 0 16px; padding:10px 16px; font-size:14px; background:transparent; color:#315d4c; border:1px solid #b8cdc0; }
+.tester-select-secondary:hover { background:#edf3ec; }
+.tester-session-notice { border-top:1px solid #dce5db; padding-top:16px; color:#52635d; font-size:14px; line-height:1.7; }
+.tester-session-notice b { display:block; color:#304c3f; font-weight:650; }
+.tester-session-notice ul { padding-left:18px; margin:8px 0; display:grid; gap:5px; }
+.tester-login-card .tester-session-notice p { font-size:14px; line-height:1.7; margin:8px 0 0; }

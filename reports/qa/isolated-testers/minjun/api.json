@@ -1,0 +1,12 @@
+{
+  "base": "http://localhost:3000",
+  "at": "2026-09-21T05:43:42.726Z",
+  "checks": [
+    "Guest group and public-share ownership survive tester login and logout",
+    "Wrong tester password denied by normal authentication",
+    "Two simultaneous tester logins own different profiles, five entries and three groups; cross-read denied",
+    "OAuth linking, personal device import and real group mixing blocked on server",
+    "Relogin creates fresh examples; old-tab write rejected; reload remains same account"
+  ],
+  "status": "passed"
+}

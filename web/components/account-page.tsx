@@ -21,7 +21,7 @@ import {
 } from '@/lib/account-client';
 import { cleanTravelState, type TravelState } from '@/lib/account-state';
 import { mergeDeviceTravel } from '@/lib/account-import';
-import { DEMO_PERSONA } from '@/lib/demo-persona';
+import { DEMO_PERSONA, OPENAPI_PERSONA } from '@/lib/demo-persona';
 import { guideAudience } from '@/lib/onboarding';
 
 function returnTo() {
@@ -155,6 +155,7 @@ export default function AccountPage() {
           </div>
           <button
             className="tester-select"
+            aria-describedby="tester-session-notice"
             disabled={busy || !session}
             onClick={() => {
               setMode('login');
@@ -169,11 +170,41 @@ export default function AccountPage() {
           >
             민준 테스터 계정 선택 <ArrowRight size={18} />
           </button>
-          <small>
-            선택하면 아이디와 비밀번호가 채워집니다.
-            <br />
-            로그인마다 나만의 예시 사본을 준비해요. 자유롭게 수정해 보세요.
-          </small>
+          <button
+            className="tester-select tester-select-secondary"
+            disabled={busy || !session}
+            aria-describedby="tester-session-notice"
+            onClick={() => {
+              setMode('login');
+              setHandle(OPENAPI_PERSONA.handle);
+              setPassword(OPENAPI_PERSONA.password);
+              setError('');
+              setTimeout(
+                () => document.getElementById('tester-login-submit')?.focus(),
+                0,
+              );
+            }}
+          >
+            openapi 테스트 계정 넣기 <ArrowRight size={16} />
+          </button>
+          <div className="tester-session-notice" id="tester-session-notice">
+            <b>두 테스트 계정 모두 나만의 체험 공간이에요</b>
+            <ul>
+              <li>선택하면 아이디·비밀번호가 채워집니다.</li>
+              <li>
+                로그인 중에는 수정한 여행·그룹을 이어서 볼 수 있어요.
+                새로고침해도 유지돼요.
+              </li>
+              <li>
+                로그아웃 후 다시 로그인하거나 다른 기기에서 로그인하면 초기
+                예시로 시작해요.
+              </li>
+            </ul>
+            <p>
+              수정 내용은 다른 테스터에게 보이지 않아요. 계속 보관할 여행은 개인
+              계정을 이용해 주세요.
+            </p>
+          </div>
         </aside>
       )}
       <section className="account-panel">
@@ -182,12 +213,17 @@ export default function AccountPage() {
             <p className="account-eyebrow">내 여행 계정</p>
             {session.account.demoPersona && (
               <div className="tester-account-note">
-                <b>민준 · 24세 장병 / 가상 인물</b>
+                <b>
+                  {session.account.demoPersona === 'openapi'
+                    ? 'openapi · 기능심사 체험 공간'
+                    : '민준 · 24세 장병 / 가상 인물'}
+                </b>
                 <p>
-                  가족·연인·친구와 보내는 휴가를 준비 중이에요. 지금 여행은
-                  나만의 체험 사본입니다. 다시 로그인하면 새 예시로 시작하며,
-                  개인 소셜 계정과 연결되지 않아요. 체험 시작 후 14일이 지나고
-                  로그인이 만료된 사본은 정리됩니다.
+                  지금 여행과 그룹은 가상의 예시로 시작한 나만의 체험
+                  사본이에요. 로그인 중에는 수정한 내용을 이어서 볼 수 있고,
+                  다시 로그인하면 초기 예시로 시작해요. 개인 소셜 계정과
+                  연결되지 않으며, 체험 시작 후 14일이 지나고 로그인이 만료된
+                  사본은 정리됩니다.
                 </p>
                 <a href="/?tour=1">체험 가이드 다시 보기 →</a>
               </div>
@@ -198,7 +234,10 @@ export default function AccountPage() {
               다음 여행도 이어서.
             </h1>
             <p className="account-lead">
-              <Cloud size={18} /> 여행 계획·기록·즐겨찾기를 계정에 보관해요.
+              <Cloud size={18} />{' '}
+              {session.account.demoPersona
+                ? '체험 내용은 현재 로그인이 유지되는 동안 이어볼 수 있어요.'
+                : '여행 계획·기록·즐겨찾기를 계정에 보관해요.'}
             </p>
             <a href="/#passport" className="account-primary-link">
               내 여행으로 <ArrowRight size={17} />
@@ -360,8 +399,10 @@ export default function AccountPage() {
               다녀온 날도 여기에.
             </h1>
             <p className="account-lead">
-              로그인하면 어느 기기에서든
-              <br />내 여행과 그룹을 이어갈 수 있어요.
+              {[DEMO_PERSONA.handle, OPENAPI_PERSONA.handle].includes(handle) &&
+              mode === 'login'
+                ? '테스트 계정은 로그인마다 초기 예시로 시작해요. 지금 로그인한 동안의 수정 내용은 유지돼요.'
+                : '개인 계정으로 로그인하면 어느 기기에서든 내 여행과 그룹을 이어갈 수 있어요.'}
             </p>
             <div className="account-mode" role="tablist" aria-label="계정 시작">
               <button
@@ -504,11 +545,12 @@ export default function AccountPage() {
                   </small>
                 </>
               )}
-              {handle === DEMO_PERSONA.handle && mode === 'login' && (
-                <p className="tester-filled" role="status">
-                  테스터 계정이 준비됐어요. 아래 버튼으로 시작하세요.
-                </p>
-              )}
+              {[DEMO_PERSONA.handle, OPENAPI_PERSONA.handle].includes(handle) &&
+                mode === 'login' && (
+                  <p className="tester-filled" role="status">
+                    테스터 계정이 준비됐어요. 아래 버튼으로 시작하세요.
+                  </p>
+                )}
               <Button
                 id="tester-login-submit"
                 type="submit"
@@ -520,7 +562,9 @@ export default function AccountPage() {
                     ? '내 여행 계정 만들기'
                     : handle === DEMO_PERSONA.handle
                       ? '민준으로 체험 시작'
-                      : '로그인'}
+                      : handle === OPENAPI_PERSONA.handle
+                        ? 'openapi로 체험 시작'
+                        : '로그인'}
                 <ArrowRight size={17} />
               </Button>
             </form>
