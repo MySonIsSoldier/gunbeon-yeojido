@@ -31,14 +31,12 @@ try {
     const r = await api.get(pathname, { maxRedirects: 0 });
     assert.equal(r.status(), 200, pathname);
     const html = await r.text();
-    assert.match(
-      html,
-      new RegExp(
-        '<link[^>]+rel="canonical"[^>]+href="https://gunbeon.gangwon.kr' +
-          pathname.replaceAll('.', '\\.') +
-          '"',
-      ),
-    );
+    const head = html.split('</head>')[0];
+    const canonical = head.match(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/);
+    assert.ok(canonical, `Initial head must include canonical: ${pathname}`);
+    // Production URL serialization may omit the root slash; these are the same URL.
+    assert.equal(new URL(canonical[1]).href, new URL(pathname, 'https://gunbeon.gangwon.kr').href);
+    assert.match(head, /<title>[^<]*군번여지도/);
     if (indexable)
       assert.doesNotMatch(r.headers()['x-robots-tag'] || '', /noindex/);
     else assert.match(r.headers()['x-robots-tag'] || '', /noindex/);
@@ -88,6 +86,11 @@ try {
   report.checks.push(
     'Anonymous SSR/public URLs, canonical, robots/XML, login noindex, private APIs, invitation redirects',
   );
+  const bot = await api.get('/', { maxRedirects: 0, headers: { 'User-Agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)' } });
+  assert.equal(bot.status(), 200);
+  const botHtml = await bot.text();
+  assert.match(botHtml.split('</head>')[0], /rel="canonical"/);
+  assert.match(botHtml, /함께 기다린 하루/);
   browser = await chromium.launch({
     ...(process.env.QA_BROWSER_CHANNEL &&
     process.env.QA_BROWSER_CHANNEL !== 'chromium'
