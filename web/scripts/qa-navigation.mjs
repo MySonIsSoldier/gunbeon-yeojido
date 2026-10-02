@@ -1,4 +1,7 @@
 export async function enterGuest(page) {
+  await page.locator('.public-home, .account-page[data-ready=true], .test-entry[data-ready=true]').first().waitFor();
+  if (await page.locator('.public-home').isVisible())
+    await page.getByRole('link', { name: '여행 계획 시작하기', exact: true }).click();
   const button = page.getByRole('button', {
     name: '회원가입 없이 체험하기',
     exact: true,
