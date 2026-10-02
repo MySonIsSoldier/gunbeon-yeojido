@@ -8181,3 +8181,82 @@ input {
 .tester-session-notice b { display:block; color:#304c3f; font-weight:650; }
 .tester-session-notice ul { padding-left:18px; margin:8px 0; display:grid; gap:5px; }
 .tester-login-card .tester-session-notice p { font-size:14px; line-height:1.7; margin:8px 0 0; }
+
+/* Public, server-rendered introduction; the signed-in travel workspace is unchanged. */
+.public-home { color:#243c34; background:#fcfcf8; min-height:100vh; }
+.public-home a:focus-visible,.public-home summary:focus-visible { outline:3px solid #387b64; outline-offset:5px; }
+.public-nav,.public-home main,.public-footer { width:min(1120px,calc(100% - 64px)); margin-inline:auto; }
+.public-nav { display:flex; align-items:center; justify-content:space-between; gap:24px; min-height:96px; }
+.public-nav nav { display:flex; align-items:center; gap:28px; font-size:15px; }
+.public-nav nav a { min-height:44px; display:inline-flex; align-items:center; gap:8px; }
+.public-nav-login { font-weight:650; }
+.public-hero { display:grid; grid-template-columns:1.25fr 1fr; align-items:center; gap:64px; padding:76px 0 96px; }
+.public-eyebrow { font-size:13px; font-weight:650; color:#507865; letter-spacing:.04em; margin:0 0 18px; }
+.public-hero h1 { font-size:clamp(32px,3.5vw,48px); font-weight:750; line-height:1.3; letter-spacing:-.05em; margin:0 0 24px; word-break:keep-all; }
+.public-lead { font-size:17px; line-height:1.9; color:#526259; word-break:keep-all; }
+.public-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+.public-actions a { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:52px; padding:14px 20px; border-radius:12px; font-size:15px; font-weight:650; }
+.public-primary { color:#fff; background:#28604b; }
+.public-primary:hover { background:#204f3e; }
+.public-secondary { border:1px solid #cbd7cc; background:#fff; }
+.public-secondary:hover { background:#eef3eb; }
+.public-small { font-size:13px; color:#627065; line-height:1.7; margin:16px 0 0; max-width:380px; }
+.public-trip-preview { background:#eef2e4; padding:32px; border:1px solid #dde5d3; border-radius:24px; box-shadow:0 18px 45px -26px #49644455; }
+.public-preview-heading { display:flex; justify-content:space-between; align-items:center; font-size:13px; color:#526b52; }
+.public-trip-preview h2 { font-size:30px; line-height:1.4; letter-spacing:-.04em; font-weight:700; margin:24px 0 10px; }
+.public-trip-preview>p { font-size:14px; color:#5d6d5b; }
+.public-trip-preview ol { list-style:none; padding:0; margin:28px 0; display:grid; gap:10px; }
+.public-trip-preview li { background:#ffffffd9; border-radius:12px; padding:14px 16px; display:flex; gap:16px; align-items:center; }
+.public-trip-preview li>span { color:#738368; font-size:13px; font-variant-numeric:tabular-nums; }
+.public-trip-preview li strong { display:block; font-size:15px; font-weight:650; }
+.public-trip-preview li small { display:block; font-size:13px; margin-top:4px; color:#697365; }
+.public-trip-preview>a { display:flex; gap:8px; align-items:center; font-size:13px; line-height:1.6; min-height:32px; }
+.public-regions { padding:40px 0 48px; border-block:1px solid #dee5dc; }
+.public-home h2 { word-break:keep-all; }
+.public-regions h2,.public-section-heading h2,.public-faq h2 { font-size:28px; line-height:1.4; letter-spacing:-.04em; font-weight:700; margin:0 0 16px; }
+.public-regions>p:not(.public-eyebrow),.public-section-heading>p:not(.public-eyebrow) { font-size:16px; color:#5d6a61; line-height:1.85; max-width:730px; word-break:keep-all; }
+.public-regions ul { display:flex; flex-wrap:wrap; list-style:none; gap:8px; padding:0; margin:22px 0 0; }
+.public-regions li { padding:8px 16px; border:1px solid #d6dfd1; border-radius:30px; font-size:14px; color:#53694e; }
+.public-features { padding:72px 0; }
+.public-feature-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:32px; }
+.public-feature-grid article { padding:28px; background:#fff; border:1px solid #e2e7df; border-radius:18px; display:flex; flex-direction:column; align-items:flex-start; }
+.public-feature-grid article>svg { color:#427358; }
+.public-feature-grid h3 { font-size:20px; line-height:1.4; font-weight:650; letter-spacing:-.03em; margin:24px 0 12px; }
+.public-feature-grid p { font-size:15px; line-height:1.85; color:#5d6a61; margin:0 0 24px; word-break:keep-all; }
+.public-feature-grid a { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:550; min-height:44px; margin-top:auto; }
+.public-faq { max-width:760px; padding:8px 0 72px; }
+.public-faq h2 { margin-bottom:24px; }
+.public-faq details { border-bottom:1px solid #dfe6da; padding:20px 0; }
+.public-faq summary { cursor:pointer; font-size:16px; font-weight:600; line-height:1.7; }
+.public-faq details p { color:#5d6a61; line-height:1.9; font-size:15px; margin:16px 0 0; }
+.public-footer { border-top:1px solid #dfe6da; padding:32px 0; display:flex; flex-wrap:wrap; gap:16px 32px; align-items:center; }
+.public-footer>p { color:#6b756b; font-size:13px; }
+.public-footer nav { margin-left:auto; display:flex; flex-wrap:wrap; gap:8px 24px; font-size:13px; }
+.public-footer nav a { display:flex; align-items:center; min-height:44px; }
+@media(max-width:900px) {
+ .public-hero { gap:32px; padding:48px 0 64px; }
+ .public-lead br { display:none; }
+ .public-trip-preview { padding:24px; }
+ .public-feature-grid { gap:14px; }
+ .public-feature-grid article { padding:22px; }
+}
+@media(max-width:680px) {
+ .public-nav,.public-home main,.public-footer { width:calc(100% - 40px); }
+ .public-nav { min-height:80px; gap:16px; }
+ .public-nav nav { gap:14px; font-size:14px; }
+ .public-nav nav>a:first-child { display:none; }
+ .public-hero { grid-template-columns:1fr; gap:32px; padding:36px 0 48px; }
+ .public-hero h1 { font-size:32px; }
+ .public-lead { font-size:16px; }
+ .public-actions { gap:10px; }
+ .public-actions a { padding:14px 16px; font-size:14px; flex:1 1 auto; }
+ .public-trip-preview h2 { font-size:26px; }
+ .public-regions { padding:32px 0; }
+ .public-regions h2,.public-section-heading h2,.public-faq h2 { font-size:24px; }
+ .public-features { padding:48px 0; }
+ .public-feature-grid { grid-template-columns:1fr; gap:16px; }
+ .public-feature-grid h3 { margin-top:16px; }
+ .public-feature-grid p { margin-bottom:12px; }
+ .public-faq { padding-bottom:48px; }
+ .public-footer nav { margin-left:0; width:100%; gap:8px 18px; }
+}

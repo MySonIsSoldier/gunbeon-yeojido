@@ -155,3 +155,7 @@ React 19 · TypeScript · Tailwind · Vinext/App Router · Sites · D1/Drizzle. 
 공사 출처: ⓒ한국관광공사. 고석정 사진: 한국문화관광연구원(2015), [공공누리 제1유형](https://www.kogl.or.kr/recommend/recommendDivView.do?division=img&oc=&recommendIdx=2453). 각 원천의 이미지 이용조건을 따릅니다.
 
 추가 사진 6장은 공공누리·Wikimedia Commons에서 실제 장소와 개별 이용조건을 확인해 적용했습니다. [적용·보류·제외 전체 17건](reports/photo_sources.md)과 앱의 사진 출처 화면에서 원문·저작자·촬영 시점·라이선스를 확인할 수 있습니다.
+
+## 검색 등록 운영
+
+[Google Search Console 등록·진단 절차](docs/search-console-setup.md) · [검색 접근 개선 기록](reports/search_readiness_2026-10-02.md). 공개 소개와 이용 가이드는 로그인 없이 읽을 수 있으며 개인 여행·계정은 검색에서 제외합니다.

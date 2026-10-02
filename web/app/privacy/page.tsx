@@ -1,3 +1,14 @@
+/* oxlint-disable next/no-html-link-for-pages -- Full navigation re-evaluates session cookies at the public/private boundary. */
+import { env } from 'cloudflare:workers';
+import { publicMetadata } from '@/lib/search-policy';
+export function generateMetadata() {
+  return publicMetadata(
+    env as Record<string, unknown>,
+    '/privacy',
+    '개인정보 안내 · 군번여지도 강원',
+    '군번여지도 강원이 수집하는 계정 정보와 여행 기록, 기기 저장, 공유 범위 및 삭제 문의에 관한 안내입니다.',
+  );
+}
 export default function Privacy() {
   return (
     <main className="account-page">
