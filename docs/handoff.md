@@ -5,7 +5,7 @@
 - 시작 시 master `6c74c92`와 원격 일치 확인. 공개 `/`, `/robots.txt`, `/sitemap.xml`, `/guide`가 로그인으로 리디렉션되던 상태를 수정했다. 비로그인 루트는 서비스 소개, 유효 계정/게스트 세션은 기존 여행 앱이다. 초대·제안의 로그인 흐름과 개인 API 보호 유지.
 - 공개 5 URL의 초기 HTML head 메타정보·canonical·WebSite·robots/sitemap. 개발과 계정/개인/공개 제안은 noindex. 기존 운영 별칭은 공식 canonical과 noindex. 실제 Search Console 제외 사유는 아직 사용자 미확인이다.
 - 만료 체험 사본 정리의 D1 LIKE 패턴 길이 오류를 정확 접두어 비교로 수정. 로컬에서 만료 사본/가상 동행자 제거·유효 세션 보존을 검증했다. 원본 계정이나 개인 자료 초기화 없음.
-- 구현 커밋 `317adf7`, `28c9651`, `c9cf705`, `a620597`. [PR #35](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/35) 병합 `3155830d374ae6e2a8f83c0fc3d7d17325f321e8`. 최종 검증·agent/운영 문서는 후속 commit으로 master에 push하고 master로 복귀한다. 최종 문서 SHA는 `git log -1`과 원격 일치를 확인한다.
+- 구현 커밋 `317adf7`, `28c9651`, `c9cf705`, `a620597`. [PR #35](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/35) 병합 `3155830d374ae6e2a8f83c0fc3d7d17325f321e8`. 최종 검증·agent/운영 자료 `0d43f57f5b47a8f6ce08ff75c0fabdd314a08605`의 master push를 재확인했고, 중단 후 로컬도 master로 복귀해 원격과 동기화했다. 미커밋/미push 앱 변경은 없다. 이 종료 상태 갱신을 포함한 최종 문서 SHA는 `git log -1`을 따른다.
 - Sites source 개발 `2c340893396f20d066d503ed3c2dffb8f1dd3e2a`, 운영 `1ccb1cbac48001488436fe0cc625c5d47dc1dcfa`. [배포 응답](../reports/qa/search-2026-10-02/deployment.json). 운영의 비밀 아닌 `SITE_ENVIRONMENT=production`만 추가해 env6. API/OAuth Secret·D1 스키마·공개 범위·도메인 변경 없음. 기존 도구의 로컬 archive helper가 없어 지원되는 원격 빌드로 배포했다.
 - typecheck·124개 단위·build·변경 TS lint 통과. [최종 전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/36963528792) 8분 29초 통과. 로컬 계정·테스터 격리/만료·가이드·3화면 안내 검사와 최종 개발/운영 검색·무JS 반응형·게스트 진입 통과. 운영 두 테스터 3크기 안내/일정은 v25에서 통과했고 v26은 동일 앱에 메타 출력만 보완했다. 물리 휴대폰/Edge·새 소셜 동의·실제 Google 색인 등록은 별도다.
 
