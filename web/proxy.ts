@@ -2,9 +2,39 @@ import { currentAccount, accountError } from './lib/account-server';
 import { NextResponse } from 'next/server';
 import { env } from 'cloudflare:workers';
 import { cookieValue, validTestSession } from './lib/test-access';
+import {
+  PUBLIC_SEARCH_PATHS,
+  SEARCH_ORIGIN,
+  searchEnabled,
+  privateHomeRequest,
+} from './lib/search-policy';
 
 export async function proxy(request: Request) {
   const url = new URL(request.url);
+  const vars = env as Record<string, unknown>;
+  const searchPublic = PUBLIC_SEARCH_PATHS.some(
+    (path) => path === url.pathname,
+  );
+  if (
+    searchPublic ||
+    url.pathname === '/robots.txt' ||
+    url.pathname === '/sitemap.xml' ||
+    /^\/guide\/[a-z0-9-]+\.png$/.test(url.pathname)
+  ) {
+    const response = NextResponse.next();
+    if (
+      !searchEnabled(vars) ||
+      url.origin !== SEARCH_ORIGIN ||
+      (url.pathname === '/' &&
+        privateHomeRequest(url, request.headers.get('cookie')))
+    )
+      response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    if (url.pathname === '/') {
+      response.headers.set('Cache-Control', 'private, no-store');
+      response.headers.set('Vary', 'Cookie');
+    }
+    return response;
+  }
   const publicPaths = [
     '/login',
     '/account',
@@ -47,11 +77,22 @@ export async function proxy(request: Request) {
     url.pathname.startsWith('/_next/') ||
     url.pathname.startsWith('/@') ||
     url.pathname.startsWith('/node_modules/')
-  )
-    return NextResponse.next();
-  const secret = String(
-    (env as Record<string, unknown>).TEST_SESSION_SECRET || '',
-  );
+  ) {
+    const response = NextResponse.next();
+    if (
+      url.pathname === '/login' ||
+      url.pathname === '/account' ||
+      url.pathname.startsWith('/api/') ||
+      url.pathname.startsWith('/p/') ||
+      !searchEnabled(vars)
+    )
+      response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return response;
+  }
+  const secret =
+    typeof vars.TEST_SESSION_SECRET === 'string'
+      ? vars.TEST_SESSION_SECRET
+      : '';
   let account;
   try {
     account = await currentAccount(request);

@@ -191,8 +191,14 @@ export async function cleanupExpiredDemos() {
         .prepare('DELETE FROM accounts WHERE id=? AND demo_persona=?')
         .bind(a.id, a.demoPersona),
       db
-        .prepare('DELETE FROM profiles WHERE id=? OR token_hash LIKE ?')
-        .bind(a.profileId, 'demo-character:' + a.id + ':%'),
+        // UUID prefixes exceed D1's LIKE pattern limit. Compare the exact
+        // prefix so expired demo cleanup cannot prevent a new tester login.
+        .prepare('DELETE FROM profiles WHERE id=? OR substr(token_hash,1,?)=?')
+        .bind(
+          a.profileId,
+          ('demo-character:' + a.id + ':').length,
+          'demo-character:' + a.id + ':',
+        ),
     ]);
   }
 }

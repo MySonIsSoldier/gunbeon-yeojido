@@ -1,0 +1,10 @@
+{
+  "base": "http://localhost:3000",
+  "checkedAt": "2026-10-02T03:21:43.399Z",
+  "indexable": false,
+  "checks": [
+    "Anonymous SSR/public URLs, canonical, robots/XML, login noindex, private APIs, invitation redirects",
+    "JavaScript-disabled mobile/desktop landing and guide; authenticated visitor retains travel app"
+  ],
+  "status": "passed"
+}

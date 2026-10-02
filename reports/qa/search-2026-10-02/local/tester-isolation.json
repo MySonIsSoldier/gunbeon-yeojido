@@ -1,0 +1,12 @@
+{
+  "base": "http://localhost:3000",
+  "at": "2026-10-02T03:30:14.465Z",
+  "status": "passed",
+  "mode": "Real authentication and D1 APIs; only disposable tester workspaces changed",
+  "checks": [
+    "minjun_demo: concurrent login isolation; travel and group create/edit persist only within session; cookie restoration; logout revocation; pristine relogin; no cross-read/write or personal OAuth/import",
+    "openapi: concurrent login isolation; travel and group create/edit persist only within session; cookie restoration; logout revocation; pristine relogin; no cross-read/write or personal OAuth/import",
+    "Existing synthetic legacy sessions retain their saved state and groups in distinct copies; concurrent migration converges; stale screen write denied",
+    "Expired demo cleanup accepts UUID prefixes in D1, removes associated characters, preserves active sessions, and does not break new tester login"
+  ]
+}

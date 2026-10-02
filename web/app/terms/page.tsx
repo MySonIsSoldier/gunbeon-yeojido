@@ -1,11 +1,15 @@
-import type { Metadata } from 'next';
-import Brand from '@/components/brand';
-
-export const metadata: Metadata = {
-  title: '서비스 이용약관 · 군번여지도 강원',
-  description:
+/* oxlint-disable next/no-html-link-for-pages -- Full navigation re-evaluates session cookies at the public/private boundary. */
+import { env } from 'cloudflare:workers';
+import { publicMetadata } from '@/lib/search-policy';
+export function generateMetadata() {
+  return publicMetadata(
+    env as Record<string, unknown>,
+    '/terms',
+    '서비스 이용약관 · 군번여지도 강원',
     '군번여지도 강원의 계정, 여행 정보, 기록과 공유에 관한 서비스 이용약관입니다.',
-};
+  );
+}
+import Brand from '@/components/brand';
 
 export default function Terms() {
   return (

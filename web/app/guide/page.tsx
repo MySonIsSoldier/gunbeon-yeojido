@@ -1,3 +1,13 @@
+import { env } from 'cloudflare:workers';
+import { publicMetadata } from '@/lib/search-policy';
+export function generateMetadata() {
+  return publicMetadata(
+    env as Record<string, unknown>,
+    '/guide',
+    '사용법 · 군번여지도 강원',
+    '추천 코스 고르기부터 내 일정 편집, 동행 그룹, 한 수 받기, 출타와 여행 기록까지 실제 화면으로 따라 하는 군번여지도 이용 가이드.',
+  );
+}
 /* oxlint-disable next/no-img-element -- These small, pre-captured screenshots are served as static assets without a runtime image transform. */
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
@@ -213,11 +223,10 @@ export default function Guide() {
         <h2>저장과 공유를 구분해 주세요</h2>
         <p>
           개인 계정은 내 여행·즐겨찾기·출타·스탬프를 서버에 보관합니다.
-          민준·openapi 테스트 계정은 현재 로그인한 체험 공간에만 내용을 유지하며,
-          다시 로그인하면 초기 예시로 시작합니다. 비회원 체험은 사용 중인
-          브라우저에 저장됩니다. 그룹에 공유한
-          일정은 멤버들이 함께 보고 수정합니다. 개인 복귀 기준시각과 출타 진행은
-          그룹에 공유되지 않아요.
+          민준·openapi 테스트 계정은 현재 로그인한 체험 공간에만 내용을
+          유지하며, 다시 로그인하면 초기 예시로 시작합니다. 비회원 체험은 사용
+          중인 브라우저에 저장됩니다. 그룹에 공유한 일정은 멤버들이 함께 보고
+          수정합니다. 개인 복귀 기준시각과 출타 진행은 그룹에 공유되지 않아요.
         </p>
         <p>
           초기 체험 비밀번호는 1234이며 개인 계정 비밀번호와는 다릅니다. 그룹
