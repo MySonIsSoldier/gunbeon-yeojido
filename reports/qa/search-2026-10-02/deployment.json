@@ -1,0 +1,69 @@
+{
+  "checkedAt": {
+    "current_time": "2026-10-02 04:23:16 UTC"
+  },
+  "development": {
+    "id": "appgdep_6abf2fa4f67c8191a1ca08664e771587",
+    "project_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f",
+    "title": "\uad70\ubc88\uc5ec\uc9c0\ub3c4 \uac15\uc6d0 \u00b7 \uac1c\ubc1c",
+    "version_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_cc9ffa9e5f4c819196e6e94204147303",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gunbeon-development.ybuser.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aa8c98dd2a08191a61d18c5e318a57f",
+    "failure_message": null,
+    "env_set_revision": 2,
+    "updated_at": "2026-10-02T04:18:45.830256+00:00",
+    "source_commit": "2c340893396f20d066d503ed3c2dffb8f1dd3e2a",
+    "version_number": 10
+  },
+  "production": {
+    "id": "appgdep_6abf311da4508191960779d2e1522825",
+    "project_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc",
+    "title": "\uad70\ubc88\uc5ec\uc9c0\ub3c4 \uac15\uc6d0",
+    "version_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_6e5e447a2f6481919973313d887b8420",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6a9e5a33eaa08191a72a52abf77522cc",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-02T04:22:42.259229+00:00",
+    "source_commit": "1ccb1cbac48001488436fe0cc625c5d47dc1dcfa",
+    "version_number": 26
+  },
+  "initial_development": {
+    "id": "appgdep_6abf2b4eddc08191beed37fe2ad4fac3",
+    "project_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f",
+    "title": "\uad70\ubc88\uc5ec\uc9c0\ub3c4 \uac15\uc6d0 \u00b7 \uac1c\ubc1c",
+    "version_id": "appgprj_6aa8c98dd2a08191a61d18c5e318a57f~appgver_b0d0a828eb388191bc7a1a5f194d1afc",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gunbeon-development.ybuser.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aa8c98dd2a08191a61d18c5e318a57f",
+    "failure_message": null,
+    "env_set_revision": 2,
+    "updated_at": "2026-10-02T03:59:22.552999+00:00"
+  },
+  "initial_production": {
+    "id": "appgdep_6abf2c8b08c481918f7161e391b48b0f",
+    "project_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc",
+    "title": "\uad70\ubc88\uc5ec\uc9c0\ub3c4 \uac15\uc6d0",
+    "version_id": "appgprj_6a9e5a33eaa08191a72a52abf77522cc~appgver_ffa172482fa881919d5d604ae2878133",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gunbeon-yeojido-gangwon.ybuser.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000ac9481f8a0c583aa846c9db5",
+    "provider_deployment_id": "site---6a9e5a33eaa08191a72a52abf77522cc",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-02T04:04:21.087866+00:00"
+  }
+}

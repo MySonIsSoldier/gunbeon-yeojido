@@ -154,3 +154,11 @@ npm run build
 - 기존 openapi 로그인 세션은 원래 저장 여행·소유 그룹을 사본으로 전환한다. 조건부 session account 변경으로 동시 요청은 한 사본에 수렴한다. 예전 화면의 account ID 저장 보호를 우회하지 않는다. 개인 계정과 기존 원본을 삭제하지 않는다.
 - 테스트 계정은 개인 OAuth/기기 가져오기·실제 그룹 초대/참여를 제한한다. 공개 한 수는 사용자가 명시적으로 발행한 DTO만 기존 규칙대로 공유한다. 생성14일 경과+유효세션 없는 체험 사본만 제한적으로 정리한다.
 - `test:tester-isolation`, `test:tester-isolation-ui`와 일반 계정 회귀 유지. 운영에서는 생성한 체험 사본만 편집해 검증한다. `scripts/verify-guided-entry.mjs`는 이제 공유계정 hash 비교 대신 체험 격리 검사를 실행한다. 기존 세션 전환 검증의 임시 쿠키는 ignore된 tmp/0600으로만 보관하고 검사 후 삭제한다.
+
+## 10/2 공개 첫 화면과 검색 정책
+
+- `docs/search-console-setup.md`, `reports/search_readiness_2026-10-02.md` 확인. `/`는 비로그인 소개 화면이며 유효 계정/게스트 세션은 기존 여행 앱으로 들어간다. 검색 로봇과 일반 방문자에 같은 규칙을 적용한다. 공개 가이드도 로그인 없이 읽는다.
+- `lib/search-policy.ts`의 5개 공개 URL만 sitemap에 넣는다. 운영 `SITE_ENVIRONMENT=production` + 공식 `PUBLIC_SITE_URL`에서만 색인 허용. 개발/설정 누락·개인 화면·공개 한 수·운영 별칭은 차단한다. sitemap에 개인/공유 DTO를 넣거나 robots를 인증 수단으로 쓰지 않는다.
+- 로그인 root의 private/no-store·noindex, 초대/제안 리디렉션과 API 인증 보호를 유지한다. SEO 변경을 이유로 계정·여행 저장 계약을 완화하지 않는다.
+- `npm run test:search`는 공개 SSR/canonical/robots/XML·320/430/1440px·기존 게스트 앱 진입을 검증한다. `QA_SEARCH_INDEXABLE=1`은 공식 운영 도메인 검사에만 사용한다. 실제 Google 색인 성공으로 보고하지 않는다.
+- 오래된 체험 정리의 `demo-character:<UUID>:`는 D1 LIKE 패턴 길이 한도를 넘으므로 `substr` 정확 접두어 비교를 쓴다. 만료 계정만 제한적으로 정리하고 유효 세션/원본 계정은 보존한다. 로컬 `test:tester-isolation`에 만료 사본/유효 세션 회귀가 있다.

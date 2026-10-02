@@ -1,6 +1,6 @@
 {
-  "base": "http://localhost:3000",
-  "checkedAt": "2026-10-02T04:07:34.051Z",
+  "base": "https://gunbeon-development.ybuser.chatgpt.site",
+  "checkedAt": "2026-10-02T04:19:19.145Z",
   "indexable": false,
   "checks": [
     "Anonymous SSR/public URLs, canonical, robots/XML, login noindex, private APIs, invitation redirects",

@@ -55,3 +55,5 @@ QA_BASE_URL=https://gunbeon.gangwon.kr QA_SEARCH_INDEXABLE=1 npm run test:search
 - [noindex 사용](https://developers.google.com/search/docs/crawling-indexing/block-indexing?hl=ko): robots.txt로 막으면 noindex를 읽을 수 없다.
 - [표준 URL 통합](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=ko)
 - [사이트 이름 구조화 데이터](https://developers.google.com/search/docs/appearance/site-names?hl=ko)
+
+운영 빌드의 지연 메타 출력도 점검했다. `htmlLimitedBots: /.*/`로 동일한 메타정보를 모든 방문자의 초기 HTML head에 포함한다. 표준 URL의 루트 슬래시 유무는 URL로 정규화해 검사한다.

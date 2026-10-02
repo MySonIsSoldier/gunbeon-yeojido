@@ -1,3 +1,16 @@
+# 10/2 최신: 공개 검색 접근·사이트맵 운영 배포 완료
+
+[Search Console 사용자 절차](search-console-setup.md) · [구현/검증](../reports/search_readiness_2026-10-02.md). 운영 **v26/env6**, 개발 **v10/env2**. 1차 심사 완료 상태와 기능설명서 v3.3은 그대로다.
+
+- 시작 시 master `6c74c92`와 원격 일치 확인. 공개 `/`, `/robots.txt`, `/sitemap.xml`, `/guide`가 로그인으로 리디렉션되던 상태를 수정했다. 비로그인 루트는 서비스 소개, 유효 계정/게스트 세션은 기존 여행 앱이다. 초대·제안의 로그인 흐름과 개인 API 보호 유지.
+- 공개 5 URL의 초기 HTML head 메타정보·canonical·WebSite·robots/sitemap. 개발과 계정/개인/공개 제안은 noindex. 기존 운영 별칭은 공식 canonical과 noindex. 실제 Search Console 제외 사유는 아직 사용자 미확인이다.
+- 만료 체험 사본 정리의 D1 LIKE 패턴 길이 오류를 정확 접두어 비교로 수정. 로컬에서 만료 사본/가상 동행자 제거·유효 세션 보존을 검증했다. 원본 계정이나 개인 자료 초기화 없음.
+- 구현 커밋 `317adf7`, `28c9651`, `c9cf705`, `a620597`. [PR #35](https://github.com/MySonIsSoldier/gunbeon-yeojido/pull/35) 병합 `3155830d374ae6e2a8f83c0fc3d7d17325f321e8`. 최종 검증·agent/운영 문서는 후속 commit으로 master에 push하고 master로 복귀한다. 최종 문서 SHA는 `git log -1`과 원격 일치를 확인한다.
+- Sites source 개발 `2c340893396f20d066d503ed3c2dffb8f1dd3e2a`, 운영 `1ccb1cbac48001488436fe0cc625c5d47dc1dcfa`. [배포 응답](../reports/qa/search-2026-10-02/deployment.json). 운영의 비밀 아닌 `SITE_ENVIRONMENT=production`만 추가해 env6. API/OAuth Secret·D1 스키마·공개 범위·도메인 변경 없음. 기존 도구의 로컬 archive helper가 없어 지원되는 원격 빌드로 배포했다.
+- typecheck·124개 단위·build·변경 TS lint 통과. [최종 전체 브라우저 CI](https://github.com/MySonIsSoldier/gunbeon-yeojido/actions/runs/36963528792) 8분 29초 통과. 로컬 계정·테스터 격리/만료·가이드·3화면 안내 검사와 최종 개발/운영 검색·무JS 반응형·게스트 진입 통과. 운영 두 테스터 3크기 안내/일정은 v25에서 통과했고 v26은 동일 앱에 메타 출력만 보완했다. 물리 휴대폰/Edge·새 소셜 동의·실제 Google 색인 등록은 별도다.
+
+**다음 첫 행동:** 사용자가 공식 속성의 sitemap.xml 제출 → 홈 실제 URL 테스트 → 색인 생성 요청을 한 번 진행한다. 며칠 뒤에도 미색인이면 정확한 제외 사유·마지막 크롤링 시각·Google 선택 표준 URL을 확인한다. 코드/배포 완료를 Google 색인 성공으로 쓰지 않는다. 첫 접속 장기 안정성·운영 DB 전체 백업·실사용자 관찰은 기존 후속 과제다.
+
 # 9/21 최신: 기능별 안내 우선 · 계획/출타 구분 보완
 
 [변경·시나리오·검증 기록](../reports/planning_first_guide_2026-09-21.md). 운영 **v24/env5**, 개발 **v8/env2** 반영 완료. 기능설명서 v3.3 PDF/PPTX는 유지했다.

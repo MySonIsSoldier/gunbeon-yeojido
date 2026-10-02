@@ -1,7 +1,7 @@
 {
-  "base": "http://localhost:3000",
-  "checkedAt": "2026-10-02T04:07:34.051Z",
-  "indexable": false,
+  "base": "https://gunbeon.gangwon.kr",
+  "checkedAt": "2026-10-02T04:23:15.109Z",
+  "indexable": true,
   "checks": [
     "Anonymous SSR/public URLs, canonical, robots/XML, login noindex, private APIs, invitation redirects",
     "JavaScript-disabled mobile/desktop landing and guide; authenticated visitor retains travel app"

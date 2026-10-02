@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "http_status": "HTTP/2 200 ",
+  "x_robots_tag": "noindex, nofollow",
+  "canonical": "https://gunbeon.gangwon.kr",
+  "check": "Platform alias remains accessible and noindex; canonical in initial head points to official domain"
+}
