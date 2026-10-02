@@ -250,6 +250,68 @@ try {
       'Existing synthetic legacy sessions retain their saved state and groups in distinct copies; concurrent migration converges; stale screen write denied',
     );
   }
+  if (local) {
+    // Only age the two disposable workspaces created by this test. A still-valid
+    // session must survive cleanup; an expired one and its characters must not.
+    const expiredClient = await make(),
+      activeClient = await make();
+    const login = {
+      action: 'login',
+      handle: 'minjun_demo',
+      password: 'GangwonTrip2026!',
+    };
+    const expired = (await ok(await post(expiredClient, '/api/account', login)))
+      .account;
+    const active = (await ok(await post(activeClient, '/api/account', login)))
+      .account;
+    assert(
+      /^[a-f0-9-]{36}$/.test(expired.id) && /^[a-f0-9-]{36}$/.test(active.id),
+    );
+    const sql = (command) =>
+      JSON.parse(
+        execFileSync(
+          process.execPath,
+          [
+            'node_modules/wrangler/bin/wrangler.js',
+            'd1',
+            'execute',
+            'DB',
+            '--local',
+            '--config',
+            'wrangler.local.jsonc',
+            '--command',
+            command,
+            '--json',
+          ],
+          { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] },
+        ),
+      );
+    sql(
+      `UPDATE accounts SET created_at='2020-01-01T00:00:00.000Z' WHERE id IN ('${expired.id}','${active.id}'); UPDATE account_sessions SET expires_at=0 WHERE account_id='${expired.id}'`,
+    );
+    // Each login removes at most three expired copies; older test fixtures may
+    // be ahead of ours, so do not assume this particular copy is first in line.
+    let remaining = 1;
+    for (let attempt = 0; attempt < 20 && remaining; attempt++) {
+      const next = await make();
+      await ok(await post(next, '/api/account', login));
+      remaining = sql(
+        `SELECT count(*) AS n FROM accounts WHERE id='${expired.id}'`,
+      )[0].results[0].n;
+    }
+    assert.equal(remaining, 0);
+    const characters = sql(
+      `SELECT count(*) AS n FROM profiles WHERE substr(token_hash,1,${('demo-character:' + expired.id + ':').length})='demo-character:${expired.id}:'`,
+    )[0].results[0].n;
+    assert.equal(characters, 0);
+    assert.equal(
+      (await ok(await activeClient.get('/api/account'))).account.id,
+      active.id,
+    );
+    checks.push(
+      'Expired demo cleanup accepts UUID prefixes in D1, removes associated characters, preserves active sessions, and does not break new tester login',
+    );
+  }
   await fs.mkdir(out, { recursive: true });
   await fs.writeFile(
     out + '/api.json',
